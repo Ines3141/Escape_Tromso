@@ -5,59 +5,6 @@
     box-sizing: border-box;
 }
 
-/* Default: PC / large screen */
-.box,
-.content-box {
-    width: 500px;
-    max-width: 90%;
-}
-
-button {
-    width: 250px;
-}
-
-/* Tablet */
-@media (max-width: 900px) {
-    .box,
-    .content-box {
-        width: 80%;
-    }
-
-    h1 {
-        font-size: 2.4rem;
-    }
-}
-
-/* Phone */
-@media (max-width: 600px) {
-    body {
-        padding: 20px;
-    }
-
-    .box,
-    .content-box {
-        width: 100%;
-        padding: 24px;
-    }
-
-    h1 {
-        font-size: 2rem;
-    }
-
-    p {
-        font-size: 1rem;
-    }
-
-    button {
-        width: 100%;
-        margin: 8px 0;
-    }
-
-    input {
-        width: 100%;
-    }
-}
-
 /* GENERAL PAGE SETTINGS */
 body {
     font-family: "Segoe UI", Arial, sans-serif;
@@ -116,6 +63,7 @@ input {
 
 /* BUTTONS */
 button {
+    width: 250px;
     border: none;
     border-radius: 14px;
     padding: 14px 24px;
@@ -133,9 +81,57 @@ button {
         background: #ffe066;
     }
 
+/* IMAGES */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
 /* ERROR / MESSAGE TEXT */
 #message {
     color: #ffb4b4;
     font-weight: bold;
     margin-top: 10px;
+}
+
+/* TABLET */
+@media (max-width: 900px) {
+    .box,
+    .content-box {
+        max-width: 80%;
+    }
+
+    h1 {
+        font-size: 2.4rem;
+    }
+}
+
+/* PHONE */
+@media (max-width: 600px) {
+    body {
+        padding: 20px;
+    }
+
+    .box,
+    .content-box {
+        max-width: 100%;
+        padding: 24px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+
+    button {
+        width: 100%;
+        margin: 8px 0;
+    }
+
+    input {
+        width: 100%;
+    }
 }

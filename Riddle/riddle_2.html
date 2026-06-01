@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Right location? </title>
+    <link rel="stylesheet" href="../CSS/global.css"> <!-- link to style sheet -->
+    <link rel="stylesheet" href="../CSS/riddle.css">
+</head>
+<body>
+    <div class="box">
+        <p>
+            Which path do you have to take through the ice?
+            The year when Nansen got Nobel peace will help you.
+        </p>
+        <img src="../Images/station_2_test.jpg"
+             alt="Treasure Map"
+             class="riddle-map">
+        <input id="answer" type="text" placeholder="Answer">
+        <submit-button onclick="checkAnswer()">Submit</submit-button>
+        <p id="message"></p>
+        <back-button onclick="window.location.href='riddle_1.html'">
+            Back
+        </back-button>
+    </div>
+
+    <script>
+    function checkAnswer() {
+      let answer = document.getElementById("answer").value.toLowerCase();
+      if (answer === "3") {
+        window.location.href = "../Stations/HTML/station_3.html";
+      } /*  else {
+         window.location.href = "riddle_1.html";
+         Not correct, take another look. Time delay. 
+      } */
+    }
+    </script>
+
+</body>
+</html>

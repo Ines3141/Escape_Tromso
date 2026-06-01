@@ -1,0 +1,141 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Default: PC / large screen */
+.box,
+.content-box {
+    width: 500px;
+    max-width: 90%;
+}
+
+button {
+    width: 250px;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+    .box,
+    .content-box {
+        width: 80%;
+    }
+
+    h1 {
+        font-size: 2.4rem;
+    }
+}
+
+/* Phone */
+@media (max-width: 600px) {
+    body {
+        padding: 20px;
+    }
+
+    .box,
+    .content-box {
+        width: 100%;
+        padding: 24px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+
+    button {
+        width: 100%;
+        margin: 8px 0;
+    }
+
+    input {
+        width: 100%;
+    }
+}
+
+/* GENERAL PAGE SETTINGS */
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: white;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #07182c, #123b63, #0f5f8f);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}
+
+/* MAIN BOX */
+.content-box,
+.box {
+    width: 100%;
+    max-width: 500px;
+    background: rgba(10, 35, 65, 0.85);
+    backdrop-filter: blur(8px);
+    padding: 35px;
+    border-radius: 24px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    text-align: center;
+}
+
+/* HEADINGS */
+h1 {
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+h2 {
+    margin-bottom: 15px;
+}
+
+p {
+    line-height: 1.6;
+    margin-bottom: 15px;
+    color: #dbeafe;
+}
+
+/* INPUT FIELDS */
+input {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 14px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    text-align: center;
+    outline: none;
+}
+
+/* BUTTONS */
+button {
+    border: none;
+    border-radius: 14px;
+    padding: 14px 24px;
+    margin: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    background: #f7d046;
+    color: #082033;
+    transition: 0.3s;
+}
+
+    button:hover {
+        transform: scale(1.05);
+        background: #ffe066;
+    }
+
+/* ERROR / MESSAGE TEXT */
+#message {
+    color: #ffb4b4;
+    font-weight: bold;
+    margin-top: 10px;
+}

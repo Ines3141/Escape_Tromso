@@ -1,0 +1,38 @@
+/* .station-page {
+    background-image: url("../images/station_background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    padding: 50px;
+} */
+
+/* BUTTON COLORS */
+
+.location-button {
+    background-color: #2c7be5;
+    color: white;
+}
+
+.map-button {
+    background-color: #00b894;
+    color: white;
+}
+
+.riddle-button {
+    background-color: #fdcb6e;
+    color: black;
+}
+
+.back-button {
+    background-color: #d63031;
+    color: white;
+}
+
+.back-button,
+.location-button,
+.riddle-button {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+}

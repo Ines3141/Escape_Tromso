@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Right location? </title>
+    <link rel="stylesheet" href="../CSS/global.css"> <!-- link to style sheet -->
+    <link rel="stylesheet" href="../CSS/riddle.css">
+</head>
+<body>
+    <div class="box">
+        <p>Which polar explorer do you see?</p>
+        <input id="answer" type="text" placeholder="Answer">
+        <submit-button onclick="checkAnswer()">Submit</submit-button>
+        <p id="message"></p>
+        <back-button onclick="window.location.href='riddle_1.html'">
+            Back
+        </back-button>
+    </div>
+
+    <script>
+    function checkAnswer() {
+      let answer = document.getElementById("answer").value.toLowerCase();
+      if (answer === "test") {
+        window.location.href = "../Stations/HTML/station_2.html";
+      } else {
+         window.location.href = "riddle_1.html";
+         /* Not correct, take another look. Time delay. */
+      }
+    }
+    </script>
+
+</body>
+</html>

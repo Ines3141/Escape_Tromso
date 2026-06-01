@@ -1,0 +1,23 @@
+/*.riddle-page {
+    background-image: url("../images/riddle_background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    padding: 50px;
+}*/
+
+.submit-button {
+    background-color: #00b894;
+    color: white;
+}
+
+.hint-button {
+    background-color: #fdcb6e;
+    color: black;
+}
+
+.back-button {
+    background-color: #d63031;
+    color: white;
+}

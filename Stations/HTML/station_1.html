@@ -21,7 +21,7 @@
             <div id="subtitle" class="subtitle"></div>
         </div>
 
-        <audio id="voice" src="../../audio/test_mp3.mp3"></audio>
+        <audio id="voice" src="../../audio/test.m4a"></audio>
 
         <div class="button-row">
             <button class="back-button" onclick="window.location.href='../../index.html'">
@@ -51,10 +51,9 @@
 
         btn.addEventListener("click", () => {
             audio.currentTime = 0;
-            audio.play();
             audio.play().catch(error => {
-                alert("Audio could not play. Check file type or path.");
-                console.log(error);
+                console.log("Audio error:", error);
+            });
         });
 
         audio.addEventListener("timeupdate", () => {

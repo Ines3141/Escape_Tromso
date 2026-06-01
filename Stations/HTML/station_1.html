@@ -52,6 +52,9 @@
         btn.addEventListener("click", () => {
             audio.currentTime = 0;
             audio.play();
+            audio.play().catch(error => {
+                alert("Audio could not play. Check file type or path.");
+                console.log(error);
         });
 
         audio.addEventListener("timeupdate", () => {

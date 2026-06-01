@@ -109,13 +109,13 @@ img {
 /* PHONE */
 @media (max-width: 600px) {
     body {
-        padding: 20px;
+        padding: 10px;
     }
 
     .box,
     .content-box {
-        max-width: 100%;
-        padding: 24px;
+        width: calc(100vw - 20px);
+        max-width: none;
     }
 
     h1 {

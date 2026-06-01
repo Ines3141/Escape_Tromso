@@ -24,11 +24,66 @@ body {
     max-width: 500px;
     background: rgba(10, 35, 65, 0.85);
     backdrop-filter: blur(8px);
-    padding: 35px;
+    padding: 20px;
     border-radius: 24px;
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
     border: 1px solid rgba(255, 255, 255, 0.15);
     text-align: center;
+}
+
+/* AUDIO AND SUBTITELS*/
+.audio-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 20px 0;
+}
+
+.audio-btn {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    border: none;
+    font-size: 26px;
+    cursor: pointer;
+    background: #111;
+    color: white;
+    animation: pulse 1.5s infinite;
+    flex-shrink: 0;
+}
+
+.subtitle {
+    background: rgba(0,0,0,.75);
+    color: white;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: 18px;
+    flex: 1;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(0,0,0,.4);
+    }
+
+    70% {
+        transform: scale(1.08);
+        box-shadow: 0 0 0 16px rgba(0,0,0,0);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(0,0,0,0);
+    }
+}
+
+.image-container img {
+    width: 100%;
+    max-width: 600px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 12px;
 }
 
 /* HEADINGS */
@@ -109,13 +164,15 @@ img {
 /* PHONE */
 @media (max-width: 600px) {
     body {
-        padding: 10px;
+        display: block;
+        padding: 15px;
     }
 
     .box,
     .content-box {
-        width: calc(100vw - 20px);
+        width: 100%;
         max-width: none;
+        margin-top: 15px;
     }
 
     h1 {

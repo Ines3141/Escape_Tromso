@@ -7,22 +7,62 @@
     <link rel="stylesheet" href="../../CSS/station.css">
 </head>
 <body>
-
     <div class="box">
         <h1>Station 1</h1>
+
         <p>Location: Gate to the arctic</p>
 
-        <button class="back-button" onclick="window.location.href='../../First_page_Enter_Code.html'">Back</button>
+        <div class="image-container">
+            <img src="../../Images/Station_1_gate.jfif" alt="Station 1">
+        </div>
 
-        <button class=""location-button" onclick="window.open('https://www.google.com/maps/search/Tromsø+Harbour')">
-            Open Map
-        </button>
+        <div class="audio-row">
+            <button class="audio-btn" id="audioBtn">&#128266;</button>
+            <div id="subtitle" class="subtitle"></div>
+        </div>
 
-        <button class="riddle-button" onclick="window.location.href='../../Riddle/riddle_1.html'">
-            Solve Riddle
-        </button>
-        <!-- BUTTON FOR TAKING A PICTURE -->
+        <audio id="voice" src="../../audio/test.m4a"></audio>
+
+        <div class="button-row">
+            <button class="back-button" onclick="window.location.href='../../First_page_Enter_Code.html'">
+                Back
+            </button>
+
+            <button class="location-button" onclick="window.open('https://www.google.com/maps/search/Tromsø+Harbour')">
+                Open Map
+            </button>
+
+            <button class="riddle-button" onclick="window.location.href='../../Riddle/riddle_1.html'">
+                Solve Riddle
+            </button>
+        </div>
     </div>
 
+    <script>
+        const audio = document.getElementById("voice");
+        const btn = document.getElementById("audioBtn");
+        const subtitle = document.getElementById("subtitle");
+
+        const subtitles = [
+            { start: 0, end: 2.5, text: "Welcome to the website." },
+            { start: 2.5, end: 5, text: "This is the spoken text." },
+            { start: 5, end: 8, text: "Click the audio button to hear it again." }
+        ];
+
+        btn.addEventListener("click", () => {
+            audio.currentTime = 0;
+            audio.play();
+        });
+
+        audio.addEventListener("timeupdate", () => {
+            const current = audio.currentTime;
+
+            const line = subtitles.find(sub =>
+                current >= sub.start && current <= sub.end
+            );
+
+            subtitle.textContent = line ? line.text : "";
+        });
+    </script>
 </body>
 </html>

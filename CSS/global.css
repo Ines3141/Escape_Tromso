@@ -33,7 +33,7 @@ body {
 
 /* AUDIO AND SUBTITELS*/
 .audio-row {
-    display: flex;
+    display: block;
     align-items: center;
     gap: 14px;
     margin: 20px 0;

@@ -3,15 +3,22 @@ To do list:
 - Format for phone
 - Database for saving phone and what you said (YOU CAN ADD IT HERE)
 - People should have a round frame and when they are talking they should pulsate
-- Buttons for answer people 
-- Station 2: Nansen Riddle with the Ice shelfs:
+- Buttons for answer choices to answer the explorers 
+
+Station 2: Nansen Riddle with the Ice shelfs:
   - Write text and interaction  
   - Background picture with floats
   - Numbers are button and when you click on them in an order there will be a lign
   - Doesnt work properly and format not correct.
+    
 Station 3: Wanny:
 - Include pictures
 - Right text and interaction
+- Create riddle:
+  - One sees first a fox running thorugh the snow (easy simulation)
+  - One can see the fitting foot prints
+  - Follow the fox through the snow, bute there are other animals
+  - Easiest implementation: just upload a picture   
 
 - Station 4: Monument
 - Only picture of the monument

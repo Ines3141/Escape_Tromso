@@ -1,27 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Station 6</title>
+    <meta charset="UTF-8">
+    <title>Station 5</title>
     <link rel="stylesheet" href="../../CSS/global.css">
     <link rel="stylesheet" href="../../CSS/station.css">
 </head>
 <body>
-
     <div class="box">
-        <h1>Station 6</h1>
-        <p>Location: Olhallen Henry Rudi</p>
+        <button id="settingsBtn" class="settings-btn">&#9881</button>
 
-        <back-button onclick="window.location.href='station_5.html'">Back</back-button>
+        <div id="settingsMenu" class="settings-menu hidden">
+            <!-- <button>Replay Audio</button> -->
+            <button>Show Hint</button> <!-- Not necessary with Sation side-->
+            <button id="Location_btn">Show location</button>
+            <button>About Rudi</button>
+            <!--Maybe more ifnormation is nice.
+                For people who are interested -->
+        </div>
+        <h1>Station 5</h1>
+        <p>Location: Rudi</p>
 
-        <location-button onclick="window.open('https://www.google.com/maps/search/Ølhallen')">
-            Open Map
-        </location-button>
+        <div class="person-container">
+            <img src="../../Images/rudi.jpg" alt="Station 6" class="imag-person">
+        </div>
 
-        <riddle-button onclick="window.location.href='../../Riddle/riddle_6.html'">
+        <div class="audio-row">
+            <button class="audio-btn" id="audioBtn"> &#128266;</button>
+            <div id="subtitle" class="subtitle"></div>
+        </div>
+
+        <audio id="voice" preload="auto">
+            <source src="../../Audio/test.m4a" type="Audio/mp4">
+        </audio>
+        <audio id="voice_2" preload="auto">
+            <!-- preload auto: Load the audio file as soon as possible, even before the user presses play. -->
+            <source src="../../Audio/test.m4a" type="Audio/mp4">
+        </audio>
+        <div id="choices" style="display:none;">
+            <button id="btnA" class="answer-button">Option A</button>
+            <button id="btnB" class="answer-button">Option B</button>
+        </div>
+
+        <button class="back-button" onclick="window.location.href='station_5.html'">
+            Back
+        </button>
+        <!-- for actual game do </button>style="display:none;">, but now it is just blocking -->
+
+        <button class="riddle-button" id="riddle_btn" onclick="window.location.href='../../Riddle/riddle_6.html'">
             Solve Riddle
-        </riddle-button>
+        </button>
+
+        <script>const audio = document.getElementById("voice");
+            const audio2= document.getElementById("voice_2")
+            const btn = document.getElementById("audioBtn");
+            const person = document.querySelector(".person-container");
+            const riddle_btn = document.getElementById("riddle_btn");
+            const location_btn = document.getElementById("Location_btn")
+
+            location_btn.addEventListener("click", () => {
+                window.open('https://www.google.com/maps/search/Olhallen');
+            }) /* FIND THE RIGHT LINK */
+
+            btn.addEventListener("click", () => {
+                if (audio.paused) {
+                    audio.play();
+                    person.classList.add("speaking");
+                } else {
+                    audio.pause();
+                    person.classList.remove("speaking");
+                }
+            });
+
+            audio.addEventListener("ended", () => {
+                person.classList.remove("speaking");
+                document.getElementById("choices").style.display = "block";
+            });
+            const choices = document.getElementById("choices");
+
+            document.getElementById("btnA").addEventListener("click", () => {
+                choices.style.display = "none";
+                if (audio2.paused) {
+                    audio2.play();
+                    person.classList.add("speaking");
+                } else {
+                    audio2.pause();
+                    person.classList.remove("speaking");
+                }
+            });
+
+            document.getElementById("btnB").addEventListener("click", () => {
+                choices.style.display = "none";
+                if (audio2.paused) {
+                    audio2.play();
+                    person.classList.add("speaking");
+                } else {
+                    audio2.pause();
+                    person.classList.remove("speaking");
+                }
+            });
+            audio2.addEventListener("ended", () => {
+                person.classList.remove("speaking");
+                riddle_btn.style.display = "block"
+                /* IF THIS IS THE LAST PART OF THE CONVERSATION SHOW BUTTON
+                TO SOLVE RIDDLE IF ISNT YOU NEED MORE BLOCKS*/
+            });
+            settingsBtn.addEventListener("click", (event) => {
+                event.stopPropagation();
+                settingsMenu.classList.toggle("hidden");
+            });
+
+            settingsMenu.addEventListener("click", (event) => {
+                event.stopPropagation();
+            });
+
+            document.addEventListener("click", () => {
+                settingsMenu.classList.add("hidden");
+            });</script>
+
     </div>
 
 </body>

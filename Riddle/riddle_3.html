@@ -2,17 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Right location? </title>
+    <title>Wanny </title>
     <link rel="stylesheet" href="../CSS/global.css"> <!-- link to style sheet -->
     <link rel="stylesheet" href="../CSS/riddle.css">
+    <link rel="stylesheet" href="../CSS/riddle_Wanny.css">
 </head>
 <body>
     <div class="box">
-        <p>Which polar explorer do you see?</p>
-        <input id="answer" type="text" placeholder="Answer">
-        <submit-button onclick="checkAnswer()">Submit</submit-button>
-        <p id="message"></p>
-        <back-button onclick="window.location.href='riddle_1.html'">
+        <div class="scene">
+            <div class="prints">
+                <span>&#128062;</span><span>&#128062;</span><span>&#128062;</span><span>&#128062;</span><span>&#128062;</span>
+            </div>
+            <img class="fox" src="../Images/fox.jpg" />
+        </div>
+        <button class="submit-button" id="submit" onclick="window.location.href='riddle_3_part2.html'">
+            Continue
+        </button>
+        <back-button onclick="window.location.href='../Stations/HTML/station_2.html'">
             Back
         </back-button>
     </div>

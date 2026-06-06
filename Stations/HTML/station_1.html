@@ -22,8 +22,8 @@
         </div>
 
         <audio id="voice" preload="auto">
-            <source src="../../Audio/test_mp3.mp3" type="Audio/mpeg">
-            <source src="../../Audio/test.m4a" type="Audio/mp4">
+            <!--<source src="../../Audio/test_mp3.mp3" type="Audio/mpeg"> -->
+            <source src="../../Audio/Station_1_Welcome.m4a" type="Audio/mp4">
         </audio>
 
         <div class="button-row">
@@ -36,7 +36,7 @@
             </button>
 
             <button class="riddle-button" onclick="window.location.href='../../Riddle/riddle_1.html'">
-                Solve Riddle
+                Start rescue mission
             </button>
         </div>
     </div>
@@ -47,10 +47,36 @@
         const subtitle = document.getElementById("subtitle");
 
         const subtitles = [
-            { start: 0, end: 2.5, text: "Welcome to the website." },
-            { start: 2.5, end: 5, text: "This is the spoken text." },
-            { start: 5, end: 8, text: "Click the audio button to hear it again." }
-        ];
+    { start: 0, end: 5, text: "--- SOS Signal Detected ---" },
+
+    { start: 5, end: 7, text: "Do you hear that?" },
+
+    { start: 7, end: 9, text: "It sounds like an SOS call." },
+
+    { start: 9, end: 13, text: "Someone is in trouble and needs your help." },
+
+    { start: 13, end: 16, text: "Welcome to the Rescue Hunt of the Lost Polar Expedition." },
+
+    { start: 16, end: 18, text: "A crew of five explorers is trapped in the Arctic." },
+
+    { start: 18, end: 22, text: "Their only hope is the information you uncover." },
+
+    { start: 22, end: 27, text: "At each station, you will meet polar explorers and Arctic heroes." },
+
+    { start: 27, end: 31, text: "Each of them holds an important clue." },
+
+    { start: 31, end: 35, text: "Solve riddles and collect their information." },
+
+    { start: 35, end: 39, text: "Every clue brings the crew closer to safety." },
+
+    { start: 39, end: 42, text: "Are you ready?" },
+
+    { start: 42, end: 46, text: "The lives of five people depend on you." },
+
+    { start: 46, end: 50, text: "Hurry. The rescue mission starts now." },
+
+    { start: 50, end: 53, text: "Proceed to the Riddle Page." }
+];
 
         btn.addEventListener("click", () => {
             audio.currentTime = 0;

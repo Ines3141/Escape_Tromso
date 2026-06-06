@@ -5,6 +5,7 @@
     <title>Right location? </title>
     <link rel="stylesheet" href="../CSS/global.css"> <!-- link to style sheet -->
     <link rel="stylesheet" href="../CSS/riddle.css">
+    <link rel="stylesheet" href="../CSS/Nansen_riddle.css">
 </head>
 <body>
     <div class="box">
@@ -12,28 +13,109 @@
             Which path do you have to take through the ice?
             The year when Nansen got Nobel peace will help you.
         </p>
-        <img src="../Images/station_2_test.jpg"
-             alt="Treasure Map"
-             class="riddle-map">
-        <input id="answer" type="text" placeholder="Answer">
-        <submit-button onclick="checkAnswer()">Submit</submit-button>
-        <p id="message"></p>
-        <back-button onclick="window.location.href='riddle_1.html'">
+        <div class="ice-game">
+            <svg id="lineLayer"></svg>
+
+            <button class="number-dot" data-number="1" style="left:10%; top:10%;">1</button>
+            <button class="number-dot" data-number="2" style="left:66%; top:45%;">2</button>
+            <button class="number-dot" data-number="4" style="left:60%; top:15%;">4</button>
+            <button class="number-dot" data-number="6" style="left:25%; top:30%;">6</button>
+            <button class="number-dot" data-number="7" style="left:5%; top:60%;">7</button>
+            <button class="number-dot" data-number="8" style="left:75%; top:70%;">8</button>
+            <button class="number-dot" data-number="33" style="left:50%; top:72%;">33</button>
+            <button class="number-dot" data-number="22" style="left:5%; top:88%;">22</button>
+            <button class="number-dot" data-number="3" style="left:85%; top:88%;">3</button>
+            <button class="number-dot" data-number="9" style="left:45%; top:25%;">9</button>
+            <button class="number-dot" data-number="5" style="left:50%; top:72%;">5</button>
+        </div>
+
+        <p id="feedback"></p>
+        <button class="submit-button" id="submit" onclick="window.location.href='../Stations/HTML/station_3.html'" style="display:none;">
+            Continue
+        </button>
+        <button class="back-button" onclick="window.location.href='riddle_1.html'">
             Back
-        </back-button>
+        </button>
+        <script>
+            const correctAnswer = ["1", "9", "22"];
+            let selected = [];
+
+            const buttons = document.querySelectorAll(".number-dot");
+            const svg = document.getElementById("lineLayer");
+            const feedback = document.getElementById("feedback");
+            const game = document.querySelector(".ice-game");
+            const btn_submit = document.getElementById("submit");
+
+            buttons.forEach(button => {
+              button.addEventListener("click", () => {
+                if (selected.includes(button)) return;
+
+                selected.push(button);
+                button.classList.add("selected");
+
+                drawCurvedLines();
+
+                const currentAnswer = selected.map(btn => btn.dataset.number);
+
+                if (selected.length === correctAnswer.length) {
+                  if (JSON.stringify(currentAnswer) === JSON.stringify(correctAnswer)) {
+                    feedback.textContent = "Correct! The path through the ice is revealed.";
+                    feedback.style.color = "lightgreen";
+                    btn_submit.style.display = "block";
+
+                  } else {
+                    feedback.textContent = "Not quite. Try again.";
+                    feedback.style.color = "orange";
+                    setTimeout(resetGame, 1000);
+                  }
+                }
+              });
+            });
+
+            function drawCurvedLines() {
+              svg.innerHTML = "";
+
+              for (let i = 0; i < selected.length - 1; i++) {
+                const start = getCenter(selected[i]);
+                const end = getCenter(selected[i + 1]);
+
+                const midX = (start.x + end.x) / 2;
+                const midY = (start.y + end.y) / 2 - 40;
+
+                const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+
+                path.setAttribute(
+                  "d",
+                  `M ${start.x} ${start.y} Q ${midX} ${midY} ${end.x} ${end.y}`
+                );
+
+                path.setAttribute("stroke", "white");
+                path.setAttribute("stroke-width", "4");
+                path.setAttribute("fill", "none");
+                path.setAttribute("stroke-linecap", "round");
+
+                svg.appendChild(path);
+              }
+            }
+
+            function getCenter(element) {
+              const gameRect = game.getBoundingClientRect();
+              const rect = element.getBoundingClientRect();
+
+              return {
+                x: rect.left + rect.width / 2 - gameRect.left,
+                y: rect.top + rect.height / 2 - gameRect.top
+              };
+            }
+
+            function resetGame() {
+              selected = [];
+              svg.innerHTML = "";
+              feedback.textContent = "";
+              buttons.forEach(btn => btn.classList.remove("selected"));
+            }
+        </script>
+
     </div>
-
-    <script>
-    function checkAnswer() {
-      let answer = document.getElementById("answer").value.toLowerCase();
-      if (answer === "3") {
-        window.location.href = "../Stations/HTML/station_3.html";
-      } /*  else {
-         window.location.href = "riddle_1.html";
-         Not correct, take another look. Time delay. 
-      } */
-    }
-    </script>
-
 </body>
 </html>

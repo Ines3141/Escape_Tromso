@@ -28,11 +28,50 @@
     background-color: #d63031;
     color: white;
 }
+.answer-button{
+    background-color: lavenderblush;
+    color:black;
+}
 
 .back-button,
 .location-button,
+.answer-button, 
 .riddle-button {
     display: block;
     width: 100%;
     margin: 10px 0;
+}
+
+.person-container {
+    width: 180px;
+    height: 240px;
+    overflow: hidden;
+    border-radius: 50% / 45%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.imag-person {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.person-container.speaking {
+    animation: pulse 0.8s infinite;
+    box-shadow: 0 0 0 6px rgba(0, 150, 255, 0.25);
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.08);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }

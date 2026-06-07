@@ -3,7 +3,8 @@ To do list:
 - Format for phone
 - Database for saving phone and what you said (YOU CAN ADD IT HERE)
 - People should have a round frame and when they are talking they should pulsate
-- Buttons for answer choices to answer the explorers 
+- Buttons for answer choices to answer the explorers
+- When people go back and they have solved the riddle already they can go through all the station without doing the riddle again -> need to save status in DB
 
 Station 2: Nansen Riddle with the Ice shelfs:
   - Write text and interaction  

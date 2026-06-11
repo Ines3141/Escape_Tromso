@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wanny </title>
+    <link rel="stylesheet" href="../CSS/global.css"> <!-- link to style sheet -->
+    <link rel="stylesheet" href="../CSS/riddle.css">
+</head>
+<body>
+    <div class="box">
+        <h1>Next Location</h1>
+        <p>Coordinates:</p>
+        <p><strong>69.6492, 18.9553</strong></p>
+
+        <button class="submit-button" id="submit">
+            Open coordinates and continue
+        </button>
+
+        <button class="back-button" onclick="window.location.href='../Stations/HTML/station_4.html'">
+            Back
+        </button>
+    </div>
+    <script>
+        const submit = document.getElementById("submit");
+
+        submit.addEventListener("click", () => {
+            window.open("https://www.google.com/maps/search/?api=1&query=69.6492,18.9553", "_blank");
+
+            setTimeout(() => {
+                window.location.href = "../Stations/HTML/station_5.html";
+            }, 500);
+        });
+    </script>
+</body>
+</html>

@@ -75,3 +75,69 @@
         transform: scale(1);
     }
 }
+.settings-menu {
+    position: absolute;
+    top: 55px;
+    right: 20px;
+    background: rgba(0,0,0,0.85);
+    color: white;
+    padding: 15px;
+    border-radius: 12px;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.hidden {
+    display: none;
+}
+
+/* MAYBE CREATE ONE OWN CLASS */
+.monument-theme {
+    background: linear-gradient(180deg, #07111f, #0b2540);
+    border: 1px solid rgba(180, 220, 255, 0.25);
+    box-shadow: 0 0 35px rgba(120, 180, 255, 0.15);
+}
+
+.monument-theme h1 {
+    letter-spacing: 2px;
+    text-shadow: 0 0 12px rgba(180, 220, 255, 0.45);
+}
+
+.monument-theme .image-container img {
+    filter: brightness(0.65) contrast(1.15) saturate(0.65);
+    box-shadow: 0 0 25px rgba(0,0,0,0.6);
+}
+
+.monument-theme .subtitle {
+    background: rgba(0, 0, 0, 0.85);
+    border: 1px solid rgba(180, 220, 255, 0.25);
+    color: #dbefff;
+    font-style: italic;
+}
+
+.monument-theme .audio-btn {
+    background: #020812;
+    box-shadow: 0 0 18px rgba(120, 180, 255, 0.45);
+}
+
+.monument-theme .riddle-button {
+    background: #c9a24d;
+    color: #0b0b0b;
+}
+
+.monument-theme .location-button {
+    background: #1f4f8f;
+}
+
+.monument-theme .back-button {
+    background: #6b1f2a;
+}
+
+.fog {
+    height: 35px;
+    margin-top: -25px;
+    background: linear-gradient(90deg, transparent, rgba(220,240,255,0.35), transparent);
+    filter: blur(10px);
+}

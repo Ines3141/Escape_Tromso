@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wanny </title>
+    <link rel="stylesheet" href="../CSS/global.css"> <!-- link to style sheet -->
+    <link rel="stylesheet" href="../CSS/riddle.css">
+    <link rel="stylesheet" href="../CSS/Henry.css">
+</head>
+<body>
+    <div class="box">
+        <h1>Henry Rudi's Lock</h1>
+
+        <p>
+            Look closely at the house.
+            The Arctic hunter left a three-digit code.
+        </p>
+
+        <div class="lock-box">
+            <div class="lock-top"></div>
+
+            <div class="lock-body">
+                <input class="lock-digit" id="digit1" maxlength="1" type="text" inputmode="numeric">
+                <input class="lock-digit" id="digit2" maxlength="1" type="text" inputmode="numeric">
+                <input class="lock-digit" id="digit3" maxlength="1" type="text" inputmode="numeric">
+            </div>
+        </div>
+
+        <p class="hint">
+            Top floor windows → Lanterns → Doors
+        </p>
+
+        <button class="submit-button" onclick="checkLock()">Unlock</button>
+
+        <p id="feedback"></p>
+    </div>
+    <script>
+        function checkLock() {
+            const d1 = document.getElementById("digit1").value;
+            const d2 = document.getElementById("digit2").value;
+            const d3 = document.getElementById("digit3").value;
+
+            const code = d1 + d2 + d3;
+            const feedback = document.getElementById("feedback");
+
+            if (code === "451") {
+                feedback.textContent = "Click! The lock opens.";
+                feedback.style.color = "lightgreen";
+
+                setTimeout(() => {
+                    window.location.href = "../final_page.html";
+                }, 1200);
+            } else {
+                feedback.textContent = "Still locked. Count carefully.";
+                feedback.style.color = "orange";
+            }
+        }
+        document.querySelectorAll(".lock-digit").forEach((input, index, inputs) => {
+            input.addEventListener("input", () => {
+                if (input.value.length === 1 && inputs[index + 1]) {
+                    inputs[index + 1].focus();
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

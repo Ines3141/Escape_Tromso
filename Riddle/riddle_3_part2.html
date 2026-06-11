@@ -14,15 +14,30 @@
         </div>
         <!-- CHANGE THAT THEY CAN PRESS DIRECTLY THE BUTTONS THERE -->
         <!-- -->
+        <input id="answerInput" placeholder="Enter frequency">
+        <button id="checkBtn">Transmit</button>
         <button class="submit-button" id="submit" onclick="window.location.href='../Stations/HTML/station_4.html'">
             Continue
         </button>
-        <back-button onclick="window.location.href='riddle_3.html'">
+        <button class="back-button" onclick="window.location.href='riddle_3.html'">
             Back
-        </back-button>
+        </button>
     </div>
 
     <script>
+        checkBtn.addEventListener("click", () => {
+            const answer = answerInput.value
+                .toLowerCase()
+                .replace(/\s+/g, "");
+            if (
+                answer === "91" ||
+                answer === "91mhz"
+            ) {
+                window.location.href = "../Stations/HTML/station_4.html";
+            } else {
+                alert("Wrong frequency. Try again!");
+            }
+        });
     </script>
 
 </body>

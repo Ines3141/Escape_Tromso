@@ -1,0 +1,74 @@
+.cube-scene {
+    position: relative;
+    width: 300px;
+    height: 240px;
+    perspective: 900px;
+    margin: 0px auto 70px;
+}
+
+.monument-standing {
+    position: absolute;
+    width: 100px;
+    left: 50%;
+    top: 0px;
+    transform: translateX(-50%);
+    z-index: 20;
+    border-radius: 10px;
+}
+
+.cube {
+    width: 160px;
+    height: 160px;
+    position: relative;
+    top: 100px;
+    transform-style: preserve-3d;
+    transform: rotateX(-20deg) rotateY(0deg);
+    transition: transform .8s;
+    margin: 60px auto 0;
+}
+
+.face {
+    position: absolute;
+    width: 160px;
+    height: 160px;
+    background: rgba(180, 220, 255, 0.9);
+    border: 2px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fish-symbol {
+    position: absolute;
+    top: 0px;
+    font-size: 28px;
+    opacity: 0.45;
+}
+
+.face input {
+    width: 70px;
+    font-size: 36px;
+    text-align: center;
+    z-index: 2;
+}
+
+.front {
+    transform: translateZ(80px);
+}
+
+.back {
+    transform: rotateY(180deg) translateZ(80px);
+}
+
+.right {
+    transform: rotateY(90deg) translateZ(80px);
+}
+
+.left {
+    transform: rotateY(-90deg) translateZ(80px);
+}
+
+.cube-buttons {
+    text-align: center;
+    margin: 20px;
+}

@@ -1,0 +1,76 @@
+.box {
+    position: relative;
+}
+
+.settings-btn {
+    width: 100%;
+    margin: 10px 0;
+    padding: 14px;
+    font-size: 18px;
+    font-weight: bold;
+    background: #f7d046;
+    color: #082033;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+}
+
+.settings-menu,
+.settings-menu-final {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.85);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+    .settings-menu button {
+        width: 100%;
+    }
+
+.route-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.route-answer {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: 3px solid transparent;
+    border-radius: 14px;
+    overflow: hidden;
+    background: transparent;
+    cursor: pointer;
+}
+
+    .route-answer img {
+        width: 100%;
+        height: 120px;
+        object-fit: cover;
+        display: block;
+    }
+
+    .route-answer.selected {
+        border-color: #00b894;
+        box-shadow: 0 0 18px rgba(0, 184, 148, 0.8);
+    }
+
+.hidden {
+    display: none;
+}
+
+.submit-button {
+    width: 100%;
+    margin-top: 15px;
+}
+
+#feedback {
+    margin-top: 15px;
+    font-weight: bold;
+    font-size: 18px;
+}

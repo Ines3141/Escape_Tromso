@@ -10,60 +10,78 @@
 <body>
     <div class="box">
         <button id="settingsBtn" class="settings-btn">&#9881</button>
-
         <div id="settingsMenu" class="settings-menu hidden">
             <!-- <button>Replay Audio</button> -->
+            <label for="volumeSlider">Volume</label>
+            <input id="volumeSlider" type="range" min="0" max="1" step="0.1" value="1">
             <button>Show Hint</button> <!-- Not necessary with Sation side-->
             <button id="Location_btn">Show location</button>
-            <button>About Amundsen</button>
-            <!--Maybe more ifnormation is nice.
-                For people who are interested -->
+            <button>About Roald Amundsen</button>
+            <!--Maybe more ifnormation is nice. For people who are interested -->
         </div>
         <h1>Station 5</h1>
-        <p>Location: Amundsen</p>
-
+        <p>Roald Amundsen</p>
         <div class="person-container">
             <img src="../../Images/Amundsen.jpg" alt="Station 5" class="imag-person">
         </div>
-
         <div class="audio-row">
             <button class="audio-btn" id="audioBtn"> &#128266;</button>
             <div id="subtitle" class="subtitle"></div>
         </div>
-
         <audio id="voice" preload="auto">
-            <source src="../../Audio/test.m4a" type="Audio/mp4">
+            <source src="../../Audio/Amundsen1.mp4" type="audio/mp4">
         </audio>
-        <audio id="voice_2" preload="auto">
-            <!-- preload auto: Load the audio file as soon as possible, even before the user presses play. -->
-            <source src="../../Audio/test.m4a" type="Audio/mp4">
+        <audio id="voiceA" preload="auto">
+            <source src="../../Audio/AmundsenA.mp4" type="audio/mp4">
         </audio>
-        <div id="choices" style="display:none;">
-            <button id="btnA" class="answer-button">Option A</button>
-            <button id="btnB" class="answer-button">Option B</button>
-        </div>
+        <audio id="voiceB" preload="auto">
+            <source src="../../Audio/AmundsenB.mp4" type="audio/mp4">
+        </audio>
 
+        <div id="choices" style="display:none;">
+            <button id="btnA" class="answer-button"></button>
+            <button id="btnB" class="answer-button"></button>
+        </div>
         <button class="back-button" onclick="window.location.href='station_4.html'">
             Back
         </button>
         <!-- for actual game do </button>style="display:none;">, but now it is just blocking -->
-
         <button class="riddle-button" id="riddle_btn" onclick="window.location.href='../../Riddle/riddle_5.html'">
             Solve Riddle
         </button>
+        <script>
+            /* Audio */
+            const audio = document.getElementById("voice");
+            const audioA = document.getElementById("voiceA");
+            const audioB = document.getElementById("voiceB");
 
-        <script>const audio = document.getElementById("voice");
-            const audio2= document.getElementById("voice_2")
-            const btn = document.getElementById("audioBtn");
-            const person = document.querySelector(".person-container");
+            /* Buttons */
+            const btnA = document.getElementById("btnA");
+            const btnB = document.getElementById("btnB");
+            const audio_btn = document.getElementById("audioBtn");
             const riddle_btn = document.getElementById("riddle_btn");
-            const location_btn = document.getElementById("Location_btn")
+            const location_btn = document.getElementById("Location_btn");
+
+            const choices = document.getElementById("choices");
+            const settingsBtn = document.getElementById("settingsBtn");
+            const settingsMenu = document.getElementById("settingsMenu");
+            const subtitle = document.getElementById("subtitle");
+            const allAudios = [audio, audioA, audioB];
+            const volumeSlider = document.getElementById("volumeSlider");
+
+            const person = document.querySelector(".person-container");
 
             location_btn.addEventListener("click", () => {
                 window.open('https://www.google.com/maps/search/Amundsen+plass');
-            }) /* FIND THE RIGHT LINK */
-
-            btn.addEventListener("click", () => {
+            });
+            /* Change volumne */ 
+            volumeSlider.addEventListener("input", () => {
+                allAudios.forEach(sound => {
+                    sound.volume = volumeSlider.value;
+                });
+            });
+            /* Start the audio file and the subtitels. */
+            audio_btn.addEventListener("click", () => {
                 if (audio.paused) {
                     audio.play();
                     person.classList.add("speaking");
@@ -72,53 +90,100 @@
                     person.classList.remove("speaking");
                 }
             });
-
+            /* If audio ends, show answer options A and B*/
             audio.addEventListener("ended", () => {
                 person.classList.remove("speaking");
-                document.getElementById("choices").style.display = "block";
+                btnA.textContent =
+                    "Yes! We need your help to save our friends!";
+                btnB.textContent =
+                    "Yes, we need help. Do you have any Arctic experience?";
+                choices.style.display = "block";
             });
-            const choices = document.getElementById("choices");
-
-            document.getElementById("btnA").addEventListener("click", () => {
+            btnA.addEventListener("click", () => {
                 choices.style.display = "none";
-                if (audio2.paused) {
-                    audio2.play();
+                if (audioA.paused) {
+                    audioA.play();
                     person.classList.add("speaking");
                 } else {
-                    audio2.pause();
+                    audioA.pause();
                     person.classList.remove("speaking");
                 }
             });
-
-            document.getElementById("btnB").addEventListener("click", () => {
-                choices.style.display = "none";
-                if (audio2.paused) {
-                    audio2.play();
-                    person.classList.add("speaking");
-                } else {
-                    audio2.pause();
-                    person.classList.remove("speaking");
-                }
-            });
-            audio2.addEventListener("ended", () => {
+            audioA.addEventListener("ended", () => {
                 person.classList.remove("speaking");
-                riddle_btn.style.display = "block"
-                /* IF THIS IS THE LAST PART OF THE CONVERSATION SHOW BUTTON
+                riddle_btn.style.display = "block";
+                /*
+                NO MORE INTERACTION
+                IF THIS IS THE LAST PART OF THE CONVERSATION
+                SHOW BUTTON
                 TO SOLVE RIDDLE IF ISNT YOU NEED MORE BLOCKS*/
+            });
+            btnB.addEventListener("click", () => {
+                choices.style.display = "none";
+                if (audioB.paused) {
+                    audioB.play();
+                    person.classList.add("speaking");
+                } else {
+                    audioB.pause();
+                    person.classList.remove("speaking");
+                }
+            });
+            audioB.addEventListener("ended", () => {
+                person.classList.remove("speaking");
+                riddle_btn.style.display = "block";
+            });
+
+            const subtitles = [
+                { start: 0, end: 4, text: "Excellent! Are we heading off on another expedition?" }
+            ];
+            const subtitlesA = [
+                { start: 0, end: 2, text: "A rescue mission?" },
+                { start: 2, end: 5, text: "Now that's an adventure worth joining!" },
+                { start: 5, end: 7, text: "I left several safety depots during my expeditions." },
+                { start: 7, end: 10, text: "Take these coordinates and hurry on your way." },
+                { start: 10, end: 13, text: "Good luck!" }
+            ];
+            const subtitlesB = [
+                { start: 1, end: 3, text: "Do I have Arctic experience?" },
+                { start: 3, end: 6, text: "My dear explorer, I am Roald Amundsen!" },
+                { start: 6, end: 10, text: "I was the first person to reach the South Pole." },
+                { start: 10, end: 14, text: "The first to navigate the Northwest Passage" },
+                { start: 14, end: 17, text: "And among the first to fly across over the North pole." },
+                { start: 20, end: 23, text: "I practically considered the Arctic my home." },
+                { start: 23, end: 26, text: "I left several safety depots during my expeditions." },
+                { start: 26, end: 29, text: "Good luck!" },
+            ];
+
+            function updateSubtitle(audioFile, subtitleList) {
+                const current = audioFile.currentTime;
+
+                const line = subtitleList.find(sub =>
+                    current >= sub.start && current <= sub.end
+                );
+
+                subtitle.textContent = line ? line.text : "";
+            }
+            /* Add subtitels to all options */
+            audio.addEventListener("timeupdate", () => {
+                updateSubtitle(audio, subtitles);
+            });
+            audioA.addEventListener("timeupdate", () => {
+                updateSubtitle(audioA, subtitlesA);
+            });
+            audioB.addEventListener("timeupdate", () => {
+                updateSubtitle(audioB, subtitlesB);
             });
             settingsBtn.addEventListener("click", (event) => {
                 event.stopPropagation();
                 settingsMenu.classList.toggle("hidden");
             });
-
             settingsMenu.addEventListener("click", (event) => {
                 event.stopPropagation();
             });
-
             document.addEventListener("click", () => {
                 settingsMenu.classList.add("hidden");
-            });</script>
-
+            });
+        </script>
     </div>
 
 </body>

@@ -159,10 +159,10 @@ button {
     transition: 0.3s;
 }
 
-    button:hover {
-        transform: scale(1.05);
-        background: #ffe066;
-    }
+button:hover {
+    transform: scale(1.05);
+    background: #ffe066;
+}
 
 /* IMAGES */
 img {
@@ -219,4 +219,87 @@ img {
     input {
         width: 100%;
     }
+}
+
+.final-choice {
+    margin: 25px 0;
+    text-align: center;
+}
+
+    .final-choice button {
+        margin: 8px;
+        padding: 14px 18px;
+        border-radius: 12px;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+        .final-choice button.selected {
+            background: #00b894;
+            color: white;
+        }
+
+    .final-choice img {
+        width: 120px;
+        height: 90px;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+
+
+.confetti {
+    font-size: 45px;
+    animation: pop 1s infinite alternate;
+}
+
+@keyframes pop {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.2);
+    }
+}
+
+.final-page .settings-btn {
+    position: static !important;
+    top: auto !important;
+    right: auto !important;
+    display: block;
+    width: 100%;
+    margin: 12px 0;
+    padding: 18px 24px;
+    background: #f7d046;
+    color: #082033;
+    border: none;
+    border-radius: 18px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.final-page .settings-menu,
+.final-page .settings-menu-final {
+    position: static !important;
+    top: auto !important;
+    right: auto !important;
+    width: 100%;
+    margin: 0 0 18px 0;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.85);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.final-page .hidden {
+    display: none !important;
+}
+
+.settings-menu button.selected {
+    background: #00b894;
+    color: white;
 }

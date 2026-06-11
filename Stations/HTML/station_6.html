@@ -3,7 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
-    <title>Station 5</title>
+    <title>Station 6</title>
     <link rel="stylesheet" href="../../CSS/global.css">
     <link rel="stylesheet" href="../../CSS/station.css">
 </head>
@@ -13,57 +13,83 @@
 
         <div id="settingsMenu" class="settings-menu hidden">
             <!-- <button>Replay Audio</button> -->
+            <label for="volumeSlider">Volume</label>
+            <input id="volumeSlider" type="range" min="0" max="1" step="0.1" value="1">
             <button>Show Hint</button> <!-- Not necessary with Sation side-->
             <button id="Location_btn">Show location</button>
-            <button>About Rudi</button>
+            <button>About Henry Rudi</button>
             <!--Maybe more ifnormation is nice.
-                For people who are interested -->
+        For people who are interested -->
         </div>
-        <h1>Station 5</h1>
-        <p>Location: Rudi</p>
-
+        <h1>Station 6</h1>
+        <p>Henry Rudi</p>
         <div class="person-container">
             <img src="../../Images/rudi.jpg" alt="Station 6" class="imag-person">
         </div>
-
         <div class="audio-row">
             <button class="audio-btn" id="audioBtn"> &#128266;</button>
             <div id="subtitle" class="subtitle"></div>
         </div>
-
         <audio id="voice" preload="auto">
-            <source src="../../Audio/test.m4a" type="Audio/mp4">
+            <source src="../../Audio/Rudi1.mp4" type="audio/mp4">
         </audio>
-        <audio id="voice_2" preload="auto">
-            <!-- preload auto: Load the audio file as soon as possible, even before the user presses play. -->
-            <source src="../../Audio/test.m4a" type="Audio/mp4">
+        <audio id="voiceA" preload="auto">
+            <source src="../../Audio/RudiA.mp4" type="audio/mp4">
         </audio>
+        <audio id="voiceB" preload="auto">
+            <source src="../../Audio/RudiB.mp4" type="audio/mp4">
+        </audio>
+        <audio id="voiceC" preload="auto">
+            <source src="../../Audio/RudiC.mp4" type="audio/mp4">
+        </audio>
+       
         <div id="choices" style="display:none;">
-            <button id="btnA" class="answer-button">Option A</button>
-            <button id="btnB" class="answer-button">Option B</button>
+            <button id="btnA" class="answer-button"></button>
+            <button id="btnB" class="answer-button"></button>
+            <button id="btnC" class="answer-button" style="display:none;"></button>
         </div>
-
         <button class="back-button" onclick="window.location.href='station_5.html'">
             Back
         </button>
         <!-- for actual game do </button>style="display:none;">, but now it is just blocking -->
-
         <button class="riddle-button" id="riddle_btn" onclick="window.location.href='../../Riddle/riddle_6.html'">
             Solve Riddle
         </button>
+        <script>
+            /* Audio */
+            const audio = document.getElementById("voice");
+            const audioA = document.getElementById("voiceA");
+            const audioB = document.getElementById("voiceB");
+            const audioC = document.getElementById("voiceC");
 
-        <script>const audio = document.getElementById("voice");
-            const audio2= document.getElementById("voice_2")
-            const btn = document.getElementById("audioBtn");
-            const person = document.querySelector(".person-container");
+            /* Buttons */
+            const btnA = document.getElementById("btnA");
+            const btnB = document.getElementById("btnB");
+            const btnC = document.getElementById("btnC");
+            const audio_btn = document.getElementById("audioBtn");
             const riddle_btn = document.getElementById("riddle_btn");
-            const location_btn = document.getElementById("Location_btn")
+            const location_btn = document.getElementById("Location_btn");
+
+            const choices = document.getElementById("choices");
+            const settingsBtn = document.getElementById("settingsBtn");
+            const settingsMenu = document.getElementById("settingsMenu");
+            const subtitle = document.getElementById("subtitle");
+            const allAudios = [audio, audioA, audioB, audioC];
+            const volumeSlider = document.getElementById("volumeSlider");
+
+            const person = document.querySelector(".person-container");
 
             location_btn.addEventListener("click", () => {
-                window.open('https://www.google.com/maps/search/Olhallen');
-            }) /* FIND THE RIGHT LINK */
-
-            btn.addEventListener("click", () => {
+                window.open('https://www.google.com/maps/search/Oelhallen+Tromsoe');
+            })
+            /* Change volume */
+            volumeSlider.addEventListener("input", () => {
+                allAudios.forEach(sound => {
+                    sound.volume = volumeSlider.value;
+                });
+            });
+            /* Start the audio file and the subtitels. */
+            audio_btn.addEventListener("click", () => {
                 if (audio.paused) {
                     audio.play();
                     person.classList.add("speaking");
@@ -72,54 +98,134 @@
                     person.classList.remove("speaking");
                 }
             });
-
+            /* If audio ends, show answer options A and B*/
             audio.addEventListener("ended", () => {
                 person.classList.remove("speaking");
-                document.getElementById("choices").style.display = "block";
+                btnA.textContent =
+                    "We need help rescuing people trapped in the ice.";
+                btnB.textContent =
+                    "Polar Bear King? How did you get that nickname?";
+                btnC.style.display = "none";
+                choices.style.display = "block";
             });
-            const choices = document.getElementById("choices");
-
-            document.getElementById("btnA").addEventListener("click", () => {
+            btnA.addEventListener("click", () => {
                 choices.style.display = "none";
-                if (audio2.paused) {
-                    audio2.play();
+                if (audioA.paused) {
+                    audioA.play();
                     person.classList.add("speaking");
                 } else {
-                    audio2.pause();
+                    audioA.pause();
                     person.classList.remove("speaking");
                 }
             });
-
-            document.getElementById("btnB").addEventListener("click", () => {
-                choices.style.display = "none";
-                if (audio2.paused) {
-                    audio2.play();
-                    person.classList.add("speaking");
-                } else {
-                    audio2.pause();
-                    person.classList.remove("speaking");
-                }
-            });
-            audio2.addEventListener("ended", () => {
+            audioA.addEventListener("ended", () => {
                 person.classList.remove("speaking");
                 riddle_btn.style.display = "block"
-                /* IF THIS IS THE LAST PART OF THE CONVERSATION SHOW BUTTON
+                /*
+                NO MORE INTERACTION
+                IF THIS IS THE LAST PART OF THE CONVERSATION
+                SHOW BUTTON
                 TO SOLVE RIDDLE IF ISNT YOU NEED MORE BLOCKS*/
             });
+            btnB.addEventListener("click", () => {
+                choices.style.display = "none";
+                if (audioB.paused) {
+                    audioB.play();
+                    person.classList.add("speaking");
+                } else {
+                    audioB.pause();
+                    person.classList.remove("speaking");
+                }
+            });
+            audioB.addEventListener("ended", () => {
+                person.classList.remove("speaking");
+                btnA.style.display = "none";
+                btnB.style.display = "none";
+                btnC.textContent =
+                    "We need your help first. Our friends are trapped in the ice.";
+                btnC.style.display = "block";
+                choices.style.display = "block";
+            });
+            btnC.addEventListener("click", () => {
+                choices.style.display = "none";
+                if (audioC.paused) {
+                    audioC.play();
+                    person.classList.add("speaking");
+                } else {
+                    audioC.pause();
+                    person.classList.remove("speaking");
+                }
+            });
+            audioC.addEventListener("ended", () => {
+                person.classList.remove("speaking");
+                riddle_btn.style.display = "block";
+            });
+
+            const subtitles = [
+                { start: 0, end: 2, text: "Ahoy, explorers!" },
+                { start: 2, end: 5, text: "You can call me Polar Bear King." },
+                { start: 5, end: 7, text: "What brings you here? Looking for adventure?" }
+            ];
+            const subtitlesA = [
+                { start: 0, end: 2, text: "A rescue mission, eh?" },
+                { start: 2, end: 5, text: "Then let's get straight to business."},
+                { start: 5, end: 7, text: "I studied ocean currents and sea ice." },
+                { start: 7, end: 10, text: "I learned a thing or two about surviving in the ice." },
+                { start: 10, end: 13, text: "Take a look at these notes." },
+                { start: 13, end: 16, text: "They might help you determine the right date for your friends to leave.." }
+            ];
+            const subtitlesB = [
+                { start: 1, end: 3, text: "I spent trapping and hunting on Svalbard a lot." },
+                { start: 3, end: 6, text: "People call me the Polar Bear King." },
+                { start: 6, end: 10, text: "I encountered more than you image." },
+                { start: 10, end: 14, text: "I overwintered on Svalbard 27 times." },
+                { start: 14, end: 17, text: "And do you know something funny?" },
+                { start: 20, end: 23, text: "I spent my first winter there when I was only nine years old." },
+                { start: 23, end: 26, text: "What brings you here?" }
+            ];
+            const subtitlesC = [
+                { start: 1, end: 3, text: "Now that's a good reason!" },
+                { start: 3, end: 7, text: "The Arctic rewards patience and good timing." },
+                { start: 7, end: 11, text: "Take these notes." },
+                { start: 11, end: 14, text: "They may help you figure out the right date." },
+                { start: 14, end: 17, text: "Good luck!" }
+            ];
+
+            function updateSubtitle(audioFile, subtitleList) {
+                const current = audioFile.currentTime;
+
+                const line = subtitleList.find(sub =>
+                    current >= sub.start && current <= sub.end
+                );
+
+                subtitle.textContent = line ? line.text : "";
+            }
+
+            /* Add subtitels to all options */
+            audio.addEventListener("timeupdate", () => {
+                updateSubtitle(audio, subtitles);
+            });
+            audioA.addEventListener("timeupdate", () => {
+                updateSubtitle(audioA, subtitlesA);
+            });
+            audioB.addEventListener("timeupdate", () => {
+                updateSubtitle(audioB, subtitlesB);
+            });
+            audioC.addEventListener("timeupdate", () => {
+                updateSubtitle(audioC, subtitlesC);
+            });
+
             settingsBtn.addEventListener("click", (event) => {
                 event.stopPropagation();
                 settingsMenu.classList.toggle("hidden");
             });
-
             settingsMenu.addEventListener("click", (event) => {
                 event.stopPropagation();
             });
-
             document.addEventListener("click", () => {
                 settingsMenu.classList.add("hidden");
-            });</script>
-
+            });
+        </script>
     </div>
-
 </body>
 </html>

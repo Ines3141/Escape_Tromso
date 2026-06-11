@@ -2,240 +2,140 @@
 <html>
 <head>
     <title>Amundsen Circle Puzzle</title>
-    <style>
-        body {
-            background: #f4efe4;
-            font-family: Arial, sans-serif;
-            text-align: center;
-        }
-
-        canvas {
-            background: #fffaf0;
-            border: 2px solid #333;
-            margin-top: 20px;
-        }
-
-        #message {
-            font-size: 22px;
-            font-weight: bold;
-            margin-top: 15px;
-        }
-    </style>
     <link rel="stylesheet" href="../CSS/global.css"> <!-- link to style sheet -->
     <link rel="stylesheet" href="../CSS/riddle.css">
+    <link rel="stylesheet" href="../CSS/Amundsen.css">
 </head>
 <body>
     <div class="box">
         <h1>Amundsen Compass Puzzle</h1>
-        <p>Rotate the inner circle until the explorer looks southwest.</p>
-
-        <canvas id="puzzleCanvas" width="800" height="800"></canvas>
-        <div id="message"></div>
-
-        <script>
-        const canvas = document.getElementById("puzzleCanvas");
-        const ctx = canvas.getContext("2d");
-        const message = document.getElementById("message");
-
-        const cx = canvas.width / 2;
-        const cy = canvas.height / 2;
-
-        let innerRotation = 0;
-        let dragging = false;
-        let lastMouseAngle = 0;
-
-        const targetAngle = 225; // southwest
-
-        const directions = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
-
-        const labels = [
-          "North Pole",
-          "Fram",
-          "East",
-          "Depot",
-          "South Pole",
-          "Amundsen",
-          "Gjøa",
-          "Northwest Passage"
-        ];
-
-        function draw() {
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-          drawOuterCircle();
-          drawInnerCircle();
-          checkSolved();
-        }
-
-        function drawOuterCircle() {
-          const outerRadius = 300;
-
-          ctx.beginPath();
-          ctx.arc(cx, cy, outerRadius, 0, Math.PI * 2);
-          ctx.lineWidth = 4;
-          ctx.strokeStyle = "black";
-          ctx.stroke();
-
-          for (let i = 0; i < 8; i++) {
-            const angle = i * 45 - 90;
-
-            drawText(directions[i], outerRadius + 35, angle, 24, "bold");
-            drawText(labels[i], outerRadius - 40, angle, 15, "normal");
-          }
-        }
-
-        function drawInnerCircle() {
-          const innerRadius = 190;
-
-          ctx.save();
-
-          ctx.translate(cx, cy);
-          ctx.rotate(degToRad(innerRotation));
-          ctx.translate(-cx, -cy);
-
-          ctx.beginPath();
-          ctx.arc(cx, cy, innerRadius, 0, Math.PI * 2);
-          ctx.lineWidth = 4;
-          ctx.strokeStyle = "darkblue";
-          ctx.stroke();
-
-          // Looking arrow
-          ctx.beginPath();
-          ctx.moveTo(cx, cy);
-          ctx.lineTo(cx, cy - innerRadius + 25);
-          ctx.lineWidth = 6;
-          ctx.strokeStyle = "red";
-          ctx.stroke();
-
-          drawArrowHead(cx, cy - innerRadius + 25, -90);
-
-          drawCenterText("LOOK", cx, cy - innerRadius + 60, 18, "bold");
-
-          // Connection lines
-          drawInnerLine(0, 180, innerRadius - 30);
-          drawInnerLine(45, 225, innerRadius - 50);
-          drawInnerLine(90, 270, innerRadius - 70);
-          drawInnerLine(135, 315, innerRadius - 90);
-
-          ctx.restore();
-        }
-
-        function drawInnerLine(angle1, angle2, radius) {
-          const p1 = pointOnCircle(radius, angle1 - 90);
-          const p2 = pointOnCircle(radius, angle2 - 90);
-
-          ctx.beginPath();
-          ctx.moveTo(p1.x, p1.y);
-          ctx.lineTo(p2.x, p2.y);
-          ctx.lineWidth = 3;
-          ctx.strokeStyle = "darkgreen";
-          ctx.stroke();
-        }
-
-        function checkSolved() {
-          const diff = Math.abs(normalizeAngle(innerRotation - targetAngle));
-
-          if (diff < 8 || diff > 352) {
-            message.textContent = "Correct! The explorer faces SOUTHWEST.";
-            message.style.color = "green";
-          } else {
-            message.textContent = "Not aligned yet.";
-            message.style.color = "black";
-          }
-        }
-
-        function drawText(text, radius, angle, size, weight) {
-          const p = pointOnCircle(radius, angle);
-          drawCenterText(text, p.x, p.y, size, weight);
-        }
-
-        function drawCenterText(text, x, y, size, weight) {
-          ctx.font = `${weight} ${size}px Arial`;
-          ctx.fillStyle = "black";
-          ctx.textAlign = "center";
-          ctx.textBaseline = "middle";
-          ctx.fillText(text, x, y);
-        }
-
-        function drawArrowHead(x, y, angle) {
-          const size = 15;
-          const rad = degToRad(angle);
-
-          ctx.beginPath();
-          ctx.moveTo(x, y);
-          ctx.lineTo(
-            x - size * Math.cos(rad - Math.PI / 6),
-            y - size * Math.sin(rad - Math.PI / 6)
-          );
-          ctx.lineTo(
-            x - size * Math.cos(rad + Math.PI / 6),
-            y - size * Math.sin(rad + Math.PI / 6)
-          );
-          ctx.closePath();
-          ctx.fillStyle = "red";
-          ctx.fill();
-        }
-
-        function pointOnCircle(radius, angleDegrees) {
-          const radians = degToRad(angleDegrees);
-          return {
-            x: cx + radius * Math.cos(radians),
-            y: cy + radius * Math.sin(radians)
-          };
-        }
-
-        function getMouseAngle(event) {
-          const rect = canvas.getBoundingClientRect();
-          const x = event.clientX - rect.left;
-          const y = event.clientY - rect.top;
-
-          return Math.atan2(y - cy, x - cx) * 180 / Math.PI;
-        }
-
-        function normalizeAngle(angle) {
-          angle = angle % 360;
-          if (angle < 0) angle += 360;
-          return angle;
-        }
-
-        function degToRad(degrees) {
-          return degrees * Math.PI / 180;
-        }
-
-        canvas.addEventListener("mousedown", function(event) {
-          dragging = true;
-          lastMouseAngle = getMouseAngle(event);
-        });
-
-        canvas.addEventListener("mousemove", function(event) {
-          if (!dragging) return;
-
-          const currentAngle = getMouseAngle(event);
-          const delta = currentAngle - lastMouseAngle;
-
-          innerRotation = normalizeAngle(innerRotation + delta);
-          lastMouseAngle = currentAngle;
-
-          draw();
-        });
-
-        canvas.addEventListener("mouseup", function() {
-          dragging = false;
-        });
-
-        canvas.addEventListener("mouseleave", function() {
-          dragging = false;
-        });
-
-        draw();
-        </script>
-        <button class="submit-button" id="submit" onclick="window.location.href='../Stations/HTML/station_6.html'">
-            Continue
-        </button>
-        <back-button onclick="window.location.href='riddle_4.html'">
-            Back
-        </back-button>
+        <p>Rotate the inner circle until the explorer looks in the right direction. It will help you to find the connections.</p>
+        <div class="compass-wrapper">
+            <span class="angle-label angle-0">
+                0° <br> Northpole </br>
+            </span>
+            <span class="angle-label angle-45">45° <br> Gjoa </br> </span>
+            <span class="angle-label angle-90">90° <br> North-East passage </br></span>
+            <span class="angle-label angle-135">135°<br> Maud </br></span>
+            <span class="angle-label angle-180">180° <br> Southpole </br></span>
+            <span class="angle-label angle-225">225° <br> Norge </br></span>
+            <span class="angle-label angle-270">270° <br> North-West passage</br></span>
+            <span class="angle-label angle-315">315° <br> FRAM </br></span>
+            <div class="compass-container">
+                <img id="arcticMap" src="../Images/Labyrinth_Amundsen.jpg">
+            </div>
         </div>
+        <div class="compass-buttons">
+            <button type="button" onclick="rotateStep(-45)">⟲</button>
+            <button type="button" onclick="rotateStep(45)">⟳</button>
+        </div>
+
+        <audio id="clickSound" src="../audio/Click.m4a"></audio>
+
+        <h2>Match the ships</h2>
+
+        <div class="match-game">
+
+            <div class="ship-card">
+                <div class="ship-name">&#9973; Fram</div>
+                <select id="fram">
+                    <option value="">Choose...</option>
+                    <option value="southpole">South Pole</option>
+                    <option value="northwest">North-West Passage</option>
+                    <option value="northeast">North-East Passage</option>
+                    <option value="northpole">North Pole</option>
+                </select>
+            </div>
+
+            <div class="ship-card">
+                <div class="ship-name">&#9973; Gjøa</div>
+                <select id="gjoa">
+                    <option value="">Choose...</option>
+                    <option value="southpole">South Pole</option>
+                    <option value="northwest">North-West Passage</option>
+                    <option value="northeast">North-East Passage</option>
+                    <option value="northpole">North Pole</option>
+                </select>
+            </div>
+
+            <div class="ship-card">
+                <div class="ship-name">&#9973; Maud</div>
+                <select id="maud">
+                    <option value="">Choose...</option>
+                    <option value="southpole">South Pole</option>
+                    <option value="northwest">North-West Passage</option>
+                    <option value="northeast">North-East Passage</option>
+                    <option value="northpole">North Pole</option>
+                </select>
+            </div>
+
+            <div class="ship-card">
+                <div class="ship-name">&#9992; Norge</div>
+                <select id="norge">
+                    <option value="">Choose...</option>
+                    <option value="southpole">South Pole</option>
+                    <option value="northwest">North-West Passage</option>
+                    <option value="northeast">North-East Passage</option>
+                    <option value="northpole">North Pole</option>
+                </select>
+            </div>
+
+        </div>
+        <p id="message"></p>
+        <button class="submit-button" id="submit" onclick="checkPuzzle()">
+            Submit
+        </button>
+        <button class="submit-button" id="submit_just_for_now" onclick="window.location.href='../Stations/HTML/station_6.html'">
+        Continue
+        </button> 
+        <button class="back-button" onclick="window.location.href='riddle_4.html'">
+            Back
+        </button>
+        <script>
+            let rotation = 225;
+            const targetRotation = 225;
+
+            const arcticMap = document.getElementById("arcticMap");
+            const clickSound = document.getElementById("clickSound");
+            const message = document.getElementById("message");
+
+            arcticMap.style.transform = `rotate(${rotation}deg)`;
+            function rotateStep(degrees) {
+                rotation += degrees;
+
+                arcticMap.style.transform = `rotate(${rotation}deg)`;
+
+                clickSound.currentTime = 0;
+                clickSound.play();
+            }
+
+            function checkPuzzle() {
+                const fram = document.getElementById("fram").value;
+                const gjoa = document.getElementById("gjoa").value;
+                const maud = document.getElementById("maud").value;
+                const norge = document.getElementById("norge").value;
+
+                const shipsCorrect =
+                    fram === "southpole" &&
+                    gjoa === "northwest" &&
+                    maud === "northeast" &&
+                    norge === "northpole";
+
+                if (shipsCorrect) {
+                    message.textContent = "Correct! Amundsen would be proud.";
+                    message.style.color = "lightgreen";
+
+                    setTimeout(() => {
+                        window.location.href = "../Stations/HTML/station_6.html";
+                    }, 1200);
+                } else {
+                    message.textContent = "Not quite. Check the direction and the ships.";
+                    message.style.color = "orange";
+                }
+            }
+        </script>
+
+    </div>
 
 </body>
 </html>

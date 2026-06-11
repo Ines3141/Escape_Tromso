@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final Rescue Decision</title>
+
+    <link rel="stylesheet" href="CSS/global.css">
+    <link rel="stylesheet" href="CSS/final_page.css">
+</head>
+<body class="final-page">
+    <div class="box">
+
+        <h1>Final Rescue Decision</h1>
+
+        <p>Enter the information you collected from the explorers.</p>
+
+        <!-- Nansen -->
+        <button class="settings-btn" onclick="toggleMenu(this)">
+            Nansen: Route through the ice
+        </button>
+
+        <div class="settings-menu-final hidden">
+            <div class="route-grid">
+
+                <button class="route-answer"
+                        onclick="chooseRoute(this,'wrong')">
+                    <img src="Images/Answer_1_final.jpg" alt="">
+                </button>
+
+                <button class="route-answer"
+                        onclick="chooseRoute(this,'correct')">
+                    <img src="Images/Answer_1_final.jpg" alt="">
+                </button>
+
+                <button class="route-answer"
+                        onclick="chooseRoute(this,'wrong')">
+                    <img src="Images/Answer_1_final.jpg" alt="">
+                </button>
+
+                <button class="route-answer"
+                        onclick="chooseRoute(this,'wrong')">
+                    <img src="Images/Answer_1_final.jpg" alt="">
+                </button>
+
+            </div>
+        </div>
+
+        <!-- Wanny -->
+        <button class="settings-btn" onclick="toggleMenu(this)">
+            Wanny: Radio frequency
+        </button>
+
+        <div class="settings-menu hidden">
+            <button onclick="choose('frequency','wrong', this)">122.4 MHz</button>
+            <button onclick="choose('frequency','correct', this)">156.8 MHz</button>
+            <button onclick="choose('frequency','wrong', this)">98.2 MHz</button>
+        </div>
+
+        <!-- Henry Rudi -->
+        <button class="settings-btn" onclick="toggleMenu(this)">
+            Henry Rudi: Date to leave
+        </button>
+
+        <div class="settings-menu hidden">
+            <button onclick="choose('date','wrong', this)">12 June</button>
+            <button onclick="choose('date','correct', this)">24 June</button>
+            <button onclick="choose('date','wrong', this)">3 July</button>
+        </div>
+
+        <!-- Amundsen -->
+        <button class="settings-btn" onclick="toggleMenu(this)">
+            Amundsen: Support coordinates
+        </button>
+
+        <div class="settings-menu hidden">
+            <button onclick="choose('coords','wrong', this)">
+                69.64°N, 18.95°E
+            </button>
+
+            <button onclick="choose('coords','correct', this)">
+                78.22°N, 15.65°E
+            </button>
+
+            <button onclick="choose('coords','wrong', this)">
+                90.00°N, 0.00°E
+            </button>
+        </div>
+
+        <button class="submit-button" onclick="checkFinal()">
+            Send Rescue Plan
+        </button>
+        <button class="submit-button" onclick="window.location.href='congrats.html'">
+            Continue
+        </button>
+
+        <p id="feedback"></p>
+
+    </div>
+
+    <script>
+        const answers = {
+            route: null,
+            frequency: null,
+            date: null,
+            coords: null
+        };
+
+        function toggleMenu(button) {
+            const menu = button.nextElementSibling;
+            const isAlreadyOpen = !menu.classList.contains("hidden");
+            closeAllMenus();
+            if (!isAlreadyOpen) {
+                menu.classList.remove("hidden");
+            }
+        }
+
+        function closeAllMenus() {
+            document
+                .querySelectorAll(".settings-menu, .settings-menu-final")
+                .forEach(menu => menu.classList.add("hidden"));
+        }
+
+        function choose(category, value, button) {
+            answers[category] = value;
+            const menu = button.closest(".settings-menu");
+            menu.querySelectorAll("button")
+                .forEach(btn => btn.classList.remove("selected"));
+            button.classList.add("selected");            
+        }
+
+        function chooseRoute(button, value) {
+            answers.route = value;
+            const grid = button.closest(".route-grid");
+            grid.querySelectorAll(".route-answer")
+                .forEach(btn => btn.classList.remove("selected"));
+            button.classList.add("selected");
+        }
+
+        document.addEventListener("click", function (event) {
+            const clickedInsideMenu = event.target.closest(".settings-menu, .settings-menu-final");
+            const clickedSettingsButton = event.target.closest(".settings-btn");
+            if (!clickedInsideMenu && !clickedSettingsButton) {
+                closeAllMenus();
+            }
+        });
+
+        function checkFinal() {
+            const feedback = document.getElementById("feedback");
+            const allCorrect =
+                answers.route === "correct" &&
+                answers.frequency === "correct" &&
+                answers.date === "correct" &&
+                answers.coords === "correct";
+            if (allCorrect) {
+                feedback.textContent = "Rescue plan accepted!";
+                feedback.style.color = "lightgreen";
+                setTimeout(() => {
+                    window.location.href = "congrats.html";
+                }, 1000);
+            } else {
+                feedback.textContent = "Something is wrong. Check the clues again.";
+                feedback.style.color = "orange";
+            }
+        }
+    </script>
+
+</body>
+</html>

@@ -30,7 +30,7 @@
         </div>
 
         <p id="feedback"></p>
-        <button class="submit-button" id="submit" onclick="window.location.href='../Stations/HTML/station_3.html'" style="display:none;">
+        <button class="submit-button" id="submit_nansen" onclick="window.location.href='../Stations/HTML/station_3.html'" style="display:none;">
             Continue
         </button>
         <button class="back-button" onclick="window.location.href='riddle_1.html'">
@@ -44,75 +44,75 @@
             const svg = document.getElementById("lineLayer");
             const feedback = document.getElementById("feedback");
             const game = document.querySelector(".ice-game");
-            const btn_submit = document.getElementById("submit");
+            const btn_submit = document.getElementById("submit_nansen");
 
             buttons.forEach(button => {
-              button.addEventListener("click", () => {
-                if (selected.includes(button)) return;
+                button.addEventListener("click", () => {
+                    if (selected.includes(button)) return;
 
-                selected.push(button);
-                button.classList.add("selected");
+                    selected.push(button);
+                    button.classList.add("selected");
 
-                drawCurvedLines();
+                    drawCurvedLines();
 
-                const currentAnswer = selected.map(btn => btn.dataset.number);
+                    const currentAnswer = selected.map(btn => btn.dataset.number);
 
-                if (selected.length === correctAnswer.length) {
-                  if (JSON.stringify(currentAnswer) === JSON.stringify(correctAnswer)) {
-                    feedback.textContent = "Correct! The path through the ice is revealed.";
-                    feedback.style.color = "lightgreen";
-                    btn_submit.style.display = "block";
+                    if (selected.length === correctAnswer.length) {
+                        if (JSON.stringify(currentAnswer) === JSON.stringify(correctAnswer)) {
+                            feedback.textContent = "Correct! The path through the ice is revealed.";
+                            feedback.style.color = "lightgreen";
+                            btn_submit.style.display = "block";
 
-                  } else {
-                    feedback.textContent = "Not quite. Try again.";
-                    feedback.style.color = "orange";
-                    setTimeout(resetGame, 1000);
-                  }
-                }
-              });
+                        } else {
+                            feedback.textContent = "Not quite. Try again.";
+                            feedback.style.color = "orange";
+                            setTimeout(resetGame, 1000);
+                        }
+                    }
+                });
             });
 
             function drawCurvedLines() {
-              svg.innerHTML = "";
+                svg.innerHTML = "";
 
-              for (let i = 0; i < selected.length - 1; i++) {
-                const start = getCenter(selected[i]);
-                const end = getCenter(selected[i + 1]);
+                for (let i = 0; i < selected.length - 1; i++) {
+                    const start = getCenter(selected[i]);
+                    const end = getCenter(selected[i + 1]);
 
-                const midX = (start.x + end.x) / 2;
-                const midY = (start.y + end.y) / 2 - 40;
+                    const midX = (start.x + end.x) / 2;
+                    const midY = (start.y + end.y) / 2 - 40;
 
-                const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+                    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
 
-                path.setAttribute(
-                  "d",
-                  `M ${start.x} ${start.y} Q ${midX} ${midY} ${end.x} ${end.y}`
-                );
+                    path.setAttribute(
+                        "d",
+                        `M ${start.x} ${start.y} Q ${midX} ${midY} ${end.x} ${end.y}`
+                    );
 
-                path.setAttribute("stroke", "white");
-                path.setAttribute("stroke-width", "4");
-                path.setAttribute("fill", "none");
-                path.setAttribute("stroke-linecap", "round");
+                    path.setAttribute("stroke", "white");
+                    path.setAttribute("stroke-width", "4");
+                    path.setAttribute("fill", "none");
+                    path.setAttribute("stroke-linecap", "round");
 
-                svg.appendChild(path);
-              }
+                    svg.appendChild(path);
+                }
             }
 
             function getCenter(element) {
-              const gameRect = game.getBoundingClientRect();
-              const rect = element.getBoundingClientRect();
+                const gameRect = game.getBoundingClientRect();
+                const rect = element.getBoundingClientRect();
 
-              return {
-                x: rect.left + rect.width / 2 - gameRect.left,
-                y: rect.top + rect.height / 2 - gameRect.top
-              };
+                return {
+                    x: rect.left + rect.width / 2 - gameRect.left,
+                    y: rect.top + rect.height / 2 - gameRect.top
+                };
             }
 
             function resetGame() {
-              selected = [];
-              svg.innerHTML = "";
-              feedback.textContent = "";
-              buttons.forEach(btn => btn.classList.remove("selected"));
+                selected = [];
+                svg.innerHTML = "";
+                feedback.textContent = "";
+                buttons.forEach(btn => btn.classList.remove("selected"));
             }
         </script>
 

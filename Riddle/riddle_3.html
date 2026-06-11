@@ -11,16 +11,31 @@
     <div class="box">
         <div class="scene">
             <div class="prints">
-                <span>&#128062;</span><span>&#128062;</span><span>&#128062;</span><span>&#128062;</span><span>&#128062;</span>
+                <img src="../Images/fox_paw.jpg" class="paw">
+                <img src="../Images/fox_paw.jpg" class="paw">
+                <img src="../Images/fox_paw.jpg" class="paw">
+                <img src="../Images/fox_paw.jpg" class="paw">
+                <img src="../Images/fox_paw.jpg" class="paw">
             </div>
             <img class="fox" src="../Images/fox.jpg" />
         </div>
         <button class="submit-button" id="submit" onclick="window.location.href='riddle_3_part2.html'">
             Continue
         </button>
-        <back-button onclick="window.location.href='../Stations/HTML/station_2.html'">
+        <back-button onclick="window.location.href='../Stations/HTML/station_3.html'">
             Back
         </back-button>
+        <script>
+            const fox = document.querySelector(".fox");
+            fox.addEventListener("animationend", () => {
+                document.body.classList.add("fade-out");
+
+                setTimeout(() => {
+                    window.location.href = "riddle_3_part2.html";
+                }, 1000);
+            });
+
+        </script>
     </div>
 
     <script>

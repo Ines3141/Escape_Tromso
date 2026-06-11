@@ -39,3 +39,7 @@
 .number-dot.selected {
         background: #66ddff;
 }
+
+#submit_nansen{
+    margin: 20px auto;
+}

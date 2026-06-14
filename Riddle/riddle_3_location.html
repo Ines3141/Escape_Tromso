@@ -1,8 +1,8 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Next location from Monument </title>
+    <title> Next station: Fisher Monument </title>
     <link rel="stylesheet" href="../CSS/global.css"> <!-- link to style sheet -->
     <link rel="stylesheet" href="../CSS/riddle.css">
 </head>
@@ -14,7 +14,7 @@
         <p>The rescue team now knows where to continue the search.</p>
 
         <h3>Your next destination:</h3>
-        <p class="location">📍 Amundsen Plass</p>
+        <p class="location">📍 Fisher Monument (Stor torget) </p>
         <p><strong>69.6492, 18.9553</strong></p>
         <p>Proceed to the location and open the next clue.</p>
 
@@ -24,7 +24,7 @@
         <button class="submit-button" id="submit">
             Continue
         </button>
-        <button class="back-button" onclick="window.location.href='../Stations/HTML/station_4.html'">
+        <button class="back-button" onclick="window.location.href='riddle_3_part2.html'">
             Back
         </button>
     </div>
@@ -33,11 +33,11 @@
         const mapButton = document.getElementById("location");
 
         submitButton.addEventListener("click", () => {
-            window.location.href = "../Stations/HTML/station_5.html";
+            window.location.href = "../Stations/HTML/station_4.html";
         });
 
         mapButton.addEventListener("click", () => {
-            window.location.href = "https://www.google.com/maps/search/Amundsen+plass";
+            window.location.href = "https://www.google.com/maps/search/Stor+torget";
         });
     </script>
 </body>

@@ -77,27 +77,22 @@ body {
         box-shadow: 0 0 0 0 rgba(0,0,0,0);
     }
 }
-.image-container img {
-    width: 100%;
-    max-width: 600px;
-    height: 300px;
-    object-fit: cover;
-    border-radius: 12px;
-}
 
 /* OPTION BUTTON */
 .settings-btn {
-    color: white;
     position: absolute;
-    top: 15px;
-    right: 15px;
-    font-size: 24px;
+    top: 28px;
+    right: 28px;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    color: white;
     background: none;
     border: none;
+    font-size: 28px;
     cursor: pointer;
 }
-
-.settings-menu {
+/* .settings-menu {
     position: absolute;
     top: 55px;
     right: 15px;
@@ -108,8 +103,24 @@ body {
     background: white;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+} */
+.settings-menu {
+    position: absolute;
+    top: 55px;
+    right: 20px;
+    background: rgba(0,0,0,0.85);
+    color: white;
+    padding: 15px;
+    border-radius: 12px;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
-
+.settings-menu button.selected {
+    background: #00b894;
+    color: white;
+}
 .hidden {
     display: none;
 }
@@ -226,27 +237,26 @@ img {
     text-align: center;
 }
 
-    .final-choice button {
+.final-choice button {
         margin: 8px;
         padding: 14px 18px;
         border-radius: 12px;
         border: none;
         cursor: pointer;
         font-weight: bold;
-    }
+}
 
-        .final-choice button.selected {
-            background: #00b894;
-            color: white;
-        }
+.final-choice button.selected {
+    background: #00b894;
+    color: white;
+}
 
-    .final-choice img {
-        width: 120px;
-        height: 90px;
-        object-fit: cover;
-        border-radius: 10px;
-    }
-
+.final-choice img {
+    width: 120px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 10px;
+}
 
 .confetti {
     font-size: 45px;
@@ -299,7 +309,3 @@ img {
     display: none !important;
 }
 
-.settings-menu button.selected {
-    background: #00b894;
-    color: white;
-}

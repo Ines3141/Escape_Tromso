@@ -10,7 +10,7 @@
 <body>
     <div class="box">
         <p>Which polar explorer do you see?</p>
-        <input id="answer" type="text" placeholder="Answer">
+        <input id="answer" type="text" placeholder="Answer: Last name">
         <submit-button onclick="checkAnswer()">Submit</submit-button>
         <p id="message"></p>
         <back-button onclick="window.location.href='riddle_1.html'">
@@ -19,15 +19,15 @@
     </div>
 
     <script>
-    function checkAnswer() {
-      let answer = document.getElementById("answer").value.toLowerCase();
-      if (answer === "test") {
-        window.location.href = "../Stations/HTML/station_2.html";
-      } else {
-         window.location.href = "riddle_1.html";
-         /* Not correct, take another look. Time delay. */
-      }
-    }
+        function checkAnswer() {
+            let answer = document.getElementById("answer").value.trim().toLowerCase();
+
+            if (answer === "nansen") {
+                window.location.href = "../Stations/HTML/station_2.html";
+            } else {
+                window.location.href = "riddle_1.html";
+            }
+        }
     </script>
 
 </body>

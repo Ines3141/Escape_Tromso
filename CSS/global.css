@@ -225,7 +225,7 @@ img {
     button:not(.settings-btn):not(.audio-btn) {
         width: 100%;
         margin: 8px 0;
-    }
+    } /* The not is there because these buttons are smaller. */
 
     input {
         width: 100%;
@@ -322,3 +322,71 @@ img {
     display: none !important;
 }
 
+.victory-box {
+    max-width: 640px;
+    border: 1px solid rgba(150, 220, 255, 0.35);
+    box-shadow: 0 0 35px rgba(80, 180, 255, 0.25);
+}
+
+.signal-badge {
+    display: inline-block;
+    margin-bottom: 18px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: rgba(0, 184, 148, 0.18);
+    border: 1px solid #00b894;
+    color: #7fffe0;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.final-message {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.transmission-card {
+    margin: 24px 0;
+    padding: 22px;
+    border-radius: 18px;
+    background: rgba(0, 0, 0, 0.28);
+    border-left: 4px solid #7dd3fc;
+    text-align: left;
+}
+
+    .transmission-card h2 {
+        color: #7dd3fc;
+        margin-bottom: 10px;
+    }
+
+.mission-summary {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 22px 0;
+}
+
+    .mission-summary span {
+        background: rgba(255,255,255,0.1);
+        padding: 12px;
+        border-radius: 12px;
+        font-weight: bold;
+    }
+
+.thank-you {
+    margin-top: 20px;
+    font-style: italic;
+}
+
+.feedback-button {
+    background: #00b894;
+    color: white;
+}
+
+@media (max-width: 600px) {
+    .mission-summary {
+        grid-template-columns: 1fr;
+    }
+}

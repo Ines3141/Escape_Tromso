@@ -141,3 +141,131 @@
     background: linear-gradient(90deg, transparent, rgba(220,240,255,0.35), transparent);
     filter: blur(10px);
 }
+
+.profile-button {
+    width: 100%;
+    margin: 10px auto;
+    display: block;
+    padding: 12px;
+    border: none;
+    border-radius: 12px;
+    background: #1f4c6b;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.profile-button:hover {
+    background: #2b678f;
+}
+
+.profile-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.65);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+    padding: 20px;
+}
+
+.profile-card {
+    background: #f8f4e8;
+    color: #1d1d1d;
+    max-width: 520px;
+    width: 100%;
+    border-radius: 18px;
+    padding: 24px;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+    text-align: center;
+}
+
+.close-profile {
+    position: absolute;
+    top: 16px;
+    right: 18px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 50%;
+    background: #f0d45a;
+    font-size: 32px;
+    font-weight: bold;
+    color: #0b2d4a;
+    cursor: pointer;
+    padding: 0;
+}
+
+.profile-img {
+    width: 130px;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid #16324f;
+}
+
+.profile-subtitle {
+    font-weight: bold;
+    color: #555;
+}
+
+.profile-card {
+    background: #f5efe0;
+}
+
+.profile-card p {
+    color: #2b2418;
+}
+
+.profile-subtitle {
+    color: #5a4a2f;
+}
+
+.profile-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin: 16px 0;
+}
+
+.profile-tags span {
+    background: #dce8f2;
+    padding: 8px 10px;
+    border-radius: 999px;
+    font-size: 14px;
+}
+
+.fun-fact {
+    margin-top: 16px;
+    padding: 12px;
+    background: #fff3c4;
+    border-radius: 10px;
+}
+
+
+@media (max-width: 600px) {
+    .profile-card {
+        max-height: 85vh;
+        overflow-y: auto;
+        padding: 20px;
+    }
+
+    .profile-img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .profile-tags span {
+        font-size: 13px;
+    }
+}
+.hidden {
+    display: none;
+}

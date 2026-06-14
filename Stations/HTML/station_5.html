@@ -14,10 +14,7 @@
             <!-- <button>Replay Audio</button> -->
             <label for="volumeSlider">Volume</label>
             <input id="volumeSlider" type="range" min="0" max="1" step="0.1" value="1">
-            <button>Show Hint</button> <!-- Not necessary with Sation side-->
             <button id="Location_btn">Show location</button>
-            <button>About Roald Amundsen</button>
-            <!--Maybe more ifnormation is nice. For people who are interested -->
         </div>
         <h1>Station 5</h1>
         <p>Roald Amundsen</p>
@@ -42,6 +39,40 @@
             <button id="btnA" class="answer-button"></button>
             <button id="btnB" class="answer-button"></button>
         </div>
+        <button id="profile" class="profile-button" onclick="openProfile()" style="display:none;">
+            Explorer Profile
+        </button>
+        <div id="profileOverlay" class="profile-overlay hidden">
+            <div class="profile-card">
+
+                <button class="close-profile" onclick="closeProfile()">×</button>
+
+                <img src="../../Images/Amundsen.jpg" class="profile-img">
+
+                <h2>Roald Amundsen</h2>
+
+                <p class="profile-subtitle">
+                    Polar Explorer • Expedition Leader
+                </p>
+
+                <div class="profile-tags">
+                    <span>🏆 First at the South Pole</span>
+                    <span>🧭 Northwest Passage</span>
+                    <span>✈️ Arctic Flight Pioneer</span>
+                </div>
+
+                <p>
+                    Roald Amundsen was one of the greatest explorers of all time.
+                    He became the first person to reach the South Pole and mastered
+                    survival techniques learned from Indigenous Arctic peoples.
+                </p>
+
+                <div class="fun-fact">
+                    <strong>Fun Fact:</strong>
+                    Amundsen disappeared in 1928 while flying on a rescue mission.
+                </div>
+            </div>
+        </div>
         <button class="back-button" onclick="window.location.href='station_4.html'">
             Back
         </button>
@@ -61,6 +92,7 @@
             const audio_btn = document.getElementById("audioBtn");
             const riddle_btn = document.getElementById("riddle_btn");
             const location_btn = document.getElementById("Location_btn");
+            const profile_btn = document.getElementById("profile");
 
             const choices = document.getElementById("choices");
             const settingsBtn = document.getElementById("settingsBtn");
@@ -74,7 +106,7 @@
             location_btn.addEventListener("click", () => {
                 window.open('https://www.google.com/maps/search/Amundsen+plass');
             });
-            /* Change volumne */ 
+            /* Change volumne */
             volumeSlider.addEventListener("input", () => {
                 allAudios.forEach(sound => {
                     sound.volume = volumeSlider.value;
@@ -112,6 +144,7 @@
             audioA.addEventListener("ended", () => {
                 person.classList.remove("speaking");
                 riddle_btn.style.display = "block";
+                profile_btn.style.display = "block";
                 /*
                 NO MORE INTERACTION
                 IF THIS IS THE LAST PART OF THE CONVERSATION
@@ -131,6 +164,7 @@
             audioB.addEventListener("ended", () => {
                 person.classList.remove("speaking");
                 riddle_btn.style.display = "block";
+                profile_btn.style.display = "block";
             });
 
             const subtitles = [
@@ -183,6 +217,13 @@
             document.addEventListener("click", () => {
                 settingsMenu.classList.add("hidden");
             });
+            function openProfile() {
+                document.getElementById("profileOverlay").classList.remove("hidden");
+            }
+
+            function closeProfile() {
+                document.getElementById("profileOverlay").classList.add("hidden");
+            }
         </script>
     </div>
 

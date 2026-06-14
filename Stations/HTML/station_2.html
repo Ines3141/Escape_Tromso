@@ -17,7 +17,7 @@
             <input id="volumeSlider" type="range" min="0" max="1" step="0.1" value="1">
             <button>Show Hint</button> <!-- Not necessary with Sation side-->
             <button id="Location_btn">Show location</button>
-            <button>About Nansen</button>
+            <!-- <button>About Nansen</button> -->
             <!--Maybe more ifnormation is nice. For people who are interested -->
         </div>
         <h1>Station 2</h1>
@@ -51,7 +51,35 @@
             <button id="btnB" class="answer-button"></button>
             <button id="btnC" class="answer-button" style="display:none;"></button>
         </div>
+        <button id="profile" class="profile-button" onclick="openProfile()" style="display:none;">
+            Explorer Profile
+        </button>
 
+        <div id="profileOverlay" class="profile-overlay hidden">
+            <div class="profile-card">
+                <button class="close-profile" onclick="closeProfile()">×</button>
+
+                <img src="../../Images/Nansen.jpg" class="profile-img" alt="Fridtjof Nansen">
+
+                <h2>Fridtjof Nansen</h2>
+                <p class="profile-subtitle">Scientist • Explorer • Humanitarian</p>
+
+                <div class="profile-tags">
+                    <span>🧊 Greenland Crossing</span>
+                    <span>🚢 Fram Expedition</span>
+                    <span>🕊 Nobel Peace Prize 1922</span>
+                </div>
+
+                <p>
+                    Nansen was one of Norway's greatest polar explorers. He crossed Greenland on skis,
+                    studied Arctic ice and ocean currents, and later helped refugees after World War I.
+                </p>
+
+                <div class="fun-fact">
+                    <strong>Fun fact:</strong> Nansen tried to reach the North Pole by letting his ship drift with the ice.
+                </div>
+            </div>
+        </div>
         <button class="back-button" onclick="window.location.href='station_1.html'">
             Back
         </button>
@@ -62,7 +90,7 @@
         </button>
 
         <script>
-            /* Audio's file */ 
+            /* Audio's file */
             const audio = document.getElementById("voice0");
             const audioA = document.getElementById("voiceA");
             const audioB = document.getElementById("voiceB");
@@ -75,6 +103,7 @@
             const btnA = document.getElementById("btnA");
             const btnB = document.getElementById("btnB");
             const btnC = document.getElementById("btnC");
+            const profile_btn = document.getElementById("profile");
 
             const choices = document.getElementById("choices");
             const person = document.querySelector(".person-container");
@@ -87,7 +116,7 @@
 
             location_btn.addEventListener("click", () => {
                 window.open('https://www.google.com/maps/search/Troms�+Harbour');
-            })           
+            })
             /* Make sound louder/silent */
             volumeSlider.addEventListener("input", () => {
                 allAudios.forEach(sound => {
@@ -128,10 +157,11 @@
             });
             audioA.addEventListener("ended", () => {
                 person.classList.remove("speaking");
-                riddle_btn.style.display = "block"
+                riddle_btn.style.display = "block";
+                profile_btn.style.display = "block";
                 /*
-                NO MORE INTERACTION 
-                IF THIS IS THE LAST PART OF THE CONVERSATION 
+                NO MORE INTERACTION
+                IF THIS IS THE LAST PART OF THE CONVERSATION
                 SHOW BUTTON
                 TO SOLVE RIDDLE IF ISNT YOU NEED MORE BLOCKS*/
             });
@@ -155,7 +185,7 @@
                 btnC.style.display = "block";
                 choices.style.display = "block";
             });
-            
+
             btnC.addEventListener("click", () => {
                 choices.style.display = "none";
                 if (audioC.paused) {
@@ -169,6 +199,7 @@
             audioC.addEventListener("ended", () => {
                 person.classList.remove("speaking");
                 riddle_btn.style.display = "block";
+                profile_btn.style.display = "block";
             });
 
             const subtitles = [
@@ -213,7 +244,7 @@
                 subtitle.textContent = line ? line.text : "";
             }
 
-            /* Add subtitels to all options */ 
+            /* Add subtitels to all options */
             audio.addEventListener("timeupdate", () => {
                 updateSubtitle(audio, subtitles);
             });
@@ -226,7 +257,7 @@
             audioC.addEventListener("timeupdate", () => {
                 updateSubtitle(audioC, subtitlesC);
             });
-            
+
             settingsBtn.addEventListener("click", (event) => {
                 event.stopPropagation();
                 settingsMenu.classList.toggle("hidden");
@@ -239,6 +270,13 @@
             document.addEventListener("click", () => {
                 settingsMenu.classList.add("hidden");
             });
+            function openProfile() {
+                document.getElementById("profileOverlay").classList.remove("hidden");
+            }
+
+            function closeProfile() {
+                document.getElementById("profileOverlay").classList.add("hidden");
+            }
 
         </script>
 

@@ -15,11 +15,7 @@
             <!-- <button>Replay Audio</button> -->
             <label for="volumeSlider">Volume</label>
             <input id="volumeSlider" type="range" min="0" max="1" step="0.1" value="1">
-            <button>Show Hint</button> <!-- Not necessary with Sation side-->
             <button id="Location_btn">Show location</button>
-            <button>About Henry Rudi</button>
-            <!--Maybe more ifnormation is nice.
-        For people who are interested -->
         </div>
         <h1>Station 6</h1>
         <p>Henry Rudi</p>
@@ -42,11 +38,46 @@
         <audio id="voiceC" preload="auto">
             <source src="../../Audio/RudiC.mp4" type="audio/mp4">
         </audio>
-       
+
         <div id="choices" style="display:none;">
             <button id="btnA" class="answer-button"></button>
             <button id="btnB" class="answer-button"></button>
             <button id="btnC" class="answer-button" style="display:none;"></button>
+        </div>
+        <button id="profile" class="profile-button" onclick="openProfile()" style="display:none;">
+            Explorer Profile
+        </button>
+        <div id="profileOverlay" class="profile-overlay hidden">
+            <div class="profile-card">
+
+                <button class="close-profile" onclick="closeProfile()">×</button>
+
+                <img src="../../Images/Rudi.jpg" class="profile-img">
+
+                <h2>Henry Rudi</h2>
+
+                <p class="profile-subtitle">
+                    Trapper • Hunter • Arctic Survivor
+                </p>
+
+                <div class="profile-tags">
+                    <span>🐻 Polar Bear King</span>
+                    <span>❄️ 27 Winters on Svalbard</span>
+                    <span>🏕 Arctic Survival Expert</span>
+                </div>
+
+                <p>
+                    Henry Rudi spent most of his life in the High Arctic.
+                    His knowledge of weather, ice, and survival made him one of
+                    Svalbard's most legendary trappers.
+                </p>
+
+                <div class="fun-fact">
+                    <strong>Fun Fact:</strong>
+                    Henry spent his first winter on Svalbard when he was only 9 years old.
+                </div>
+
+            </div>
         </div>
         <button class="back-button" onclick="window.location.href='station_5.html'">
             Back
@@ -69,6 +100,7 @@
             const audio_btn = document.getElementById("audioBtn");
             const riddle_btn = document.getElementById("riddle_btn");
             const location_btn = document.getElementById("Location_btn");
+            const profile_btn = document.getElementById("profile");
 
             const choices = document.getElementById("choices");
             const settingsBtn = document.getElementById("settingsBtn");
@@ -120,7 +152,8 @@
             });
             audioA.addEventListener("ended", () => {
                 person.classList.remove("speaking");
-                riddle_btn.style.display = "block"
+                riddle_btn.style.display = "block";
+                profile_btn.style.display = "block";
                 /*
                 NO MORE INTERACTION
                 IF THIS IS THE LAST PART OF THE CONVERSATION
@@ -159,6 +192,7 @@
             audioC.addEventListener("ended", () => {
                 person.classList.remove("speaking");
                 riddle_btn.style.display = "block";
+                profile_btn.style.display = "block";
             });
 
             const subtitles = [
@@ -168,7 +202,7 @@
             ];
             const subtitlesA = [
                 { start: 0, end: 2, text: "A rescue mission, eh?" },
-                { start: 2, end: 5, text: "Then let's get straight to business."},
+                { start: 2, end: 5, text: "Then let's get straight to business." },
                 { start: 5, end: 7, text: "I studied ocean currents and sea ice." },
                 { start: 7, end: 10, text: "I learned a thing or two about surviving in the ice." },
                 { start: 10, end: 13, text: "Take a look at these notes." },
@@ -225,6 +259,13 @@
             document.addEventListener("click", () => {
                 settingsMenu.classList.add("hidden");
             });
+            function openProfile() {
+                document.getElementById("profileOverlay").classList.remove("hidden");
+            }
+
+            function closeProfile() {
+                document.getElementById("profileOverlay").classList.add("hidden");
+            }
         </script>
     </div>
 </body>

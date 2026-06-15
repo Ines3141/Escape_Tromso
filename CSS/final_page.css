@@ -51,8 +51,9 @@
 
 .route-answer img {
     width: 100%;
-    height: 120px;
+    height: 200px;
     object-fit: cover;
+    /*This decides if the image in nansen is covered or not contain or cover*/
     display: block;
 }
 
@@ -60,6 +61,10 @@
     border-color: #00b894;
     box-shadow: 0 0 18px rgba(0, 184, 148, 0.8);
 }
+
+/* .route-answer:hover img {
+    transform: scale(1.0);
+} */
 
 .hidden {
     display: none;
@@ -76,18 +81,33 @@
     font-size: 18px;
 }
 
+@media (min-width: 900px) {
+
+    /*THIS IS MEANT FOR PC MIGHT HAVE TO MAKE THIS MEDIA QUERY SO IT IS DIFFERENT ON PHONE*/
+    .route-answer:hover {
+        width: 110%;
+        height: 110%;
+    }
+
+
+}
+
 @media (max-width: 900px) {
     .settings-btn {
         width: 100%;
         height: 70px;
-        margin: 10px 0;
-        padding: 14px;
-        font-size: 18px;
-        font-weight: bold;
-        background: #f7d046;
-        color: #082033;
-        border: none;
-        border-radius: 14px;
-        cursor: pointer;
+    }
+
+    .route-answer img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        /*This decides if the image in nansen is covered or not contain or cover*/
+        display: block;
+    }
+
+    .route-answer:active {
+        width: 200%;
+        height: auto;
     }
 }

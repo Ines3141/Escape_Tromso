@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <link rel="stylesheet" href="CSS/final_page.css">
     <link rel="stylesheet" href="CSS/station.css">
 </head>
+
 <body class="final-page">
     <div class="box">
 
@@ -24,26 +26,21 @@
         <div class="settings-menu-final hidden">
             <div class="route-grid">
 
-                <button class="route-answer"
-                        onclick="chooseRoute(this,'wrong')">
+                <button class="route-answer" onclick="chooseRoute(this,'wrong')">
+                    <img src="Images/Nansen_Wrong1.png" alt="">
+                </button>
+
+                <button class="route-answer" onclick="chooseRoute(this,'correct')">
                     <img src="Images/Answer_1_final.jpg" alt="">
                 </button>
 
-                <button class="route-answer"
-                        onclick="chooseRoute(this,'correct')">
-                    <img src="Images/Answer_1_final.jpg" alt="">
+                <button class="route-answer" onclick="chooseRoute(this,'wrong')">
+                    <img src="Images/Nansen_Wrong2.png" alt="">
                 </button>
 
-                <button class="route-answer"
-                        onclick="chooseRoute(this,'wrong')">
-                    <img src="Images/Answer_1_final.jpg" alt="">
+                <button class="route-answer" onclick="chooseRoute(this,'wrong')">
+                    <img src="Images/Nansen_Wrong3.png" alt="">
                 </button>
-
-                <button class="route-answer"
-                        onclick="chooseRoute(this,'wrong')">
-                    <img src="Images/Answer_1_final.jpg" alt="">
-                </button>
-
             </div>
         </div>
 
@@ -56,6 +53,7 @@
             <button onclick="choose('frequency','wrong', this)">122.4 MHz</button>
             <button onclick="choose('frequency','correct', this)">156.8 MHz</button>
             <button onclick="choose('frequency','wrong', this)">98.2 MHz</button>
+            <button onclick="choose('frequency','wrong', this)">98.2 MHz</button>
         </div>
 
         <!-- Henry Rudi -->
@@ -66,6 +64,7 @@
         <div class="settings-menu hidden">
             <button onclick="choose('date','wrong', this)">12 June</button>
             <button onclick="choose('date','correct', this)">24 June</button>
+            <button onclick="choose('date','wrong', this)">3 July</button>
             <button onclick="choose('date','wrong', this)">3 July</button>
         </div>
 
@@ -81,6 +80,10 @@
 
             <button onclick="choose('coords','correct', this)">
                 78.22�N, 15.65�E
+            </button>
+
+            <button onclick="choose('coords','wrong', this)">
+                90.00�N, 0.00�E
             </button>
 
             <button onclick="choose('coords','wrong', this)">
@@ -130,7 +133,7 @@
             const menu = button.closest(".settings-menu");
             menu.querySelectorAll("button")
                 .forEach(btn => btn.classList.remove("selected"));
-            button.classList.add("selected");            
+            button.classList.add("selected");
         }
 
         function chooseRoute(button, value) {
@@ -170,4 +173,5 @@
     </script>
 
 </body>
+
 </html>

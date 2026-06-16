@@ -16,7 +16,6 @@
         </p>
         <div class="ice-game">
             <svg id="lineLayer"></svg>
-
             <button class="number-dot" data-number="1" style="left:10%; top:10%;">1</button>
             <button class="number-dot" data-number="2" style="left:66%; top:45%;">2</button>
             <button class="number-dot" data-number="4" style="left:60%; top:15%;">4</button>
@@ -31,6 +30,10 @@
         </div>
 
         <p id="feedback"></p>
+        <button class="submit-button" id="check_nansen">
+            Check Answer
+        </button>
+
         <button class="submit-button" id="submit_nansen" onclick="window.location.href='riddle_2_location.html'" style="display:none;">
             Continue
         </button>
@@ -46,6 +49,7 @@
             const feedback = document.getElementById("feedback");
             const game = document.querySelector(".ice-game");
             const btn_submit = document.getElementById("submit_nansen");
+            const btn_check = document.getElementById("check_nansen");
 
             buttons.forEach(button => {
                 button.addEventListener("click", () => {
@@ -54,24 +58,31 @@
                     selected.push(button);
                     button.classList.add("selected");
 
+                    feedback.textContent = "";
                     drawCurvedLines();
-
-                    const currentAnswer = selected.map(btn => btn.dataset.number);
-
-                    if (selected.length === correctAnswer.length) {
-                        if (JSON.stringify(currentAnswer) === JSON.stringify(correctAnswer)) {
-                            feedback.textContent = "Correct! The path through the ice is revealed.";
-                            feedback.style.color = "lightgreen";
-                            btn_submit.style.display = "block";
-
-                        } else {
-                            feedback.textContent = "Not quite. Try again.";
-                            feedback.style.color = "orange";
-                            setTimeout(resetGame, 10000);
-                        }
-                    }
                 });
             });
+
+            btn_check.addEventListener("click", () => {
+                checkAnswer();
+            });
+
+            function checkAnswer() {
+                const currentAnswer = selected.map(btn => btn.dataset.number);
+
+                if (JSON.stringify(currentAnswer) === JSON.stringify(correctAnswer)) {
+                    feedback.textContent = "Correct! The path through the ice is revealed.";
+                    feedback.style.color = "lightgreen";
+
+                    btn_submit.style.display = "";
+                    btn_check.style.display = "none";
+                } else {
+                    feedback.textContent = "Not quite. Try again.";
+                    feedback.style.color = "orange";
+
+                    setTimeout(resetGame, 1500);
+                }
+            }
 
             function drawCurvedLines() {
                 svg.innerHTML = "";
@@ -113,10 +124,12 @@
                 selected = [];
                 svg.innerHTML = "";
                 feedback.textContent = "";
+                btn_submit.style.display = "none";
+                btn_check.style.display = "";
+
                 buttons.forEach(btn => btn.classList.remove("selected"));
             }
         </script>
-
     </div>
 </body>
 </html>

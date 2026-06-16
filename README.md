@@ -51,5 +51,6 @@ Station 6:
   - Create the image of differences 
 
 Final page:
-  - NOTHING DONE YET
+  - Roald amundsen riddle needs to be fixed so that yo can view the individual images on the phone [ ]
+  - 
   

@@ -58,20 +58,17 @@
         <button id="profile" class="profile-button" onclick="openProfile()" style="display:none;">
             Explorer Gateway to arctic
         </button>
-
-        <button class="back-button" onclick="window.location.href='intro.html'">
-            Back
-        </button>
         <!-- for actual game do </button>style="display:none;">, but now it is just blocking -->
-
         <button class="riddle-button" id="riddle_btn" onclick="window.location.href='../../Riddle/riddle_1.html'">
             Solve Riddle
         </button>
-
+        <button class="back-button" onclick="window.location.href='intro.html'">
+            Back
+        </button>
         <script>
             const audio = document.getElementById("voice");
             const audio_btn = document.getElementById("audioBtn");
-            
+
             /* Buttons */
             const settingsBtn = document.getElementById("settingsBtn");
             const settingsMenu = document.getElementById("settingsMenu");
@@ -80,7 +77,7 @@
             const riddle_btn = document.getElementById("riddle_btn");
 
             const image = document.querySelector(".image-container");
-
+            const savedVolume = localStorage.getItem("volume");
             const subtitleBox = document.getElementById("subtitle");
             const subtitle = [
                 { start: 0, end: 5, text: "--- SOS Signal Detected ---" },
@@ -100,6 +97,16 @@
                 { start: 50, end: 53, text: "Proceed to the Riddle Page." }
             ];
 
+            /* To save the volume for all the other pages*/
+            if (savedVolume !== null) {
+                audio.volume = savedVolume;
+                volumeSlider.value = savedVolume;
+            }
+            volumeSlider.addEventListener("input", () => {
+                audio.volume = volumeSlider.value;
+                localStorage.setItem("volume", volumeSlider.value);
+            });
+
             audio_btn.addEventListener("click", () => {
                 if (audio.paused) {
                     audio.play();
@@ -109,13 +116,10 @@
                     image.classList.remove("speaking");
                 }
             });
-            
             audio.addEventListener("ended", () => {
                 image.classList.remove("speaking");
                 riddle_btn.style.display = "block";
             });
-
-            
             audio.addEventListener("timeupdate", () => {
                 const current = audio.currentTime;
 
@@ -125,11 +129,6 @@
 
                 subtitleBox.textContent = line ? line.text : "";
             });
-
-            volumeSlider.addEventListener("input", () => {
-                audio.volume = volumeSlider.value;
-            });
-
             location_btn.addEventListener("click", () => {
                 window.open("https://www.google.com/maps/search/Tromsø+Harbour");
             });

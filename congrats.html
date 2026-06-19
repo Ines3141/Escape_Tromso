@@ -289,9 +289,39 @@
                 height: 150px;
             }
         }
+        .team-photo-frame {
+            background: white;
+            padding: 12px 12px 50px 12px;
+            width: 260px;
+            margin: 25px auto;
+            transform: rotate(-2deg);
+            box-shadow: 0 8px 25px rgba(0,0,0,.35);
+        }
+
+            .team-photo-frame img {
+                width: 100%;
+                display: block;
+            }
+
+        .memory-caption {
+            text-align: center;
+            color: #333;
+            margin-top: 12px;
+        }
+
+        .memory-caption h3 {
+            margin-bottom: 6px;
+        }
+
+        .achievement {
+            margin-top: 10px;
+            color: #0b4a66;
+            font-weight: bold;
+        }
     </style>
 </head>
-
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<!--This for downloading the image but there are still some problems.-->
 <body>
 
     <div class="victory-box">
@@ -335,13 +365,27 @@
                 The five lost explorers are safe.
                 Thank you for joining the Rescue Hunt of the Lost Polar Expedition.
             </p>
+            <div id="memoryCard" class="team-photo-frame">
+                <img id="teamPhotoDisplay" alt="Team Photo">
 
+                <div class="memory-caption">
+                    <h3 id="memoryTeam"></h3>
+                    <p>Rescue Hunt of the Lost Polar Expedition</p>
+                    <p>Mission Completed ✓</p>
+                    <p class="achievement">
+                        🏅 Arctic Rescuer
+                    </p>
+                </div>
+            </div>
             <button class="feedback-button" onclick="window.open('YOUR-FEEDBACK-LINK-HERE')">
                 Leave Feedback
             </button>
 
             <button class="back-button" onclick="window.location.href='index.html'">
                 Return to Start
+            </button>
+            <button class="feedback-button" onclick="downloadMemoryCard()">
+                Download Memory Card
             </button>
         </div>
     </div>
@@ -350,6 +394,41 @@
         function openLetter() {
             const letter = document.getElementById("letter");
             letter.classList.add("open");
+
+            const teamName = localStorage.getItem("teamName");
+            const teamPhoto = localStorage.getItem("teamPhoto");
+            document.getElementById("memoryTeam").textContent =
+                `Team ${teamName}`;
+
+            document.getElementById("teamPhotoDisplay").src =
+                teamPhoto;
+
+            document.getElementById("teamNameDisplay").textContent =
+                teamName
+                    ? `Mission completed by Team ${teamName}.`
+                    : "Mission completed.";
+
+            if (teamPhoto) {
+                document.getElementById("teamPhotoDisplay").src = teamPhoto;
+            }
+        }
+        async function downloadMemoryCard() {
+
+            const card = document.getElementById("memoryCard");
+
+            const canvas = await html2canvas(card, {
+                scale: 2,
+                backgroundColor: null
+            });
+
+            const link = document.createElement("a");
+
+            link.download =
+                `${localStorage.getItem("teamName")}_Polar_Rescue.png`;
+
+            link.href = canvas.toDataURL("image/png");
+
+            link.click();
         }
     </script>
 

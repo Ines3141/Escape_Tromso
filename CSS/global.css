@@ -221,7 +221,7 @@ img {
         font-size: 1rem;
     }
 
-    button:not(.settings-btn):not(.audio-btn) {
+    button:not(.settings-btn):not(.audio-btn):not(.number-dot) {
         width: 100%;
         margin: 8px 0;
     } /* The not is there because these buttons are smaller. */

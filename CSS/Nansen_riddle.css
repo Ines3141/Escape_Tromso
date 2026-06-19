@@ -17,23 +17,28 @@
     pointer-events: none;
 }
 
-.number-dot {
+.ice-game .number-dot {
     position: absolute;
+    width: 34px !important;
+    height: 34px !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    max-width: 34px !important;
+    max-height: 34px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border-radius: 50% !important;
+    font-size: 14px !important;
+    line-height: 34px !important;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transform: translate(-50%, -50%);
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.9);
-    color: #003366;
-    border: 2px solid #cceeff;
-    font-size: 16px;
-    font-weight: bold;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.number-dot:hover {
-        transform: translate(-50%, -50%) scale(1.2);
-        box-shadow: 0 0 10px rgba(255,255,255,0.8);
+.ice-game .number-dot:hover {
+    transform: translate(-50%, -50%) scale(1.2);
 }
 
 .number-dot.selected {

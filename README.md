@@ -51,5 +51,14 @@ Station 6:
   - Create the image of differences 
 
 Final page:
-  - NOTHING DONE YET
+
+Jorgen todo:
+- Fix roald ammundsen riddle.
+- Organize code.
+- Database.
+- Email code mechanic.
+- Insert express.
+- Nav bar.
+- Somethign else Ines said.
+- 
   

@@ -28,7 +28,7 @@
         </div>
 
         <p class="hint">
-            Top floor windows → Lanterns → Doors
+            Doors → Top floor windows →  Lanterns
         </p>
 
         <button class="submit-button" onclick="checkLock()">Unlock</button>
@@ -47,12 +47,12 @@
             const code = d1 + d2 + d3;
             const feedback = document.getElementById("feedback");
 
-            if (code === "451") {
+            if (code === "145") {
                 feedback.textContent = "Click! The lock opens.";
                 feedback.style.color = "lightgreen";
 
                 setTimeout(() => {
-                    window.location.href = "../final_page.html";
+                    window.location.href = "riddle_6_feedback.html";
                 }, 1200);
             } else {
                 feedback.textContent = "Still locked. Count carefully.";

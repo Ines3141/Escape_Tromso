@@ -14,7 +14,6 @@
             <!-- <button>Replay Audio</button> -->
             <label for="volumeSlider">Volume</label>
             <input id="volumeSlider" type="range" min="0" max="1" step="0.1" value="1">
-            <button>Show Hint</button> <!-- Not necessary with Sation side-->
             <button id="Location_btn">Show location</button>
             <button>About Nansen</button>
             <!--Maybe more ifnormation is nice. For people who are interested -->
@@ -36,9 +35,6 @@
         <button class="back-button" onclick="window.location.href='station_3.html'">
             Back
         </button>
-        <button class="location-button" onclick="window.open('https://www.google.com/maps/search/Stortorget')">
-            Open Map
-        </button>
         <button class="riddle-button" onclick="window.location.href='../../Riddle/riddle_4.html'">
             Solve Riddle
         </button>
@@ -48,6 +44,8 @@
         const audio_btn = document.getElementById("audioBtn");
         const subtitle = document.getElementById("subtitle");
 
+        /* Buttons */
+        const location_btn = document.getElementById("Location_btn");
         const settingsBtn = document.getElementById("settingsBtn");
         const settingsMenu = document.getElementById("settingsMenu");
 
@@ -62,13 +60,16 @@
             { start: 13, end: 17, text: "Nature always has the final word." }
         ];
 
+        location_btn.addEventListener("click", () => {
+            window.open('https://www.google.com/maps/search/Stortorget');
+        });
+
         audio_btn.addEventListener("click", () => {
             audio.currentTime = 0;
             audio.play().catch(error => {
                 console.log("Audio error:", error);
             });
         });
-
         audio.addEventListener("timeupdate", () => {
             const current = audio.currentTime;
 
@@ -78,24 +79,19 @@
 
             subtitle.textContent = line ? line.text : "";
         });
-
         volumeSlider.addEventListener("input", () => {
             audio.volume = volumeSlider.value;
         });
-
         settingsBtn.addEventListener("click", (event) => {
             event.stopPropagation();
             settingsMenu.classList.toggle("hidden");
         });
-
         settingsMenu.addEventListener("click", (event) => {
             event.stopPropagation();
         });
-
         document.addEventListener("click", () => {
             settingsMenu.classList.add("hidden");
         });
     </script>
-
 </body>
 </html>

@@ -17,6 +17,7 @@
         <!-- -->
         <input id="answerInput" placeholder="Enter frequency">
         <button id="checkBtn">Transmit</button>
+        <p id="feedback"></p>
         <button class="submit-button" id="submit" onclick="window.location.href='riddle_3_location.html'">
             Continue
         </button>
@@ -31,12 +32,12 @@
                 .toLowerCase()
                 .replace(/\s+/g, "");
             if (
-                answer === "91" ||
-                answer === "91mhz"
+                answer === "111" ||
+                answer === "111ghz"
             ) {
                 window.location.href = "../Stations/HTML/station_4.html";
             } else {
-                alert("Wrong frequency. Try again!");
+                feedback.textContent = "Wrong frequency. Try again.";
             }
         });
     </script>

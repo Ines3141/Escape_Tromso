@@ -1,0 +1,173 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>Rescue Hunt Start</title>
+    <link rel="stylesheet" href="../../CSS/global.css">
+
+    <style>
+        .intro-box {
+            max-width: 560px;
+            position: relative;
+        }
+
+        .start-badge {
+            display: inline-block;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: rgba(0,184,148,0.18);
+            border: 1px solid #00b894;
+            color: #7fffe0;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 14px;
+        }
+
+        .info-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 16px;
+            margin: 18px 0;
+            text-align: left;
+        }
+
+            .info-card p {
+                margin-bottom: 8px;
+            }
+
+        .team-photo {
+            width: 100%;
+            max-height: 220px;
+            object-fit: cover;
+            border-radius: 16px;
+            margin: 12px 0;
+            display: none;
+        }
+
+        .settings-btn {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+        }
+
+        .warning {
+            font-size: 0.9rem;
+            color: #cfefff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box intro-box">
+
+        <button id="settingsBtn" class="settings-btn">&#9881;</button>
+
+        <div id="settingsMenu" class="settings-menu hidden">
+            <button id="locationBtn">First Location</button>
+            <p>📍 Gateway to the Arctic</p>
+            <p>Coordinates: 69.6492, 18.9553</p>
+        </div>
+
+        <div class="start-badge">INCOMING SOS</div>
+
+        <h1>Rescue Hunt</h1>
+        <p><strong>The Lost Polar Expedition</strong></p>
+
+        <div class="info-card">
+            <p>🚨 <strong>Mission Briefing</strong></p>
+
+            <p>A arctic crew is trapped in the Arctic ice and need your help.</p>
+
+            <p>You have <strong>2 hours</strong> to locate historic explorer, solve their riddles to help the lost crew.</p>
+
+            <p>At every station, listen carefully to the information provided, solve the challenge, and continue to the next location.</p>
+
+            <p class="warning">
+                ⚙ Need a reminder? Use the settings button at any time to view the current location again.
+            </p>
+
+            <p>You can interact with each explorer as much as you like.</p>
+
+            <p>Each explorer has a unique profile and story based on real polar history. These details are not required to solve the riddles, but they may help you learn more about the people behind the expedition.</p>
+        </div>
+
+        <input id="teamName" type="text" placeholder="Enter your team name">
+
+        <label class="submit-button" for="teamPhoto">
+            Take Team Photo
+        </label>
+        <input id="teamPhoto" type="file" accept="image/*" capture="environment" style="display:none;">
+
+        <img id="preview" class="team-photo" alt="Team photo preview">
+
+        <button class="submit-button" onclick="startMission()">
+            Start Mission
+        </button>
+
+        <p id="message"></p>
+    </div>
+
+    <script>
+const settingsBtn = document.getElementById("settingsBtn");
+const settingsMenu = document.getElementById("settingsMenu");
+const locationBtn = document.getElementById("locationBtn");
+const teamPhoto = document.getElementById("teamPhoto");
+const preview = document.getElementById("preview");
+const message = document.getElementById("message");
+
+settingsBtn.addEventListener("click", (event) => {
+    event.stopPropagation();
+    settingsMenu.classList.toggle("hidden");
+});
+
+settingsMenu.addEventListener("click", (event) => {
+    event.stopPropagation();
+});
+
+document.addEventListener("click", () => {
+    settingsMenu.classList.add("hidden");
+});
+
+locationBtn.addEventListener("click", () => {
+    window.open("https://www.google.com/maps/search/Gateway+to+the+Arctic+Tromsø");
+});
+
+teamPhoto.addEventListener("change", () => {
+    const file = teamPhoto.files[0];
+
+    if (!file) return;
+
+    const reader = new FileReader();
+
+    reader.onload = () => {
+        preview.src = reader.result;
+        preview.style.display = "block";
+        localStorage.setItem("teamPhoto", reader.result);
+    };
+
+    reader.readAsDataURL(file);
+});
+
+function startMission() {
+    const name = document.getElementById("teamName").value.trim();
+
+    if (name === "") {
+        message.textContent = "Please enter your team name.";
+        return;
+    }
+
+    if (!teamPhoto.files[0]) {
+        message.textContent = "Please take or choose a team photo.";
+        return;
+    }
+
+    localStorage.setItem("teamName", name);
+    localStorage.setItem("missionStart", Date.now());
+
+    window.location.href = "station_1.html";
+}
+    </script>
+</body>
+</html>

@@ -157,11 +157,11 @@ function startMission() {
         message.textContent = "Please enter your team name.";
         return;
     }
-
+    /* Commented out for testing reasons, because it does not allow for continuing without team photo. 
     if (!teamPhoto.files[0]) {
         message.textContent = "Please take or choose a team photo.";
         return;
-    }
+    }*/
 
     localStorage.setItem("teamName", name);
     localStorage.setItem("missionStart", Date.now());

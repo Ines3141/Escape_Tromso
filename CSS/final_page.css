@@ -26,6 +26,7 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    position: sticky;
 }
 
 .settings-menu button {
@@ -51,7 +52,7 @@
 
 .route-answer img {
     width: 100%;
-    height: 200px;
+    height: auto;
     object-fit: cover;
     /*This decides if the image in nansen is covered or not contain or cover*/
     display: block;
@@ -96,18 +97,25 @@
     .settings-btn {
         width: 100%;
         height: 70px;
+        position: sticky;
+        top: 0;
     }
 
     .route-answer img {
         width: 100%;
-        height: 200px;
+        height: auto;
         object-fit: cover;
         /*This decides if the image in nansen is covered or not contain or cover*/
         display: block;
     }
 
     .route-answer:active {
-        width: 200%;
+        width: 110%;
         height: auto;
+    }
+
+    .route-grid {
+        grid-template-columns: 1fr;
+        gap: 5px;
     }
 }

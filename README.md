@@ -51,6 +51,14 @@ Station 6:
   - Create the image of differences 
 
 Final page:
-  - Roald amundsen riddle needs to be fixed so that yo can view the individual images on the phone [ ]
-  - 
+
+Jorgen todo:
+- Fix roald ammundsen riddle.
+- Organize code.
+- Database.
+- Email code mechanic.
+- Insert express.
+- Nav bar.
+- Somethign else Ines said.
+- 
   

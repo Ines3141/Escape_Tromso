@@ -158,10 +158,10 @@ function startMission() {
         return;
     }
 
-    if (!teamPhoto.files[0]) {
-        message.textContent = "Please take or choose a team photo.";
-        return;
-    }
+    // if (!teamPhoto.files[0]) {
+    //     message.textContent = "Please take or choose a team photo.";
+    //     return;
+    // }
 
     localStorage.setItem("teamName", name);
     localStorage.setItem("missionStart", Date.now());

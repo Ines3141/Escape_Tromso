@@ -16,7 +16,7 @@ body {
     min-height: 70vh;
     padding: 28px;
     color: white;
-    background: linear-gradient(rgba(3, 18, 32, 0.65), rgba(3, 18, 32, 0.75)), url("../Images/Tromso.jpg");
+    background: linear-gradient(rgba(3, 18, 32, 0.65), rgba(3, 18, 32, 0.75)), url("../assets/images/Tromso.jpg");
     background-size: cover;
     background-position: center;
     border-bottom-left-radius: 40px;

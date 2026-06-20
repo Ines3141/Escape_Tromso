@@ -4,8 +4,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <title>Station 1</title>
-    <link rel="stylesheet" href="../../CSS/global.css">
-    <link rel="stylesheet" href="../../CSS/station.css">
+    <link rel="stylesheet" href="../../../../CSS/global.css">
+    <link rel="stylesheet" href="../../../../CSS/station.css">
 </head> 
 <body>
     <div class="box">
@@ -20,13 +20,13 @@
         <p>Gateway to the Arctic</p>
 
         <div class="image-container">
-            <img src="../../assets/images/Station_1_gate.jfif" alt="Station 1" class="imag-station">
+            <img src="../../../../assets/images/Station_1_gate.jfif" alt="Station 1" class="imag-station">
         </div>
         <div id="profileOverlay" class="profile-overlay hidden">
             <div class="profile-card">
                 <button class="close-profile" onclick="closeProfile()">×</button>
 
-                <img src="../../assets/images/Nansen.jpg" class="profile-img" alt="Fridtjof Nansen">
+                <img src="../../../../assets/images/Nansen.jpg" class="profile-img" alt="Fridtjof Nansen">
 
                 <h2>Fridtjof Nansen</h2>
                 <p class="profile-subtitle">Scientist • Explorer • Humanitarian</p>
@@ -52,14 +52,14 @@
             <div id="subtitle" class="subtitle"></div>
         </div>
         <audio id="voice" preload="auto">
-            <source src="../../assets/audio/Station_1_Welcome.m4a" type="audio/mp4">
+            <source src="../../../../assets/audio/Station_1_Welcome.m4a" type="audio/mp4">
         </audio>
 
         <button id="profile" class="profile-button" onclick="openProfile()" style="display:none;">
             Explorer Gateway to arctic
         </button>
         <!-- for actual game do </button>style="display:none;">, but now it is just blocking -->
-        <button class="riddle-button" id="riddle_btn" onclick="window.location.href='../../Riddle/riddle_1.html'">
+        <button class="riddle-button" id="riddle_btn" onclick="window.location.href='../riddle/riddle_1.html'">
             Solve Riddle
         </button>
         <button class="back-button" onclick="window.location.href='intro.html'">
@@ -97,7 +97,7 @@
                 { start: 50, end: 53, text: "Proceed to the Riddle Page." }
             ];
 
-            /* To save the volume for all the other pages*/
+            /* To save the volume for all the other html*/
             if (savedVolume !== null) {
                 audio.volume = savedVolume;
                 volumeSlider.value = savedVolume;

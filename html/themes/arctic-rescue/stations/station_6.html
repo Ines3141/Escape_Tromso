@@ -3,47 +3,42 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
-    <title>Station 2</title>
-    <link rel="stylesheet" href="../../CSS/global.css">
-    <link rel="stylesheet" href="../../CSS/station.css">
+    <title>Station 6</title>
+    <link rel="stylesheet" href="../../../../CSS/global.css">
+    <link rel="stylesheet" href="../../../../CSS/station.css">
 </head>
 <body>
     <div class="box">
         <button id="settingsBtn" class="settings-btn">&#9881</button>
+
         <div id="settingsMenu" class="settings-menu hidden">
             <!-- <button>Replay Audio</button> -->
             <label for="volumeSlider">Volume</label>
             <input id="volumeSlider" type="range" min="0" max="1" step="0.1" value="1">
-            <button>Show Hint</button> <!-- Not necessary with Sation side-->
             <button id="Location_btn">Show location</button>
-            <!-- <button>About Nansen</button> -->
-            <!--Maybe more ifnormation is nice. For people who are interested -->
         </div>
-        <h1>Station 2</h1>
-        <p> Fridtjof Nansen</p>
-
+        <h1>Station 6</h1>
+        <p>Henry Rudi</p>
         <div class="person-container">
-            <img src="../../assets/images/Nansen.jpg" alt="Station 1" class="imag-person">
+            <img src="../../../../assets/images/rudi.jpg" alt="Station 6" class="imag-person">
         </div>
-
         <div class="audio-row">
             <button class="audio-btn" id="audioBtn"> &#128266;</button>
             <div id="subtitle" class="subtitle"></div>
         </div>
-
-        <audio id="voice0" preload="auto">
-            <source src="../../assets/audio/Nansen1.mp4" type="audio/mp4">
+        <audio id="voice" preload="auto">
+            <source src="../../../../assets/audio/Rudi1.mp4" type="audio/mp4">
         </audio>
         <audio id="voiceA" preload="auto">
-            <source src="../../assets/audio/NansenA.mp4" type="audio/mp4">
+            <source src="../../../../assets/audio/RudiA.mp4" type="audio/mp4">
         </audio>
         <audio id="voiceB" preload="auto">
-            <source src="../../assets/audio/NansenB.mp4" type="audio/mp4">
+            <source src="../../../../assets/audio/RudiB.mp4" type="audio/mp4">
         </audio>
         <audio id="voiceC" preload="auto">
-            <source src="../../assets/audio/NansenC.mp4" type="audio/mp4">
+            <source src="../../../../assets/audio/RudiC.mp4" type="audio/mp4">
         </audio>
-        <!-- preload auto: Load the audio file as soon as possible, even before the user presses play. -->
+
         <div id="choices" style="display:none;">
             <button id="btnA" class="answer-button"></button>
             <button id="btnB" class="answer-button"></button>
@@ -52,82 +47,79 @@
         <button id="profile" class="profile-button" onclick="openProfile()" style="display:none;">
             Explorer Profile
         </button>
-
         <div id="profileOverlay" class="profile-overlay hidden">
             <div class="profile-card">
+
                 <button class="close-profile" onclick="closeProfile()">×</button>
 
-                <img src="../../assets/images/Nansen.jpg" class="profile-img" alt="Fridtjof Nansen">
+                <img src="../../../../assets/images/Rudi.jpg" class="profile-img">
 
-                <h2>Fridtjof Nansen</h2>
-                <p class="profile-subtitle">Scientist • Explorer • Humanitarian</p>
+                <h2>Henry Rudi</h2>
+
+                <p class="profile-subtitle">
+                    Trapper • Hunter • Arctic Survivor
+                </p>
 
                 <div class="profile-tags">
-                    <span>🧊 Greenland Crossing</span>
-                    <span>🚢 Fram Expedition</span>
-                    <span>🕊 Nobel Peace Prize </span>
+                    <span>🐻 Polar Bear King</span>
+                    <span>❄️ 27 Winters on Svalbard</span>
+                    <span>🏕 Arctic Survival Expert</span>
                 </div>
 
                 <p>
-                    Nansen was one of Norway's greatest polar explorers and scientist.
-                    He studied marine zoology and neuroanatomy.
-                    He crossed Greenland on skis 1888, had the
-                    Fram Expedition (1893–1896), which are supposed to go the North pole.
-                    He purposely froze his specially designed ship, the Fram, into the Arctic ice pack, allowing the natural drift of the ice to carry
-                    them toward the North Pole. Though he didn't reach the exact pole, he set a new "furthest north" record.
-                    He studied Arctic ice and ocean currents. Nansen helped over 400.000 refugees after World War I and
-                    invented the Nansen passport for stateless refugees.
+                    Henry Rudi spent most of his life in the High Arctic.
+                    His knowledge of weather, ice, and survival made him one of
+                    Svalbard's most legendary trappers.
                 </p>
 
                 <div class="fun-fact">
-                    <strong>Fun fact:</strong> Nansen tried to reach the North Pole by letting his ship drift with the ice.
+                    <strong>Fun Fact:</strong>
+                    Henry spent his first winter on Svalbard when he was only 9 years old.
                 </div>
+
             </div>
         </div>
-        <button class="back-button" onclick="window.location.href='station_1.html'">
+        <button class="back-button" onclick="window.location.href='station_5.html'">
             Back
         </button>
         <!-- for actual game do </button>style="display:none;">, but now it is just blocking -->
-
-        <button class="riddle-button" id="riddle_btn" onclick="window.location.href='../../Riddle/riddle_2.html'">
+        <button class="riddle-button" id="riddle_btn" onclick="window.location.href='../riddle/riddle_6.html'">
             Solve Riddle
         </button>
-
         <script>
-            /* Audio's file */
-            const audio = document.getElementById("voice0");
+            /* Audio */
+            const audio = document.getElementById("voice");
             const audioA = document.getElementById("voiceA");
             const audioB = document.getElementById("voiceB");
             const audioC = document.getElementById("voiceC");
 
             /* Buttons */
-            const audio_btn = document.getElementById("audioBtn");
-            const riddle_btn = document.getElementById("riddle_btn");
-            const location_btn = document.getElementById("Location_btn");
             const btnA = document.getElementById("btnA");
             const btnB = document.getElementById("btnB");
             const btnC = document.getElementById("btnC");
+            const audio_btn = document.getElementById("audioBtn");
+            const riddle_btn = document.getElementById("riddle_btn");
+            const location_btn = document.getElementById("Location_btn");
             const profile_btn = document.getElementById("profile");
 
             const choices = document.getElementById("choices");
-            const person = document.querySelector(".person-container");
             const settingsBtn = document.getElementById("settingsBtn");
             const settingsMenu = document.getElementById("settingsMenu");
+            const subtitle = document.getElementById("subtitle");
             const allAudios = [audio, audioA, audioB, audioC];
             const volumeSlider = document.getElementById("volumeSlider");
 
-            const subtitle = document.getElementById("subtitle");
+            const person = document.querySelector(".person-container");
 
             location_btn.addEventListener("click", () => {
-                window.open('https://www.google.com/maps/search/Troms�+Harbour');
+                window.open('https://www.google.com/maps/search/Oelhallen+Tromsoe');
             })
-            /* Make sound louder/silent */
+            /* Change volume */
             volumeSlider.addEventListener("input", () => {
                 allAudios.forEach(sound => {
                     sound.volume = volumeSlider.value;
                 });
             });
-
             /* Start the audio file and the subtitels. */
             audio_btn.addEventListener("click", () => {
                 if (audio.paused) {
@@ -142,13 +134,12 @@
             audio.addEventListener("ended", () => {
                 person.classList.remove("speaking");
                 btnA.textContent =
-                    "We're Team [XY]. We need to rescue a crew trapped in the Arctic!";
+                    "We need help rescuing people trapped in the ice.";
                 btnB.textContent =
-                    "We're Team [XY]. And who are you?";
+                    "Polar Bear King? How did you get that nickname?";
                 btnC.style.display = "none";
                 choices.style.display = "block";
             });
-
             btnA.addEventListener("click", () => {
                 choices.style.display = "none";
                 if (audioA.paused) {
@@ -169,7 +160,6 @@
                 SHOW BUTTON
                 TO SOLVE RIDDLE IF ISNT YOU NEED MORE BLOCKS*/
             });
-
             btnB.addEventListener("click", () => {
                 choices.style.display = "none";
                 if (audioB.paused) {
@@ -185,11 +175,10 @@
                 btnA.style.display = "none";
                 btnB.style.display = "none";
                 btnC.textContent =
-                    "Our colleagues are trapped in the ice.";
+                    "We need your help first. Our friends are trapped in the ice.";
                 btnC.style.display = "block";
                 choices.style.display = "block";
             });
-
             btnC.addEventListener("click", () => {
                 choices.style.display = "none";
                 if (audioC.paused) {
@@ -207,35 +196,33 @@
             });
 
             const subtitles = [
-                { start: 0, end: 2, text: "Hello there, fellow explorers!" },
-                { start: 2, end: 5, text: "You seem to be in a hurry." },
-                { start: 5, end: 7, text: "Who are you?" }
+                { start: 0, end: 2, text: "Ahoy, explorers!" },
+                { start: 2, end: 5, text: "You can call me Polar Bear King." },
+                { start: 5, end: 7, text: "What brings you here? Looking for adventure?" }
             ];
-
             const subtitlesA = [
-                { start: 0, end: 2, text: "There is no time to waste." },
-                { start: 2, end: 5, text: "The arctic is dangerous, but I can help." },
+                { start: 0, end: 2, text: "A rescue mission, eh?" },
+                { start: 2, end: 5, text: "Then let's get straight to business." },
                 { start: 5, end: 7, text: "I studied ocean currents and sea ice." },
-                { start: 7, end: 10, text: "Take this clue about ocean currents." },
-                { start: 10, end: 13, text: "It may help them escape the ice." }
+                { start: 7, end: 10, text: "I learned a thing or two about surviving in the ice." },
+                { start: 10, end: 13, text: "Take a look at these notes." },
+                { start: 13, end: 16, text: "They might help you determine the right date for your friends to leave.." }
             ];
-
             const subtitlesB = [
-                { start: 1, end: 3, text: "My name is Fridtjof Nansen." },
-                { start: 3, end: 6, text: "Scientist. Explorer." },
-                { start: 6, end: 10, text: "And sometimes a troublemaker." },
-                { start: 10, end: 14, text: "I crossed Greenland on skis." },
-                { start: 14, end: 17, text: "And tried to reach the North Pole." },
-                { start: 20, end: 23, text: "That part didn't quite work out." },
-                { start: 23, end: 26, text: "But I learned a lot about Arctic ice." }
+                { start: 1, end: 3, text: "I spent trapping and hunting on Svalbard a lot." },
+                { start: 3, end: 6, text: "People call me the Polar Bear King." },
+                { start: 6, end: 10, text: "I encountered more than you image." },
+                { start: 10, end: 14, text: "I overwintered on Svalbard 27 times." },
+                { start: 14, end: 17, text: "And do you know something funny?" },
+                { start: 20, end: 23, text: "I spent my first winter there when I was only nine years old." },
+                { start: 23, end: 26, text: "What brings you here?" }
             ];
-
             const subtitlesC = [
-                { start: 1, end: 3, text: "Your friends are trapped, you say?" },
-                { start: 3, end: 7, text: "Then every minute counts!" },
-                { start: 7, end: 11, text: "Take this clue about ocean currents." },
-                { start: 11, end: 14, text: "It may help them escape the ice." },
-                { start: 14, end: 17, text: "Good luck, [XY]!" }
+                { start: 1, end: 3, text: "Now that's a good reason!" },
+                { start: 3, end: 7, text: "The Arctic rewards patience and good timing." },
+                { start: 7, end: 11, text: "Take these notes." },
+                { start: 11, end: 14, text: "They may help you figure out the right date." },
+                { start: 14, end: 17, text: "Good luck!" }
             ];
 
             function updateSubtitle(audioFile, subtitleList) {
@@ -266,11 +253,9 @@
                 event.stopPropagation();
                 settingsMenu.classList.toggle("hidden");
             });
-
             settingsMenu.addEventListener("click", (event) => {
                 event.stopPropagation();
             });
-
             document.addEventListener("click", () => {
                 settingsMenu.classList.add("hidden");
             });
@@ -281,10 +266,7 @@
             function closeProfile() {
                 document.getElementById("profileOverlay").classList.add("hidden");
             }
-
         </script>
-
     </div>
-
 </body>
 </html>

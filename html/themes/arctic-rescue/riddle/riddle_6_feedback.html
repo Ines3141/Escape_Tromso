@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Next location: Henry Rudi </title>
-    <link rel="stylesheet" href="../CSS/global.css"> <!-- link to style sheet -->
-    <link rel="stylesheet" href="../CSS/riddle.css">
+    <link rel="stylesheet" href="../../../../CSS/global.css"> <!-- link to style sheet -->
+    <link rel="stylesheet" href="../../../../CSS/riddle.css">
     <style>
         .envelope {
             font-size: 58px;
@@ -55,13 +55,14 @@
             transform-origin: top;
         }
 
-        .letter p {
-            color: #2b2418;
-        }
-        .letter.open {
-            display: block;
-            animation: unfold 0.8s ease-out forwards;
-        }
+            .letter p {
+                color: #2b2418;
+            }
+
+            .letter.open {
+                display: block;
+                animation: unfold 0.8s ease-out forwards;
+            }
 
         @keyframes unfold {
             from {
@@ -95,66 +96,55 @@
 
         <div id="letter" class="letter">
 
-            <h3>Dispatch from Roald Amundsen</h3>
+            <h3>Dispatch from Henry Rudi</h3>
 
             <p>
                 Explorer,
             </p>
 
             <p>
-                Thank you for your help. The safety depot has been located and the crew
-                now has supplies to continue their journey.
+                Thank you for your help. I checked the ice, the wind, and the weather conditions.
+                The crew now has the safest date to leave the ice.
             </p>
 
             <p>
-                I have enclosed the coordinates of the depot and the location of your
-                next contact.
-            </p>
-
-            <p>
-                The next clue awaits with <strong>Henry Rudi</strong>.
+                This date is the final code for the last riddle.
             </p>
 
             <div class="coordinates">
-                <strong>Safety Depot Coordinates</strong><br>
-                78°13'N, 15°38'E
-            </div>
-
-            <div class="coordinates">
-                <strong>Next Mission</strong><br>
-                📍 Henri Rudi (Olhallen)
+                <strong>Final Code</strong><br>
+                Departure Date: 14.5
             </div>
 
             <p>
-                Good luck, explorer.
-                The crew is counting on you.
+                Now you have everything together: the correct route, the radio frequency,
+                the safety depot coordinates, and the right date to leave.
             </p>
 
             <p>
-                — Roald Amundsen
+                Send all information to the lost crew and help them escape the ice.
             </p>
 
-            <button class="location" id="location">
-                Open in Google Maps
-            </button>
+            <p>
+                Good luck, explorer. Their lives depend on you.
+            </p>
+
+            <p>
+                — Henry Rudi
+            </p>
 
             <button class="submit-button" id="submit">
-                Continue
+                Send Final Rescue Message
             </button>
-
         </div>
     </div>
     <script>
         const submitButton = document.getElementById("submit");
-        const mapButton = document.getElementById("location");
 
         submitButton.addEventListener("click", () => {
-            window.location.href = "../Stations/HTML/station_6.html";
+            window.location.href = "../final_page.html";
         });
 
-        mapButton.addEventListener("click", () => {
-            window.location.href = "https://www.google.com/maps/search/Olhallen";
-        });
         function openLetter() {
             document
                 .getElementById("letter")

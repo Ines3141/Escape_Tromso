@@ -4,9 +4,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <title> Riddle Roald Amundsen</title>
-    <link rel="stylesheet" href="../CSS/global.css"> <!-- link to style sheet -->
-    <link rel="stylesheet" href="../CSS/riddle.css">
-    <link rel="stylesheet" href="../CSS/Amundsen.css">
+    <link rel="stylesheet" href="../../../../CSS/global.css"> <!-- link to style sheet -->
+    <link rel="stylesheet" href="../../../../CSS/riddle.css">
+    <link rel="stylesheet" href="../../../../CSS/Amundsen.css">
 </head>
 <body>
     <div class="box">
@@ -24,7 +24,7 @@
             <span class="angle-label angle-270">270° <br> N-W passage</br></span>
             <span class="angle-label angle-315">315° <br> FRAM </br></span>
             <div class="compass-container">
-                <img id="arcticMap" src="../assets/images/Labyrinth_Amundsen.jpg">
+                <img id="arcticMap" src="../../../../assets/images/Labyrinth_Amundsen.jpg">
             </div>
         </div>
         <div class="compass-buttons">
@@ -32,7 +32,7 @@
             <button type="button" onclick="rotateStep(45)">⟳</button>
         </div>
 
-        <audio id="clickSound" src="../assets/audio/Click.m4a"></audio>
+        <audio id="clickSound" src="../../../../assets/audio/Click.m4a"></audio>
 
         <h2>Match the ships</h2>
 
@@ -128,7 +128,7 @@
                     message.style.color = "lightgreen";
 
                     setTimeout(() => {
-                        window.location.href = "../Stations/HTML/station_6.html";
+                        window.location.href = "../stations/station_6.html";
                     }, 1200);
                 } else {
                     message.textContent = "Not quite. Check the direction and the ships.";

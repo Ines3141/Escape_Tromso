@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Station 4</title>
+    <link rel="stylesheet" href="../../../../CSS/global.css">
+    <link rel="stylesheet" href="../../../../CSS/station.css">
+</head>
+<body>
+    <div class="box monument-theme">
+        <button id="settingsBtn" class="settings-btn">&#9881</button>
+        <div id="settingsMenu" class="settings-menu hidden">
+            <!-- <button>Replay Audio</button> -->
+            <label for="volumeSlider">Volume</label>
+            <input id="volumeSlider" type="range" min="0" max="1" step="0.1" value="1">
+            <button id="Location_btn">Show location</button>
+            <button>About Nansen</button>
+            <!--Maybe more ifnormation is nice. For people who are interested -->
+        </div>
+        <h1>Station 4</h1>
+        <p>Location: Hunter Fisher Monument, Stortorget</p>
+        <!--NO IDEAS YET NO RIDDLE BUT IT SHOULD BE DARK AND REMIND PEOPLE -->
+        <div class="image-container">
+            <img src="../../../../assets/images/Monument.jpg" alt="Station 4">
+        </div>
+        <div class="fog"></div>
+        <div class="audio-row">
+            <button class="audio-btn" id="audioBtn">&#128266;</button>
+            <div id="subtitle" class="subtitle"></div>
+        </div>
+        <audio id="voice" preload="auto">
+            <source src="../../../../assets/audio/Monument.mp4" type="audio/mp4">
+        </audio>
+        <button class="back-button" onclick="window.location.href='station_3.html'">
+            Back
+        </button>
+        <button class="riddle-button" onclick="window.location.href='../riddle/riddle_4.html'">
+            Solve Riddle
+        </button>
+    </div>
+    <script>
+        const audio = document.getElementById("voice");
+        const audio_btn = document.getElementById("audioBtn");
+        const subtitle = document.getElementById("subtitle");
+
+        /* Buttons */
+        const location_btn = document.getElementById("Location_btn");
+        const settingsBtn = document.getElementById("settingsBtn");
+        const settingsMenu = document.getElementById("settingsMenu");
+
+        const volumeSlider = document.getElementById("volumeSlider");
+
+        const subtitles = [
+            { start: 0, end: 2, text: "The Arctic is unforgiving." },
+            { start: 2, end: 5, text: "Many brave fishers, trappers, sailors, and explorers lost their lives in these waters." },
+            { start: 5, end: 7, text: "This monument stands in memory of those who never returned home." },
+            { start: 7, end: 10, text: "Five Norwegian ships were caught in a powerful hurricane in 1952." },
+            { start: 10, end: 13, text: "Seventy-eight people lost their lives." },
+            { start: 13, end: 17, text: "Nature always has the final word." }
+        ];
+
+        location_btn.addEventListener("click", () => {
+            window.open('https://www.google.com/maps/search/Stortorget');
+        });
+
+        audio_btn.addEventListener("click", () => {
+            audio.currentTime = 0;
+            audio.play().catch(error => {
+                console.log("Audio error:", error);
+            });
+        });
+        audio.addEventListener("timeupdate", () => {
+            const current = audio.currentTime;
+
+            const line = subtitles.find(sub =>
+                current >= sub.start && current <= sub.end
+            );
+
+            subtitle.textContent = line ? line.text : "";
+        });
+        volumeSlider.addEventListener("input", () => {
+            audio.volume = volumeSlider.value;
+        });
+        settingsBtn.addEventListener("click", (event) => {
+            event.stopPropagation();
+            settingsMenu.classList.toggle("hidden");
+        });
+        settingsMenu.addEventListener("click", (event) => {
+            event.stopPropagation();
+        });
+        document.addEventListener("click", () => {
+            settingsMenu.classList.add("hidden");
+        });
+    </script>
+</body>
+</html>

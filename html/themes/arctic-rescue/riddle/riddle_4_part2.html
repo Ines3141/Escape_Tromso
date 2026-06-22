@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>Next location from Monument </title>
+    <link rel="stylesheet" href="../../../../CSS/global.css"> <!-- link to style sheet -->
+</head>
+<body>
+    <div class="box">
+        <h2>✓ MISSION COMPLETE</h2>
+
+        <p>You have decoded the explorer's message.</p>
+        <p>The rescue team now knows where to continue the search.</p>
+
+        <h3>Your next destination:</h3>
+        <p class="location">📍 Amundsen Plass</p>
+        <p><strong>69.6492, 18.9553</strong></p>
+        <p>Proceed to the location and open the next clue.</p>
+
+        <button class="location" id="location">
+            Open in Google Maps
+        </button>
+        <button class="submit-button" id="submit">
+            Continue
+        </button>
+        <button class="back-button" onclick="window.location.href='../stations/station_4.html'">
+            Back
+        </button>
+    </div>
+    <script>
+        const submitButton = document.getElementById("submit");
+        const mapButton = document.getElementById("location");
+
+        submitButton.addEventListener("click", () => {
+            window.location.href = "../stations/station_5.html";
+        });
+
+        mapButton.addEventListener("click", () => {
+            window.location.href = "https://www.google.com/maps/search/Amundsen+plass";
+        });
+    </script>
+</body>
+</html>

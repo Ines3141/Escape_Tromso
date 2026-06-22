@@ -1,0 +1,418 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* GENERAL PAGE SETTINGS */
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: white;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #07182c, #123b63, #0f5f8f);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}
+
+/* MAIN BOX */
+.content-box,
+.box {
+    width: 100%;
+    max-width: 500px;
+    background: rgba(10, 35, 65, 0.85);
+    backdrop-filter: blur(8px);
+    padding: 20px;
+    border-radius: 24px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    text-align: center;
+}
+
+/* AUDIO AND SUBTITELS*/
+.audio-row {
+    display: block;
+    align-items: center;
+    gap: 14px;
+    margin: 20px 0;
+}
+
+.audio-btn {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    border: none;
+    font-size: 26px;
+    cursor: pointer;
+    background: #111;
+    color: white;
+    animation: pulse 1.5s infinite;
+    flex-shrink: 0;
+}
+
+.subtitle {
+    background: rgba(0,0,0,.75);
+    color: white;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: 18px;
+    flex: 1;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(0,0,0,.4);
+    }
+
+    70% {
+        transform: scale(1.08);
+        box-shadow: 0 0 0 16px rgba(0,0,0,0);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(0,0,0,0);
+    }
+}
+
+/* OPTION BUTTON */
+.settings-btn {
+    position: absolute;
+    top: 28px;
+    right: 28px;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    color: white;
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+}
+/* .settings-menu {
+    position: absolute;
+    top: 55px;
+    right: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 10px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+} */
+.settings-menu {
+    position: absolute;
+    top: 55px;
+    right: 20px;
+    background: rgba(0,0,0,0.85);
+    color: white;
+    padding: 15px;
+    border-radius: 12px;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.settings-menu button.selected {
+    background: #00b894;
+    color: white;
+}
+.hidden {
+    display: none;
+}
+
+/* HEADINGS */
+h1 {
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+h2 {
+    margin-bottom: 15px;
+}
+
+p {
+    line-height: 1.6;
+    margin-bottom: 15px;
+    color: #dbeafe;
+}
+
+/* INPUT FIELDS */
+input {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 14px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    text-align: center;
+    outline: none;
+}
+
+/* BUTTONS */
+button {
+    width: 250px;
+    border: none;
+    border-radius: 14px;
+    padding: 14px 24px;
+    margin: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    background: #f7d046;
+    color: #082033;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+    background: #ffe066;
+}
+
+/* IMAGES */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* ERROR / MESSAGE TEXT */
+#message {
+    color: #ffb4b4;
+    font-weight: bold;
+    margin-top: 10px;
+}
+/* TABLET */
+@media (max-width: 900px) {
+    .box,
+    .content-box {
+        max-width: 80%;
+    }
+
+    h1 {
+        font-size: 2.4rem;
+    }
+}
+
+/* PHONE */
+@media (max-width: 600px) {
+    body {
+        display: block;
+        padding: 15px;
+    }
+
+    .box,
+    .content-box {
+        width: 100%;
+        max-width: none;
+        margin-top: 15px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+
+    button:not(.settings-btn):not(.audio-btn):not(.number-dot) {
+        width: 100%;
+        margin: 8px 0;
+    } /* The not is there because these buttons are smaller. */
+
+    input {
+        width: 100%;
+    }
+
+    .settings-btn {
+        width: 30px;
+        height: 30px;
+        margin: 0;
+        padding: 0;
+        top: 18px;
+        right: 18px;
+    }
+
+    input {
+        width: 100%;
+    }
+}
+/*----------------------------------------RIDDLE-----------------------------------------------------*/
+/*.riddle-page {
+    background-image: url("../assets/images/riddle_background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    padding: 50px;
+}*/
+
+.submit-button {
+    background-color: #00b894;
+    color: white;
+}
+
+.hint-button {
+    background-color: #fdcb6e;
+    color: black;
+}
+
+.back-button {
+    background-color: #d63031;
+    color: white;
+}
+.final-choice {
+    margin: 25px 0;
+    text-align: center;
+}
+
+.final-choice button {
+        margin: 8px;
+        padding: 14px 18px;
+        border-radius: 12px;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+}
+
+.final-choice button.selected {
+    background: #00b894;
+    color: white;
+}
+
+.final-choice img {
+    width: 120px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.confetti {
+    font-size: 45px;
+    animation: pop 1s infinite alternate;
+}
+
+@keyframes pop {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.2);
+    }
+}
+
+.final-page .settings-btn {
+    position: static !important;
+    top: auto !important;
+    right: auto !important;
+    display: block;
+    width: 100%;
+    margin: 12px 0;
+    padding: 18px 24px;
+    background: #f7d046;
+    color: #082033;
+    border: none;
+    border-radius: 18px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.final-page .settings-menu,
+.final-page .settings-menu-final {
+    position: static !important;
+    top: auto !important;
+    right: auto !important;
+    width: 100%;
+    margin: 0 0 18px 0;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.85);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.final-page .hidden {
+    display: none !important;
+}
+
+.victory-box {
+    max-width: 640px;
+    border: 1px solid rgba(150, 220, 255, 0.35);
+    box-shadow: 0 0 35px rgba(80, 180, 255, 0.25);
+}
+
+.signal-badge {
+    display: inline-block;
+    margin-bottom: 18px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: rgba(0, 184, 148, 0.18);
+    border: 1px solid #00b894;
+    color: #7fffe0;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.final-message {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.transmission-card {
+    margin: 24px 0;
+    padding: 22px;
+    border-radius: 18px;
+    background: rgba(0, 0, 0, 0.28);
+    border-left: 4px solid #7dd3fc;
+    text-align: left;
+}
+
+    .transmission-card h2 {
+        color: #7dd3fc;
+        margin-bottom: 10px;
+    }
+
+.mission-summary {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 22px 0;
+}
+
+    .mission-summary span {
+        background: rgba(255,255,255,0.1);
+        padding: 12px;
+        border-radius: 12px;
+        font-weight: bold;
+    }
+
+.thank-you {
+    margin-top: 20px;
+    font-style: italic;
+}
+
+.feedback-button {
+    background: #00b894;
+    color: white;
+}
+
+@media (max-width: 600px) {
+    .mission-summary {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+
+

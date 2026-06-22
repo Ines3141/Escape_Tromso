@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>Riddle Wanny Woldstad </title>
+    <link rel="stylesheet" href="../../../../CSS/global.css"> <!-- link to style sheet -->
+</head>
+<body>
+    <div class="box">
+        <h1>Which path did the fox take?</h1>
+        <div class="image-container">
+            <img src="../../../../assets/images/Labyrinth_Wanny_Animals.jpg" alt="Station 3">
+        </div>
+        <!-- CHANGE THAT THEY CAN PRESS DIRECTLY THE BUTTONS THERE -->
+        <!-- -->
+        <input id="answerInput" placeholder="Enter frequency">
+        <button id="checkBtn">Transmit</button>
+        <p id="feedback"></p>
+        <button class="submit-button" id="submit" onclick="window.location.href='riddle_3_location.html'">
+            Continue
+        </button>
+        <button class="back-button" onclick="window.location.href='riddle_3.html'">
+            Back
+        </button>
+    </div>
+
+    <script>
+        checkBtn.addEventListener("click", () => {
+            const answer = answerInput.value
+                .toLowerCase()
+                .replace(/\s+/g, "");
+            if (
+                answer === "111" ||
+                answer === "111ghz"
+            ) {
+                window.location.href = "../stations/station_4.html";
+            } else {
+                feedback.textContent = "Wrong frequency. Try again.";
+            }
+        });
+    </script>
+
+</body>
+</html>

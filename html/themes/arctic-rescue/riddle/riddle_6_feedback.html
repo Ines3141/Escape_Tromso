@@ -1,0 +1,154 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Next location: Henry Rudi </title>
+    <link rel="stylesheet" href="../../../../CSS/global.css"> <!-- link to style sheet -->
+    <style>
+        .envelope {
+            font-size: 58px;
+            margin: 20px 0;
+            animation: dropEnvelope 1.4s ease-out forwards, wiggle 1.5s 1.4s infinite;
+        }
+
+        @keyframes dropEnvelope {
+            from {
+                transform: translateY(-180px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes wiggle {
+            0%,100% {
+                transform: rotate(0deg);
+            }
+
+            25% {
+                transform: rotate(-4deg);
+            }
+
+            75% {
+                transform: rotate(4deg);
+            }
+        }
+
+        .open-letter-btn {
+            background: #f7d046;
+            color: #082033;
+        }
+
+        .letter {
+            display: none;
+            margin-top: 20px;
+            padding: 22px;
+            background: #f5efe0;
+            color: #2b2418;
+            border-radius: 16px;
+            text-align: left;
+            transform-origin: top;
+        }
+
+            .letter p {
+                color: #2b2418;
+            }
+
+            .letter.open {
+                display: block;
+                animation: unfold 0.8s ease-out forwards;
+            }
+
+        @keyframes unfold {
+            from {
+                transform: scaleY(0);
+                opacity: 0;
+            }
+
+            to {
+                transform: scaleY(1);
+                opacity: 1;
+            }
+        }
+
+        .coordinates {
+            margin: 15px 0;
+            padding: 12px;
+            border-radius: 10px;
+            background: rgba(0,0,0,0.08);
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h2>📡 Incoming Dispatch</h2>
+
+        <div class="envelope">✉️</div>
+
+        <button class="open-letter-btn" onclick="openLetter()">
+            Open Dispatch
+        </button>
+
+        <div id="letter" class="letter">
+
+            <h3>Dispatch from Henry Rudi</h3>
+
+            <p>
+                Explorer,
+            </p>
+
+            <p>
+                Thank you for your help. I checked the ice, the wind, and the weather conditions.
+                The crew now has the safest date to leave the ice.
+            </p>
+
+            <p>
+                This date is the final code for the last riddle.
+            </p>
+
+            <div class="coordinates">
+                <strong>Final Code</strong><br>
+                Departure Date: 14.5
+            </div>
+
+            <p>
+                Now you have everything together: the correct route, the radio frequency,
+                the safety depot coordinates, and the right date to leave.
+            </p>
+
+            <p>
+                Send all information to the lost crew and help them escape the ice.
+            </p>
+
+            <p>
+                Good luck, explorer. Their lives depend on you.
+            </p>
+
+            <p>
+                — Henry Rudi
+            </p>
+
+            <button class="submit-button" id="submit">
+                Send Final Rescue Message
+            </button>
+        </div>
+    </div>
+    <script>
+        const submitButton = document.getElementById("submit");
+
+        submitButton.addEventListener("click", () => {
+            window.location.href = "../final_page.html";
+        });
+
+        function openLetter() {
+            document
+                .getElementById("letter")
+                .classList.add("open");
+        }
+    </script>
+</body>
+</html>

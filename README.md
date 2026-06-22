@@ -1,16 +1,64 @@
-# React + Vite
+To do list:
+- Check rights of pictures (ask Bernd)
+- Format for phone (Jorgen)
+- Database for saving status, picture, team name on the phone (YOU CAN ADD IT HERE)
+- People should have a round frame and when they are talking they should pulsate (FIXED)
+- Buttons for answer choices to answer the explorers (Done for Station 2, 3)
+- When people go back and they have solved the riddle already they can go through all the station without doing the riddle again -> need to save status in DB
+- Survey: To see if people would be interested
+- Information text for each side (+Function of button in setting)
+- Setting button design - overlaps with the title for all stations
+- WHICH PEOPLE TO ASK:
+  - Emmanuel AIDA
+  - ERASMUS
+  - Linda
+  - Hotel
+  - Samskipnaden  
+- Test Round with friends
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Front page:
+  - Needs completly a different nice design
+    
+Station 1 Arctic gate:
+  - Riddle picture has to be nicer
+  - Different text
+  
+Station 2 Nansen Riddle with the Ice shelfs:
+  - Write text and interaction (DONE)
+  - Nicer design:
+    - Continue button in the middle
+    - Lines could make a specific pattern
+    - When continue, one has to choose the pattern without seeing the numbers, important for the last page. 
+    
+Station 3: Wanny:
+  - Improve simulation: a fox running thorugh the snow (easy simulation)
+  - Fix the timing, FOx runs further than visible, so the timing is not correct! Page changes automatically after the simulation. 
+  - One can see the fitting foot prints (DONE)
+  - Buttons on the image to choose the right answer 
 
-Currently, two official plugins are available:
+Station 4: Monument
+  - Only picture of the monument
+  - Loud speaker pulsating
+  - Write text (DONE)
+  - Create riddle to get the next coordinates
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Station 5: Amundsen
+  - Write text and interactions (DONE)
+  - Make riddle circle in the middle with labyrinth outer circle with stations or maybe frequency: task is to position amundsen in the right direction
 
-## React Compiler
+Station 6:
+  - Write text and interaction (DONE)
+  - Create the image of differences 
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Final page:
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Jorgen todo:
+- Fix roald ammundsen riddle.
+- Organize code.
+- Database.
+- Email code mechanic.
+- Insert express.
+- Nav bar.
+- Somethign else Ines said.
+- 
+  

@@ -243,7 +243,30 @@ img {
         width: 100%;
     }
 }
+/*----------------------------------------RIDDLE-----------------------------------------------------*/
+/*.riddle-page {
+    background-image: url("../assets/images/riddle_background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    padding: 50px;
+}*/
 
+.submit-button {
+    background-color: #00b894;
+    color: white;
+}
+
+.hint-button {
+    background-color: #fdcb6e;
+    color: black;
+}
+
+.back-button {
+    background-color: #d63031;
+    color: white;
+}
 .final-choice {
     margin: 25px 0;
     text-align: center;
@@ -389,3 +412,7 @@ img {
         grid-template-columns: 1fr;
     }
 }
+
+
+
+

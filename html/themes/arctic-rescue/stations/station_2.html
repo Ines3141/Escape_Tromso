@@ -6,21 +6,200 @@
     <title>Station 2</title>
     <link rel="stylesheet" href="../../../../CSS/global.css">
     <link rel="stylesheet" href="../../../../CSS/station.css">
+    <style>
+        .call-screen {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at top, #123b63, #020812 75%);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .call-card {
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+            color: white;
+        }
+
+        .caller-photo {
+            width: 170px;
+            height: 170px;
+            margin: 0 auto 24px auto;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid rgba(125, 211, 252, 0.9);
+            box-shadow: 0 0 35px rgba(125, 211, 252, 0.7);
+            animation: ringPulse 1.2s infinite;
+        }
+
+        .caller-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .incoming-text {
+            color: #7dd3fc;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 13px;
+        }
+
+        .call-subtitle {
+            color: #dbeafe;
+        }
+
+        .call-actions {
+            display: flex;
+            justify-content: center;
+            gap: 45px;
+            margin-top: 35px;
+        }
+
+        .accept-call,
+        .decline-call {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            border: none;
+            font-size: 34px;
+            color: white;
+        }
+
+        .accept-call {
+            background: #00b894;
+            animation: shakeCall 0.8s infinite;
+        }
+
+        .decline-call {
+            background: #d63031;
+        }
+
+        .call-help {
+            margin-top: 20px;
+            color: #cfefff;
+            font-size: 14px;
+        }
+
+        @keyframes ringPulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(125,211,252,0.7);
+            }
+
+            70% {
+                transform: scale(1.04);
+                box-shadow: 0 0 0 22px rgba(125,211,252,0);
+            }
+
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(125,211,252,0);
+            }
+        }
+
+        @keyframes shakeCall {
+            0%, 100% {
+                transform: rotate(0deg);
+            }
+
+            25% {
+                transform: rotate(-8deg);
+            }
+
+            75% {
+                transform: rotate(8deg);
+            }
+        }
+        .call-controls {
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+            margin-top: 26px;
+        }
+
+        .call-action {
+            width: 82px;
+            height: 82px;
+            border-radius: 26px;
+            border: 1px solid rgba(255,255,255,0.15);
+            padding: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+        }
+
+        .call-icon {
+            font-size: 28px;
+            line-height: 1;
+        }
+
+        .call-action small {
+            margin-top: 6px;
+            font-size: 11px;
+            opacity: 0.85;
+        }
+
+        .end-call {
+            background: linear-gradient(145deg, #e63946, #9d0208);
+        }
+
+        .info-call {
+            background: linear-gradient(145deg, #245b78, #123b63);
+        }
+
+        .continue-call {
+            background: linear-gradient(145deg, #00c896, #007f5f);
+            box-shadow: 0 0 20px rgba(0, 200, 150, 0.45);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
 </head>
 <body>
-    <div class="box">
+    <div id="callScreen" class="call-screen">
+        <div class="call-card">
+            <div class="caller-photo">
+                <img src="../../../../assets/images/Nansen.jpg" alt="Nansen">
+            </div>
+
+            <p class="incoming-text">Incoming call...</p>
+            <h1>Fridtjof Nansen</h1>
+            <p class="call-subtitle">Arctic Explorer</p>
+
+            <div class="call-actions">
+                <button class="decline-call" onclick="declineCall()">✕</button>
+                <button class="accept-call" onclick="acceptCall()">☎</button>
+            </div>
+
+            <p class="call-help">Tap green to answer</p>
+        </div>
+    </div>
+    <div class="box hidden" id="stationContent">
         <button id="settingsBtn" class="settings-btn">&#9881</button>
         <div id="settingsMenu" class="settings-menu hidden">
             <!-- <button>Replay Audio</button> -->
             <label for="volumeSlider">Volume</label>
             <input id="volumeSlider" type="range" min="0" max="1" step="0.1" value="1">
-            <button>Show Hint</button> <!-- Not necessary with Sation side-->
             <button id="Location_btn">Show location</button>
-            <!-- <button>About Nansen</button> -->
+            <button onclick="openProfile()">About Nansen</button>
             <!--Maybe more ifnormation is nice. For people who are interested -->
         </div>
-        <h1>Station 2</h1>
-        <p> Fridtjof Nansen</p>
+        <h1>Fridtjof Nansen</h1>
+
 
         <div class="person-container">
             <img src="../../../../assets/images/Nansen.jpg" alt="Station 1" class="imag-person">
@@ -84,14 +263,31 @@
                 </div>
             </div>
         </div>
-        <button class="back-button" onclick="window.location.href='station_1.html'">
-            Back
-        </button>
-        <!-- for actual game do </button>style="display:none;">, but now it is just blocking -->
+        <div class="call-controls">
+            <button class="call-action end-call" onclick="window.location.href='station_1.html'">
+                <span class="call-icon">⌕</span>
+                <small>Hang up</small>
+            </button>
 
-        <button class="riddle-button" id="riddle_btn" onclick="window.location.href='../riddle/riddle_2.html'">
+            <button class="call-action info-call" onclick="openProfile()">
+                <span class="call-icon">i</span>
+                <small>Profile</small>
+            </button>
+
+            <button id="nextBtn" class="call-action continue-call hidden" onclick="window.location.href='../riddle/riddle_2.html'">
+                <span class="call-icon">➜</span>
+                <small>Continue</small>
+            </button>
+        </div>
+        <!-- for actual game do </button>style="display:none;">, but now it is just blocking
+
+        <button class="riddle-button" id="riddle_btn" onclick="window.location.href='../riddle/riddle_2.html'" style="display:none;">
             Solve Riddle
         </button>
+        <button class="back-button" onclick="window.location.href='station_1.html'">
+            Back
+        </button> -->
+
 
         <script>
             /* Audio's file */
@@ -117,6 +313,7 @@
             const volumeSlider = document.getElementById("volumeSlider");
 
             const subtitle = document.getElementById("subtitle");
+            const teamName = localStorage.getItem("teamName") || "Explorer";
 
             location_btn.addEventListener("click", () => {
                 window.open('https://www.google.com/maps/search/Troms�+Harbour');
@@ -142,9 +339,9 @@
             audio.addEventListener("ended", () => {
                 person.classList.remove("speaking");
                 btnA.textContent =
-                    "We're Team [XY]. We need to rescue a crew trapped in the Arctic!";
+                    `We're Team ${teamName}. We need to rescue a crew trapped in the Arctic!`;
                 btnB.textContent =
-                    "We're Team [XY]. And who are you?";
+                    `We're Team ${teamName}. And who are you?`;
                 btnC.style.display = "none";
                 choices.style.display = "block";
             });
@@ -161,13 +358,15 @@
             });
             audioA.addEventListener("ended", () => {
                 person.classList.remove("speaking");
+                /*
                 riddle_btn.style.display = "block";
                 profile_btn.style.display = "block";
-                /*
+                
                 NO MORE INTERACTION
                 IF THIS IS THE LAST PART OF THE CONVERSATION
                 SHOW BUTTON
                 TO SOLVE RIDDLE IF ISNT YOU NEED MORE BLOCKS*/
+                document.getElementById("nextBtn").classList.remove("hidden");
             });
 
             btnB.addEventListener("click", () => {
@@ -202,40 +401,52 @@
             });
             audioC.addEventListener("ended", () => {
                 person.classList.remove("speaking");
+                /*
                 riddle_btn.style.display = "block";
-                profile_btn.style.display = "block";
+                profile_btn.style.display = "block"; */
+                document.getElementById("nextBtn").classList.remove("hidden");
             });
 
             const subtitles = [
-                { start: 0, end: 2, text: "Hello there, fellow explorers!" },
-                { start: 2, end: 5, text: "You seem to be in a hurry." },
-                { start: 5, end: 7, text: "Who are you?" }
+                { start: 0, end: 3, text: "Hello there, fellow explorers!" },
+                { start: 3, end: 6, text: "In haste, I see." },
+                { start: 6, end: 9, text: "What brings you to Tromsø?" }
             ];
 
             const subtitlesA = [
-                { start: 0, end: 2, text: "There is no time to waste." },
-                { start: 2, end: 5, text: "The arctic is dangerous, but I can help." },
-                { start: 5, end: 7, text: "I studied ocean currents and sea ice." },
-                { start: 7, end: 10, text: "Take this clue about ocean currents." },
-                { start: 10, end: 13, text: "It may help them escape the ice." }
+                { start: 0, end: 4, text: "A rescue mission in the Arctic, you say?" },
+                { start: 4, end: 8, text: "Then every moment counts." },
+                { start: 8, end: 12, text: "The Arctic can be an unforgiving place." },
+                { start: 12, end: 17, text: "Yet it is also a place of great beauty and many scientific secrets." },
+                { start: 17, end: 23, text: "During my years in the north, I studied the drift of sea ice and the great currents of the Arctic waters." },
+                { start: 23, end: 28, text: "It was work that brought me much pleasure and many adventures." },
+                { start: 28, end: 31, text: "Well, I’m drifting off." },
+                { start: 31, end: 35, text: "Please, take these notes." },
+                { start: 35, end: 39, text: "They may prove useful to the lost crew." },
+                { start: 39, end: 42, text: `Good luck, Team ${teamName}!`}
             ];
 
             const subtitlesB = [
-                { start: 1, end: 3, text: "My name is Fridtjof Nansen." },
-                { start: 3, end: 6, text: "Scientist. Explorer." },
-                { start: 6, end: 10, text: "And sometimes a troublemaker." },
-                { start: 10, end: 14, text: "I crossed Greenland on skis." },
-                { start: 14, end: 17, text: "And tried to reach the North Pole." },
-                { start: 20, end: 23, text: "That part didn't quite work out." },
-                { start: 23, end: 26, text: "But I learned a lot about Arctic ice." }
+                { start: 0, end: 2, text: "A fair question." },
+                { start: 2, end: 6, text: "My name is Fridtjof Nansen." },
+                { start: 6, end: 10, text: "I was a scientist and explorer." },
+                { start: 10, end: 15, text: "Though I believe people have called me lots of things." },
+                { start: 15, end: 22, text: "Together with my colleague Otto Sverdrup, I became the first to cross Greenland on skis." },
+                { start: 22, end: 31, text: "Later, I attempted to reach the North Pole by sailing my ship into sea ice north of Siberia." },
+                { start: 31, end: 38, text: "I hoped the natural drift of the ice would bring me to the North Pole." },
+                { start: 38, end: 42, text: "We came close, but not close enough, unfortunately." },
+                { start: 42, end: 49, text: "Nevertheless, it yielded valuable knowledge of the Arctic Ocean." },
+                { start: 49, end: 54, text: "Something I hope people still remember me for." },
+                { start: 54, end: 58, text: "But that’s enough of my past." },
+                { start: 58, end: 61, text: "What brings you here?" }
             ];
 
             const subtitlesC = [
-                { start: 1, end: 3, text: "Your friends are trapped, you say?" },
-                { start: 3, end: 7, text: "Then every minute counts!" },
-                { start: 7, end: 11, text: "Take this clue about ocean currents." },
-                { start: 11, end: 14, text: "It may help them escape the ice." },
-                { start: 14, end: 17, text: "Good luck, [XY]!" }
+                { start: 0, end: 4, text: "Now that’s something you should have said immediately!" },
+                { start: 4, end: 8, text: "Every minute matters in the Arctic." },
+                { start: 8, end: 14, text: "Fortunately, I know a thing or two about ice, currents, and getting unstuck." },
+                { start: 14, end: 19, text: "Take this clue, it may help your crew escape the ice." },
+                { start: 19, end: 22, text: `Good luck, Team ${teamName}!` }
             ];
 
             function updateSubtitle(audioFile, subtitleList) {
@@ -280,6 +491,26 @@
 
             function closeProfile() {
                 document.getElementById("profileOverlay").classList.add("hidden");
+            }
+            const callScreen = document.getElementById("callScreen");
+            const stationContent = document.getElementById("stationContent");
+
+            function acceptCall() {
+                callScreen.classList.add("hidden");
+                stationContent.classList.remove("hidden");
+
+                audio.currentTime = 0;
+                audio.play();
+
+                person.classList.add("speaking");
+            }
+
+            function declineCall() {
+                document.querySelector(".incoming-text").textContent = "Call missed...";
+
+                setTimeout(() => {
+                    document.querySelector(".incoming-text").textContent = "Incoming call...";
+                }, 1200);
             }
 
         </script>

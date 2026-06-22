@@ -110,64 +110,64 @@
     </div>
 
     <script>
-const settingsBtn = document.getElementById("settingsBtn");
-const settingsMenu = document.getElementById("settingsMenu");
-const locationBtn = document.getElementById("locationBtn");
-const teamPhoto = document.getElementById("teamPhoto");
-const preview = document.getElementById("preview");
-const message = document.getElementById("message");
+        const settingsBtn = document.getElementById("settingsBtn");
+        const settingsMenu = document.getElementById("settingsMenu");
+        const locationBtn = document.getElementById("locationBtn");
+        const teamPhoto = document.getElementById("teamPhoto");
+        const preview = document.getElementById("preview");
+        const message = document.getElementById("message");
 
-settingsBtn.addEventListener("click", (event) => {
-    event.stopPropagation();
-    settingsMenu.classList.toggle("hidden");
-});
+        settingsBtn.addEventListener("click", (event) => {
+            event.stopPropagation();
+            settingsMenu.classList.toggle("hidden");
+        });
 
-settingsMenu.addEventListener("click", (event) => {
-    event.stopPropagation();
-});
+        settingsMenu.addEventListener("click", (event) => {
+            event.stopPropagation();
+        });
 
-document.addEventListener("click", () => {
-    settingsMenu.classList.add("hidden");
-});
+        document.addEventListener("click", () => {
+            settingsMenu.classList.add("hidden");
+        });
 
-locationBtn.addEventListener("click", () => {
-    window.open("https://www.google.com/maps/search/Gateway+to+the+Arctic+Tromsø");
-});
+        locationBtn.addEventListener("click", () => {
+            window.open("https://www.google.com/maps/search/Gateway+to+the+Arctic+Tromsø");
+        });
 
-teamPhoto.addEventListener("change", () => {
-    const file = teamPhoto.files[0];
+        teamPhoto.addEventListener("change", () => {
+            const file = teamPhoto.files[0];
 
-    if (!file) return;
+            if (!file) return;
 
-    const reader = new FileReader();
+            const reader = new FileReader();
 
-    reader.onload = () => {
-        preview.src = reader.result;
-        preview.style.display = "block";
-        localStorage.setItem("teamPhoto", reader.result);
-    };
+            reader.onload = () => {
+                preview.src = reader.result;
+                preview.style.display = "block";
+                localStorage.setItem("teamPhoto", reader.result);
+            };
 
-    reader.readAsDataURL(file);
-});
+            reader.readAsDataURL(file);
+        });
 
-function startMission() {
-    const name = document.getElementById("teamName").value.trim();
+        function startMission() {
+            const name = document.getElementById("teamName").value.trim();
 
-    if (name === "") {
-        message.textContent = "Please enter your team name.";
-        return;
-    }
-    /* Commented out for testing reasons, because it does not allow for continuing without team photo. 
-    if (!teamPhoto.files[0]) {
-        message.textContent = "Please take or choose a team photo.";
-        return;
-    }*/
+            if (name === "") {
+                message.textContent = "Please enter your team name.";
+                return;
+            }
+            /* Commented out for testing reasons, because it does not allow for continuing without team photo. 
+            if (!teamPhoto.files[0]) {
+                message.textContent = "Please take or choose a team photo.";
+                return;
+            }*/
 
-    localStorage.setItem("teamName", name);
-    localStorage.setItem("missionStart", Date.now());
+            localStorage.setItem("teamName", name);
+            localStorage.setItem("missionStart", Date.now());
 
-    window.location.href = "station_1.html";
-}
+            window.location.href = "station_1.html";
+        }
     </script>
 </body>
 </html>

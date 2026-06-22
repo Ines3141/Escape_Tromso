@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title> Next location Wanny Woldstad </title>
+    <link rel="stylesheet" href="../../../../CSS/global.css"> <!-- link to style sheet -->
+    <style>
+        /* Specific style for solution image */
+        .solution-container { 
+            width:120px; /* Fixed values */
+            height: 120px;
+            overflow: hidden; /* Cuts the image out */
+            margin-left: auto;
+            margin-right: auto; /* Center it*/
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h2>✓ MISSION COMPLETE</h2>
+
+        <p>You have decoded the explorer's message.</p>
+        <p>You know which route the lost crew has to take through the ice.</p>
+        <p> Remember it!</p>
+        <div class="solution-container">
+            <img src="../../../../assets/images/Answer_1_final.jpg" alt="Station 1" class="imag-station">
+        </div>
+        <p>The rescue team now knows where to continue the search.</p>
+
+        <h3>Your next destination:</h3>
+        <p class="location">📍 Wanny Woldstad (Trafikskole)</p>
+        <p><strong>69.6492, 18.9553</strong></p>
+        <p>Proceed to the location and open the next clue.</p>
+
+        <button class="location" id="location">
+            Open in Google Maps
+        </button>
+        <button class="submit-button" id="submit">
+            Continue
+        </button>
+        <button class="back-button" onclick="window.location.href='riddle_2.html'">
+            Back
+        </button>
+    </div>
+    <script>
+        const submitButton = document.getElementById("submit");
+        const mapButton = document.getElementById("location");
+
+        submitButton.addEventListener("click", () => {
+            window.location.href = "../stations/station_3.html";
+        });
+
+        mapButton.addEventListener("click", () => {
+            window.location.href = "https://www.google.com/maps/search/wanny+woldstad";
+        });
+    </script>
+</body>
+</html>

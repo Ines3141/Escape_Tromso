@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Arctic Escape</title>
+    <link rel="stylesheet" href=..\CSS\style_index.css />
+</head>
+<body>
+
+    <header class="hero">
+        <div class="hero-text">
+
+            <span class="eyebrow">ARCTIC DISCOVERY</span>
+
+            <h1>Discover Tromsø Through Adventure</h1>
+
+            <p class="lead">
+                Explore and learn about the Arctic capital through riddles, clues and immersive stories.
+               </p>
+
+            <button class="hero-btn" onclick="showTourPage()">
+                Start Exploring
+            </button>
+
+        </div>
+    </header>
+
+    <main id="homePage">
+        <section class="themes">
+            <h2>Choose Your Adventure</h2>
+
+            <div class="card" onclick="showTourPage()">
+                <h3>Arctic Explorers</h3>
+                <p>Follow the path of brave explorers in Tromsø’s and help a lost crew in the ice.</p>
+                <span>Difficulty: ★★★☆☆</span>
+            </div>
+        </section>
+    </main>
+
+    <main id="tourPage" class="hidden">
+        <section class="tour-detail">
+            <button class="back" onclick="showHomePage()">← Back</button>
+
+            <h2>Arctic Explorers</h2>
+            <p class="subtitle">A historical outdoor escape room through Tromsø.</p>
+
+            <div class="info-grid">
+                <div><strong>Duration:</strong><br>90–120 minutes</div>
+                <div><strong>Distance:</strong><br>2.5 km walking</div>
+                <div><strong>Difficulty:</strong><br>★★★☆☆</div>
+                <div><strong>Group size:</strong><br>2–6 players</div>
+            </div>
+
+            <h3>Description</h3>
+            <p>
+                In Arctic Explorers, players follow clues across Tromsø while learning about
+                Arctic expeditions, local history, and the city’s connection to exploration.
+                The game combines sightseeing, teamwork, and puzzle-solving.
+            </p>
+
+            <h3>What you need</h3>
+            <ul>
+                <li>A fully charged phone</li>
+                <li>Comfortable shoes</li>
+                <li>Weather-appropriate clothing</li>
+                <li>Your game access code</li>
+            </ul>
+
+            <button class="buy-btn" onclick="showCodePage()">Buy / Unlock Game</button>
+        </section>
+    </main>
+
+    <main id="codePage" class="hidden">
+        <section class="code-box">
+            <button class="back" onclick="showHomePage()">← Back</button>
+
+            <h2>Enter Your Access Code</h2>
+            <p>Enter the code you received after purchase to start the game.</p>
+
+            <input type="text" id="codeInput" placeholder="Enter code here" />
+            <button onclick="checkCode()">Start Game</button>
+
+            <p id="message"></p>
+        </section>
+    </main>
+
+    <script>
+        function showHomePage() {
+            document.getElementById("homePage").classList.remove("hidden");
+            document.getElementById("tourPage").classList.add("hidden");
+            document.getElementById("codePage").classList.add("hidden");
+        }
+
+        function showTourPage() {
+            document.getElementById("homePage").classList.add("hidden");
+            document.getElementById("tourPage").classList.remove("hidden");
+            document.getElementById("codePage").classList.add("hidden");
+        }
+
+        function showCodePage() {
+            document.getElementById("homePage").classList.add("hidden");
+            document.getElementById("tourPage").classList.add("hidden");
+            document.getElementById("codePage").classList.remove("hidden");
+        }
+
+        function checkCode() {
+            const code = document.getElementById("codeInput").value;
+            const message = document.getElementById("message");
+
+            if (code === "TROMSO") {
+                window.location.href = "themes/arctic-rescue/stations/intro.html";
+            } else {
+                message.textContent = "Wrong code. Try again.";
+                message.style.color = "red";
+            }
+        }</script>
+</body>
+</html>

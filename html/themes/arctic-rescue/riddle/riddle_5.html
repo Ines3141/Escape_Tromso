@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title> Riddle Roald Amundsen</title>
+    <link rel="stylesheet" href="../../../../CSS/global.css"> <!-- link to style sheet -->
+    <link rel="stylesheet" href="../../../../CSS/arctic-theme.css">
+</head>
+<body>
+    <div class="box">
+        <h1>Amundsen Compass Puzzle</h1>
+        <p>Rotate the inner circle until the explorer looks in the right direction. It will help you to find the connections.</p>
+        <div class="compass-wrapper">
+            <span class="angle-label angle-0">
+                0° <br> Northpole </br>
+            </span>
+            <span class="angle-label angle-45">45° <br> Gjøa </br> </span>
+            <span class="angle-label angle-90">90° <br> N-E passage </br></span>
+            <span class="angle-label angle-135">135°<br> Maud </br></span>
+            <span class="angle-label angle-180">180° <br> Southpole </br></span>
+            <span class="angle-label angle-225">225° <br> Norge </br></span>
+            <span class="angle-label angle-270">270° <br> N-W passage</br></span>
+            <span class="angle-label angle-315">315° <br> FRAM </br></span>
+            <div class="compass-container">
+                <img id="arcticMap" src="../../../../assets/images/Labyrinth_Amundsen.jpg">
+            </div>
+        </div>
+        <div class="compass-buttons">
+            <button type="button" onclick="rotateStep(-45)">⟲</button>
+            <button type="button" onclick="rotateStep(45)">⟳</button>
+        </div>
+
+        <audio id="clickSound" src="../../../../assets/audio/Click.m4a"></audio>
+
+        <h2>Match the ships</h2>
+
+        <div class="match-game">
+
+            <div class="ship-card">
+                <div class="ship-name">&#9973; Fram</div>
+                <select id="fram">
+                    <option value="">Choose...</option>
+                    <option value="northwest">North-West Passage</option>
+                    <option value="northeast">North-East Passage</option>
+                    <option value="southpole">South Pole</option>
+                    <option value="northpole">North Pole</option>
+                </select>
+            </div>
+
+            <div class="ship-card">
+                <div class="ship-name">&#9973; Gjøa</div>
+                <select id="gjoa">
+                    <option value="">Choose...</option>
+                    <option value="northwest">North-West Passage</option>
+                    <option value="northeast">North-East Passage</option>
+                    <option value="southpole">South Pole</option>
+                    <option value="northpole">North Pole</option>
+                </select>
+            </div>
+
+            <div class="ship-card">
+                <div class="ship-name">&#9973; Maud</div>
+                <select id="maud">
+                    <option value="">Choose...</option>
+                    <option value="northwest">North-West Passage</option>
+                    <option value="northeast">North-East Passage</option>
+                    <option value="southpole">South Pole</option>
+                    <option value="northpole">North Pole</option>
+                </select>
+            </div>
+
+            <div class="ship-card">
+                <div class="ship-name">&#9992; Norge</div>
+                <select id="norge">
+                    <option value="">Choose...</option>
+                    <option value="northwest">North-West Passage</option>
+                    <option value="northeast">North-East Passage</option>
+                    <option value="southpole">South Pole</option>
+                    <option value="northpole">North Pole</option>
+                </select>
+            </div>
+
+        </div>
+        <p id="message"></p>
+        <button class="submit-button" id="submit" onclick="checkPuzzle()">
+            Submit
+        </button>
+        <button class="submit-button" id="submit_just_for_now" onclick="window.location.href='riddle_5_location.html'">
+        Continue
+        </button> 
+        <button class="back-button" onclick="window.location.href='riddle_4.html'">
+            Back
+        </button>
+        <script>
+            let rotation = 225;
+            const targetRotation = 225;
+
+            const arcticMap = document.getElementById("arcticMap");
+            const clickSound = document.getElementById("clickSound");
+            const message = document.getElementById("message");
+
+            arcticMap.style.transform = `rotate(${rotation}deg)`;
+            function rotateStep(degrees) {
+                rotation += degrees;
+
+                arcticMap.style.transform = `rotate(${rotation}deg)`;
+
+                clickSound.currentTime = 0;
+                clickSound.play();
+            }
+
+            function checkPuzzle() {
+                const fram = document.getElementById("fram").value;
+                const gjoa = document.getElementById("gjoa").value;
+                const maud = document.getElementById("maud").value;
+                const norge = document.getElementById("norge").value;
+
+                const shipsCorrect =
+                    fram === "southpole" &&
+                    gjoa === "northwest" &&
+                    maud === "northeast" &&
+                    norge === "northpole";
+
+                if (shipsCorrect) {
+                    message.textContent = "Correct! Amundsen would be proud.";
+                    message.style.color = "lightgreen";
+
+                    setTimeout(() => {
+                        window.location.href = "../stations/station_6.html";
+                    }, 1200);
+                } else {
+                    message.textContent = "Not quite. Check the direction and the ships.";
+                    message.style.color = "orange";
+                }
+            }
+        </script>
+
+    </div>
+
+</body>
+</html>

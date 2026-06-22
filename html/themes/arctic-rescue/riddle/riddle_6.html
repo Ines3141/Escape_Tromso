@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title> Riddle Henry Rudi </title>
+    <link rel="stylesheet" href="../../../../CSS/global.css">
+    <link rel="stylesheet" href="../../../../CSS/arctic-theme.css">
+</head>
+<body>
+    <div class="box">
+        <h1>Henry Rudi's Lock</h1>
+
+        <p>
+            Look closely at the house.
+            The Arctic hunter left a three-digit code.
+        </p>
+
+        <div class="lock-box">
+            <div class="lock-top"></div>
+
+            <div class="lock-body">
+                <input class="lock-digit" id="digit1" maxlength="1" type="text" inputmode="numeric">
+                <input class="lock-digit" id="digit2" maxlength="1" type="text" inputmode="numeric">
+                <input class="lock-digit" id="digit3" maxlength="1" type="text" inputmode="numeric">
+            </div>
+        </div>
+
+        <p class="hint">
+            Doors → Top floor windows →  Lanterns
+        </p>
+
+        <button class="submit-button" onclick="checkLock()">Unlock</button>
+        <button class="back-button" onclick="window.location.href='../stations/station_6.html'">
+            Back
+        </button>
+
+        <p id="feedback"></p>
+    </div>
+    <script>
+        function checkLock() {
+            const d1 = document.getElementById("digit1").value;
+            const d2 = document.getElementById("digit2").value;
+            const d3 = document.getElementById("digit3").value;
+
+            const code = d1 + d2 + d3;
+            const feedback = document.getElementById("feedback");
+
+            if (code === "145") {
+                feedback.textContent = "Click! The lock opens.";
+                feedback.style.color = "lightgreen";
+
+                setTimeout(() => {
+                    window.location.href = "riddle_6_feedback.html";
+                }, 1200);
+            } else {
+                feedback.textContent = "Still locked. Count carefully.";
+                feedback.style.color = "orange";
+            }
+        }
+        document.querySelectorAll(".lock-digit").forEach((input, index, inputs) => {
+            input.addEventListener("input", () => {
+                if (input.value.length === 1 && inputs[index + 1]) {
+                    inputs[index + 1].focus();
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -284,6 +284,7 @@
                 card.innerHTML = `
                     <button id="closeInbox"
                     style="
+                        display:flex;
                         float:right;
                         border:none;
                         border-radius:50%;
@@ -293,6 +294,8 @@
                         color:white;
                         font-size:22px;
                         cursor:pointer;
+                        justify-content: center;
+                        align-items: center;
                     ">
                         ×
                     </button>
@@ -367,6 +370,7 @@
                         </button>
 
                         <button id="closeInbox" style="
+                            display:flex;
                             border:none;
                             border-radius:50%;
                             width:40px;
@@ -375,6 +379,8 @@
                             color:white;
                             font-size:20px;
                             cursor:pointer;
+                            justify-content: center;
+                            align-items: center;
                         ">
                             ✕
                         </button>

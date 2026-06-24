@@ -26,7 +26,7 @@
                     </p>
 
                     <div class="note">
-                        _ _ m _ and _ _ m _
+                        _ _ m _ and _ _ 9 m _
                     </div>
 
                     <p>
@@ -106,6 +106,8 @@
                     color: white;
                     font-size: 26px;
                     cursor: pointer;
+                    justify-content: center;
+                    align-items: center;
                 }
 
                 .envelope {
@@ -221,7 +223,7 @@
 
         this.shadowRoot.getElementById("openBtn").addEventListener("click", () => {
             this.openLetter(letterId, letter);
-            startMorseLamps(this.shadowRoot);
+            setupMorseLamps(this.shadowRoot);
         });
 
         this.shadowRoot.getElementById("continueBtn").addEventListener("click", () => {

@@ -7,34 +7,227 @@
     <title>Right location? </title>
     <link rel="stylesheet" href="../../../../CSS/global.css"> <!-- link to style sheet -->
     <script src="../../../../Stations/JAVA/navigation.js"></script>
+    <style>
+        body {
+            min-height: 100vh;
+            margin: 0;
+            padding: 24px 16px 120px;
+            background: radial-gradient(circle at top, #173f63, #050b12 72%);
+            color: white;
+            font-family: Arial, sans-serif;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+            body.page-success {
+                opacity: 0;
+                transform: scale(1.03);
+            }
+
+        .destination-box {
+            max-width: 430px;
+            margin: 0 auto;
+        }
+
+        .radio-panel {
+            padding: 26px 18px;
+            border-radius: 24px;
+            background: linear-gradient(180deg, rgba(14, 43, 68, 0.96), rgba(4, 13, 24, 0.96));
+            border: 1px solid rgba(255,255,255,0.15);
+            box-shadow: 0 18px 50px rgba(0,0,0,0.45);
+            text-align: center;
+        }
+
+        .status-light {
+            width: 14px;
+            height: 14px;
+            margin: 0 auto 14px;
+            border-radius: 50%;
+            background: #ffe66d;
+            box-shadow: 0 0 14px #ffe66d;
+        }
+
+        .radio-panel h1 {
+            margin: 0 0 18px;
+            font-size: 30px;
+        }
+
+        .question {
+            font-size: 18px;
+            font-weight: bold;
+            line-height: 1.35;
+        }
+
+        .instruction {
+            margin-top: 8px;
+            opacity: 0.85;
+            line-height: 1.4;
+        }
+
+        .contact-list {
+            margin-top: 24px;
+            display: grid;
+            gap: 12px;
+        }
+
+        .contact-card {
+            width: 100%;
+            padding: 16px;
+            border: 1px solid rgba(255,255,255,0.16);
+            border-radius: 16px;
+            background: rgba(255,255,255,0.08);
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-align: left;
+            transition: transform 0.18s ease, background 0.18s ease;
+        }
+
+            .contact-card:hover {
+                transform: translateY(-2px);
+                background: rgba(255,255,255,0.14);
+            }
+
+            .contact-card:active {
+                transform: scale(0.97);
+            }
+
+        .contact-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.28);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+        }
+
+        .danger-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 999999;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background: radial-gradient(circle, rgba(130,0,0,0.9), rgba(0,0,0,0.98) 70%);
+            color: #ff2b2b;
+            text-align: center;
+        }
+
+            .danger-overlay.show {
+                display: flex;
+                animation: dangerFlash 0.25s infinite alternate;
+            }
+
+        .danger-cross {
+            font-size: 180px;
+            font-weight: 900;
+            line-height: 1;
+            text-shadow: 0 0 20px red, 0 0 50px red, 0 0 90px red;
+            animation: dangerPop 0.4s ease-out forwards;
+        }
+
+        .danger-overlay p {
+            margin-top: 20px;
+            font-size: 26px;
+            font-weight: 900;
+            letter-spacing: 3px;
+        }
+
+        @keyframes dangerPop {
+            from {
+                transform: scale(0.2) rotate(-12deg);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        @keyframes dangerFlash {
+            from {
+                filter: brightness(0.85);
+            }
+
+            to {
+                filter: brightness(1.25);
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <div class="box">
-        <p>Which polar explorer do you see?</p>
-        <input id="answer" type="text" placeholder="Answer: Last name">
-        <submit-button onclick="checkAnswer()">Submit</submit-button>
-        <p id="message"></p>
-        <back-button onclick="window.location.href='riddle_1.html'">
-            Back
-        </back-button>
+    <div class="box destination-box">
+        <div class="radio-panel">
+            <div class="status-light"></div>
+
+            <h1>Destination Check</h1>
+
+            <p class="question">
+                Are you sure that you reached the right destination?
+            </p>
+
+            <p class="instruction">
+                Please call the closest polar explorer you can see.
+            </p>
+
+            <div class="contact-list">
+                <button class="contact-card" onclick="callExplorer('nansen')">
+                    <span class="contact-icon">📡</span>
+                    <span>Fridtjof Nansen</span>
+                </button>
+
+                <button class="contact-card" onclick="callExplorer('amundsen')">
+                    <span class="contact-icon">📡</span>
+                    <span>Roald Amundsen</span>
+                </button>
+
+                <button class="contact-card" onclick="callExplorer('johansen')">
+                    <span class="contact-icon">📡</span>
+                    <span>Hjalmar Johansen</span>
+                </button>
+
+                <button class="contact-card" onclick="callExplorer('nobile')">
+                    <span class="contact-icon">📡</span>
+                    <span>Umberto Nobile</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="dangerOverlay" class="danger-overlay">
+        <div class="danger-cross">✕</div>
+        <p>WRONG DESTINATION</p>
     </div>
 
     <game-navigation previous="riddle_1.html" next="../stations/station_2.html">
     </game-navigation>
 
     <script>
-        function checkAnswer() {
-            let answer = document.getElementById("answer").value.trim().toLowerCase();
+        function callExplorer(explorer) {
+            if (explorer === "nansen") {
+                document.body.classList.add("page-success");
 
-            if (answer === "nansen") {
-                window.location.href = "../stations/station_2.html";
+                setTimeout(() => {
+                    window.location.href = "../stations/station_2.html";
+                }, 500);
             } else {
-                window.location.href = "riddle_1.html";
+                const overlay = document.getElementById("dangerOverlay");
+                overlay.classList.add("show");
+
+                setTimeout(() => {
+                    window.location.href = "riddle_1.html";
+                }, 1400);
             }
         }
     </script>
-
 </body>
 
 </html>

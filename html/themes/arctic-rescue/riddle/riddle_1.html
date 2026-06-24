@@ -15,32 +15,164 @@
             min-height: 100%;
             overflow-y: auto;
         }
-
         body {
             padding-bottom: 120px;
+        }
+        .map-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .map-expand-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 42px;
+            height: 42px;
+            border: none;
+            border-radius: 8px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .map-expand-btn:hover {
+            background: rgba(0,0,0,0.9);
+        }
+
+        .map-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.95);
+            z-index: 999999;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .map-overlay.open {
+            display: flex;
+        }
+
+        .fullscreen-map {
+            max-width: 95vw;
+            max-height: 95vh;
+            object-fit: contain;
+        }
+
+        .close-map-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border: none;
+            border-radius: 50%;
+            background: white;
+            color: black;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .location-confirm-btn {
+            margin-top: 22px;
+            width: 100%;
+            max-width: 280px;
+            padding: 15px 18px;
+            border: none;
+            border-radius: 999px;
+            background: linear-gradient(135deg, #00c2a8, #00a37a);
+            color: white;
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 10px 24px rgba(0,194,168,0.35);
+            transition: transform 0.18s ease, box-shadow 0.18s ease;
+        }
+
+        .location-confirm-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(0,194,168,0.45);
+        }
+
+        .location-confirm-btn:active {
+            transform: scale(0.97);
         }
     </style>
 </head>
 
 <body>
     <div class="box">
-        <h1>Riddle 1</h1>
-        <h2> Go 64m south and 129m west.</h2>
-        <img src="../../../../assets/images/station_1_test.jpg" alt="Treasure Map" class="riddle-map">
-        <button class="submit-button" onclick=window.location.href='riddle_1_part2.html'>
-            Click here when you found the correct location.
+        <h1>Gateway to the arctic</h1>
+        <h2>You need to find out where to go. You only got this hand drafted map and this strange message.</h2>
+        <h2>You can find the letter in the Inbox, to study it further. Can you figure out where to go?</h2>
+        <div class="map-container">
+            <img src="../../../../assets/images/station_1_test.jpg"
+                 alt="Treasure Map"
+                 class="riddle-map"
+                 id="mapImage">
+
+            <button id="fullscreenBtn" class="map-expand-btn">
+                ⛶
+            </button>
+        </div>
+        <button class="location-confirm-btn" onclick="window.location.href='riddle_1_part2.html'">
+            <span>📍</span>
+            I FOUND THE LOCATION
         </button>
 
         <incoming-dispatch letter-id="station-1-signal" title="Incoming Dispatch" from="Dispatch Control"
-            next="../stations/station_2.html" lamp="true">
+                           next="../stations/station_2.html" lamp="true">
         </incoming-dispatch>
         <p id="message"></p>
+        <!--
         <button class="back-button" onclick="window.location.href='../stations/station_1.html'">
             Back
         </button>
+            -->
+    </div>
+    <div id="mapOverlay" class="map-overlay">
+        <button id="closeMapBtn" class="close-map-btn">
+            ✕ Close
+        </button>
+
+        <img src="../../../../assets/images/station_1_test.jpg"
+             alt="Treasure Map"
+             class="fullscreen-map">
     </div>
     <game-navigation previous="..\stations\station_1.html" next="riddle_1_part2.html">
     </game-navigation>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+
+            const overlay = document.getElementById("mapOverlay");
+            const openBtn = document.getElementById("fullscreenBtn");
+            const closeBtn = document.getElementById("closeMapBtn");
+
+            openBtn.addEventListener("click", () => {
+                overlay.classList.add("open");
+            });
+
+            closeBtn.addEventListener("click", () => {
+                overlay.classList.remove("open");
+            });
+
+        });
+        overlay.addEventListener("click", (e) => {
+            if (e.target === overlay) {
+                overlay.classList.remove("open");
+            }
+        });
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") {
+                overlay.classList.remove("open");
+            }
+        });
+    </script>
 </body>
 
 </html>

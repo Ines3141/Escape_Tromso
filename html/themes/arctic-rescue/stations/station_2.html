@@ -1,176 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <title>Station 2</title>
     <link rel="stylesheet" href="../../../../CSS/global.css">
     <link rel="stylesheet" href="../../../../CSS/station.css">
+    <link rel="stylesheet" href="../../../../CSS/nansen.css">
+
     <script src="../../../../Stations/JAVA/navigation.js"></script>
-    <style>
-        .call-screen {
-            position: fixed;
-            inset: 0;
-            background: radial-gradient(circle at top, #123b63, #020812 75%);
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .call-card {
-            width: 100%;
-            max-width: 420px;
-            text-align: center;
-            color: white;
-        }
-
-        .caller-photo {
-            width: 170px;
-            height: 170px;
-            margin: 0 auto 24px auto;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 4px solid rgba(125, 211, 252, 0.9);
-            box-shadow: 0 0 35px rgba(125, 211, 252, 0.7);
-            animation: ringPulse 1.2s infinite;
-        }
-
-            .caller-photo img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
-
-        .incoming-text {
-            color: #7dd3fc;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            font-size: 13px;
-        }
-
-        .call-subtitle {
-            color: #dbeafe;
-        }
-
-        .call-actions {
-            display: flex;
-            justify-content: center;
-            gap: 45px;
-            margin-top: 35px;
-        }
-
-        .accept-call,
-        .decline-call {
-            width: 60px;
-            height: 60px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 50%;
-            border: none;
-            font-size: 34px;
-            color: white;
-        }
-
-        .accept-call {
-            background: #00b894;
-            animation: shakeCall 0.8s infinite;
-        }
-
-        .decline-call {
-            background: #d63031;
-        }
-
-        .call-help {
-            margin-top: 20px;
-            color: #cfefff;
-            font-size: 14px;
-        }
-
-        @keyframes ringPulse {
-            0% {
-                transform: scale(1);
-                box-shadow: 0 0 0 0 rgba(125,211,252,0.7);
-            }
-
-            70% {
-                transform: scale(1.04);
-                box-shadow: 0 0 0 22px rgba(125,211,252,0);
-            }
-
-            100% {
-                transform: scale(1);
-                box-shadow: 0 0 0 0 rgba(125,211,252,0);
-            }
-        }
-
-        @keyframes shakeCall {
-            0%, 100% {
-                transform: rotate(0deg);
-            }
-
-            25% {
-                transform: rotate(-8deg);
-            }
-
-            75% {
-                transform: rotate(8deg);
-            }
-        }
-
-        .call-controls {
-            display: flex;
-            justify-content: center;
-            gap: 18px;
-            margin-top: 26px;
-        }
-
-        .call-action {
-            width: 82px;
-            height: 82px;
-            border-radius: 26px;
-            border: 1px solid rgba(255,255,255,0.15);
-            padding: 8px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            cursor: pointer;
-            backdrop-filter: blur(10px);
-        }
-
-        .call-icon {
-            font-size: 28px;
-            line-height: 1;
-        }
-
-        .call-action small {
-            margin-top: 6px;
-            font-size: 11px;
-            opacity: 0.85;
-        }
-
-        .end-call {
-            background: linear-gradient(145deg, #e63946, #9d0208);
-        }
-
-        .info-call {
-            background: linear-gradient(145deg, #245b78, #123b63);
-        }
-
-        .continue-call {
-            background: linear-gradient(145deg, #00c896, #007f5f);
-            box-shadow: 0 0 20px rgba(0, 200, 150, 0.45);
-        }
-
-        .hidden {
-            display: none !important;
-        }
-    </style>
 </head>
+
 <body>
     <div id="callScreen" class="call-screen">
         <div class="call-card">
@@ -254,14 +95,17 @@
                     He studied marine zoology and neuroanatomy.
                     He crossed Greenland on skis 1888, had the
                     Fram Expedition (1893–1896), which are supposed to go the North pole.
-                    He purposely froze his specially designed ship, the Fram, into the Arctic ice pack, allowing the natural drift of the ice to carry
-                    them toward the North Pole. Though he didn't reach the exact pole, he set a new "furthest north" record.
+                    He purposely froze his specially designed ship, the Fram, into the Arctic ice pack, allowing the
+                    natural drift of the ice to carry
+                    them toward the North Pole. Though he didn't reach the exact pole, he set a new "furthest north"
+                    record.
                     He studied Arctic ice and ocean currents. Nansen helped over 400.000 refugees after World War I and
                     invented the Nansen passport for stateless refugees.
                 </p>
 
                 <div class="fun-fact">
-                    <strong>Fun fact:</strong> Nansen tried to reach the North Pole by letting his ship drift with the ice.
+                    <strong>Fun fact:</strong> Nansen tried to reach the North Pole by letting his ship drift with the
+                    ice.
                 </div>
             </div>
         </div>
@@ -276,7 +120,8 @@
                 <small>Profile</small>
             </button>
 
-            <button id="nextBtn" class="call-action continue-call hidden" onclick="window.location.href='../riddle/riddle_2.html'">
+            <button id="nextBtn" class="call-action continue-call hidden"
+                onclick="window.location.href='../riddle/riddle_2.html'">
                 <span class="call-icon">➜</span>
                 <small>Continue</small>
             </button>
@@ -289,10 +134,6 @@
     <button class="back-button" onclick="window.location.href='station_1.html'">
         Back
     </button> -->
-        <game-navigation 
-              previous="station_1.html"
-              next="../riddle/riddle_2.html">
-        </game-navigation>
 
 
         <script>
@@ -522,6 +363,8 @@
         </script>
 
     </div>
-
+    <game-navigation previous="../riddle/riddle_1_part2.html" next="../riddle/riddle_2.html">
+    </game-navigation>
 </body>
+
 </html>

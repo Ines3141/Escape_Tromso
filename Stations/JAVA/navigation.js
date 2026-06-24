@@ -44,6 +44,9 @@
 
                 .menu {
                     display: none;
+                    display: none;
+                    position: relative;
+                    z-index: 100001;
                     margin-top: 10px;
                     background: white;
                     border-radius: 12px;
@@ -79,22 +82,31 @@
                 }
 
                 .bottom-nav {
-                    position: absolute;
-                    bottom: 18px;
-                    left: 50%;
-                    transform: translateX(-50%);
+                    position: fixed;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    z-index: 10000;
+
+                    height: 72px;
+
                     display: flex;
+                    justify-content: center;
+                    align-items: center;
                     gap: 16px;
+
+                    background: #111;
+                    border-top: 1px solid #333;
                 }
 
                 .move-btn {
-                    width: 56px;
-                    height: 56px;
+                    width: 48px;
+                    height: 48px;
                     border-radius: 50%;
                     border: none;
-                    background: #111;
+                    background: #222;
                     color: white;
-                    font-size: 26px;
+                    font-size: 24px;
                     cursor: pointer;
                 }
 
@@ -390,7 +402,7 @@
             document.body.appendChild(overlay);
 
             showInboxList();
-        }  
+        }
     }
 }
 

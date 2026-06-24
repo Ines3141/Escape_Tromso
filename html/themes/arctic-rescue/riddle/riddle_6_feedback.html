@@ -1,10 +1,12 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Next location: Henry Rudi </title>
     <link rel="stylesheet" href="../../../../CSS/global.css"> <!-- link to style sheet -->
+    <script src="../../../../Stations/JAVA/navigation.js"></script>
     <style>
         .envelope {
             font-size: 58px;
@@ -25,7 +27,9 @@
         }
 
         @keyframes wiggle {
-            0%,100% {
+
+            0%,
+            100% {
                 transform: rotate(0deg);
             }
 
@@ -54,14 +58,14 @@
             transform-origin: top;
         }
 
-            .letter p {
-                color: #2b2418;
-            }
+        .letter p {
+            color: #2b2418;
+        }
 
-            .letter.open {
-                display: block;
-                animation: unfold 0.8s ease-out forwards;
-            }
+        .letter.open {
+            display: block;
+            animation: unfold 0.8s ease-out forwards;
+        }
 
         @keyframes unfold {
             from {
@@ -79,10 +83,11 @@
             margin: 15px 0;
             padding: 12px;
             border-radius: 10px;
-            background: rgba(0,0,0,0.08);
+            background: rgba(0, 0, 0, 0.08);
         }
     </style>
 </head>
+
 <body>
     <div class="box">
         <h2>📡 Incoming Dispatch</h2>
@@ -150,5 +155,8 @@
                 .classList.add("open");
         }
     </script>
+    <game-navigation previous="riddle_6.html" next="../final_page.html">
+    </game-navigation>
 </body>
+
 </html>

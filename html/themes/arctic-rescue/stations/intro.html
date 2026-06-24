@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
@@ -16,7 +17,7 @@
             display: inline-block;
             padding: 8px 14px;
             border-radius: 999px;
-            background: rgba(0,184,148,0.18);
+            background: rgba(0, 184, 148, 0.18);
             border: 1px solid #00b894;
             color: #7fffe0;
             font-size: 13px;
@@ -26,16 +27,16 @@
         }
 
         .info-card {
-            background: rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 16px;
             padding: 16px;
             margin: 18px 0;
             text-align: left;
         }
 
-            .info-card p {
-                margin-bottom: 8px;
-            }
+        .info-card p {
+            margin-bottom: 8px;
+        }
 
         .team-photo {
             width: 100%;
@@ -57,6 +58,7 @@
             color: #cfefff;
         }
     </style>
+    <script src="../../../../Stations/JAVA/navigation.js"></script>
 </head>
 
 <body>
@@ -80,9 +82,11 @@
 
             <p>A arctic crew is trapped in the Arctic ice and need your help.</p>
 
-            <p>You have <strong>2 hours</strong> to locate historic explorer, solve their riddles to help the lost crew.</p>
+            <p>You have <strong>2 hours</strong> to locate historic explorer, solve their riddles to help the lost crew.
+            </p>
 
-            <p>At every station, listen carefully to the information provided, solve the challenge, and continue to the next location.</p>
+            <p>At every station, listen carefully to the information provided, solve the challenge, and continue to the
+                next location.</p>
 
             <p class="warning">
                 ⚙ Need a reminder? Use the settings button at any time to view the current location again.
@@ -90,7 +94,8 @@
 
             <p>You can interact with each explorer as much as you like.</p>
 
-            <p>Each explorer has a unique profile and story based on real polar history. These details are not required to solve the riddles, but they may help you learn more about the people behind the expedition.</p>
+            <p>Each explorer has a unique profile and story based on real polar history. These details are not required
+                to solve the riddles, but they may help you learn more about the people behind the expedition.</p>
         </div>
 
         <input id="teamName" type="text" placeholder="Enter your team name">
@@ -169,5 +174,8 @@
             window.location.href = "station_1.html";
         }
     </script>
+    <game-navigation previous="" next="../stations/station_1.html">
+    </game-navigation>
 </body>
+
 </html>

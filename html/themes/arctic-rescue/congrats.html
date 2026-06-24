@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <title>Mission Complete</title>
+    <script src="../../../Stations/JAVA/navigation.js"></script>
 
     <style>
         * {
@@ -140,7 +142,9 @@
         }
 
         @keyframes signalBlink {
-            0%, 100% {
+
+            0%,
+            100% {
                 opacity: 1;
             }
 
@@ -179,7 +183,9 @@
         }
 
         @keyframes wiggle {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: rotate(0deg);
             }
 
@@ -230,14 +236,14 @@
             color: #2b2418;
             border-radius: 16px;
             text-align: left;
-            box-shadow: inset 0 0 25px rgba(0,0,0,0.12);
+            box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.12);
             transform-origin: top;
         }
 
-            .letter.open {
-                display: block;
-                animation: unfold 0.9s ease-out forwards;
-            }
+        .letter.open {
+            display: block;
+            animation: unfold 0.9s ease-out forwards;
+        }
 
         @keyframes unfold {
             from {
@@ -259,7 +265,7 @@
 
         .report-line {
             padding: 10px 0;
-            border-bottom: 1px solid rgba(0,0,0,0.15);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.15);
             font-weight: bold;
         }
 
@@ -289,19 +295,20 @@
                 height: 150px;
             }
         }
+
         .team-photo-frame {
             background: white;
             padding: 12px 12px 50px 12px;
             width: 260px;
             margin: 25px auto;
             transform: rotate(-2deg);
-            box-shadow: 0 8px 25px rgba(0,0,0,.35);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, .35);
         }
 
-            .team-photo-frame img {
-                width: 100%;
-                display: block;
-            }
+        .team-photo-frame img {
+            width: 100%;
+            display: block;
+        }
 
         .memory-caption {
             text-align: center;
@@ -322,6 +329,7 @@
 </head>
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 <!--This for downloading the image but there are still some problems.-->
+
 <body>
 
     <div class="victory-box">
@@ -381,7 +389,7 @@
                 Leave Feedback
             </button>
 
-            <button class="back-button" onclick="window.location.href='../../index.html'">
+            <button class="back-button" onclick="window.location.href='../../../index.html'">
                 Return to Start
             </button>
             <button class="feedback-button" onclick="downloadMemoryCard()">
@@ -431,6 +439,8 @@
             link.click();
         }
     </script>
-
+    <game-navigation previous="final_page.html" next="../riddle/riddle_2.html">
+    </game-navigation>
 </body>
+
 </html>

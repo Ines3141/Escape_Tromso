@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <title> FISHER MONUMENT </title>
     <link rel="stylesheet" href="../../../../CSS/global.css"> <!-- link to style sheet -->
     <link rel="stylesheet" href="../../../../CSS/arctic-theme.css">
+    <script src="../../../../Stations/JAVA/navigation.js"></script>
 </head>
+
 <body>
     <div class="box">
         <h2>Monument Cube Riddle</h2>
@@ -46,44 +49,47 @@
         </button>
         <button class="back-button" onclick="window.location.href='../stations/station_3.html'">
             Back
-        </buttonback-button>
-        <script>
-            let rotation = 0;
+            </buttonback-button>
+            <script>
+                let rotation = 0;
 
-            function rotateCube(degrees) {
-                rotation += degrees;
-                document.getElementById("cube").style.transform =
-                    `rotateX(-20deg) rotateY(${rotation}deg)`;
-            }
-
-            function checkCube() {
-                const front = Number(document.getElementById("front").value);
-                const back = Number(document.getElementById("back").value);
-                const left = Number(document.getElementById("left").value);
-                const right = Number(document.getElementById("right").value);
-
-                const feedback = document.getElementById("feedback");
-
-                const allNumbers = [front, back, left, right];
-
-                const hasCorrectNumbers =
-                    allNumbers.includes(8) &&
-                    allNumbers.includes(6) &&
-                    allNumbers.includes(2) &&
-                    allNumbers.includes(4);
-
-                const oppositeSidesCorrect =
-                    front + back === 10 &&
-                    left + right === 10;
-
-                if (hasCorrectNumbers && oppositeSidesCorrect) {
-                    feedback.textContent = "Correct! The monument stands in balance.";
-                    window.location.href = 'riddle_4_part2.html';
-                } else {
-                    feedback.textContent = "Not quite. Count the fish and balance each opposite side to 10.";
+                function rotateCube(degrees) {
+                    rotation += degrees;
+                    document.getElementById("cube").style.transform =
+                        `rotateX(-20deg) rotateY(${rotation}deg)`;
                 }
-            }
-        </script>
+
+                function checkCube() {
+                    const front = Number(document.getElementById("front").value);
+                    const back = Number(document.getElementById("back").value);
+                    const left = Number(document.getElementById("left").value);
+                    const right = Number(document.getElementById("right").value);
+
+                    const feedback = document.getElementById("feedback");
+
+                    const allNumbers = [front, back, left, right];
+
+                    const hasCorrectNumbers =
+                        allNumbers.includes(8) &&
+                        allNumbers.includes(6) &&
+                        allNumbers.includes(2) &&
+                        allNumbers.includes(4);
+
+                    const oppositeSidesCorrect =
+                        front + back === 10 &&
+                        left + right === 10;
+
+                    if (hasCorrectNumbers && oppositeSidesCorrect) {
+                        feedback.textContent = "Correct! The monument stands in balance.";
+                        window.location.href = 'riddle_4_part2.html';
+                    } else {
+                        feedback.textContent = "Not quite. Count the fish and balance each opposite side to 10.";
+                    }
+                }
+            </script>
     </div>
+    <game-navigation previous="../stations/station_4.html" next="../riddle/riddle_4_part2.html">
+    </game-navigation>
 </body>
+
 </html>

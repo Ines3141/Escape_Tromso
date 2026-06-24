@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
@@ -7,15 +8,20 @@
     <link rel="stylesheet" href="../../../../CSS/global.css"> <!-- link to style sheet -->
     <style>
         /* Specific style for solution image */
-        .solution-container { 
-            width:120px; /* Fixed values */
+        .solution-container {
+            width: 120px;
+            /* Fixed values */
             height: 120px;
-            overflow: hidden; /* Cuts the image out */
+            overflow: hidden;
+            /* Cuts the image out */
             margin-left: auto;
-            margin-right: auto; /* Center it*/
+            margin-right: auto;
+            /* Center it*/
         }
     </style>
+    <script src="../../../../Stations/JAVA/navigation.js"></script>
 </head>
+
 <body>
     <div class="box">
         <h2>✓ MISSION COMPLETE</h2>
@@ -43,6 +49,8 @@
             Back
         </button>
     </div>
+    <game-navigation previous="riddle_2.html" next="../stations/station_3.html">
+    </game-navigation>
     <script>
         const submitButton = document.getElementById("submit");
         const mapButton = document.getElementById("location");
@@ -56,4 +64,5 @@
         });
     </script>
 </body>
+
 </html>

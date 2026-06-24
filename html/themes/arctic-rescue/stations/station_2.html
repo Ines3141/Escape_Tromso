@@ -6,6 +6,7 @@
     <title>Station 2</title>
     <link rel="stylesheet" href="../../../../CSS/global.css">
     <link rel="stylesheet" href="../../../../CSS/station.css">
+    <script src="../../../../Stations/JAVA/navigation.js"></script>
     <style>
         .call-screen {
             position: fixed;
@@ -36,11 +37,11 @@
             animation: ringPulse 1.2s infinite;
         }
 
-        .caller-photo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+            .caller-photo img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
 
         .incoming-text {
             color: #7dd3fc;
@@ -118,6 +119,7 @@
                 transform: rotate(8deg);
             }
         }
+
         .call-controls {
             display: flex;
             justify-content: center;
@@ -281,12 +283,16 @@
         </div>
         <!-- for actual game do </button>style="display:none;">, but now it is just blocking
 
-        <button class="riddle-button" id="riddle_btn" onclick="window.location.href='../riddle/riddle_2.html'" style="display:none;">
-            Solve Riddle
-        </button>
-        <button class="back-button" onclick="window.location.href='station_1.html'">
-            Back
-        </button> -->
+    <button class="riddle-button" id="riddle_btn" onclick="window.location.href='../riddle/riddle_2.html'" style="display:none;">
+        Solve Riddle
+    </button>
+    <button class="back-button" onclick="window.location.href='station_1.html'">
+        Back
+    </button> -->
+        <game-navigation 
+              previous="station_1.html"
+              next="../riddle/riddle_2.html">
+        </game-navigation>
 
 
         <script>
@@ -361,7 +367,7 @@
                 /*
                 riddle_btn.style.display = "block";
                 profile_btn.style.display = "block";
-                
+
                 NO MORE INTERACTION
                 IF THIS IS THE LAST PART OF THE CONVERSATION
                 SHOW BUTTON
@@ -423,7 +429,7 @@
                 { start: 28, end: 31, text: "Well, I’m drifting off." },
                 { start: 31, end: 35, text: "Please, take these notes." },
                 { start: 35, end: 39, text: "They may prove useful to the lost crew." },
-                { start: 39, end: 42, text: `Good luck, Team ${teamName}!`}
+                { start: 39, end: 42, text: `Good luck, Team ${teamName}!` }
             ];
 
             const subtitlesB = [

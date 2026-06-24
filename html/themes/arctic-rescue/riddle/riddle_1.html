@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <title>Riddle 1</title>
     <link rel="stylesheet" href="../../../../CSS/global.css"> <!-- link to style sheet -->
+    <script src="../../../../Stations/JAVA/letter_templates.js"></script>
+    <script src="../../../../Stations/JAVA/incoming_dispatch.js"></script>
+    <script src="../../../../Stations/JAVA/navigation.js"></script>
 </head>
 <body>
     <div class="box">
@@ -13,9 +16,21 @@
         <img src="../../../../assets/images/station_1_test.jpg"
              alt="Treasure Map"
              class="riddle-map">
-        <button class="submit-button" onclick=window.location.href='riddle_1_part2.html'>
+        <button class="submit-button" onclick=window.location.href ='riddle_1_part2.html'>
             Click here when you found the correct location.
         </button>
+
+        <incoming-dispatch letter-id="station-1-signal"
+                           title="Incoming Dispatch"
+                           from="Dispatch Control"
+                           next="../stations/station_2.html"
+                           lamp="true">
+        </incoming-dispatch>
+        <game-navigation previous="../stations/station_1.html"
+                         next="../stations/station_2.html">
+        </game-navigation>
+
+
 
         <p id="message"></p>
         <button class="back-button" onclick="window.location.href='../stations/station_1.html'">

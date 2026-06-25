@@ -8,66 +8,471 @@
     <link rel="stylesheet" href="../../../../CSS/global.css">
     <link rel="stylesheet" href="../../../../CSS/arctic-theme.css">
     <script src="../../../../Stations/JAVA/navigation.js"></script>
+    <style>
+        .message-phone {
+            max-width: 430px;
+            margin: 20px auto;
+            padding: 18px;
+            border-radius: 22px;
+            background: #071827;
+            color: white;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.45);
+        }
+
+        .chat-header {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 18px;
+        }
+
+        .chat-header span {
+            color: #5cff5c;
+            font-size: 14px;
+        }
+
+        .message {
+            display: none;
+            animation: popMessage 0.35s ease-out forwards;
+        }
+
+        .message.visible {
+            display: block;
+        }
+
+        .message small {
+            display: block;
+            opacity: 0.65;
+            margin-bottom: 4px;
+        }
+
+        .typing {
+            display: none;
+            margin: 12px 0;
+            padding: 12px 14px;
+            border-radius: 14px;
+            background: #142b3a;
+            width: fit-content;
+        }
+
+        .typing.visible {
+            display: block;
+        }
+
+        .typing span {
+            animation: blinkDot 1s infinite;
+        }
+
+        .typing span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        .file-message {
+            margin-top: 14px;
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 14px;
+            background: #1d3a4f;
+            color: white;
+            text-align: left;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .gallery-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 999999;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0,0,0,0.92);
+            padding: 20px;
+        }
+
+        .gallery-overlay.open {
+            display: flex;
+        }
+
+        .gallery-box {
+            max-width: 520px;
+        }
+
+        .gallery-grid {
+            gap: 10px;
+        }
+
+        .gallery-close {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            border: none;
+            background: none;
+            color: white;
+            font-size: 34px;
+            cursor: pointer;
+        }
+
+        .gallery-item {
+            border: 3px solid transparent;
+            border-radius: 14px;
+            overflow: hidden;
+            padding: 0;
+            background: none;
+            cursor: pointer;
+        }
+
+        .gallery-item.selected {
+            border-color: #4cd137;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 130px;
+            object-fit: cover;
+        }
+
+        .confirm-btn {
+            width: 100%;
+            margin-top: 18px;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            background: #4cd137;
+            color: white;
+            font-weight: 900;
+            cursor: pointer;
+        }
+
+        .animation-stage {
+            display: none;
+            max-width: 700px;
+            margin: 24px auto;
+        }
+
+        .animation-stage.open {
+            display: block;
+        }
+
+        .animation-stage img {
+            width: 100%;
+            border-radius: 18px;
+            opacity: 1;
+            transition: opacity 0.8s ease;
+        }
+        .animation-stage {
+            max-width: 430px;
+        }
+
+        .chat-input-area {
+            display: flex;
+            gap: 8px;
+            margin-top: 14px;
+        }
+
+        .chat-input-area input {
+            flex: 1;
+            padding: 12px;
+            border-radius: 12px;
+            border: none;
+            background: #101820;
+            color: white;
+        }
+
+        .chat-input-area button {
+            width: 48px;
+            border: none;
+            border-radius: 12px;
+            background: #4cd137;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .user-message {
+            background: #0b7d5c;
+            margin-left: auto;
+            max-width: 80%;
+        }
+
+        .success-message {
+            background: #1d3a4f;
+            border: 1px solid #4cd137;
+        }
+
+        @keyframes popMessage {
+            from {
+                opacity: 0;
+                transform: translateY(8px) scale(0.96);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes blinkDot {
+            0%, 80%, 100% {
+                opacity: 0.25;
+            }
+
+            40% {
+                opacity: 1;
+            }
+        }
+    </style>
 </head>
 
 <body>
     <div class="box">
         <h1>Henry Rudi's Lock</h1>
 
-        <p>
-            Look closely at the house.
-            The Arctic hunter left a three-digit code.
-        </p>
+        <div class="message-phone">
+            <div class="chat-header">
+                <strong>Henry Rudi</strong>
+                <span>online</span>
+            </div>
 
-        <div class="lock-box">
-            <div class="lock-top"></div>
+            <div class="message chat-step"><small>10:17</small> We spotted movement near the old observatory.</div>
+            <div class="message chat-step"><small>10:18</small> Someone keeps signalling from the window.</div>
+            <div class="message chat-step"><small>10:19</small> I captured a few images.</div>
 
-            <div class="lock-body">
-                <input class="lock-digit" id="digit1" maxlength="1" type="text" inputmode="numeric">
-                <input class="lock-digit" id="digit2" maxlength="1" type="text" inputmode="numeric">
-                <input class="lock-digit" id="digit3" maxlength="1" type="text" inputmode="numeric">
+            <div class="typing" id="typingBubble">
+                <span>●</span> <span>●</span> <span>●</span>
+            </div>
+
+            <button class="file-message chat-step" id="openGalleryBtn">
+                📄 observatory_images.zip<br>
+                <small>4 images</small>
+            </button>
+            <div id="animationMessageArea"></div>
+
+            <div id="chatInputArea" class="chat-input-area" style="display:none;">
+                <input id="chatAnswer" type="text" placeholder="Type your answer...">
+                <button id="sendAnswerBtn">➤</button>
+            </div>
+        </div>
+        
+
+        <p id="feedback"></p>
+        <div class="gallery-overlay" id="galleryOverlay">
+            <div class="gallery-box">
+                <button class="gallery-close" id="closeGalleryBtn">×</button>
+                <h2>observatory_images.zip</h2>
+
+                <div class="gallery-grid" id="galleryGrid"></div>
+
+                <p id="galleryFeedback">Select the image that matches the signal.</p>
+
+                <button class="confirm-btn" id="confirmImageBtn">
+                    CONFIRM
+                </button>
             </div>
         </div>
 
-        <p class="hint">
-            Doors → Top floor windows → Lanterns
-        </p>
-
-        <button class="submit-button" onclick="checkLock()">Unlock</button>
-        <button class="back-button" onclick="window.location.href='../stations/station_6.html'">
-            Back
-        </button>
-
-        <p id="feedback"></p>
+        <div class="animation-stage" id="animationStage">
+            <img id="animationImage" src="" alt="Signal animation">
+        </div>
     </div>
+
     <script>
-        function checkLock() {
-            const d1 = document.getElementById("digit1").value;
-            const d2 = document.getElementById("digit2").value;
-            const d3 = document.getElementById("digit3").value;
+        const galleryImages = [
+            "../../../../assets/images/Rudi_1.jpg",
+            "../../../../assets/images/Rudi_2.jpg",
+            "../../../../assets/images/Rudi_3.jpg",
+            "../../../../assets/images/Rudi_4.jpg"
+        ];
 
-            const code = d1 + d2 + d3;
-            const feedback = document.getElementById("feedback");
+        const correctImageIndex = 0;
 
-            if (code === "145") {
-                feedback.textContent = "Click! The lock opens.";
-                feedback.style.color = "lightgreen";
+        const animationImages = [
+            "../../../../assets/images/Rudi_1.jpg",
+            "../../../../assets/images/Rudi_Animation_2.jpg",
+            "../../../../assets/images/Rudi_Animation_3.jpg",
+            "../../../../assets/images/Rudi_Animation_4.jpg",
+            "../../../../assets/images/Rudi_Animation_5.jpg",
+            "../../../../assets/images/Rudi_Animation_6.jpg",
+            "../../../../assets/images/Rudi_Animation_7.jpg",
+            "../../../../assets/images/Rudi_Animation_8.jpg"
+        ];
+
+        let selectedImageIndex = null;
+        let answerSolved = false;
+
+        const openGalleryBtn = document.getElementById("openGalleryBtn");
+        const closeGalleryBtn = document.getElementById("closeGalleryBtn");
+        const galleryOverlay = document.getElementById("galleryOverlay");
+        const galleryGrid = document.getElementById("galleryGrid");
+        const confirmImageBtn = document.getElementById("confirmImageBtn");
+        const galleryFeedback = document.getElementById("galleryFeedback");
+        const animationStage = document.getElementById("animationStage");
+        const animationImage = document.getElementById("animationImage");
+
+        const typingBubble = document.getElementById("typingBubble");
+        const animationMessageArea = document.getElementById("animationMessageArea");
+        const chatInputArea = document.getElementById("chatInputArea");
+        const chatAnswer = document.getElementById("chatAnswer");
+        const sendAnswerBtn = document.getElementById("sendAnswerBtn");
+
+        function showTypingThen(callback) {
+            typingBubble.classList.add("visible");
+
+            setTimeout(() => {
+                typingBubble.classList.remove("visible");
+                callback();
+            }, 900);
+        }
+
+        function revealChatSteps() {
+            const steps = document.querySelectorAll(".chat-step");
+
+            steps.forEach((step, index) => {
+                setTimeout(() => {
+                    showTypingThen(() => {
+                        step.classList.add("visible");
+                    });
+                }, index * 1400);
+            });
+        }
+
+        function addChatMessage(text, className = "") {
+            const msg = document.createElement("div");
+            msg.className = `message visible ${className}`;
+            msg.innerHTML = `<small>${getTime()}</small>${text}`;
+            animationMessageArea.appendChild(msg);
+            msg.scrollIntoView({ behavior: "smooth", block: "end" });
+        }
+
+        function getTime() {
+            return new Date().toLocaleTimeString([], {
+                hour: "2-digit",
+                minute: "2-digit"
+            });
+        }
+
+        galleryImages.forEach((src, index) => {
+            const button = document.createElement("button");
+            button.className = "gallery-item";
+
+            button.innerHTML = `<img src="${src}" alt="Observatory image ${index + 1}">`;
+
+            button.addEventListener("click", () => {
+                selectedImageIndex = index;
+
+                document.querySelectorAll(".gallery-item").forEach(item => {
+                    item.classList.remove("selected");
+                });
+
+                button.classList.add("selected");
+                galleryFeedback.textContent = "Image selected.";
+                galleryFeedback.style.color = "white";
+            });
+
+            galleryGrid.appendChild(button);
+        });
+
+        openGalleryBtn.addEventListener("click", () => {
+            galleryOverlay.classList.add("open");
+        });
+
+        closeGalleryBtn.addEventListener("click", () => {
+            galleryOverlay.classList.remove("open");
+        });
+
+        confirmImageBtn.addEventListener("click", () => {
+            if (selectedImageIndex === null) {
+                galleryFeedback.textContent = "Select an image first.";
+                galleryFeedback.style.color = "#ffcc00";
+                return;
+            }
+
+            if (selectedImageIndex === correctImageIndex) {
+                galleryOverlay.classList.remove("open");
+                startImageSequence();
+            } else {
+                galleryFeedback.textContent = "Wrong image. Check the signal again.";
+                galleryFeedback.style.color = "#ff5c5c";
+            }
+        });
+
+        function startImageSequence() {
+            animationStage.classList.add("open");
+
+            let index = 0;
+            animationImage.src = animationImages[index];
+            animationImage.style.opacity = "1";
+
+            const interval = setInterval(() => {
+                animationImage.style.opacity = "0";
 
                 setTimeout(() => {
-                    window.location.href = "riddle_6_feedback.html";
-                }, 1200);
+                    index++;
+
+                    if (index >= animationImages.length) {
+                        clearInterval(interval);
+                        animationStage.classList.remove("open");
+
+                        showTypingThen(() => {
+                            addChatMessage("What do you see?");
+                            chatInputArea.style.display = "flex";
+                            chatAnswer.focus();
+                        });
+
+                        return;
+                    }
+
+                    animationImage.src = animationImages[index];
+                    animationImage.style.opacity = "1";
+                }, 700);
+
+            }, 1400);
+        }
+
+        function checkChatAnswer() {
+            const answer = chatAnswer.value.trim().toLowerCase();
+
+            if (!answer) return;
+
+            addChatMessage(chatAnswer.value, "user-message");
+            chatAnswer.value = "";
+
+            const correctAnswers = ["2", "two", "two.", "2.", "two people", "2 people"];
+
+            if (correctAnswers.includes(answer)) {
+                answerSolved = true;
+                chatInputArea.style.display = "none";
+
+                showTypingThen(() => {
+                    addChatMessage(
+                        "YES, I remember that is correct! Now you only need the month and there you have to go to this location.",
+                        "success-message"
+                    );
+
+                    setTimeout(() => {
+                        window.location.href = "../riddle/riddle_6_feedback.html";
+                    }, 3000);
+                });
             } else {
-                feedback.textContent = "Still locked. Count carefully.";
-                feedback.style.color = "orange";
+                showTypingThen(() => {
+                    addChatMessage("Look carefully at the movement in the window.");
+                });
             }
         }
-        document.querySelectorAll(".lock-digit").forEach((input, index, inputs) => {
-            input.addEventListener("input", () => {
-                if (input.value.length === 1 && inputs[index + 1]) {
-                    inputs[index + 1].focus();
-                }
-            });
+
+        sendAnswerBtn.addEventListener("click", checkChatAnswer);
+
+        chatAnswer.addEventListener("keydown", (event) => {
+            if (event.key === "Enter") {
+                checkChatAnswer();
+            }
         });
+
+        revealChatSteps();
     </script>
     <game-navigation previous="../stations/station_6.html" next="../riddle/riddle_6_feedback.html">
     </game-navigation>

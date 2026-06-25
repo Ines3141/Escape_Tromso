@@ -58,6 +58,65 @@
 
                     <p>— Roald Amundsen</p>
                 `
+            }, 
+            "nansen-ice-dispatch": {
+                title: "Ice Route Calculation",
+                from: "Dispatch Control",
+                content: `
+                <p> Hello Team ${teamName},</p>
+                <p>
+                    Greenland and Nobel Peace. What does this give together?
+                </p>
+                <p>
+                    Not sure? Enter the two years and solve the route code.
+                </p>
+                <div class="year-lock" data-lock-id="nansenIceLock">
+                    <div class="lock-row">
+                        <input class="lock-cell year-a" maxlength="1">
+                        <input class="lock-cell year-a" maxlength="1">
+                        <input class="lock-cell year-a" maxlength="1">
+                        <input class="lock-cell year-a" maxlength="1">
+                    </div>
+
+                    <div class="lock-row">
+                        <input class="lock-cell year-b" maxlength="1">
+                        <input class="lock-cell year-b" maxlength="1">
+                        <input class="lock-cell year-b" maxlength="1">
+                        <input class="lock-cell year-b" maxlength="1">
+                    </div>
+
+                    <div class="lock-row">
+                        <span class="lock-symbol">+</span>
+                        <span class="lock-symbol">−</span>
+                        <span class="lock-symbol">+</span>
+                        <span class="lock-symbol">−</span>
+                    </div>
+
+                    <div class="lock-row">
+                        <span class="lock-symbol">1</span>
+                        <span class="lock-symbol">2</span>
+                        <span class="lock-symbol">1</span>
+                        <span class="lock-symbol">6</span>
+                    </div>
+                    <hr>
+
+                    <div class="lock-row">
+                        <input class="lock-result result" maxlength="2">
+                        <input class="lock-result result" maxlength="2">
+                        <input class="lock-result result" maxlength="2">
+                        <input class="lock-result result" maxlength="2">
+                    </div>
+
+                    <button class="lock-check-btn">Check numbers</button>
+                    <p class="lock-message"></p>
+                </div>
+
+                <p>
+                    Try to connect the numbers with letters.
+                </p>
+
+                <p>— Dispatch Control</p>
+                `
             }
         };
 
@@ -90,6 +149,9 @@
                 .dispatch-card {
                     max-width: 650px;
                     width: 100%;
+                    max-height: 90vh;
+                    overflow-y: auto; /* It is possible to scroll in y direction */
+                    overflow-x: hidden;
                     text-align: center;
                     color: white;
                 }
@@ -224,6 +286,7 @@
         this.shadowRoot.getElementById("openBtn").addEventListener("click", () => {
             this.openLetter(letterId, letter);
             setupMorseLamps(this.shadowRoot);
+            setupYearLocks(this.shadowRoot);
         });
 
         this.shadowRoot.getElementById("continueBtn").addEventListener("click", () => {
@@ -258,3 +321,87 @@
     }    
 }
 customElements.define("incoming-dispatch", IncomingDispatch);
+
+
+function setupYearLocks(root) {
+    const locks = root.querySelectorAll(".year-lock");
+
+    locks.forEach(lock => {
+        const lockId = lock.dataset.lockId;
+
+        const inputs = lock.querySelectorAll("input");
+        const message = lock.querySelector(".lock-message");
+        const checkBtn = lock.querySelector(".lock-check-btn");
+
+        const saved = JSON.parse(localStorage.getItem(lockId)) || null;
+
+        if (saved) {
+            inputs.forEach((input, index) => {
+                input.value = saved.values[index] || "";
+            });
+
+            if (saved.correct) {
+                markLockCorrect(lock);
+                message.textContent = "Correct numbers. Route code unlocked.";
+                message.style.color = "green";
+            }
+        }
+
+        inputs.forEach((input, index) => {
+            input.addEventListener("input", () => {
+                input.value = input.value.replace(/[^0-9]/g, "");
+
+                if (input.value && inputs[index + 1]) {
+                    inputs[index + 1].focus();
+                }
+
+                saveLockState(lock, false);
+            });
+
+            input.addEventListener("keydown", (e) => {
+                if (e.key === "Backspace" && !input.value && inputs[index - 1]) {
+                    inputs[index - 1].focus();
+                }
+            });
+        });
+
+        checkBtn.addEventListener("click", () => {
+            const yearA = [...lock.querySelectorAll(".year-a")].map(i => i.value).join("");
+            const yearB = [...lock.querySelectorAll(".year-b")].map(i => i.value).join("");
+            const extra = [...lock.querySelectorAll(".extra")].map(i => i.value).join("");
+            const result = [...lock.querySelectorAll(".result")].map(i => i.value).join(",");
+
+            const correct =
+                yearA === "1888" &&
+                yearB === "1922" &&
+                result === "3,15,11,4";
+
+            if (correct) {
+                markLockCorrect(lock);
+                message.textContent = "Correct numbers. Route code unlocked.";
+                message.style.color = "green";
+                saveLockState(lock, true);
+            } else {
+                message.textContent = "Not the correct numbers.";
+                message.style.color = "darkred";
+                saveLockState(lock, false);
+            }
+        });
+    });
+}
+
+function markLockCorrect(lock) {
+    lock.querySelectorAll("input").forEach(input => {
+        input.classList.add("correct");
+    });
+}
+
+function saveLockState(lock, correct) {
+    const lockId = lock.dataset.lockId;
+    const values = [...lock.querySelectorAll("input")].map(input => input.value);
+
+    localStorage.setItem(lockId, JSON.stringify({
+        values,
+        correct
+    }));
+}

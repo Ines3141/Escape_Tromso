@@ -393,7 +393,13 @@
                     ${renderLetterHTML(inbox[index])}
                 `;
 
-                startMorseLamps(card);
+                if (typeof setupMorseLamps === "function") {
+                    setupMorseLamps(card);
+                }
+
+                if (typeof setupYearLocks === "function") {
+                    setupYearLocks(card);
+                }
 
                 card.querySelector("#closeInbox").addEventListener("click", () => {
                     overlay.remove();

@@ -238,15 +238,15 @@
                 <span>online</span>
             </div>
 
-            <div class="message chat-step"><small>10:17</small> We spotted movement near the old observatory.</div>
-            <div class="message chat-step"><small>10:18</small> Someone keeps signalling from the window.</div>
-            <div class="message chat-step"><small>10:19</small> I captured a few images.</div>
+            <div class="message chat-step"><small>10:17</small> I got some movement from different houses.</div>
+            <div class="message chat-step"><small>10:18</small> But I can't identify my favourite place "Olhallen"</div>
+            <div class="message chat-step"><small>10:19</small> Can you help me? I will send you the different photos.</div>
 
             <div class="typing" id="typingBubble">
                 <span>●</span> <span>●</span> <span>●</span>
             </div>
 
-            <button class="file-message chat-step" id="openGalleryBtn">
+            <button class="file-message chat-step" id="openGalleryBtn" style="display:none;">
                 📄 observatory_images.zip<br>
                 <small>4 images</small>
             </button>
@@ -281,11 +281,29 @@
     </div>
 
     <script>
+        const RUDI_STATE_KEY = "henryRudiChatState";
+
+        function saveRudiState(extra = {}) {
+            const state = {
+                chatStage,
+                fileVisible: openGalleryBtn.style.display !== "none",
+                extraMessages: animationMessageArea.innerHTML,
+                inputVisible: chatInputArea.style.display !== "none",
+                inputPlaceholder: chatAnswer.placeholder,
+                ...extra
+            };
+
+            localStorage.setItem(RUDI_STATE_KEY, JSON.stringify(state));
+        }
+
+        function loadRudiState() {
+            return JSON.parse(localStorage.getItem(RUDI_STATE_KEY)) || null;
+        }
         const galleryImages = [
             "../../../../assets/images/Rudi_1.jpg",
             "../../../../assets/images/Rudi_2.jpg",
             "../../../../assets/images/Rudi_3.jpg",
-            "../../../../assets/images/Rudi_4.jpg"
+            "../../../../assets/images/Rudi_2.jpg"
         ];
 
         const correctImageIndex = 0;
@@ -335,6 +353,15 @@
                 setTimeout(() => {
                     showTypingThen(() => {
                         step.classList.add("visible");
+
+                        if (index === steps.length - 1) {
+                            setTimeout(() => {
+                                showTypingThen(() => {
+                                    openGalleryBtn.style.display = "block";
+                                    saveRudiState();
+                                });
+                            }, 600);
+                        }
                     });
                 }, index * 1400);
             });
@@ -346,6 +373,8 @@
             msg.innerHTML = `<small>${getTime()}</small>${text}`;
             animationMessageArea.appendChild(msg);
             msg.scrollIntoView({ behavior: "smooth", block: "end" });
+
+            saveRudiState();
         }
 
         function getTime() {
@@ -421,6 +450,7 @@
                             addChatMessage("What do you see?");
                             chatInputArea.style.display = "flex";
                             chatAnswer.focus();
+                            saveRudiState();
                         });
 
                         return;
@@ -433,6 +463,8 @@
             }, 1400);
         }
 
+        let chatStage = "people";
+
         function checkChatAnswer() {
             const answer = chatAnswer.value.trim().toLowerCase();
 
@@ -441,26 +473,65 @@
             addChatMessage(chatAnswer.value, "user-message");
             chatAnswer.value = "";
 
-            const correctAnswers = ["2", "two", "two.", "2.", "two people", "2 people"];
+            if (chatStage === "people") {
+                const correctAnswers = ["2", "two", "two.", "2.", "two people", "2 people"];
 
-            if (correctAnswers.includes(answer)) {
-                answerSolved = true;
-                chatInputArea.style.display = "none";
+                if (correctAnswers.includes(answer)) {
+                    chatStage = "location";
+                    chatInputArea.style.display = "none";
 
-                showTypingThen(() => {
-                    addChatMessage(
-                        "YES, I remember that is correct! Now you only need the month and there you have to go to this location.",
-                        "success-message"
-                    );
+                    showTypingThen(() => {
+                        addChatMessage(
+                            "YES, I remember that is correct! Now you only need the month.",
+                            "success-message"
+                        );
 
-                    setTimeout(() => {
-                        window.location.href = "../riddle/riddle_6_feedback.html";
-                    }, 3000);
-                });
-            } else {
-                showTypingThen(() => {
-                    addChatMessage("Look carefully at the movement in the window.");
-                });
+                        showTypingThen(() => {
+                            addChatMessage(`
+                        Go to the Wooden Cathedral:
+                        <br>
+                        <a href="https://www.google.com/maps/search/Wooden+Cathedral+Tromsø"
+                           target="_blank"
+                           style="color:#7ee7ff; font-weight:bold;">
+                           Open location
+                        </a>
+                    `);
+
+                            showTypingThen(() => {
+                                addChatMessage("Write <strong>okay</strong> when you are there.");
+                                chatInputArea.style.display = "flex";
+                                chatAnswer.placeholder = "Write okay when you are there...";
+                                chatAnswer.focus();
+                            });
+                        });
+                    });
+                } else {
+                    showTypingThen(() => {
+                        addChatMessage("Look carefully at the movement in the window.");
+                    });
+                }
+
+                return;
+            }
+
+            if (chatStage === "location") {
+                const okayAnswers = ["okay", "ok", "oki", "oke", "yes", "done", "there"];
+
+                if (okayAnswers.includes(answer)) {
+                    chatInputArea.style.display = "none";
+
+                    showTypingThen(() => {
+                        addChatMessage("Good. I will meet you there.", "success-message");
+
+                        setTimeout(() => {
+                            window.location.href = "../final_page.html";
+                        }, 1800);
+                    });
+                } else {
+                    showTypingThen(() => {
+                        addChatMessage("Tell me <strong>okay</strong> when you are there.");
+                    });
+                }
             }
         }
 
@@ -471,8 +542,21 @@
                 checkChatAnswer();
             }
         });
+        const savedState = loadRudiState();
 
-        revealChatSteps();
+        if (savedState) {
+            document.querySelectorAll(".chat-step").forEach(step => {
+                step.classList.add("visible");
+            });
+
+            openGalleryBtn.style.display = savedState.fileVisible ? "block" : "none";
+            animationMessageArea.innerHTML = savedState.extraMessages || "";
+            chatInputArea.style.display = savedState.inputVisible ? "flex" : "none";
+            chatAnswer.placeholder = savedState.inputPlaceholder || "Type your answer...";
+            chatStage = savedState.chatStage || "people";
+        } else {
+            revealChatSteps();
+        }
     </script>
     <game-navigation previous="../stations/station_6.html" next="../riddle/riddle_6_feedback.html">
     </game-navigation>

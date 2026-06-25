@@ -127,8 +127,6 @@
 
             /* Buttons */
             const audio_btn = document.getElementById("audioBtn");
-            const riddle_btn = document.getElementById("riddle_btn");
-            const location_btn = document.getElementById("Location_btn");
             const btnA = document.getElementById("btnA");
             const btnB = document.getElementById("btnB");
             const btnC = document.getElementById("btnC");
@@ -136,24 +134,12 @@
 
             const choices = document.getElementById("choices");
             const person = document.querySelector(".person-container");
-            const settingsBtn = document.getElementById("settingsBtn");
-            const settingsMenu = document.getElementById("settingsMenu");
             const allAudios = [audio, audioA, audioB, audioC];
             const volumeSlider = document.getElementById("volumeSlider");
 
             const subtitle = document.getElementById("subtitle");
             const teamName = localStorage.getItem("teamName") || "Explorer";
-
-            location_btn.addEventListener("click", () => {
-                window.open('https://www.google.com/maps/search/Troms�+Harbour');
-            })
-            /* Make sound louder/silent */
-            volumeSlider.addEventListener("input", () => {
-                allAudios.forEach(sound => {
-                    sound.volume = volumeSlider.value;
-                });
-            });
-
+           
             /* Start the audio file and the subtitels. */
             audio_btn.addEventListener("click", () => {
                 if (audio.paused) {
@@ -302,18 +288,7 @@
                 updateSubtitle(audioC, subtitlesC);
             });
 
-            settingsBtn.addEventListener("click", (event) => {
-                event.stopPropagation();
-                settingsMenu.classList.toggle("hidden");
-            });
-
-            settingsMenu.addEventListener("click", (event) => {
-                event.stopPropagation();
-            });
-
-            document.addEventListener("click", () => {
-                settingsMenu.classList.add("hidden");
-            });
+            
             function openProfile() {
                 document.getElementById("profileOverlay").classList.remove("hidden");
             }

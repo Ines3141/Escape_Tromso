@@ -20,12 +20,6 @@
         <input id="answerInput" placeholder="Enter frequency">
         <button id="checkBtn">Transmit</button>
         <p id="feedback"></p>
-        <button class="submit-button" id="submit" onclick="window.location.href='riddle_3_location.html'">
-            Continue
-        </button>
-        <button class="back-button" onclick="window.location.href='riddle_3.html'">
-            Back
-        </button>
     </div>
 
     <script>
@@ -37,7 +31,7 @@
                 answer === "111" ||
                 answer === "111ghz"
             ) {
-                window.location.href = "../stations/station_4.html";
+                window.location.href = "riddle_3_location.html";
             } else {
                 feedback.textContent = "Wrong frequency. Try again.";
             }

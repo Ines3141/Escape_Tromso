@@ -56,6 +56,19 @@
                         The next clue awaits with <strong>Henry Rudi</strong>.
                     </p>
 
+                    <div class="coordinates">
+                        <strong>Safety Depot Coordinates</strong><br>
+                        78°13'N, 15°38'E
+                    </div>
+
+                    <div class="coordinates">
+                        <strong>Next Mission</strong><br>
+                        📍 Henry Rudi (Olhallen)
+                    </div>
+
+                    <button class="letter-action" onclick="window.location.href='https://www.google.com/maps/search/Olhallen'">
+                        Open in Google Maps
+                    </button>
                     <p>— Roald Amundsen</p>
                 `
             }, 
@@ -259,6 +272,25 @@
                         opacity: 1;
                     }
                 }
+                /* Roald Amundsen Letter */
+                .coordinates {
+                    margin: 15px 0;
+                    padding: 12px;
+                    border-radius: 10px;
+                    background: rgba(0,0,0,0.08);
+                }
+
+                .letter-action {
+                    display: block;
+                    margin: 14px auto;
+                    padding: 12px 18px;
+                    border: none;
+                    border-radius: 12px;
+                    background: #111;
+                    color: white !important;
+                    font-weight: bold;
+                    cursor: pointer;
+                }
             </style>
 
             <div class="dispatch-overlay" id="overlay">
@@ -290,11 +322,19 @@
         });
 
         this.shadowRoot.getElementById("continueBtn").addEventListener("click", () => {
-            this.shadowRoot.getElementById("overlay").classList.add("closed");
+            if (nextPage && nextPage !== "#") {
+                window.location.href = nextPage;
+            } else {
+                this.shadowRoot.getElementById("overlay").classList.add("closed");
+            }
         });
 
         this.shadowRoot.getElementById("closeBtn").addEventListener("click", () => {
-            this.shadowRoot.getElementById("overlay").classList.add("closed");
+            if (nextPage && nextPage !== "#") {
+                window.location.href = nextPage;
+            } else {
+                this.shadowRoot.getElementById("overlay").classList.add("closed");
+            }
         });
     }
 

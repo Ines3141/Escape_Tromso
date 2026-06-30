@@ -16,27 +16,34 @@ const STORIES = {
                 type: "text",
                 sender: "Dispatch",
                 time: "10:15",
-                text: "Hello! We are the Arctic Dispatch Team."
+                text: "Hello! We recieved a SOS signal and we need your help!!!"
             },
 
             {
                 type: "text",
                 sender: "Dispatch",
                 time: "10:15",
-                text: "We are very happy that you are here."
+                text: "A research ship is stuck in the arctic and you need to send essential for survival infomration."
+            },
+            {
+                type: "text",
+                sender: "Dispatch",
+                time: "10:15",
+                text: "Before you can start: We are your Arctic Dispatch Team, but we need to know who you are!."
             },
 
             {
                 type: "input",
                 variable: "teamName",
-                question: "Before we begin, what is your team name?",
+                question: "Please sned us your team name.",
                 placeholder: "Team name"
             },
 
             {
                 type: "text",
                 sender: "Dispatch",
-                text: "Welcome Team {teamName}!"
+                time: "10:20",
+                text: "Fantastic Team {teamName}! Are you at the right location? We will send you a photo, where you have to start."
             },
             {
                 type: "image",
@@ -47,12 +54,20 @@ const STORIES = {
             },
             {
                 type: "upload",
-                question: "Please send us a picture with the Gateway to the Arctic."
+                question: "Please send us a picture with you and the Gateway to the Arctic to confirm your location."
             },
 
             {
                 type: "text",
-                text: "Perfect! We verified your location."
+                sender: "Dispatch",
+                time: "10:22",
+                text: "Perfect! We verified your location. YOu have to follow 4 historic explorer to help the lost crew."
+            },
+            {
+                type: "text",
+                sender: "Dispatch",
+                time: "10:24",
+                text: "We recieved the letters for your first location. Good luck {teamName}"
             },
 
             {

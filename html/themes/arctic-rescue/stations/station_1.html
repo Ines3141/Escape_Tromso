@@ -29,10 +29,6 @@
 
         <story-chat story="dispatch_intro"></story-chat>
 
-
-        <div class="image-container">
-            <img src="../../../../assets/images/Station_1_gate.jfif" alt="Station 1" class="imag-station">
-        </div>
         <div id="profileOverlay" class="profile-overlay hidden">
             <div class="profile-card">
                 <button class="close-profile" onclick="closeProfile()">×</button>
@@ -59,109 +55,21 @@
                 </div>
             </div>
         </div>
-        <div class="audio-row">
-            <button class="audio-btn" id="audioBtn">&#128266;</button>
-            <div id="subtitle" class="subtitle"></div>
-        </div>
-        <audio id="voice" preload="auto">
-            <source src="../../../../assets/audio/Station_1_Welcome.m4a" type="audio/mp4">
-        </audio>
+
 
         <button id="profile" class="profile-button" onclick="openProfile()" style="display:none;">
             Explorer Gateway to arctic
         </button>
-        <!-- for actual game do </button>style="display:none;">, but now it is just blocking -->
         <button class="riddle-button" id="riddle_btn" onclick="window.location.href='../riddle/riddle_1.html'">
             Solve Riddle
         </button>
-        <button onclick="
-                localStorage.removeItem('dispatch_intro_step');
+        <button onclick=" localStorage.removeItem('dispatch_intro_step');
                 localStorage.removeItem('teamName');
-                location.reload();
-            ">
+                location.reload();">
                         Reset chat
         </button>
         <script>
-
-            const audio = document.getElementById("voice");
-            const audio_btn = document.getElementById("audioBtn");
-
             /* Buttons */
-            const settingsBtn = document.getElementById("settingsBtn");
-            const settingsMenu = document.getElementById("settingsMenu");
-            const volumeSlider = document.getElementById("volumeSlider");
-            const location_btn = document.getElementById("Location_btn");
-            const riddle_btn = document.getElementById("riddle_btn");
-
-            const image = document.querySelector(".image-container");
-            const savedVolume = localStorage.getItem("volume");
-            const subtitleBox = document.getElementById("subtitle");
-            const subtitle = [
-                { start: 0, end: 5, text: "--- SOS Signal Detected ---" },
-                { start: 5, end: 7, text: "Do you hear that?" },
-                { start: 7, end: 9, text: "It sounds like an SOS call." },
-                { start: 9, end: 13, text: "Someone is in trouble and needs your help." },
-                { start: 13, end: 16, text: "Welcome to the Rescue Hunt of the Lost Polar Expedition." },
-                { start: 16, end: 18, text: "A crew of five explorers is trapped in the Arctic." },
-                { start: 18, end: 22, text: "Their only hope is the information you uncover." },
-                { start: 22, end: 27, text: "At each station, you will meet polar explorers and Arctic heroes." },
-                { start: 27, end: 31, text: "Each of them holds an important clue." },
-                { start: 31, end: 35, text: "Solve riddles and collect their information." },
-                { start: 35, end: 39, text: "Every clue brings the crew closer to safety." },
-                { start: 39, end: 42, text: "Are you ready?" },
-                { start: 42, end: 46, text: "The lives of five people depend on you." },
-                { start: 46, end: 50, text: "Hurry. The rescue mission starts now." },
-                { start: 50, end: 53, text: "Proceed to the Riddle Page." }
-            ];
-
-            /* To save the volume for all the other html*/
-            if (savedVolume !== null) {
-                audio.volume = savedVolume;
-                volumeSlider.value = savedVolume;
-            }
-            volumeSlider.addEventListener("input", () => {
-                audio.volume = volumeSlider.value;
-                localStorage.setItem("volume", volumeSlider.value);
-            });
-
-            audio_btn.addEventListener("click", () => {
-                if (audio.paused) {
-                    audio.play();
-                    image.classList.add("speaking");
-                } else {
-                    audio.pause();
-                    image.classList.remove("speaking");
-                }
-            });
-            audio.addEventListener("ended", () => {
-                image.classList.remove("speaking");
-                riddle_btn.style.display = "block";
-            });
-            audio.addEventListener("timeupdate", () => {
-                const current = audio.currentTime;
-
-                const line = subtitle.find(sub =>
-                    current >= sub.start && current <= sub.end
-                );
-
-                subtitleBox.textContent = line ? line.text : "";
-            });
-            location_btn.addEventListener("click", () => {
-                window.open("https://www.google.com/maps/search/Tromsø+Harbour");
-            });
-
-            settingsBtn.addEventListener("click", (event) => {
-                event.stopPropagation();
-                settingsMenu.classList.toggle("hidden");
-            });
-
-            settingsMenu.addEventListener("click", (event) => {
-                event.stopPropagation();
-            });
-
-            document.addEventListener("click", () => {
-                settingsMenu.classList.add("hidden");
-            });
         </script>
     </div>
     <game-navigation previous="intro.html" next="../riddle/riddle_1.html">

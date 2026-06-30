@@ -7,13 +7,28 @@
     <title>Station 1</title>
     <link rel="stylesheet" href="../../../../CSS/global.css">
     <link rel="stylesheet" href="../../../../CSS/station.css">
+    <link rel="stylesheet" href="../../../../CSS/attachments.css">
+    <script src="../../../../Stations/JAVA/attachments.js"></script>
+    <script src="../../../../Stations/JAVA/story_data.js"></script>
+    <script src="../../../../Stations/JAVA/story_chat.js"></script>
     <script src="../../../../Stations/JAVA/navigation.js"></script>
+
+    <style>
+        story-chat {
+            display: block;
+            width: fit-content;
+            margin: 0 auto;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="box">      
+    <div class="box">
         <h1>Station 1</h1>
         <p>Gateway to the Arctic</p>
+
+        <story-chat story="dispatch_intro"></story-chat>
+
 
         <div class="image-container">
             <img src="../../../../assets/images/Station_1_gate.jfif" alt="Station 1" class="imag-station">
@@ -59,7 +74,15 @@
         <button class="riddle-button" id="riddle_btn" onclick="window.location.href='../riddle/riddle_1.html'">
             Solve Riddle
         </button>
+        <button onclick="
+                localStorage.removeItem('dispatch_intro_step');
+                localStorage.removeItem('teamName');
+                location.reload();
+            ">
+                        Reset chat
+        </button>
         <script>
+
             const audio = document.getElementById("voice");
             const audio_btn = document.getElementById("audioBtn");
 

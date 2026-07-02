@@ -17,9 +17,10 @@
         this.shadowRoot.innerHTML = `
             <style>
             .chat {
-                display:block;
+                display: block;
                 width: 320px;
-                min-height: 560px;
+                height: 560px;
+                overflow-y: auto;
                 background: #061927;
                 border-radius: 14px;
                 padding: 16px;
@@ -168,6 +169,19 @@
                 </div>
                 <div id="messages"></div>
             </div>`;
+        const chatBox = this.shadowRoot.querySelector(".chat");
+
+        chatBox.addEventListener("scroll", () => {
+            localStorage.setItem(this.storyName + "_scroll", chatBox.scrollTop);
+        });
+
+        this.renderHistory();
+
+        setTimeout(() => {
+            const savedScroll = Number(localStorage.getItem(this.storyName + "_scroll")) || 0;
+            chatBox.scrollTop = savedScroll;
+        }, 0);
+
         this.next();
     }
 
@@ -176,7 +190,33 @@
         const step = this.story.steps[this.currentStep];
         this.showTyping(step);
     }
+    renderHistory() {
+        for (let i = 0; i < this.currentStep; i++) {
+            const step = this.story.steps[i];
 
+            switch (step.type) {
+                case "text":
+                    this.addText(step);
+                    break;
+
+                case "file":
+                    this.addFile(step, false);
+                    break;
+
+                case "image":
+                    this.addImage(step, false);
+                    break;
+
+                case "input":
+                    this.addSavedInput(step);
+                    break;
+
+                case "upload":
+                    this.addSavedUpload(step, i);
+                    break;
+            }
+        }
+    }
 
     showTyping(step) {
         const messages = this.shadowRoot.querySelector("#messages");
@@ -217,20 +257,28 @@
                 break;
         }
     }
-    addImage(step) {
+    addImage(step, shouldAdvance = true) {
         const messages = this.shadowRoot.querySelector("#messages");
 
         const div = document.createElement("div");
         div.className = "message " + (
-            step.sender === "user" ? "from-user" : "from-phone");
+            step.sender === "user" ? "from-user" : "from-phone"
+        );
+
         div.innerHTML = `
             <span class="time">${step.time || ""}</span>
-            <img class="chat-image" src="${step.src}" alt="${step.name || "image"}">`;
+            <img class="chat-image" src="${step.src}" alt="${step.name || "image"}">
+        `;
+
         div.querySelector("img").onclick = () => {
             this.openImageFullscreen(step.src);
         };
+
         messages.appendChild(div);
-        this.advance();
+
+        if (shouldAdvance) {
+            this.advance();
+        }
     }
     openImageFullscreen(src) {
         const modal = document.createElement("div");
@@ -308,7 +356,7 @@
             const userMessage = document.createElement("div");
             userMessage.className = "message from-user";
             userMessage.textContent = value;
-            
+
             this.shadowRoot.querySelector("#messages").appendChild(userMessage);
             this.saveInput(step, value);
             if (step.redirect) {
@@ -324,24 +372,38 @@
 
         this.shadowRoot.querySelector("#messages").appendChild(question);
         this.shadowRoot.querySelector("#messages").appendChild(container);
-    }           
+    }
 
-    addFile(step) {
+    addFile(step, shouldAdvance = true) {
         const button = document.createElement("button");
         button.className = "file";
         button.innerHTML = `📄 ${step.name}`;
 
         button.onclick = () => {
-            this.openAttachment(step);
+            this.openAttachment(step, shouldAdvance);
         };
 
         this.shadowRoot.querySelector("#messages").appendChild(button);
     }
-    openAttachment(step) {
+    openAttachment(step, shouldAdvance = true) {
         if (step.action && window.ATTACHMENTS && window.ATTACHMENTS[step.action]) {
             window.ATTACHMENTS[step.action](step, () => {
-                this.advance();
+                if (shouldAdvance) {
+                    this.advance();
+                }
             });
+            return;
+        }
+
+        if (step.open) {
+            const dispatch = document.createElement("incoming-dispatch");
+            dispatch.setAttribute("letter-id", step.open);
+            document.body.appendChild(dispatch);
+
+            if (shouldAdvance) {
+                this.advance();
+            }
+
             return;
         }
 
@@ -353,12 +415,8 @@
 
         if (step.image) {
             content.innerHTML = `<img src="${step.image}" alt="${step.name}">`;
-        }
-        else if (step.open && window.LETTERS && window.LETTERS[step.open]) {
-            content.innerHTML = renderLetterHTML(window.LETTERS[step.open]);
-        }
-        else {
-            content.innerHTML = `<p>Letter not found: ${step.open || step.name}</p>`;
+        } else {
+            content.innerHTML = `<p>Attachment not found: ${step.name}</p>`;
         }
 
         const close = document.createElement("button");
@@ -367,16 +425,71 @@
 
         close.onclick = () => {
             modal.remove();
-            this.advance();
+
+            if (shouldAdvance) {
+                this.advance();
+            }
         };
 
         content.appendChild(close);
         modal.appendChild(content);
         this.shadowRoot.appendChild(modal);
+    }
+    addSavedInput(step) {
+        const messages = this.shadowRoot.querySelector("#messages");
 
-        setupMorseLamps(this.shadowRoot);
+        const question = document.createElement("div");
+        question.className = "message from-phone";
+        question.innerHTML = `
+        <span class="time">${step.time || ""}</span>
+        ${step.question || ""}
+    `;
+
+        messages.appendChild(question);
+
+        if (step.variable) {
+            const savedValue = localStorage.getItem(step.variable);
+
+            if (savedValue) {
+                const userMessage = document.createElement("div");
+                userMessage.className = "message from-user";
+                userMessage.textContent = savedValue;
+                messages.appendChild(userMessage);
+            }
+        }
     }
 
+    addSavedUpload(step, stepIndex) {
+        const messages = this.shadowRoot.querySelector("#messages");
+
+        const question = document.createElement("div");
+        question.className = "message from-phone";
+        question.innerHTML = `
+        <span class="time">${step.time || ""}</span>
+        ${step.question || "Please upload a file."}
+    `;
+
+        messages.appendChild(question);
+
+        const savedUpload = localStorage.getItem(this.storyName + "_upload_" + stepIndex);
+
+        if (!savedUpload) return;
+
+        const uploadData = JSON.parse(savedUpload);
+
+        const div = document.createElement("div");
+        div.className = "message from-user";
+        div.innerHTML = `
+        <span class="time">uploaded</span>
+        <img class="chat-image" src="${uploadData.src}" alt="${uploadData.name}">
+    `;
+
+        div.querySelector("img").onclick = () => {
+            this.openImageFullscreen(uploadData.src);
+        };
+
+        messages.appendChild(div);
+    }
     addUpload(step) {
         const messages = this.shadowRoot.querySelector("#messages");
 
@@ -401,7 +514,16 @@
             const reader = new FileReader();
 
             reader.onload = () => {
+                localStorage.setItem(
+                    this.storyName + "_upload_" + this.currentStep,
+                    JSON.stringify({
+                        src: reader.result,
+                        name: file.name
+                    })
+                );
+
                 container.remove();
+
                 const div = document.createElement("div");
                 div.className = "message from-user";
                 div.innerHTML = `

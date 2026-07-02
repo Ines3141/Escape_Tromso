@@ -65,10 +65,15 @@
         <button class="riddle-button" id="riddle_btn" onclick="window.location.href='../riddle/riddle_1.html'">
             Solve Riddle
         </button>
-        <button onclick=" localStorage.removeItem('dispatch_intro_step');
-                localStorage.removeItem('teamName');
-                location.reload();">
-                        Reset chat
+        <button onclick="
+            localStorage.removeItem('dispatch_intro_step');
+            localStorage.removeItem('dispatch_intro_scroll');
+            localStorage.removeItem('dispatch_intro_upload_6');
+            localStorage.removeItem('teamName');
+            localStorage.removeItem('stationReady');
+            location.reload();
+        ">
+            Reset chat
         </button>
         <script>
             /* Buttons */
@@ -77,4 +82,5 @@
     <game-navigation previous="intro.html" next="../riddle/riddle_1.html">
     </game-navigation>
 </body>
+
 </html>

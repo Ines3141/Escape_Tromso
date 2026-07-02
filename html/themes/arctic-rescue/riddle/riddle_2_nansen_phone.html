@@ -1,0 +1,263 @@
+﻿<!-- THINGS TO DO:
+    - Create css file for this html page for more structure
+    - Check nansen_phone.js for TO-DO list
+    - Discuss design. There are still improvements necessary
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>Phone number Nansen </title>
+    <link rel="stylesheet" href="../../../../CSS/global.css"> <!-- link to style sheet -->
+    <script src="../../../../Stations/JAVA/navigation.js"></script>
+    <style>
+        .nansen-riddle {
+            max-width: 760px;
+            margin: 40px auto;
+            padding: 28px;
+            background: radial-gradient(circle at top, #123b63, #061927 70%);
+            color: white;
+            border-radius: 22px;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+
+        .clue-card {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.18);
+            padding: 16px;
+            border-radius: 16px;
+            margin: 18px auto;
+            max-width: 420px;
+        }
+
+        .dot {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .green { background: #48d14f; }
+        .red { background: #e94a4a; }
+
+        .country-code {
+            display: inline-block;
+            font-size: 36px;
+            font-weight: 900;
+            padding: 12px 22px;
+            border-radius: 16px;
+            background: #0b2232;
+            border: 2px solid #35586b;
+        }
+
+        .instruction {
+            max-width: 620px;
+            margin: 18px auto;
+            line-height: 1.5;
+            color: #d7ecff;
+        }
+
+        .magic-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 76px);
+            gap: 10px;
+            justify-content: center;
+            margin: 28px 0;
+        }
+
+        .cell-wrap {
+            position: relative;
+        }
+
+        .magic-cell {
+            width: 76px;
+            height: 76px;
+            font-size: 32px;
+            text-align: center;
+            border-radius: 14px;
+            border: 3px solid #35586b;
+            background: #0b2232;
+            color: white;
+            font-weight: bold;
+            box-sizing: border-box;
+        }
+
+        .cell-wrap.phone .magic-cell {
+            background: #f6e65b !important;
+            color: #222;
+            border: 3px solid #666;
+        }
+
+        .cell-wrap.green-path .magic-cell {
+            border-color: #48d14f;
+            background: rgba(72, 209, 79, 0.15);
+        }
+
+        .cell-wrap.red-path .magic-cell {
+            border-color: #e94a4a;
+            background: rgba(233, 74, 74, 0.15);
+        }
+
+        .cell-wrap.both-path .magic-cell {
+            border-left-color: #48d14f;
+            border-top-color: #48d14f;
+            border-right-color: #e94a4a;
+            border-bottom-color: #e94a4a;
+        }
+
+        .order-badge {
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            font-size: 13px;
+            font-weight: bold;
+            line-height: 22px;
+            color: white;
+            z-index: 2;
+        }
+
+        .order-badge.green-order {
+            background: #48d14f;
+        }
+
+        .order-badge.red-order {
+            background: #e94a4a;
+        }
+
+        .magic-cell.correct {
+            outline: 3px solid #72ff8a;
+        }
+
+        .magic-cell.wrong {
+            outline: 3px solid #ff6868;
+        }
+
+        #callNansenBtn {
+            padding: 14px 28px;
+            border: none;
+            border-radius: 14px;
+            background: #f8dc44;
+            color: #061927;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .phone-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.82);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .phone-overlay.hidden {
+            display: none;
+        }
+
+        .phone-box {
+            width: 340px;
+            background: #061927;
+            color: white;
+            border-radius: 22px;
+            padding: 26px;
+            text-align: center;
+            position: relative;
+            border: 2px solid #35586b;
+        }
+
+        #closePhone {
+            position: absolute;
+            top: 10px;
+            right: 12px;
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 26px;
+            cursor: pointer;
+        }
+
+        .phone-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin: 22px 0;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        #phoneInput {
+            width: 120px;
+            font-size: 30px;
+            text-align: center;
+            border-radius: 10px;
+            border: 2px solid #35586b;
+            background: #0b2232;
+            color: white;
+        }
+
+        #callBtn {
+            padding: 14px 28px;
+            border: none;
+            border-radius: 14px;
+            background: #1f9d4c;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        #phoneMessage {
+            margin-top: 16px;
+            font-weight: bold;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="box">
+        <!-- riddle_1.html -->
+        <div class="nansen-riddle">
+            <h1>Call Nansen</h1>
+            <div class="clue-card">
+                <p><span class="dot green"></span> Greenland Expedition</p>
+                <p><span class="dot red"></span> Nobel Peace Prize</p>
+            </div>
+            <p class="country-code">+47 Norway</p>
+            <p class="instruction">
+                Follow the coloured paths. The small numbers show the order.
+                Fill the grid so every row, column and diagonal has the same sum.
+                The yellow fields form Nansen’s phone number.
+            </p>
+            <div id="magicGrid" class="magic-grid"></div>
+            <button id="callNansenBtn">☎ Call Nansen</button>
+        </div>
+        <div id="phoneOverlay" class="phone-overlay hidden">
+            <div class="phone-box">
+                <button id="closePhone">×</button>
+                <h2>Call Fridtjof Nansen</h2>
+                <div class="phone-display">
+                    <span>+47</span>
+                    <input id="phoneInput" maxlength="6" placeholder="------">
+                </div>
+                <button id="callBtn">CALL</button>
+                <p id="phoneMessage"></p>
+            </div>
+        </div>
+        <game-navigation previous="riddle_1.html" next="../stations/riddle_2_nansen_phone.html">
+        </game-navigation>
+        <!-- DEVELOPMENT ONLY -->
+        <button id="devContinueBtn">Continue (DEV)</button>
+    </div>
+    <script src="../../../../Stations/JAVA/nansen_phone.js"></script>
+</body>
+</html>

@@ -1,13 +1,25 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿<!-- QUESTIONS
+- It has only a small script. Is it not neseccary to create an extra file right?
+  Please send me your opion via whatsapp
 
+THINGS TO DO:
+- change the text design and the paragraphs
+- Add comments to function in the script 
+- Add Google maps link to the Arctic gate to the page
+- Create own CSS file. 
+
+THINGS TO CHANGE AT THE END:
+    - Timing how the text is loading controlled in the function
+      typeWriter() and revealStations()
+-->
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mission Briefing</title>
-
     <link rel="stylesheet" href="../../CSS/global.css">
-
+    <script src="../../../../Stations/JAVA/navigation.js"></script>
     <style>
         body {
             background: linear-gradient(180deg, #153754 0%, #0a1d2e 100%);
@@ -177,29 +189,18 @@
             font-style: italic;
         }
     </style>
-
 </head>
-
 <body>
-
     <div class="briefing-box">
-
         <div class="logo">🧭</div>
-
         <h1>ARCTIC EXPLORER RESCUE MISSION</h1>
-
         <p class="subtitle">
             Official Mission Briefing
         </p>
-
         <div id="introText"></div>
-
         <div class="section" id="section1">
-
             <h2>Before You Begin</h2>
-
             <div class="checklist">
-
                 <div class="item">
                     <div class="icon">🔊</div>
                     <div>
@@ -207,14 +208,12 @@
                         Several riddles include audio clues.
                     </div>
                 </div>
-
                 <div class="item">
                     <div class="icon">📶</div>
                     <div>
                         Keep an internet connection during the mission.
                     </div>
                 </div>
-
                 <div class="item">
                     <div class="icon">☕</div>
                     <div>
@@ -222,144 +221,90 @@
                         Your progress will be saved.
                     </div>
                 </div>
-
             </div>
-
         </div>
-
         <div class="section" id="section2">
-
             <div class="cards">
-
                 <div class="card">
-
                     <h3>⚙ Settings</h3>
-
                     <ul>
                         <li>Adjust volume</li>
                         <li>Accessibility options</li>
                         <li>Replay audio clues</li>
                     </ul>
-
                 </div>
-
                 <div class="card">
-
                     <h3>☰ Mission Menu</h3>
-
                     <ul>
                         <li>📥 Inbox</li>
                         <li>🎒 Inventory</li>
                         <li>👤 Polar Explorer Profiles</li>
                     </ul>
-
                     <p>
                         These tools are available throughout the mission.
                     </p>
-
                 </div>
-
             </div>
-
         </div>
-
         <div class="section mission-card" id="section3">
-
             <h2>MISSION 01</h2>
-
             <div class="destination">
                 📍 Gateway to the Arctic
             </div>
-
             <div class="coords">
                 69.6493° N<br>
                 18.9560° E
             </div>
-
             <p>
                 Travel to the Gateway to the Arctic.
                 Once you arrive, press the button below to begin your mission.
             </p>
-
             <button class="start-btn"
                     onclick="window.location.href='station_1.html'">
-
                 ▶ BEGIN EXPEDITION
-
             </button>
-
         </div>
-
         <div class="footer">
-
             Good luck, Explorer.<br><br>
-
             <strong>The Arctic Discovery Team</strong>
-
         </div>
-
+        <game-navigation previous="../../../../index.html" next="station_1.html">
+        </game-navigation>
     </div>
-
     <script>
-
         const text =
             `Welcome to the Arctic Explorer Rescue Mission.
-
-Your mission is to help a crew trapped in the Arctic by recovering crucial information hidden throughout Tromsø.
-
-During your journey you will meet the stories of legendary polar explorers, each providing an important clue.
-
-Visit every location, solve the riddles, and piece together the information needed to rescue the expedition.
-
-Every clue matters.
-The crew is counting on you.`;
-
+                    Your mission is to help a crew trapped in the Arctic
+                    by recovering crucial information hidden throughout Tromsø.
+                    During your journey you will meet the stories of legendary
+                    polar explorers, each providing an important clue.
+                    Visit every location, solve the riddles, and piece together
+                    the information needed to rescue the expedition.
+                    Every clue matters.
+                    The crew is counting on you.`;
         const target = document.getElementById("introText");
-
         let i = 0;
-
         function typeWriter() {
-
             if (i < text.length) {
-
                 target.innerHTML += text.charAt(i);
-
                 i++;
-
-                setTimeout(typeWriter, 22);
-
+                setTimeout(typeWriter, 1);
             }
-
             else {
-
                 revealSections();
-
             }
-
         }
-
         function revealSections() {
-
             const sections = document.querySelectorAll(".section");
-
             sections.forEach((section, index) => {
-
                 setTimeout(() => {
-
                     section.classList.add("show");
-
                 }, index * 350);
-
             });
-
         }
-
         typeWriter();
-
     </script>
-
 </body>
-
 </html>
 
 <!--

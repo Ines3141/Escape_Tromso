@@ -16,70 +16,71 @@ const STORIES = {
                 type: "text",
                 sender: "Dispatch",
                 time: "10:15",
-                text: "Hello! We recieved a SOS signal and we need your help!!!"
-            },
-
-            {
-                type: "text",
-                sender: "Dispatch",
-                time: "10:15",
-                text: "A research ship is stuck in the arctic and you need to send essential for survival infomration."
+                text: "Hello! We received an SOS signal and need your help!"
             },
             {
                 type: "text",
                 sender: "Dispatch",
                 time: "10:15",
-                text: "Before you can start: We are your Arctic Dispatch Team, but we need to know who you are!."
+                text: "A research ship is stuck in the Arctic. The crew needs essential survival information."
             },
-
+            {
+                type: "text",
+                sender: "Dispatch",
+                time: "10:15",
+                text: "Before we begin, we need to know who we are speaking with."
+            },
             {
                 type: "input",
                 variable: "teamName",
-                question: "Please sned us your team name.",
+                question: "Please send us your team name.",
                 placeholder: "Team name"
             },
-
             {
                 type: "text",
                 sender: "Dispatch",
                 time: "10:20",
-                text: "Fantastic Team {teamName}! Are you at the right location? We will send you a photo, where you have to start."
-            },
-            {
-                type: "image",
-                sender: "Dispatch",
-                time: "10:18",
-                name: "Gateway photo",
-                src: "../../../../assets/images/Station_1_gate.jfif" /*Starts at the location of index.html*/
+                text: "Fantastic, Team {teamName}! Now we need to confirm your location. We will send you a photo of where to start."
             },
             {
                 type: "upload",
-                question: "Please send us a picture with you and the Gateway to the Arctic to confirm your location."
+                question: "Please send us a picture of you at the Gateway to the Arctic to confirm your location."
             },
-
             {
                 type: "text",
                 sender: "Dispatch",
                 time: "10:22",
-                text: "Perfect! We verified your location. YOu have to follow 4 historic explorer to help the lost crew."
+                text: "Perfect! We verified your location. You must now follow the trail of four historic explorers to help the lost crew."
             },
             {
                 type: "text",
                 sender: "Dispatch",
                 time: "10:24",
-                text: "We recieved the letters for your first location. Good luck {teamName}"
+                text: "We received the first letters for your mission. Good luck, Team {teamName}!"
             },
-
             {
                 type: "file",
-                name: "blinking_signal.jpg",
-                open: "letter1"
+                name: "treasure_map.jpg",
+                image: "../../../../assets/images/station_1_test.jpg"
             },
-
             {
                 type: "file",
                 name: "handwritten_note.pdf",
-                open: "letter2"
+                open: "station-1-signal"
+            },
+            {
+                type: "text",
+                sender: "Dispatch",
+                time: "10:26",
+                text: "Write us OKAY, when you reached the next station."
+            },
+            {
+                type: "input",
+                variable: "stationReady",
+                question: "",
+                placeholder: "Write OKAY",
+                correctAnswer: "okay",
+                wrongAnswer: "Are you there? Please write OKAY when you have reached the next station."
             }
 
         ]

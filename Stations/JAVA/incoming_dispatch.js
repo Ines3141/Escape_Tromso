@@ -12,7 +12,7 @@
 
         const teamName = localStorage.getItem("teamName") || "XY";
 
-        const letters = {
+        window.LETTERS = window.LETTERS || {
             "station-1-signal": {
                 title: "Strange Signal Received",
                 hasLamp: true,
@@ -133,7 +133,7 @@
             }
         };
 
-        const letter = letters[letterId];
+        const letter = window.LETTERS[letterId];
 
         if (!letter) {
             this.shadowRoot.innerHTML = `<p>Letter not found.</p>`;

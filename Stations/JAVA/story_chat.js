@@ -222,23 +222,15 @@
 
         const div = document.createElement("div");
         div.className = "message " + (
-            step.sender === "user" ? "from-user" : "from-phone"
-        );
-
+            step.sender === "user" ? "from-user" : "from-phone");
         div.innerHTML = `
-        <span class="time">${step.time || ""}</span>
-        <img class="chat-image" src="${step.src}" alt="${step.name || "image"}">
-    `;
-
+            <span class="time">${step.time || ""}</span>
+            <img class="chat-image" src="${step.src}" alt="${step.name || "image"}">`;
         div.querySelector("img").onclick = () => {
             this.openImageFullscreen(step.src);
         };
-
         messages.appendChild(div);
-
-        this.currentStep++;
-        localStorage.setItem(this.storyName + "_step", this.currentStep);
-        this.next();
+        this.advance();
     }
     openImageFullscreen(src) {
         const modal = document.createElement("div");
@@ -261,32 +253,22 @@
 
     addText(step) {
         const div = document.createElement("div");
-        const text = step.text.replaceAll(
-            "{teamName}",
-            localStorage.getItem("teamName") || ""
-        );
-        div.innerHTML = `
-            <span class="time">${step.time || ""}</span>
-            ${text}
-        `;
+
         div.className = "message " + (
             step.sender === "user" ? "from-user" : "from-phone"
         );
 
-        div.innerHTML = `
-            <small>${step.time}</small><br>
-            ${step.text.replace(
+        const text = (step.text || "").replaceAll(
             "{teamName}",
             localStorage.getItem("teamName") || ""
-        )}
-        `;
+        );
 
-        this.shadowRoot
-            .querySelector("#messages")
-            .appendChild(div);
+        div.innerHTML = `
+        <span class="time">${step.time || ""}</span>
+        ${text}
+    `;
 
-        this.shadowRoot.querySelector("#messages").scrollTop =
-            this.shadowRoot.querySelector("#messages").scrollHeight;
+        this.shadowRoot.querySelector("#messages").appendChild(div);
     }
 
     addInput(step) {
@@ -297,9 +279,7 @@
         question.className = "message from-phone";
         question.innerHTML = `
         <span class="time">${step.time || ""}</span>
-        ${step.question || ""}
-    `;
-
+        ${step.question || ""}`;
         const input = document.createElement("input");
         input.placeholder = step.placeholder || "Write here...";
 
@@ -308,21 +288,35 @@
 
         button.onclick = () => {
             const value = input.value.trim();
+
             if (value === "") return;
 
-            localStorage.setItem(step.variable || "teamName", value);
+            if (step.correctAnswer) {
+                if (value.toLowerCase() !== step.correctAnswer.toLowerCase()) {
+                    const wrong = document.createElement("div");
+                    wrong.className = "message from-phone";
+                    wrong.innerHTML = step.wrongAnswer || "Please try again.";
 
+                    this.shadowRoot.querySelector("#messages").appendChild(wrong);
+
+                    input.value = "";
+                    return;
+                }
+            }
             container.remove();
 
             const userMessage = document.createElement("div");
             userMessage.className = "message from-user";
             userMessage.textContent = value;
-
+            
             this.shadowRoot.querySelector("#messages").appendChild(userMessage);
+            this.saveInput(step, value);
+            if (step.redirect) {
+                window.location.href = step.redirect;
+                return;
+            }
 
-            this.currentStep++;
-            localStorage.setItem(this.storyName + "_step", this.currentStep);
-            this.next();
+            this.advance();
         };
 
         container.appendChild(input);
@@ -358,9 +352,13 @@
         content.className = "modal-content";
 
         if (step.image) {
-            content.innerHTML = `<img src="${step.image}">`;
-        } else {
-            content.innerHTML = `<p>${step.name}</p>`;
+            content.innerHTML = `<img src="${step.image}" alt="${step.name}">`;
+        }
+        else if (step.open && window.LETTERS && window.LETTERS[step.open]) {
+            content.innerHTML = renderLetterHTML(window.LETTERS[step.open]);
+        }
+        else {
+            content.innerHTML = `<p>Letter not found: ${step.open || step.name}</p>`;
         }
 
         const close = document.createElement("button");
@@ -375,6 +373,8 @@
         content.appendChild(close);
         modal.appendChild(content);
         this.shadowRoot.appendChild(modal);
+
+        setupMorseLamps(this.shadowRoot);
     }
 
     addUpload(step) {
@@ -402,24 +402,16 @@
 
             reader.onload = () => {
                 container.remove();
-
                 const div = document.createElement("div");
                 div.className = "message from-user";
-
                 div.innerHTML = `
                 <span class="time">uploaded</span>
-                <img class="chat-image" src="${reader.result}" alt="${file.name}">
-            `;
-
+                <img class="chat-image" src="${reader.result}" alt="${file.name}">`;
                 div.querySelector("img").onclick = () => {
                     this.openImageFullscreen(reader.result);
                 };
-
                 messages.appendChild(div);
-
-                this.currentStep++;
-                localStorage.setItem(this.storyName + "_step", this.currentStep);
-                this.next();
+                this.advance();
             };
 
             reader.readAsDataURL(file);
@@ -430,10 +422,17 @@
         messages.appendChild(question);
         messages.appendChild(container);
     }
+    /* Next step in chat */
     advance() {
         this.currentStep++;
         localStorage.setItem(this.storyName + "_step", this.currentStep);
         this.next();
+    }
+    /* Helper function to save parameter in local storage. */
+    saveInput(step, value) {
+        if (step.variable) {
+            localStorage.setItem(step.variable, value);
+        }
     }
 }
 customElements.define("story-chat", StoryChat);

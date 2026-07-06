@@ -8,6 +8,7 @@
 -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
@@ -27,8 +28,8 @@
         }
 
         .clue-card {
-            background: rgba(255,255,255,0.08);
-            border: 1px solid rgba(255,255,255,0.18);
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.18);
             padding: 16px;
             border-radius: 16px;
             margin: 18px auto;
@@ -43,8 +44,13 @@
             margin-right: 8px;
         }
 
-        .green { background: #48d14f; }
-        .red { background: #e94a4a; }
+        .green {
+            background: #48d14f;
+        }
+
+        .red {
+            background: #e94a4a;
+        }
 
         .country-code {
             display: inline-block;
@@ -155,7 +161,7 @@
         .phone-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(0,0,0,0.82);
+            background: rgba(0, 0, 0, 0.82);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -223,9 +229,9 @@
             margin-top: 16px;
             font-weight: bold;
         }
-        
     </style>
 </head>
+
 <body>
     <div class="box">
         <!-- riddle_1.html -->
@@ -261,6 +267,9 @@
         <!-- DEVELOPMENT ONLY -->
         <button id="devContinueBtn">Continue (DEV)</button>
     </div>
+    <game-navigation previous="riddle_1_part2.html" next="../stations/station_2.html">
+    </game-navigation>
     <script src="../../../../Stations/JAVA/nansen_phone.js"></script>
 </body>
+
 </html>

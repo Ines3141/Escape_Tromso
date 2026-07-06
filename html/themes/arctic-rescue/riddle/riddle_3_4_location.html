@@ -7,6 +7,10 @@
     <title> Next station: Fisher Monument </title>
     <link rel="stylesheet" href="../../../../CSS/global.css"> <!-- link to style sheet -->
     <script src="../../../../Stations/JAVA/navigation.js"></script>
+    <script>
+        const previousPage = "riddle_3_3_maze.html";
+        const nextPage = "../stations/station_4.html";
+    </script>
 </head>
 
 <body>
@@ -34,15 +38,17 @@
         const mapButton = document.getElementById("location");
 
         submitButton.addEventListener("click", () => {
-            window.location.href = "../stations/station_4.html";
+            window.location.href = nextPage;
         });
 
         mapButton.addEventListener("click", () => {
             window.location.href = "https://www.google.com/maps/search/Stor+torget";
         });
     </script>
-    <game-navigation previous="riddle_3_part2.html" next="../stations/station_4.html">
-    </game-navigation>
+    <game-navigation></game-navigation>
+    <script>
+        setupGameNavigation();
+    </script>
 </body>
 
 </html>

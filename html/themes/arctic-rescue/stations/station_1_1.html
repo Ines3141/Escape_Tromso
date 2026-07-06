@@ -13,6 +13,10 @@
     <script src="../../../../Stations/JAVA/story_data.js"></script>
     <script src="../../../../Stations/JAVA/story_chat.js"></script>
     <script src="../../../../Stations/JAVA/navigation.js"></script>
+    <script>
+        const previousPage = "intro.html";
+        const nextPage = "../riddle/riddle_1_2_destination.html";
+    </script>
     <style>
         story-chat {
             display: block;
@@ -59,7 +63,7 @@
         <button id="profile" class="profile-button" onclick="openProfile()" style="display:none;">
             Explorer Gateway to arctic
         </button>
-        <button class="riddle-button" id="riddle_btn" onclick="window.location.href='../riddle/riddle_1.html'">
+        <button class="riddle-button" id="riddle_btn" onclick="window.location.href=nextPage">
             Solve Riddle
         </button>
         <button onclick="
@@ -76,7 +80,9 @@
             /* Buttons */
         </script>
     </div>
-    <game-navigation previous="intro.html" next="../riddle/riddle_1_part2.html">
-    </game-navigation>
+    <game-navigation></game-navigation>
+    <script>
+        setupGameNavigation();
+    </script>
 </body>
 </html>

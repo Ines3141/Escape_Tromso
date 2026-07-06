@@ -211,8 +211,8 @@
         const backBtn = this.shadowRoot.getElementById("backBtn");
         const forwardBtn = this.shadowRoot.getElementById("forwardBtn");
 
-        const previousPage = this.getAttribute("previous");
-        const nextPage = this.getAttribute("next");
+        const getPreviousPage = () => this.getAttribute("previous");
+        const getNextPage = () => this.getAttribute("next");
 
         const currentPage = window.location.pathname;
 
@@ -231,11 +231,14 @@
 
             return visited.includes(link);
         }
-
         function updateButtons() {
+            const previousPage = getPreviousPage();
+            const nextPage = getNextPage();
+
             backBtn.disabled = !previousPage;
             forwardBtn.disabled = !nextPage || !hasVisited(nextPage);
         }
+        this.updateButtons = updateButtons;
 
         settingsBtn.addEventListener("click", (event) => {
             event.stopPropagation();
@@ -297,12 +300,16 @@
         });
 
         backBtn.addEventListener("click", () => {
+            const previousPage = getPreviousPage();
+
             if (previousPage) {
                 window.location.href = previousPage;
             }
         });
 
         forwardBtn.addEventListener("click", () => {
+            const nextPage = getNextPage();
+
             if (nextPage && hasVisited(nextPage)) {
                 window.location.href = nextPage;
             }
@@ -476,5 +483,20 @@
         }
     }
 }
-
+function setupGameNavigation() {
+    /* Every page should have on the top the next/previous page defined.
+       One has only to add 
+       <game-navigation></game-navigation>
+       <script>
+            setupGameNavigation();
+       </script>
+    */
+    const gameNav = document.querySelector("game-navigation");
+    if (!gameNav) return;
+    gameNav.setAttribute("previous", previousPage);
+    gameNav.setAttribute("next", nextPage);
+    if (typeof gameNav.updateButtons === "function") {
+        gameNav.updateButtons();
+    }
+}
 customElements.define("game-navigation", GameNavigation);

@@ -1,12 +1,16 @@
 <!--Things to do:
- - Audio for wanny talk doesnt work.
- - CHAnge the volume for the static noise in wanny riddle
- - IF you do the frequency riddle and set the volume to zero and then move one of the dials the volume goes on again.
--->
+    - Change the volume for the static noise in wanny riddle.
+        LOUDER OR LESS???????
+    - IF you do the frequency riddle and set the volume to zero and then move one of the dials the volume goes on again.
+    - Change audio text fitting more for a recieving call.
+    - Add profile where one gets the hint for the fox pws so one can solve the next riddle
+    - Create js file for audio play. important for several stations. saves lines here
 
+THINGS TO DO LATER:
+    - remove riddle-button it is just temporary 
+-->
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
@@ -14,13 +18,15 @@
     <link rel="stylesheet" href="../../../../CSS/global.css">
     <link rel="stylesheet" href="../../../../CSS/station.css">
     <script src="../../../../Stations/JAVA/navigation.js"></script>
+    <script>
+        const previousPage = "../riddle/riddle_3_1_frequency.html";
+        const nextPage = "../riddle/riddle_3_3_maze.html";
+    </script>
 </head>
-
 <body>
     <div class="box">
         <h1>Station 3</h1>
         <p> Wanny Woldstad </p>
-
         <div class="person-container">
             <img src="../../../../assets/images/Wanny.jpg" alt="Station 3" class="imag-person">
         </div>
@@ -48,27 +54,18 @@
         <button id="profile" class="profile-button" onclick="openProfile()" style="display:none;">
             Explorer Profile
         </button>
-        <!--<button class="back-button" onclick="window.location.href='station_2.html'">
-            Back
-        </button> -->
         <!-- for actual game do </button>style="display:none;">, but now it is just blocking -->
-
-        <button class="riddle-button" id="riddle_btn" onclick="window.location.href='../riddle/riddle_3_Frequency.html'">
+        <button class="riddle-button" id="riddle_btn" onclick="window.location.href = nextPage">
             Solve Riddle
         </button>
         <div id="profileOverlay" class="profile-overlay hidden">
             <div class="profile-card">
-
                 <button class="close-profile" onclick="closeProfile()">×</button>
-
                 <img src="../../../../assets/images/Wanny.jpg" class="profile-img">
-
                 <h2>Wanny Woldstad</h2>
-
                 <p class="profile-subtitle">
                     Hunter • Taxi Driver • Arctic Pioneer
                 </p>
-
                 <div class="profile-tags">
                     <span>🏔 First Female Hunter on Svalbard</span>
                     <span>🚕 First Female Taxi Driver in Northern Norway</span>
@@ -104,27 +101,13 @@
             const btnC = document.getElementById("btnC");
             const audio_btn = document.getElementById("audioBtn");
             const riddle_btn = document.getElementById("riddle_btn");
-            const location_btn = document.getElementById("Location_btn");
             const profile_btn = document.getElementById("profile");
 
             const choices = document.getElementById("choices");
-            const settingsBtn = document.getElementById("settingsBtn");
-            const settingsMenu = document.getElementById("settingsMenu");
             const subtitle = document.getElementById("subtitle");
             const allAudios = [audio, audioA, audioB, audioC];
-            const volumeSlider = document.getElementById("volumeSlider");
 
             const person = document.querySelector(".person-container");
-            /* Location Link to Map */
-            location_btn.addEventListener("click", () => {
-                window.open('https://www.google.com/maps/search/Wanny+tromsoe');
-            })
-            /* Change Volume */
-            volumeSlider.addEventListener("input", () => {
-                allAudios.forEach(sound => {
-                    sound.volume = volumeSlider.value;
-                });
-            });
             /* Start the audio file and the subtitels. */
             audio_btn.addEventListener("click", () => {
                 if (audio.paused) {
@@ -250,28 +233,17 @@
             audioC.addEventListener("timeupdate", () => {
                 updateSubtitle(audioC, subtitlesC);
             });
-            settingsBtn.addEventListener("click", (event) => {
-                event.stopPropagation();
-                settingsMenu.classList.toggle("hidden");
-            });
-            settingsMenu.addEventListener("click", (event) => {
-                event.stopPropagation();
-            });
-            document.addEventListener("click", () => {
-                settingsMenu.classList.add("hidden");
-            });
             function openProfile() {
                 document.getElementById("profileOverlay").classList.remove("hidden");
             }
-
             function closeProfile() {
                 document.getElementById("profileOverlay").classList.add("hidden");
             }
         </script>
-
     </div>
-    <game-navigation previous="../riddle/riddle_2_location.html" next="../riddle/riddle_3_Frequency.html">
-    </game-navigation>
+    <game-navigation></game-navigation>
+    <script>
+        setupGameNavigation();
+    </script>
 </body>
-
 </html>

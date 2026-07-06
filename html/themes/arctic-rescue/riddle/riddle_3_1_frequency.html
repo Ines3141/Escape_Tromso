@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
@@ -8,6 +7,10 @@
     <link rel="stylesheet" href="../../../../CSS/global.css"> <!-- link to style sheet -->
     <link rel="stylesheet" href="../../../../CSS/arctic-theme.css">
     <script src="../../../../Stations/JAVA/navigation.js"></script>
+    <script>
+        const previousPage = "riddle_2_4_location.html";
+        const nextPage = "../stations/station_3_2.html";
+    </script>
     <style>
         .signal-console {
             max-width: 620px;
@@ -84,8 +87,8 @@
             font-weight: bold;
         }
     </style>
-</head>
 
+</head>
 <body>
     <div class="box">
         <div class="signal-console">
@@ -126,8 +129,9 @@
             <button id="continueBtn" style="display:none;">
                 Signal matched - Continue
             </button>
+            <!-- Remove later  --->
+            <button onclick="window.location.href = nextPage">Continue (DEV)</button>
         </div>
-
         <script>
             const correctSettings = [6, 5, 2];
             let settings = [0, 0, 0];
@@ -271,13 +275,13 @@
             });
 
             continueBtn.addEventListener("click", () => {
-                window.location.href = "riddle_3_part2.html";
+                window.location.href = nextPage;
             });
         </script>
-        <game-navigation previous="../stations/station_3.html" next="riddle_3_part2.html">
-        </game-navigation>
     </div>
-
+    <game-navigation></game-navigation>
+    <script>
+        setupGameNavigation();
+    </script>
 </body>
-
 </html>

@@ -1,7 +1,8 @@
-
 <!--Things to do:
-// - Fix so that the nansen call doesnt restart when you have done it already and goes back.
-// - Make it so that you can listen to the audio again
+    - Fix so that the nansen call doesnt restart when you have done it already and goes back.
+    - Make it so that you can listen to the audio again
+    - Change text to outgoing talk 
+     
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +14,10 @@
     <link rel="stylesheet" href="../../../../CSS/global.css">
     <link rel="stylesheet" href="../../../../CSS/station.css">
     <link rel="stylesheet" href="../../../../CSS/nansen.css">
-
+    <script>
+        const previousPage = "../riddle/riddle_2_1_phone.html";
+        const nextPage = "../riddle/riddle_2_3_ice.html";
+    </script>
     <script src="../../../../Stations/JAVA/navigation.js"></script>
 </head>
 
@@ -37,7 +41,7 @@
         </div>
     </div>
     <div class="box hidden" id="stationContent">
-        
+
         <h1>Fridtjof Nansen</h1>
 
 
@@ -107,7 +111,7 @@
             </div>
         </div>
         <div class="call-controls">
-            <button class="call-action end-call" onclick="window.location.href='station_1.html'">
+            <button class="call-action end-call" onclick="window.location.href = previousPage">
                 <span class="call-icon">📞</span>
                 <small>Hang up</small>
             </button>
@@ -118,11 +122,13 @@
             </button>
 
             <button id="nextBtn" class="call-action continue-call hidden"
-                onclick="window.location.href='../riddle/riddle_2.html'">
+                    onclick="window.location.href = nextPage">
                 <span class="call-icon">➜</span>
                 <small>Continue</small>
             </button>
         </div>
+        <!-- REMOVE LATER -->
+        <button onclick="window.location.href = nextPage"> DEV Continue</button>
         <script>
             /* Audio's file */
             const audio = document.getElementById("voice0");
@@ -144,7 +150,7 @@
 
             const subtitle = document.getElementById("subtitle");
             const teamName = localStorage.getItem("teamName") || "Explorer";
-           
+
             /* Start the audio file and the subtitels. */
             audio_btn.addEventListener("click", () => {
                 if (audio.paused) {
@@ -293,7 +299,7 @@
                 updateSubtitle(audioC, subtitlesC);
             });
 
-            
+
             function openProfile() {
                 document.getElementById("profileOverlay").classList.remove("hidden");
             }
@@ -325,8 +331,10 @@
         </script>
 
     </div>
-    <game-navigation previous="../riddle/riddle_2_nansen_phone.html" next="../riddle/riddle_2.html">
-    </game-navigation>
+    <game-navigation></game-navigation>
+    <script>
+        setupGameNavigation();
+    </script>
 </body>
 
 </html>

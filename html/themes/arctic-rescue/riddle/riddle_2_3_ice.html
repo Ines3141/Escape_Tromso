@@ -1,6 +1,14 @@
+<!--
+ THINGS TO DO:
+    - Riddle depends on profile and not cold
+    - Remove unnecessary things from it like scripts for the letter
+    - create own script file, so one doesnt have the script in this file better overview
+
+THINGS TO CHANGE AT THE END:
+    - Remove devContinueBtn and function in script 
+-->
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
@@ -8,22 +16,26 @@
     <!-- link to style sheet -->
     <link rel="stylesheet" href="../../../../CSS/global.css">
     <link rel="stylesheet" href="../../../../CSS/arctic-theme.css">
-    <script src="../../../../Stations/JAVA/letter_templates.js"></script>
-    <script src="../../../../Stations/JAVA/incoming_dispatch.js"></script>
+    <script>
+        const previousPage = "../stations/station_2_2.html";
+        const nextPage = "riddle_2_4_location.html";
+    </script>
+    <!--<script src="../../../../Stations/JAVA/letter_templates.js"></script>
+    <script src="../../../../Stations/JAVA/incoming_dispatch.js"></script>-->
     <script src="../../../../Stations/JAVA/navigation.js"></script>
 </head>
-
 <body>
     <div class="box">
         <p>
             Which path do you have to take through the ice?
             The year when Nansen got Nobel peace will help you.
         </p>
-        <!-- NOT IN USE! -->
+        <!-- NOT IN USE!
         <incoming-dispatch letter-id="nansen-ice-dispatch"
                            title="Incoming Dispatch"
                            from="Dispatch Control">
         </incoming-dispatch>
+        -->
         <div class="ice-game">
             <svg id="lineLayer"></svg>
             <button class="number-dot" data-number="C" style="left:10%; top:10%;">C</button>
@@ -43,15 +55,13 @@
             Check Answer
         </button>
 
-        <button class="submit-button" id="submit_nansen" onclick="window.location.href='riddle_2_location.html'"
+        <button class="submit-button" id="submit_nansen" onclick="window.location.href = nextPage"
                 style="display:none;">
             Continue
         </button>
-        <button class="back-button" onclick="window.location.href='riddle_1.html'">
-            Back
-        </button>
-
-        <script>
+        <!-- REMOVE LATER -->
+        <button onclick="window.location.href = nextPage">Continue (DEV)</button>
+        <script>            
             const correctAnswer = ["C", "O", "L", "D"];
             let selected = [];
 
@@ -142,8 +152,10 @@
             }
         </script>
     </div>
-    <game-navigation previous="../stations/station_2.html" next="riddle_2_location.html">
-    </game-navigation>
+    <game-navigation></game-navigation>
+    <script>
+        setupGameNavigation();
+    </script>
 </body>
 
 </html>

@@ -1,11 +1,21 @@
-﻿<!DOCTYPE html>
+﻿<!--
+THINGS TO DO:
+    - It should not go directly to the frquency setting it would be nice
+    when one has a chat with the dispatcher and they give you the device and than 
+    you get the contact => Continue chat with dispatcher about contact with nanny
+    and set this as next page
+-->
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <title> Next location Wanny Woldstad </title>
     <link rel="stylesheet" href="../../../../CSS/global.css"> <!-- link to style sheet -->
+    <script>
+        const previousPage = "riddle_2_3_ice.html";
+        const nextPage = "riddle_3_1_frequency.html";
+    </script>
     <style>
         /* Specific style for solution image */
         .solution-container {
@@ -45,18 +55,17 @@
         <button class="submit-button" id="submit">
             Continue
         </button>
-        <button class="back-button" onclick="window.location.href='riddle_2.html'">
-            Back
-        </button>
     </div>
-    <game-navigation previous="riddle_2.html" next="../stations/station_3.html">
-    </game-navigation>
+    <game-navigation></game-navigation>
+    <script>
+        setupGameNavigation();
+    </script>
     <script>
         const submitButton = document.getElementById("submit");
         const mapButton = document.getElementById("location");
 
         submitButton.addEventListener("click", () => {
-            window.location.href = "../stations/station_3.html";
+            window.location.href = nextPage;
         });
 
         mapButton.addEventListener("click", () => {

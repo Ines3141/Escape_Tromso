@@ -4,8 +4,8 @@
 
 THINGS TO DO:
 - change it to an nicer interface, where one can enter the numbers
-- When one presses on a cell, where one number is already there and one enters a new 
-  number, the old number is automatically overwritten
+- (FIXED JØRGEN 7/6 26) When one presses on a cell, where one number is already there and one enters a new 
+  number, the old number is automatically overwritten.
 - Change the alert message in document.getElementById("callNansenBtn")
   with "Grid not solved." to another design/message on the webpage
 
@@ -56,7 +56,7 @@ Explaination:
 const correctPhone = phoneCells.map(([row, col]) => String(correctGrid[row][col])).join("");
 const nextPage = "../stations/station_2.html";
 const grid = document.getElementById("magicGrid");
-/* Creates the grid automatically */ 
+/* Creates the grid automatically */
 for (let row = 0; row < 4; row++) {
     for (let col = 0; col < 4; col++) {
         /* Creates cell element (16xtimes)*/
@@ -66,6 +66,9 @@ for (let row = 0; row < 4; row++) {
         input.className = "magic-cell";
         input.maxLength = 1; /* Only one input possible */
         /* Stores the cell position in the HTML */
+
+
+
         input.dataset.row = row;
         input.dataset.col = col;
 
@@ -87,18 +90,25 @@ for (let row = 0; row < 4; row++) {
             wrap.appendChild(createBadge(redIndex + 1, "red-order"));
         }
 
-        input.addEventListener("input", () => {
-            /* Removes everything what is not a number */
-            input.value = input.value.replace(/[^0-9]/g, "");
-            /* If one number is in the cell, jump to the next cell */
-            if (input.value.length === 1) {
+        input.addEventListener("beforeinput", (event) => {
+            if (event.inputType === "insertText") {
+                event.preventDefault();
+
+                const newValue = event.data;
+
+                if (!/^[0-9]$/.test(newValue)) return;
+
+                input.value = newValue;
+
                 const allInputs = [...document.querySelectorAll(".magic-cell")];
                 const currentIndex = allInputs.indexOf(input);
+
                 if (allInputs[currentIndex + 1]) {
                     allInputs[currentIndex + 1].focus();
                 }
+
+                checkGrid();
             }
-            checkGrid();
         });
         /* Runs when a key is pressed. NOT NECESSARY WITH A PHONE */
         input.addEventListener("keydown", (event) => {

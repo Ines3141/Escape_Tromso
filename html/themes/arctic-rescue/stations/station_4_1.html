@@ -8,8 +8,11 @@
     <link rel="stylesheet" href="../../../../CSS/global.css">
     <link rel="stylesheet" href="../../../../CSS/station.css">
     <script src="../../../../Stations/JAVA/navigation.js"></script>
+    <script>
+        const previousPage = "../riddle/riddle_3_4_location.html";
+        const nextPage = "../riddle/riddle_4_2_fish.html";
+    </script>
 </head>
-
 <body>
     <div class="box monument-theme">
         <h1>Station 4</h1>
@@ -26,7 +29,7 @@
         <audio id="voice" preload="auto">
             <source src="../../../../assets/audio/Monument.mp4" type="audio/mp4">
         </audio>
-        <button class="riddle-button" onclick="window.location.href='../riddle/riddle_4.html'">
+        <button class="riddle-button" onclick="window.location.href = nextPage">
             Solve Riddle
         </button>
     </div>
@@ -84,8 +87,10 @@
             settingsMenu.classList.add("hidden");
         });
     </script>
-    <game-navigation previous="../riddle/riddle_3_4_location.html" next="../riddle/riddle_4.html">
-    </game-navigation>
+    <game-navigation></game-navigation>
+    <script>
+        setupGameNavigation();
+    </script>
 </body>
 
 </html>

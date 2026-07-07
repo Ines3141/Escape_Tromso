@@ -7,6 +7,10 @@
     <title>Next location from Monument </title>
     <link rel="stylesheet" href="../../../../CSS/global.css"> <!-- link to style sheet -->
     <script src="../../../../Stations/JAVA/navigation.js"></script>
+    <script>
+        const previousPage = "riddle_4_2_frequency.html";
+        const nextPage = "../stations/station_5_1.html";
+    </script>
 </head>
 
 <body>
@@ -33,15 +37,17 @@
         const mapButton = document.getElementById("location");
 
         submitButton.addEventListener("click", () => {
-            window.location.href = "../stations/station_5.html";
+            window.location.href = nextPage;
         });
 
         mapButton.addEventListener("click", () => {
             window.location.href = "https://www.google.com/maps/search/Amundsen+plass";
         });
     </script>
-    <game-navigation previous="riddle_4.html" next="../stations/station_5.html">
-    </game-navigation>
+    <game-navigation></game-navigation>
+    <script>
+        setupGameNavigation();
+    </script>
 </body>
 
 </html>

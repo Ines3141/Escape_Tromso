@@ -1,10 +1,16 @@
 {
   "ExpandedNodes": [
     "",
+    "\\assets",
     "\\CSS",
+    "\\html",
+    "\\html\\themes",
+    "\\html\\themes\\arctic-rescue",
+    "\\html\\themes\\arctic-rescue\\riddle",
+    "\\html\\themes\\arctic-rescue\\stations",
     "\\Stations",
-    "\\Stations\\HTML"
+    "\\Stations\\JAVA"
   ],
-  "SelectedNode": "\\CSS\\station.css",
+  "SelectedNode": "\\html\\themes\\arctic-rescue\\stations\\station_2_2.html",
   "PreviewInSolutionExplorer": false
 }

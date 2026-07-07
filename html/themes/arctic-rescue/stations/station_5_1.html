@@ -1,16 +1,40 @@
+<!--
+THINGS TO DO:
+    - Create css file for incoming call use is for station_2_2 and station_5_1
+      remove nansen.css file 
+
+-->
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <title>Station 5</title>
     <link rel="stylesheet" href="../../../../CSS/global.css">
     <link rel="stylesheet" href="../../../../CSS/station.css">
+    <link rel="stylesheet" href="../../../../CSS/nansen.css">
     <script src="../../../../Stations/JAVA/navigation.js"></script>
+    <script>
+        const previousPage = "../riddle/riddle_4_3_location.html";
+        const nextPage = "../stations/station_5_1.html";
+    </script>
 </head>
-
 <body>
+    <div id="callScreen" class="call-screen">
+        <div class="call-card">
+            <div class="caller-photo">
+                <img src="../../../../assets/images/Amundsen.jpg" alt="Amundsen">
+            </div>
+            <p class="incoming-text">Incoming call...</p>
+            <h1>Roald Amundsen</h1>
+            <p class="call-subtitle">Arctic Explorer</p>
+            <div class="call-actions">
+                <button class="decline-call" onclick="declineCall()">✕</button>
+                <button class="accept-call" onclick="acceptCall()">☎</button>
+            </div>
+            <p class="call-help">Tap green to answer</p>
+        </div>
+    </div>
     <div class="box">
         <h1>Station 5</h1>
         <p>Roald Amundsen</p>
@@ -73,7 +97,7 @@
             </div>
         </div>
         <!-- for actual game do </button>style="display:none;">, but now it is just blocking -->
-        <button class="riddle-button" id="riddle_btn" onclick="window.location.href='../riddle/riddle_5.html'">
+        <button class="riddle-button" id="riddle_btn" onclick="window.location.href = nextPage">
             Solve Riddle
         </button>
         <script>
@@ -222,8 +246,10 @@
             }
         </script>
     </div>
-    <game-navigation previous="../riddle/riddle_4_part2.html" next="../riddle/riddle_5.html">
-    </game-navigation>
+    <game-navigation></game-navigation>
+    <script>
+        setupGameNavigation();
+    </script>
 </body>
 
 </html>

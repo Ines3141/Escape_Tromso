@@ -1,0 +1,32 @@
+﻿<!-- Things to do:
+    - The navigation bar at the bottom is not shown on this page
+
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Next location: Henry Rudi </title>
+    <link rel="stylesheet" href="../../../../CSS/global.css"> <!-- link to style sheet -->
+    <script src="../../../../Stations/JAVA/letter_templates.js"></script>
+    <script src="../../../../Stations/JAVA/incoming_dispatch.js"></script>
+    <script src="../../../../Stations/JAVA/navigation.js"></script>
+    <script>
+        const previousPage = "riddle_5_2_compass.html";
+        const nextPage = "../stations/station_6.html";
+    </script>
+</head>
+<body>
+    <div class="box">
+        <incoming-dispatch letter-id="amundsen-dispatch" title="Incoming Dispatch" from="Roald Amundsen"
+                           next="../stations/station_6.html">
+        </incoming-dispatch>
+    </div>
+    <game-navigation></game-navigation>
+    <script>
+        setupGameNavigation();
+    </script>
+</body>
+</html>

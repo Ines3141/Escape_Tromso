@@ -8,13 +8,19 @@
     <link rel="stylesheet" href="../../../../CSS/global.css"> <!-- link to style sheet -->
     <link rel="stylesheet" href="../../../../CSS/arctic-theme.css">
     <script src="../../../../Stations/JAVA/navigation.js"></script>
+    <script>
+        const previousPage = "../stations/station_5_1.html";
+        const nextPage = "riddle_5_3_location.html";
+    </script>
 </head>
 
 <body>
     <div class="box">
         <h1>Amundsen Compass Puzzle</h1>
-        <p>Rotate the inner circle until the explorer looks in the right direction. It will help you to find the
-            connections.</p>
+        <p>
+            Rotate the inner circle until the explorer looks in the right direction. It will help you to find the
+            connections.
+        </p>
         <div class="compass-wrapper">
             <span class="angle-label angle-0">
                 0° <br> Northpole </br>
@@ -90,10 +96,10 @@
         <button class="submit-button" id="submit" onclick="checkPuzzle()">
             Submit
         </button>
-        <button class="submit-button" id="submit_just_for_now" onclick="window.location.href='riddle_5_location.html'">
+        <button class="submit-button" id="submit_just_for_now" onclick="window.location.href = nextPage">
             Continue
         </button>
-        
+
         <script>
             let rotation = 225;
             const targetRotation = 225;
@@ -129,7 +135,7 @@
                     message.style.color = "lightgreen";
 
                     setTimeout(() => {
-                        window.location.href = "riddle_5_location.html";
+                        window.location.href = nextPage;
                     }, 1200);
                 } else {
                     message.textContent = "Not quite. Check the direction and the ships.";
@@ -139,8 +145,10 @@
         </script>
 
     </div>
-    <game-navigation previous="../stations/station_5.html" next="../riddle/riddle_5_location.html">
-    </game-navigation>
+    <game-navigation></game-navigation>
+    <script>
+        setupGameNavigation();
+    </script>
 </body>
 
 </html>

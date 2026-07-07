@@ -16,7 +16,7 @@ THINGS TO DO:
     <script src="../../../../Stations/JAVA/navigation.js"></script>
     <script>
         const previousPage = "../riddle/riddle_4_3_location.html";
-        const nextPage = "../stations/station_5_1.html";
+        const nextPage = "../riddle/riddle_5_2_compass.html";
     </script>
 </head>
 <body>
@@ -111,27 +111,14 @@ THINGS TO DO:
             const btnB = document.getElementById("btnB");
             const audio_btn = document.getElementById("audioBtn");
             const riddle_btn = document.getElementById("riddle_btn");
-            const location_btn = document.getElementById("Location_btn");
             const profile_btn = document.getElementById("profile");
 
             const choices = document.getElementById("choices");
-            const settingsBtn = document.getElementById("settingsBtn");
-            const settingsMenu = document.getElementById("settingsMenu");
             const subtitle = document.getElementById("subtitle");
             const allAudios = [audio, audioA, audioB];
-            const volumeSlider = document.getElementById("volumeSlider");
 
             const person = document.querySelector(".person-container");
 
-            location_btn.addEventListener("click", () => {
-                window.open('https://www.google.com/maps/search/Amundsen+plass');
-            });
-            /* Change volumne */
-            volumeSlider.addEventListener("input", () => {
-                allAudios.forEach(sound => {
-                    sound.volume = volumeSlider.value;
-                });
-            });
             /* Start the audio file and the subtitels. */
             audio_btn.addEventListener("click", () => {
                 if (audio.paused) {
@@ -227,22 +214,32 @@ THINGS TO DO:
             audioB.addEventListener("timeupdate", () => {
                 updateSubtitle(audioB, subtitlesB);
             });
-            settingsBtn.addEventListener("click", (event) => {
-                event.stopPropagation();
-                settingsMenu.classList.toggle("hidden");
-            });
-            settingsMenu.addEventListener("click", (event) => {
-                event.stopPropagation();
-            });
-            document.addEventListener("click", () => {
-                settingsMenu.classList.add("hidden");
-            });
             function openProfile() {
                 document.getElementById("profileOverlay").classList.remove("hidden");
             }
 
             function closeProfile() {
                 document.getElementById("profileOverlay").classList.add("hidden");
+            }
+            const callScreen = document.getElementById("callScreen");
+            const stationContent = document.getElementById("stationContent");
+
+            function acceptCall() {
+                callScreen.classList.add("hidden");
+                stationContent.classList.remove("hidden");
+
+                audio.currentTime = 0;
+                audio.play();
+
+                person.classList.add("speaking");
+            }
+
+            function declineCall() {
+                document.querySelector(".incoming-text").textContent = "Call missed...";
+
+                setTimeout(() => {
+                    document.querySelector(".incoming-text").textContent = "Incoming call...";
+                }, 1200);
             }
         </script>
     </div>

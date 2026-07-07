@@ -1,0 +1,457 @@
+<!-- Things to do:
+    -
+
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Next location: Henry Rudi </title>
+    <link rel="stylesheet" href="../../../../CSS/global.css"> <!-- link to style sheet -->
+    <script src="../../../../Stations/JAVA/navigation.js"></script>
+    <script>
+        const previousPage = "riddle_5_2_compass.html";
+        const nextPage = "riddle_5_4_location.html";
+    </script>
+    <style>
+        .riddle-box {
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .cards-area {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .card-top h2 {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .expedition-card {
+            background: #f5efe0;
+            color: #1b1b1b;
+            border-radius: 16px;
+            padding: 14px;
+            border: 3px solid transparent;
+            cursor: pointer;
+            transition: transform 0.2s ease, border 0.2s ease;
+        }
+
+        .expedition-card.selected {
+            border-color: #66d9ff;
+            transform: scale(1.03);
+        }
+
+        .expedition-card img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 12px;
+        }
+
+        .code-number {
+            min-width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: #111;
+            color: white;
+            font-size: 26px;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+            z-index: 5;
+        }
+
+        .year-label {
+            display: block;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .year-input {
+            width: 100%;
+            box-sizing: border-box;
+            margin-top: 6px;
+            padding: 12px;
+            border-radius: 10px;
+            border: 2px solid #ccc;
+            font-size: 20px;
+        }
+
+        .slots-area {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 14px;
+            margin-top: 20px;
+        }
+
+        .drop-slot {
+            min-height: 120px;
+            border: 2px dashed white;
+            border-radius: 16px;
+            padding: 8px;
+            color: white;
+            position: relative;
+        }
+
+        .slot-number {
+            position: absolute;
+            top: 8px;
+            left: 10px;
+            opacity: 0.5;
+            font-size: 18px;
+            pointer-events: none;
+        }
+
+        .drop-slot .expedition-card {
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .dark-overlay {
+            position: fixed;
+            inset: 0;
+            background: black;
+            opacity: 0;
+            z-index: 90000;
+            pointer-events: none;
+            transition: opacity 2s ease;
+        }
+
+        .dark-overlay.show {
+            opacity: 0.92;
+        }
+
+        body.reveal-mode .code-number {
+            position: relative;
+            z-index: 100000;
+            box-shadow: 0 0 22px white;
+        }
+
+        .final-code {
+            position: fixed;
+            inset: 0;
+            z-index: 100001;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 18px;
+            font-size: 54px;
+            color: white;
+            pointer-events: none;
+        }
+
+        .final-code span {
+            opacity: 0;
+            transform: translateY(40px) scale(0.7);
+            animation: moveToCenter 1.2s ease forwards, blink 1s infinite 1.2s;
+        }
+
+        .final-code span:nth-child(1) {
+            animation-delay: 0s, 1.2s;
+        }
+
+        .final-code span:nth-child(2) {
+            animation-delay: 0.2s, 1.4s;
+        }
+
+        .final-code span:nth-child(3) {
+            animation-delay: 0.4s, 1.6s;
+        }
+
+        .final-code span:nth-child(4) {
+            animation-delay: 0.6s, 1.8s;
+        }
+
+        @keyframes moveToCenter {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes blink {
+            0%, 100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.25;
+            }
+        }
+
+        @media (min-width: 700px) {
+            .cards-area {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .slots-area {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="riddle-box">
+        <h1>Sort the Expeditions</h1>
+        <p>
+            Fill in the missing years and sort the expeditions into the correct order.
+        </p>
+        <div class="cards-area">
+            <div class="expedition-card" data-id="northpole">
+                <div class="card-top">
+                    <h2>North Pole</h2>
+                    <span class="code-number">15</span>
+                </div>
+                <img src="../../../../assets/images/Norge.jfif" alt="North Pole expedition">
+                <label class="year-label">
+                    Missing year:
+                    <input class="year-input" type="number" inputmode="numeric" min="1900" max="1926" placeholder="1900–1926">
+                </label>
+            </div>
+
+            <div class="expedition-card" data-id="southpole">
+                <div class="card-top">
+                    <h2>South Pole</h2>
+                    <span class="code-number">22</span>
+                </div>                
+                <img src="../../../../assets/images/Fram.jfif" alt="South Pole expedition">
+                <label class="year-label">
+                    Missing year:
+                    <input class="year-input" type="number" inputmode="numeric" min="1900" max="1926" placeholder="1900–1926">
+                </label>
+            </div>
+            <div class="expedition-card" data-id="northeast">
+                <div class="card-top">
+                    <h2>North East Passage</h2>
+                    <span class="code-number">11</span>
+                </div>
+                <img src="../../../../assets/images/Gjoa.jfif" alt="North-East passage expedition">
+                <label class="year-label">
+                    Missing year:
+                    <input class="year-input" type="number" inputmode="numeric" min="1900" max="1926" placeholder="1900–1926">
+                </label>
+            </div>
+            <div class="expedition-card" data-id="northwest">
+                <div class="card-top">
+                    <h2>North-West Passage</h2>
+                    <span class="code-number">71</span>
+                </div>
+                <img src="../../../../assets/images/Maud.jfif" alt="North-West passage expedition">
+                <label class="year-label">
+                    Missing year:
+                    <input class="year-input" type="number" inputmode="numeric" min="1900" max="1926" placeholder="1900–1926">
+                </label>
+            </div>
+        </div>
+
+        <h2>Place them here:</h2>
+
+        <div class="slots-area">
+            <div class="drop-slot" data-position="0">
+                <span class="slot-number">1</span>
+            </div>
+            <div class="drop-slot" data-position="1">
+                <span class="slot-number">2</span>
+            </div>
+            <div class="drop-slot" data-position="2">
+                <span class="slot-number">3</span>
+            </div>
+            <div class="drop-slot" data-position="3">
+                <span class="slot-number">4</span>
+            </div>
+            <button onclick="window.location.href = nextPage"> DEV Continue </button>
+        </div>
+
+        <p id="feedback"></p>
+
+        <button class="submit-button" id="checkBtn">Check Answer</button>
+
+    </div>
+    <script>
+        const correctData = {
+            northpole: {
+                year: "1926",
+                number: "15"
+            },
+            southpole: {
+                year: "1910",
+                number: "22"
+            },
+            northeast: {
+                year: "1918",
+                number: "11"
+            },
+            northwest: {
+                year: "1903",
+                number: "71"
+            }
+        };
+
+        const correctOrder = [
+            "northwest",
+            "southpole",
+            "northeast",
+            "northpole"
+        ];
+        const checkBtn = document.getElementById("checkBtn");
+        const feedback = document.getElementById("feedback");
+
+        let selectedCard = null;
+
+        const cardsArea = document.querySelector(".cards-area");
+        const cards = document.querySelectorAll(".expedition-card");
+        const slots = document.querySelectorAll(".drop-slot");
+
+        function selectCard(card) {
+            document.querySelectorAll(".expedition-card").forEach(c => {
+                c.classList.remove("selected");
+            });
+
+            selectedCard = card;
+            card.classList.add("selected");
+        }
+
+        cards.forEach(card => {
+            card.addEventListener("click", (event) => {
+                if (event.target.classList.contains("year-input")) return;
+
+                event.stopPropagation();
+                selectCard(card);
+            });
+        });
+
+        slots.forEach(slot => {
+            slot.addEventListener("click", (event) => {
+                if (!selectedCard) return;
+
+                const targetSlot = slot;
+                const oldParent = selectedCard.parentElement;
+                const existingCard = targetSlot.querySelector(".expedition-card");
+
+                // If you tap the same slot again, deselect
+                if (oldParent === targetSlot) {
+                    selectedCard.classList.remove("selected");
+                    selectedCard = null;
+                    return;
+                }
+
+                // If target slot has a card, swap it back to the old position
+                if (existingCard) {
+                    oldParent.appendChild(existingCard);
+                }
+
+                targetSlot.appendChild(selectedCard);
+
+                selectedCard.classList.remove("selected");
+                selectedCard = null;
+            });
+        });
+
+        checkBtn.addEventListener("click", () => {
+            checkAnswer();
+        });
+
+        function checkAnswer() {
+            const placedCards = [];
+            slots.forEach(slot => {
+                const card = slot.querySelector(".expedition-card");
+
+                if (card) {
+                    placedCards.push(card.dataset.id);
+                } else {
+                    placedCards.push(null);
+                }
+            });
+            const allSlotsFilled = placedCards.every(id => id !== null);
+            if (!allSlotsFilled) {
+                feedback.textContent = "Place all four expeditions first.";
+                feedback.style.color = "orange";
+                return;
+            }
+
+            const yearsCorrect = [...document.querySelectorAll(".expedition-card")].every(card => {
+                const id = card.dataset.id;
+                const input = card.querySelector(".year-input");
+
+                return input.value.trim() === correctData[id].year;
+            });
+
+            if (!yearsCorrect) {
+                feedback.textContent = "One or more years are wrong.";
+                feedback.style.color = "orange";
+                return;
+            }
+
+            const orderCorrect = JSON.stringify(placedCards) === JSON.stringify(correctOrder);
+
+            if (!orderCorrect) {
+                feedback.textContent = "The order is not correct yet.";
+                feedback.style.color = "orange";
+                return;
+            }
+
+            revealCode();
+        }
+
+        function revealCode() {
+            document.body.classList.add("reveal-mode");
+            const overlay = document.createElement("div");
+            overlay.className = "dark-overlay";
+            document.body.appendChild(overlay);
+
+            setTimeout(() => {
+                overlay.classList.add("show");
+            }, 50);
+            setTimeout(() => {
+                const finalCode = document.createElement("div");
+                finalCode.className = "final-code";
+                correctOrder.forEach(id => {
+                    const card = document.querySelector(`.expedition-card[data-id="${id}"]`);
+                    const number = card.querySelector(".code-number").textContent;
+
+                    const numberSpan = document.createElement("span");
+                    numberSpan.textContent = number;
+
+                    finalCode.appendChild(numberSpan);
+                });
+
+                document.body.appendChild(finalCode);
+            }, 1800);
+            setTimeout(() => {
+                window.location.href = nextPage;
+            }, 8000);
+        }
+        document.querySelectorAll(".year-input").forEach(input => {
+            input.addEventListener("input", () => {
+                input.value = input.value.replace(/[^0-9]/g, "");
+
+                if (input.value.length > 4) {
+                    input.value = input.value.slice(0, 4);
+                }
+            });
+        });
+    </script>
+    <game-navigation></game-navigation>
+    <script>
+        setupGameNavigation();
+    </script>
+</body>
+</html>

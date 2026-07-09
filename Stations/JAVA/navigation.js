@@ -234,7 +234,7 @@ class GameNavigation extends HTMLElement {
         const getPreviousPage = () => this.getAttribute("previous");
         const getNextPage = () => this.getAttribute("next");
 
-        const currentPage = window.location.pathname;
+        const currentPage = window.location.pathname + window.location.search;
 
         let visitedPages = JSON.parse(localStorage.getItem("visitedPages")) || [];
 
@@ -247,7 +247,8 @@ class GameNavigation extends HTMLElement {
             if (!page) return false;
 
             const visited = JSON.parse(localStorage.getItem("visitedPages")) || [];
-            const link = new URL(page, window.location.href).pathname;
+            const url = new URL(page, window.location.href);
+            const link = url.pathname + url.search;
 
             return visited.includes(link);
         }

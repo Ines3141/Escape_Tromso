@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
@@ -15,8 +16,29 @@
     <script src="../../../../Stations/JAVA/navigation.js"></script>
     <script src="../../../../Stations/JAVA/inventory.js"></script>
     <script>
-        const previousPage = "intro.html";
-        const nextPage = "../riddle/riddle_1_2_destination.html";
+        const chatPass = new URLSearchParams(window.location.search).get("pass") || "start";
+
+        const chatNavigation = {
+            start: {
+                previous: "intro.html",
+                next: "../riddle/riddle_1_2_destination.html"
+            },
+
+            after_nansen: {
+                previous: "../riddle/riddle_1_2_destination.html",
+                next: "../riddle/riddle_2_1_phone.html"
+            },
+
+            wanny: {
+                previous: "../riddle/riddle_2_4_location.html",
+                next: "../riddle/riddle_3_1_frequency.html"
+            }
+        };
+
+        const currentNavigation = chatNavigation[chatPass] || chatNavigation.start;
+
+        const previousPage = currentNavigation.previous;
+        const nextPage = currentNavigation.next;
     </script>
     <style>
         story-chat {
@@ -26,6 +48,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="box">
         <h1>Station 1</h1>
@@ -71,6 +94,7 @@
             localStorage.removeItem('dispatch_intro_upload_6');
             localStorage.removeItem('teamName');
             localStorage.removeItem('stationReady');
+            localStorage.removeItem('nansen_phonenumber');
             location.reload();
         ">
             Reset chat
@@ -90,4 +114,5 @@
         });
     </script>
 </body>
+
 </html>

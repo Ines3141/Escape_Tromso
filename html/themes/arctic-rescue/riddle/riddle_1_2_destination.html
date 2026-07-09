@@ -19,10 +19,10 @@
             transition: opacity 0.5s ease, transform 0.5s ease;
         }
 
-            body.page-success {
-                opacity: 0;
-                transform: scale(1.03);
-            }
+        body.page-success {
+            opacity: 0;
+            transform: scale(1.03);
+        }
 
         .destination-box {
             max-width: 430px;
@@ -33,8 +33,8 @@
             padding: 26px 18px;
             border-radius: 24px;
             background: linear-gradient(180deg, rgba(14, 43, 68, 0.96), rgba(4, 13, 24, 0.96));
-            border: 1px solid rgba(255,255,255,0.15);
-            box-shadow: 0 18px 50px rgba(0,0,0,0.45);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
             text-align: center;
         }
 
@@ -73,9 +73,9 @@
         .contact-card {
             width: 100%;
             padding: 16px;
-            border: 1px solid rgba(255,255,255,0.16);
+            border: 1px solid rgba(255, 255, 255, 0.16);
             border-radius: 16px;
-            background: rgba(255,255,255,0.08);
+            background: rgba(255, 255, 255, 0.08);
             color: white;
             font-size: 17px;
             font-weight: bold;
@@ -87,20 +87,20 @@
             transition: transform 0.18s ease, background 0.18s ease;
         }
 
-            .contact-card:hover {
-                transform: translateY(-2px);
-                background: rgba(255,255,255,0.14);
-            }
+        .contact-card:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.14);
+        }
 
-            .contact-card:active {
-                transform: scale(0.97);
-            }
+        .contact-card:active {
+            transform: scale(0.97);
+        }
 
         .contact-icon {
             width: 42px;
             height: 42px;
             border-radius: 50%;
-            background: rgba(0,0,0,0.28);
+            background: rgba(0, 0, 0, 0.28);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -115,15 +115,15 @@
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            background: radial-gradient(circle, rgba(130,0,0,0.9), rgba(0,0,0,0.98) 70%);
+            background: radial-gradient(circle, rgba(130, 0, 0, 0.9), rgba(0, 0, 0, 0.98) 70%);
             color: #ff2b2b;
             text-align: center;
         }
 
-            .danger-overlay.show {
-                display: flex;
-                animation: dangerFlash 0.25s infinite alternate;
-            }
+        .danger-overlay.show {
+            display: flex;
+            animation: dangerFlash 0.25s infinite alternate;
+        }
 
         .danger-cross {
             font-size: 180px;
@@ -163,8 +163,8 @@
         }
     </style>
     <script>
-        const previousPage = "../stations/station_1_1.html";
-        const nextPage = "riddle_2_1_phone.html";
+        const previousPage = "../stations/station_1_1.html?pass=start";
+        const nextPage = "../stations/station_1_1.html?pass=after_nansen";
     </script>
 </head>
 
@@ -220,10 +220,12 @@
     <script>
         function callExplorer(explorer) {
             if (explorer === "nansen") {
+                localStorage.setItem("nansen_phonenumber", "true");
+
                 document.body.classList.add("page-success");
 
                 setTimeout(() => {
-                    window.location.href = nextPage;
+                    window.location.href = "../stations/station_1_1.html?pass=after_nansen";
                 }, 500);
             } else {
                 const overlay = document.getElementById("dangerOverlay");
@@ -234,6 +236,7 @@
                 }, 1400);
             }
         }
+
     </script>
 </body>
 

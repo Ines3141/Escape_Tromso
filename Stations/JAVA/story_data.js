@@ -80,6 +80,34 @@ const STORIES = {
                 placeholder: "Write OKAY",
                 correctAnswer: "okay",
                 wrongAnswer: "Are you there? Please write OKAY when you have reached the next station."
+            },
+            {
+                type: "waitForFlag",
+                flag: "nansen_phonenumber",
+                value: "true"
+            },
+            {
+                type: "text",
+                sender: "Dispatch",
+                time: "10:35",
+                text: "Welcome back, Team {teamName}. We have received your update from the next station."
+            },
+            {
+                type: "text",
+                sender: "Dispatch",
+                time: "10:36",
+                text: "The information you found is important. We are sending the next part of the mission now."
+            },
+            {
+                type: "file",
+                name: "new_dispatch_message.pdf",
+                open: "station-1-return"
+            },
+            {
+                type: "text",
+                sender: "Dispatch",
+                time: "10:37",
+                text: "Continue carefully. The Arctic conditions are getting worse."
             }
 
         ]

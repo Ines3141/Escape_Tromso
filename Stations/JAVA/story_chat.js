@@ -187,9 +187,23 @@
 
     next() {
         if (this.currentStep >= this.story.steps.length) return;
+
         const step = this.story.steps[this.currentStep];
+
+        if (step.type === "waitForFlag") {
+            const expectedValue = step.value || "true";
+            const actualValue = localStorage.getItem(step.flag);
+
+            if (actualValue === expectedValue) {
+                this.advance();
+            }
+
+            return;
+        }
+
         this.showTyping(step);
     }
+    
     renderHistory() {
         for (let i = 0; i < this.currentStep; i++) {
             const step = this.story.steps[i];

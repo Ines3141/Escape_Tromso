@@ -1,4 +1,24 @@
-﻿class GameNavigation extends HTMLElement {
+﻿function loadInventoryScript() {
+    /*
+
+    */
+    if (window.inventoryScriptLoaded) return;
+
+    const script = document.createElement("script");
+    script.src = "../../../../Stations/JAVA/inventory.js";
+    script.onload = () => {
+        window.inventoryScriptLoaded = true;
+        console.log("Inventory loaded.");
+    };
+    script.onerror = () => {
+        console.error("Inventory could not be loaded. Check the path.");
+    };
+
+    document.head.appendChild(script);
+}
+
+loadInventoryScript();
+class GameNavigation extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({ mode: "open" });
@@ -285,8 +305,11 @@
             window.open("https://www.google.com/maps/search/Tromsø+Harbour");
         });
 
+        /* Opens the inventory.js file */
         inventoryBtn.addEventListener("click", () => {
-            alert("Inventory will open here.");
+            if (typeof openInventory === "function") {
+                openInventory();
+            }
         });
 
         inboxBtn.addEventListener("click", () => {

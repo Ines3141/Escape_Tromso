@@ -19,6 +19,7 @@
         const nextPage = "../riddle/riddle_2_3_ice.html";
     </script>
     <script src="../../../../Stations/JAVA/navigation.js"></script>
+    <script src="../../../../Stations/JAVA/inventory.js"></script>
 </head>
 
 <body>
@@ -333,6 +334,14 @@
     <game-navigation></game-navigation>
     <script>
         setupGameNavigation();
+        addInventoryItem({
+            id: "profile-nansen",
+            title: "Nansen Profile",
+            type: "image",
+            thumb: "../../../../assets/images/file_placeholder.png",
+            full: "../../../../assets/images/file_placeholder.png",
+            description: "Profile folder collected at Station Nansen."
+        });
     </script>
 </body>
 

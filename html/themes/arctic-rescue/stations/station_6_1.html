@@ -10,6 +10,7 @@
     <script src="../../../../Stations/JAVA/letter_templates.js"></script>
     <script src="../../../../Stations/JAVA/incoming_dispatch.js"></script>
     <script src="../../../../Stations/JAVA/navigation.js"></script>
+    <script src="../../../../Stations/JAVA/inventory.js"></script>
     <script>
         const previousPage = "../riddle/riddle_5_4_location.html";
         const nextPage = "../riddle/riddle_6_2_chat.html";
@@ -269,6 +270,14 @@
     <game-navigation></game-navigation>
     <script>
         setupGameNavigation();
+        addInventoryItem({
+            id: "profile-rudi",
+            title: "Rudi Profile",
+            type: "image",
+            thumb: "../../../../assets/images/file_placeholder.png",
+            full: "../../../../assets/images/file_placeholder.png",
+            description: "Profile folder collected at Station Rudi."
+        });
     </script>
 </body>
 

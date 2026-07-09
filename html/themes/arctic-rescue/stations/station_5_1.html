@@ -14,6 +14,7 @@ THINGS TO DO:
     <link rel="stylesheet" href="../../../../CSS/station.css">
     <link rel="stylesheet" href="../../../../CSS/nansen.css">
     <script src="../../../../Stations/JAVA/navigation.js"></script>
+    <script src="../../../../Stations/JAVA/inventory.js"></script>
     <script>
         const previousPage = "../riddle/riddle_4_3_location.html";
         const nextPage = "../riddle/riddle_5_2_compass.html";
@@ -246,6 +247,14 @@ THINGS TO DO:
     <game-navigation></game-navigation>
     <script>
         setupGameNavigation();
+        addInventoryItem({
+            id: "profile-amundsen",
+            title: "Amundsen Profile",
+            type: "image",
+            thumb: "../../../../assets/images/file_placeholder.png",
+            full: "../../../../assets/images/file_placeholder.png",
+            description: "Profile folder collected at Station Amundsen."
+        });
     </script>
 </body>
 

@@ -13,6 +13,7 @@
     <script src="../../../../Stations/JAVA/story_data.js"></script>
     <script src="../../../../Stations/JAVA/story_chat.js"></script>
     <script src="../../../../Stations/JAVA/navigation.js"></script>
+    <script src="../../../../Stations/JAVA/inventory.js"></script>
     <script>
         const previousPage = "intro.html";
         const nextPage = "../riddle/riddle_1_2_destination.html";
@@ -74,10 +75,19 @@
         ">
             Reset chat
         </button>
+        <button onclick="clearInventory();"> Reset Inventory </button>
     </div>
     <game-navigation></game-navigation>
     <script>
         setupGameNavigation();
+        addInventoryItem({
+            id: "morse-sheet",
+            title: "Morse Code Sheet",
+            type: "image",
+            thumb: "../../../../assets/images/Morse_code.jpg",
+            full: "../../../../assets/images/Morse_code.jpg",
+            description: "An old paper with the Morse code alphabet and numbers."
+        });
     </script>
 </body>
 </html>

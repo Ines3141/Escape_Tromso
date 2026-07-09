@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../../../../CSS/global.css">
     <link rel="stylesheet" href="../../../../CSS/station.css">
     <script src="../../../../Stations/JAVA/navigation.js"></script>
+    <script src="../../../../Stations/JAVA/inventory.js"></script>
     <script>
         const previousPage = "../riddle/riddle_3_4_location.html";
         const nextPage = "../riddle/riddle_4_2_fish.html";
@@ -90,6 +91,14 @@
     <game-navigation></game-navigation>
     <script>
         setupGameNavigation();
+        addInventoryItem({
+            id: "profile-stortorget",
+            title: "Danger in the arctic",
+            type: "image",
+            thumb: "../../../../assets/images/file_placeholder.png",
+            full: "../../../../assets/images/file_placeholder.png",
+            description: "Profile folder collected at Station Arctic Danger."
+        });
     </script>
 </body>
 

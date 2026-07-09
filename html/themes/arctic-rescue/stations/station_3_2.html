@@ -18,6 +18,7 @@ THINGS TO DO LATER:
     <link rel="stylesheet" href="../../../../CSS/global.css">
     <link rel="stylesheet" href="../../../../CSS/station.css">
     <script src="../../../../Stations/JAVA/navigation.js"></script>
+    <script src="../../../../Stations/JAVA/inventory.js"></script>
     <script>
         const previousPage = "../riddle/riddle_3_1_frequency.html";
         const nextPage = "../riddle/riddle_3_3_maze.html";
@@ -244,6 +245,14 @@ THINGS TO DO LATER:
     <game-navigation></game-navigation>
     <script>
         setupGameNavigation();
+        addInventoryItem({
+            id: "profile-wanny",
+            title: "wanny Profile",
+            type: "image",
+            thumb: "../../../../assets/images/file_placeholder.png",
+            full: "../../../../assets/images/file_placeholder.png",
+            description: "Profile folder collected at Station Wanny."
+        });
     </script>
 </body>
 </html>

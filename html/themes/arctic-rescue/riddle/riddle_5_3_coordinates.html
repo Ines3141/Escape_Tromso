@@ -1,20 +1,19 @@
-<!-- Things to do:
-    -
-
--->
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Next location: Henry Rudi </title>
-    <link rel="stylesheet" href="../../../../CSS/global.css"> <!-- link to style sheet -->
+    <title>Next location: Henry Rudi</title>
+
+    <link rel="stylesheet" href="../../../../CSS/global.css">
     <script src="../../../../Stations/JAVA/navigation.js"></script>
+
     <script>
         const previousPage = "riddle_5_2_compass.html";
         const nextPage = "riddle_5_4_location.html";
     </script>
+
     <style>
         .riddle-box {
             max-width: 900px;
@@ -36,10 +35,10 @@
             margin-bottom: 10px;
         }
 
-        .card-top h2 {
-            margin: 0;
-            font-size: 20px;
-        }
+            .card-top h2 {
+                margin: 0;
+                font-size: 20px;
+            }
 
         .expedition-card {
             background: #f5efe0;
@@ -51,26 +50,26 @@
             transition: transform 0.2s ease, border 0.2s ease;
         }
 
-        .expedition-card.selected {
-            border-color: #66d9ff;
-            transform: scale(1.03);
-        }
+            .expedition-card.selected {
+                border-color: #66d9ff;
+                transform: scale(1.03);
+            }
 
-        .expedition-card img {
-            width: 100%;
-            height: 120px;
-            object-fit: cover;
-            border-radius: 12px;
-            margin-bottom: 12px;
-        }
+            .expedition-card img {
+                width: 100%;
+                height: 120px;
+                object-fit: cover;
+                border-radius: 12px;
+                margin-bottom: 12px;
+            }
 
         .code-number {
-            min-width: 46px;
-            height: 46px;
+            min-width: 54px;
+            height: 54px;
             border-radius: 50%;
             background: #111;
             color: white;
-            font-size: 26px;
+            font-size: 24px;
             font-weight: bold;
             display: flex;
             justify-content: center;
@@ -125,6 +124,34 @@
             box-sizing: border-box;
         }
 
+        #feedback {
+            min-height: 24px;
+            font-weight: bold;
+            margin-top: 18px;
+        }
+
+        .submit-button {
+            margin-top: 12px;
+            padding: 14px 24px;
+            border: none;
+            border-radius: 999px;
+            background: #27a8ff;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .dev-button {
+            margin-top: 14px;
+            padding: 10px 18px;
+            border: none;
+            border-radius: 999px;
+            background: #555;
+            color: white;
+            cursor: pointer;
+        }
+
         .dark-overlay {
             position: fixed;
             inset: 0;
@@ -135,9 +162,9 @@
             transition: opacity 2s ease;
         }
 
-        .dark-overlay.show {
-            opacity: 0.92;
-        }
+            .dark-overlay.show {
+                opacity: 0.92;
+            }
 
         body.reveal-mode .code-number {
             position: relative;
@@ -158,27 +185,27 @@
             pointer-events: none;
         }
 
-        .final-code span {
-            opacity: 0;
-            transform: translateY(40px) scale(0.7);
-            animation: moveToCenter 1.2s ease forwards, blink 1s infinite 1.2s;
-        }
+            .final-code span {
+                opacity: 0;
+                transform: translateY(40px) scale(0.7);
+                animation: moveToCenter 1.2s ease forwards, blink 1s infinite 1.2s;
+            }
 
-        .final-code span:nth-child(1) {
-            animation-delay: 0s, 1.2s;
-        }
+                .final-code span:nth-child(1) {
+                    animation-delay: 0s, 1.2s;
+                }
 
-        .final-code span:nth-child(2) {
-            animation-delay: 0.2s, 1.4s;
-        }
+                .final-code span:nth-child(2) {
+                    animation-delay: 0.2s, 1.4s;
+                }
 
-        .final-code span:nth-child(3) {
-            animation-delay: 0.4s, 1.6s;
-        }
+                .final-code span:nth-child(3) {
+                    animation-delay: 0.4s, 1.6s;
+                }
 
-        .final-code span:nth-child(4) {
-            animation-delay: 0.6s, 1.8s;
-        }
+                .final-code span:nth-child(4) {
+                    animation-delay: 0.6s, 1.8s;
+                }
 
         @keyframes moveToCenter {
             to {
@@ -208,22 +235,27 @@
         }
     </style>
 </head>
+
 <body>
     <div class="riddle-box">
         <h1>Sort the Expeditions</h1>
+
         <p>
-            Fill in the missing years and sort the expeditions into the correct order.
+            The expedition numbers are now decoded. Fill in the missing years and sort the expeditions into the correct order.
         </p>
+
         <div class="cards-area">
             <div class="expedition-card" data-id="northpole">
                 <div class="card-top">
                     <h2>North Pole</h2>
                     <span class="code-number">15</span>
                 </div>
+
                 <img src="../../../../assets/images/Norge.jfif" alt="North Pole expedition">
+
                 <label class="year-label">
                     Missing year:
-                    <input class="year-input" type="number" inputmode="numeric" min="1900" max="1926" placeholder="1900–1926">
+                    <input class="year-input" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="4" placeholder="1900–1926">
                 </label>
             </div>
 
@@ -231,33 +263,41 @@
                 <div class="card-top">
                     <h2>South Pole</h2>
                     <span class="code-number">22</span>
-                </div>                
+                </div>
+
                 <img src="../../../../assets/images/Fram.jfif" alt="South Pole expedition">
+
                 <label class="year-label">
                     Missing year:
-                    <input class="year-input" type="number" inputmode="numeric" min="1900" max="1926" placeholder="1900–1926">
+                    <input class="year-input" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="4" placeholder="1900–1926">
                 </label>
             </div>
+
             <div class="expedition-card" data-id="northeast">
                 <div class="card-top">
-                    <h2>North East Passage</h2>
+                    <h2>North-East Passage</h2>
                     <span class="code-number">11</span>
                 </div>
-                <img src="../../../../assets/images/Gjoa.jfif" alt="North-East passage expedition">
+
+                <img src="../../../../assets/images/Maud.jfif" alt="North-East passage expedition">
+
                 <label class="year-label">
                     Missing year:
-                    <input class="year-input" type="number" inputmode="numeric" min="1900" max="1926" placeholder="1900–1926">
+                    <input class="year-input" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="4" placeholder="1900–1926">
                 </label>
             </div>
+
             <div class="expedition-card" data-id="northwest">
                 <div class="card-top">
                     <h2>North-West Passage</h2>
                     <span class="code-number">71</span>
                 </div>
-                <img src="../../../../assets/images/Maud.jfif" alt="North-West passage expedition">
+
+                <img src="../../../../assets/images/Gjoa.jfif" alt="North-West passage expedition">
+
                 <label class="year-label">
                     Missing year:
-                    <input class="year-input" type="number" inputmode="numeric" min="1900" max="1926" placeholder="1900–1926">
+                    <input class="year-input" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="4" placeholder="1900–1926">
                 </label>
             </div>
         </div>
@@ -268,23 +308,33 @@
             <div class="drop-slot" data-position="0">
                 <span class="slot-number">1</span>
             </div>
+
             <div class="drop-slot" data-position="1">
                 <span class="slot-number">2</span>
             </div>
+
             <div class="drop-slot" data-position="2">
                 <span class="slot-number">3</span>
             </div>
+
             <div class="drop-slot" data-position="3">
                 <span class="slot-number">4</span>
             </div>
-            <button onclick="window.location.href = nextPage"> DEV Continue </button>
         </div>
 
         <p id="feedback"></p>
 
-        <button class="submit-button" id="checkBtn">Check Answer</button>
+        <button class="submit-button" id="checkBtn">
+            Check Answer
+        </button>
 
+        <br>
+
+        <button class="dev-button" onclick="window.location.href = nextPage">
+            DEV Continue
+        </button>
     </div>
+
     <script>
         const correctData = {
             northpole: {
@@ -311,14 +361,24 @@
             "northeast",
             "northpole"
         ];
+
         const checkBtn = document.getElementById("checkBtn");
         const feedback = document.getElementById("feedback");
 
         let selectedCard = null;
 
-        const cardsArea = document.querySelector(".cards-area");
         const cards = document.querySelectorAll(".expedition-card");
         const slots = document.querySelectorAll(".drop-slot");
+
+        cards.forEach(card => {
+            card.addEventListener("click", event => {
+                if (event.target.classList.contains("year-input")) {
+                    return;
+                }
+
+                selectCard(card);
+            });
+        });
 
         function selectCard(card) {
             document.querySelectorAll(".expedition-card").forEach(c => {
@@ -329,31 +389,20 @@
             card.classList.add("selected");
         }
 
-        cards.forEach(card => {
-            card.addEventListener("click", (event) => {
-                if (event.target.classList.contains("year-input")) return;
-
-                event.stopPropagation();
-                selectCard(card);
-            });
-        });
-
         slots.forEach(slot => {
-            slot.addEventListener("click", (event) => {
+            slot.addEventListener("click", () => {
                 if (!selectedCard) return;
 
                 const targetSlot = slot;
                 const oldParent = selectedCard.parentElement;
                 const existingCard = targetSlot.querySelector(".expedition-card");
 
-                // If you tap the same slot again, deselect
                 if (oldParent === targetSlot) {
                     selectedCard.classList.remove("selected");
                     selectedCard = null;
                     return;
                 }
 
-                // If target slot has a card, swap it back to the old position
                 if (existingCard) {
                     oldParent.appendChild(existingCard);
                 }
@@ -371,6 +420,7 @@
 
         function checkAnswer() {
             const placedCards = [];
+
             slots.forEach(slot => {
                 const card = slot.querySelector(".expedition-card");
 
@@ -380,7 +430,9 @@
                     placedCards.push(null);
                 }
             });
+
             const allSlotsFilled = placedCards.every(id => id !== null);
+
             if (!allSlotsFilled) {
                 feedback.textContent = "Place all four expeditions first.";
                 feedback.style.color = "orange";
@@ -413,6 +465,7 @@
 
         function revealCode() {
             document.body.classList.add("reveal-mode");
+
             const overlay = document.createElement("div");
             overlay.className = "dark-overlay";
             document.body.appendChild(overlay);
@@ -420,9 +473,11 @@
             setTimeout(() => {
                 overlay.classList.add("show");
             }, 50);
+
             setTimeout(() => {
                 const finalCode = document.createElement("div");
                 finalCode.className = "final-code";
+
                 correctOrder.forEach(id => {
                     const card = document.querySelector(`.expedition-card[data-id="${id}"]`);
                     const number = card.querySelector(".code-number").textContent;
@@ -435,10 +490,12 @@
 
                 document.body.appendChild(finalCode);
             }, 1800);
+
             setTimeout(() => {
                 window.location.href = nextPage;
             }, 8000);
         }
+
         document.querySelectorAll(".year-input").forEach(input => {
             input.addEventListener("input", () => {
                 input.value = input.value.replace(/[^0-9]/g, "");
@@ -449,9 +506,12 @@
             });
         });
     </script>
+
     <game-navigation></game-navigation>
+
     <script>
         setupGameNavigation();
     </script>
 </body>
+
 </html>

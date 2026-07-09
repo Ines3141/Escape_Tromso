@@ -327,7 +327,9 @@
         question.className = "message from-phone";
         question.innerHTML = `
         <span class="time">${step.time || ""}</span>
-        ${step.question || ""}`;
+        ${step.question || ""}
+    `;
+
         const input = document.createElement("input");
         input.placeholder = step.placeholder || "Write here...";
 
@@ -339,18 +341,26 @@
 
             if (value === "") return;
 
+            const normalizedValue = value.toLowerCase();
+
             if (step.correctAnswer) {
-                if (value.toLowerCase() !== step.correctAnswer.toLowerCase()) {
-                    const wrong = document.createElement("div");
-                    wrong.className = "message from-phone";
-                    wrong.innerHTML = step.wrongAnswer || "Please try again.";
-
-                    this.shadowRoot.querySelector("#messages").appendChild(wrong);
-
+                if (normalizedValue !== step.correctAnswer.toLowerCase()) {
+                    this.showWrongAnswer(step);
                     input.value = "";
                     return;
                 }
             }
+
+            if (step.acceptedAnswers) {
+                const accepted = step.acceptedAnswers.map(answer => answer.toLowerCase());
+
+                if (!accepted.includes(normalizedValue)) {
+                    this.showWrongAnswer(step);
+                    input.value = "";
+                    return;
+                }
+            }
+
             container.remove();
 
             const userMessage = document.createElement("div");
@@ -358,7 +368,9 @@
             userMessage.textContent = value;
 
             this.shadowRoot.querySelector("#messages").appendChild(userMessage);
+
             this.saveInput(step, value);
+
             if (step.redirect) {
                 window.location.href = step.redirect;
                 return;
@@ -372,6 +384,13 @@
 
         this.shadowRoot.querySelector("#messages").appendChild(question);
         this.shadowRoot.querySelector("#messages").appendChild(container);
+    }
+    showWrongAnswer(step) {
+        const wrong = document.createElement("div");
+        wrong.className = "message from-phone";
+        wrong.innerHTML = step.wrongAnswer || "Please try again.";
+
+        this.shadowRoot.querySelector("#messages").appendChild(wrong);
     }
 
     addFile(step, shouldAdvance = true) {

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+
+    <title>Riddle Henry Rudi</title>
+
+    <link rel="stylesheet" href="../../../../CSS/global.css">
+    <link rel="stylesheet" href="../../../../CSS/arctic-theme.css">
+
+    <script src="../../../../Stations/JAVA/navigation.js"></script>
+    <script src="../../../../Stations/JAVA/story_data.js"></script>
+    <script src="../../../../Stations/JAVA/story_chat.js"></script>
+
+    <script>
+        const previousPage = "../stations/station_6_1.html";
+        const nextPage = "../final_page.html";
+    </script>
+
+    <style>
+        story-chat {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .gallery-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 999999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.92);
+            padding: 20px;
+        }
+
+        .gallery-box {
+            width: 100%;
+            max-width: 520px;
+            background: #061927;
+            color: white;
+            padding: 20px;
+            border-radius: 18px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55);
+        }
+
+            .gallery-box h2 {
+                margin-top: 0;
+            }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin: 16px 0;
+        }
+
+        .gallery-close {
+            float: right;
+            border: none;
+            background: none;
+            color: white;
+            font-size: 34px;
+            cursor: pointer;
+        }
+
+        .gallery-item {
+            border: 3px solid transparent;
+            border-radius: 14px;
+            overflow: hidden;
+            padding: 0;
+            background: none;
+            cursor: pointer;
+        }
+
+            .gallery-item.selected {
+                border-color: #4cd137;
+            }
+
+            .gallery-item img {
+                width: 100%;
+                height: 130px;
+                object-fit: cover;
+                display: block;
+            }
+
+        .confirm-btn {
+            width: 100%;
+            margin-top: 18px;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            background: #4cd137;
+            color: white;
+            font-weight: 900;
+            cursor: pointer;
+        }
+
+        .animation-stage {
+            position: fixed;
+            inset: 0;
+            z-index: 999998;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 20px;
+        }
+
+            .animation-stage img {
+                width: 100%;
+                max-width: 430px;
+                border-radius: 18px;
+                opacity: 1;
+                transition: opacity 0.8s ease;
+            }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <h1>Henry Rudi's Lock</h1>
+
+        <story-chat story="henry_rudi"></story-chat>
+    <button onclick="
+        localStorage.removeItem('henry_rudi_step');
+        localStorage.removeItem('henry_rudi_scroll');
+        localStorage.removeItem('henryRudiPeople');
+        localStorage.removeItem('henryRudiLocation');
+        location.reload();">
+        Reset chat
+    </button>
+    <button onclick="window.location.href = nextPage">DEV Continue </button>
+    </div>
+    <script>
+        window.ATTACHMENTS = window.ATTACHMENTS || {};
+
+        window.ATTACHMENTS.henryRudiGallery = function (step, done) {
+            const galleryImages = [
+                "../../../../assets/images/Rudi_1.jpg",
+                "../../../../assets/images/Rudi_2.jpg",
+                "../../../../assets/images/Rudi_3.jpg",
+                "../../../../assets/images/Rudi_2.jpg"
+            ];
+
+            const correctImageIndex = 0;
+
+            const animationImages = [
+                "../../../../assets/images/Rudi_1.jpg",
+                "../../../../assets/images/Rudi_Animation_2.jpg",
+                "../../../../assets/images/Rudi_Animation_3.jpg",
+                "../../../../assets/images/Rudi_Animation_4.jpg",
+                "../../../../assets/images/Rudi_Animation_5.jpg",
+                "../../../../assets/images/Rudi_Animation_6.jpg",
+                "../../../../assets/images/Rudi_Animation_7.jpg",
+                "../../../../assets/images/Rudi_Animation_8.jpg"
+            ];
+
+            let selectedImageIndex = null;
+
+            const overlay = document.createElement("div");
+            overlay.className = "gallery-overlay";
+
+            overlay.innerHTML = `
+                        <div class="gallery-box">
+                            <button class="gallery-close">×</button>
+
+                            <h2>${step.name}</h2>
+
+                            <div class="gallery-grid"></div>
+
+                            <p class="gallery-feedback">Select the image that matches the signal.</p>
+
+                            <button class="confirm-btn">CONFIRM</button>
+                        </div>
+                    `;
+
+            document.body.appendChild(overlay);
+
+            const galleryGrid = overlay.querySelector(".gallery-grid");
+            const feedback = overlay.querySelector(".gallery-feedback");
+            const closeBtn = overlay.querySelector(".gallery-close");
+            const confirmBtn = overlay.querySelector(".confirm-btn");
+
+            galleryImages.forEach((src, index) => {
+                const button = document.createElement("button");
+                button.className = "gallery-item";
+
+                button.innerHTML = `
+                            <img src="${src}" alt="Observatory image ${index + 1}">
+                        `;
+
+                button.addEventListener("click", () => {
+                    selectedImageIndex = index;
+
+                    overlay.querySelectorAll(".gallery-item").forEach(item => {
+                        item.classList.remove("selected");
+                    });
+
+                    button.classList.add("selected");
+                    feedback.textContent = "Image selected.";
+                    feedback.style.color = "white";
+                });
+
+                galleryGrid.appendChild(button);
+            });
+
+            closeBtn.addEventListener("click", () => {
+                overlay.remove();
+            });
+
+            confirmBtn.addEventListener("click", () => {
+                if (selectedImageIndex === null) {
+                    feedback.textContent = "Select an image first.";
+                    feedback.style.color = "#ffcc00";
+                    return;
+                }
+
+                if (selectedImageIndex !== correctImageIndex) {
+                    feedback.textContent = "Wrong image. Check the signal again.";
+                    feedback.style.color = "#ff5c5c";
+                    return;
+                }
+
+                overlay.remove();
+                startImageSequence(animationImages, done);
+            });
+        };
+
+        function startImageSequence(animationImages, done) {
+            const stage = document.createElement("div");
+            stage.className = "animation-stage";
+
+            const img = document.createElement("img");
+            img.src = animationImages[0];
+            img.alt = "Signal animation";
+
+            stage.appendChild(img);
+            document.body.appendChild(stage);
+
+            let index = 0;
+
+            const interval = setInterval(() => {
+                img.style.opacity = "0";
+
+                setTimeout(() => {
+                    index++;
+
+                    if (index >= animationImages.length) {
+                        clearInterval(interval);
+                        stage.remove();
+
+                        done();
+                        return;
+                    }
+
+                    img.src = animationImages[index];
+                    img.style.opacity = "1";
+                }, 700);
+
+            }, 1400);
+        }
+    </script>
+
+    <game-navigation></game-navigation>
+
+    <script>
+        setupGameNavigation();
+    </script>
+</body>
+
+</html>

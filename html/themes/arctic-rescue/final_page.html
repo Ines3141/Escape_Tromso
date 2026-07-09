@@ -62,22 +62,22 @@
             align-items: center;
         }
 
-        .rescue-card span {
-            font-weight: bold;
-        }
+            .rescue-card span {
+                font-weight: bold;
+            }
 
-        .rescue-card small {
-            color: #f7d046;
-        }
+            .rescue-card small {
+                color: #f7d046;
+            }
 
-        .rescue-card.locked {
-            border-color: #00b894;
-            box-shadow: 0 0 16px rgba(0, 184, 148, 0.25);
-        }
+            .rescue-card.locked {
+                border-color: #00b894;
+                box-shadow: 0 0 16px rgba(0, 184, 148, 0.25);
+            }
 
-        .rescue-card.locked small {
-            color: #7fffe0;
-        }
+                .rescue-card.locked small {
+                    color: #7fffe0;
+                }
 
         .choice-menu {
             background: rgba(0, 0, 0, 0.35);
@@ -86,15 +86,15 @@
             margin-bottom: 12px;
         }
 
-        .choice-menu button {
-            width: 100%;
-            margin: 8px 0;
-        }
+            .choice-menu button {
+                width: 100%;
+                margin: 8px 0;
+            }
 
-        .choice-menu button.selected {
-            background: #00b894;
-            color: white;
-        }
+                .choice-menu button.selected {
+                    background: #00b894;
+                    color: white;
+                }
 
         .route-grid {
             display: grid;
@@ -107,16 +107,16 @@
             background: rgba(255, 255, 255, 0.1);
         }
 
-        .route-answer img {
-            width: 100%;
-            height: 110px;
-            object-fit: cover;
-            border-radius: 10px;
-        }
+            .route-answer img {
+                width: 100%;
+                height: 110px;
+                object-fit: cover;
+                border-radius: 10px;
+            }
 
-        .route-answer.selected {
-            background: #00b894;
-        }
+            .route-answer.selected {
+                background: #00b894;
+            }
 
         .send-button {
             width: 100%;
@@ -146,9 +146,11 @@
         }
     </style>
     <script src="../../../Stations/JAVA/navigation.js"></script>
+    <script>
+        const previousPage = "riddle/riddle_6_2_chat.html";
+        const nextPage = "stations/station_7.html";
+    </script>
 </head>
-
-
 <body class="final-page">
 
     <div class="box final-box">
@@ -228,12 +230,12 @@
             📡 Send Rescue Transmission
         </button>
 
-        <button class="back-button" onclick="window.location.href='stations/station_6.html'">
+        <button class="back-button" onclick="window.location.href = previousPage">
             Back
         </button>
 
         <p id="feedback"></p>
-
+        <button onclick="window.location.href = nextPage">DEV Continue</button>
     </div>
 
     <script>
@@ -335,7 +337,7 @@
                 feedback.style.color = "lightgreen";
 
                 setTimeout(() => {
-                    window.location.href = "congrats.html";
+                    window.location.href = nextPage;
                 }, 1200);
             } else {
                 feedback.textContent = "⚠️ Transmission rejected. One or more values are wrong.";
@@ -343,8 +345,11 @@
             }
         }
     </script>
-    <game-navigation previous="./riddle/riddle_6_feedback.html" next="congrats.html">
-    </game-navigation>
+    <game-navigation></game-navigation>
+
+    <script>
+        setupGameNavigation();
+    </script>
 </body>
 
 </html>

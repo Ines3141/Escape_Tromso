@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+
+    <title>Colour Church Riddle</title>
+
+    <link rel="stylesheet" href="../../../../CSS/global.css">
+    <link rel="stylesheet" href="../../../../CSS/arctic-theme.css">
+
+    <script src="../../../../Stations/JAVA/navigation.js"></script>
+
+    <script>
+        const previousPage = "../final_page.html";
+        const nextPage = "../congrats.html";
+    </script>
+
+    <style>
+        .riddle-box {
+            max-width: 620px;
+            margin: auto;
+            padding: 18px;
+            text-align: center;
+        }
+
+            .riddle-box h1 {
+                margin-bottom: 6px;
+                font-size: clamp(28px, 8vw, 44px);
+            }
+
+        .intro-text {
+            margin: 0 0 16px;
+            opacity: 0.95;
+            font-size: 14px;
+        }
+
+        .church-riddle-layout {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            align-items: center;
+        }
+
+        .church-card {
+            width: 100%;
+            max-width: 390px;
+            background: linear-gradient(180deg, rgba(4, 25, 44, 0.96), rgba(2, 17, 32, 0.98));
+            border-radius: 28px;
+            padding: 14px;
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .church-svg {
+            width: 100%;
+            max-width: 350px;
+            height: auto;
+            background: #f7f1df;
+            border-radius: 22px;
+            padding: 14px;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .paint-area {
+            fill: #ffffff;
+            stroke: #111;
+            stroke-width: 4;
+            cursor: pointer;
+            transition: fill 0.25s ease, filter 0.25s ease;
+        }
+
+            .paint-area:hover,
+            .paint-area:active {
+                filter: drop-shadow(0 0 8px rgba(76, 209, 55, 0.9));
+            }
+
+        .church-svg.ready-to-paint .paint-area {
+            animation: gentlePulse 1.5s infinite;
+        }
+
+        @keyframes gentlePulse {
+            0%, 100% {
+                filter: drop-shadow(0 0 0 rgba(255, 255, 255, 0));
+            }
+
+            50% {
+                filter: drop-shadow(0 0 7px rgba(255, 255, 255, 0.45));
+            }
+        }
+
+        .church-line {
+            fill: none;
+            stroke: #111;
+            stroke-width: 4;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            pointer-events: none;
+        }
+
+        .palette-section {
+            width: 100%;
+            max-width: 560px;
+        }
+
+        .paint-palette {
+            position: relative;
+            min-height: 230px;
+            width: 100%;
+            box-sizing: border-box;
+            border-radius: 48% 52% 46% 54% / 58% 46% 54% 42%;
+            background: radial-gradient(circle at 28% 25%, rgba(255, 255, 255, 0.22), transparent 12%), linear-gradient(145deg, #c98948, #8f5528);
+            box-shadow: 0 22px 50px rgba(0, 0, 0, 0.38), inset 0 8px 18px rgba(255, 255, 255, 0.24), inset 0 -12px 24px rgba(0, 0, 0, 0.22);
+            padding: 26px 24px 22px;
+            color: white;
+            overflow: hidden;
+        }
+
+            .paint-palette::before {
+                content: "";
+                position: absolute;
+                width: 70px;
+                height: 48px;
+                border-radius: 50%;
+                background: #123f66;
+                top: 24px;
+                right: 34px;
+                box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.35), 0 2px 8px rgba(255, 255, 255, 0.12);
+            }
+
+            .paint-palette h2 {
+                margin: 0 90px 12px 0;
+                font-size: 24px;
+                text-shadow: 0 2px 5px rgba(0, 0, 0, 0.35);
+            }
+
+        .palette-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            justify-items: center;
+            align-items: center;
+            margin-top: 22px;
+        }
+
+        .palette-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 7px;
+            font-size: 10px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.45);
+        }
+
+        .color-btn {
+            width: 58px;
+            height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.45);
+            cursor: pointer;
+            border-radius: 58% 42% 52% 48% / 45% 58% 42% 55%;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border 0.2s ease;
+            box-shadow: inset 0 5px 8px rgba(255, 255, 255, 0.28), inset 0 -7px 10px rgba(0, 0, 0, 0.18), 0 7px 13px rgba(0, 0, 0, 0.28);
+        }
+
+            .color-btn:hover,
+            .color-btn:active {
+                transform: scale(1.1) rotate(-2deg);
+            }
+
+            .color-btn.selected {
+                border-color: #7dff7d;
+                box-shadow: 0 0 0 4px rgba(76, 209, 55, 0.3), 0 0 20px rgba(76, 209, 55, 0.95), inset 0 5px 8px rgba(255, 255, 255, 0.28), inset 0 -7px 10px rgba(0, 0, 0, 0.18);
+                transform: scale(1.15);
+            }
+
+        .color-white {
+            background: #ffffff;
+        }
+
+        .color-black {
+            background: #111111;
+        }
+
+        .color-yellow {
+            background: #ffd84d;
+        }
+
+        .color-blue {
+            background: #3b82f6;
+        }
+
+        .color-red {
+            background: #e53935;
+        }
+
+        .control-card {
+            margin-top: 16px;
+            padding: 16px;
+            border-radius: 24px;
+            background: linear-gradient(180deg, rgba(4, 25, 44, 0.96), rgba(2, 17, 32, 0.98));
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .mini-steps {
+            margin: 0 0 12px;
+            font-size: 13px;
+            line-height: 1.45;
+            opacity: 0.95;
+        }
+
+        .palette-controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        .mix-btn,
+        .reset-btn,
+        .check-btn,
+        .dev-btn {
+            border: none;
+            border-radius: 999px;
+            font-weight: bold;
+            cursor: pointer;
+            color: white;
+            white-space: nowrap;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.24);
+        }
+
+            .mix-btn:hover,
+            .reset-btn:hover,
+            .check-btn:hover,
+            .dev-btn:hover,
+            .mix-btn:active,
+            .reset-btn:active,
+            .check-btn:active,
+            .dev-btn:active {
+                transform: scale(1.04);
+            }
+
+        .mix-btn {
+            min-width: 116px;
+            padding: 11px 18px;
+            font-size: 13px;
+            background: linear-gradient(180deg, #56e342, #2fb82a);
+        }
+
+        .reset-btn {
+            min-width: 116px;
+            padding: 11px 18px;
+            font-size: 13px;
+            background: linear-gradient(180deg, #6a6a6a, #4d4d4d);
+        }
+
+        .brush-panel {
+            max-width: 280px;
+            margin: 14px auto 0;
+            border-radius: 20px;
+            padding: 10px 12px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            display: grid;
+            grid-template-columns: 1fr 54px;
+            align-items: center;
+            gap: 8px;
+            color: white;
+        }
+
+            .brush-panel strong {
+                display: block;
+                font-size: 13px;
+            }
+
+        #currentPaintName {
+            font-size: 12px;
+            margin-top: 2px;
+            opacity: 0.95;
+        }
+
+        .paint-preview {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: 3px solid white;
+            background: transparent;
+            box-shadow: 0 0 16px rgba(255, 255, 255, 0.22), inset 0 4px 8px rgba(255, 255, 255, 0.2);
+        }
+
+        .check-btn {
+            min-width: 180px;
+            max-width: 230px;
+            display: block;
+            margin: 14px auto 0;
+            background: linear-gradient(180deg, #2eb4ff, #168bd0);
+            padding: 13px 22px;
+            font-size: 14px;
+        }
+
+        .dev-btn {
+            margin-top: 16px;
+            background: #555;
+            padding: 10px 16px;
+            font-size: 12px;
+        }
+
+        #feedback {
+            min-height: 26px;
+            margin: 12px 0 0;
+            font-weight: bold;
+            font-size: 14px;
+            color: white;
+        }
+
+        body.success-dark {
+            background: black;
+            transition: background 2s ease;
+        }
+
+        .success-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            background: black;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 2s ease;
+        }
+
+            .success-overlay.show {
+                opacity: 0.9;
+            }
+
+        .success-message {
+            position: fixed;
+            inset: 0;
+            z-index: 100000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 36px;
+            font-weight: bold;
+            text-align: center;
+            pointer-events: none;
+            animation: finalBlink 1s infinite;
+            padding: 20px;
+        }
+
+        @keyframes finalBlink {
+            0%, 100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.35;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .riddle-box {
+                padding: 12px;
+            }
+
+            .church-card {
+                max-width: 330px;
+                padding: 12px;
+            }
+
+            .church-svg {
+                max-width: 300px;
+            }
+
+            .paint-palette {
+                min-height: 210px;
+                padding: 22px 14px 18px;
+            }
+
+                .paint-palette h2 {
+                    font-size: 21px;
+                    margin-right: 72px;
+                }
+
+                .paint-palette::before {
+                    width: 58px;
+                    height: 40px;
+                    right: 24px;
+                }
+
+            .palette-grid {
+                gap: 7px;
+            }
+
+            .color-btn {
+                width: 44px;
+                height: 38px;
+            }
+
+            .palette-item {
+                font-size: 10px;
+            }
+
+            .mini-steps {
+                font-size: 12px;
+            }
+
+            .mix-btn,
+            .reset-btn {
+                min-width: 105px;
+                padding: 10px 14px;
+                font-size: 12px;
+            }
+
+            .check-btn {
+                min-width: 165px;
+                max-width: 210px;
+                padding: 12px 18px;
+                font-size: 13px;
+            }
+
+            .brush-panel {
+                max-width: 250px;
+                grid-template-columns: 1fr 48px;
+                padding: 9px 10px;
+            }
+
+            .paint-preview {
+                width: 38px;
+                height: 38px;
+            }
+        }
+
+        @media (min-width: 800px) {
+            .riddle-box {
+                max-width: 1100px;
+            }
+
+            .church-riddle-layout {
+                display: grid;
+                grid-template-columns: 420px 560px;
+                justify-content: center;
+                align-items: start;
+                gap: 28px;
+            }
+
+            .palette-section {
+                max-width: 560px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="riddle-box">
+        <h1>Colour the Church</h1>
+
+        <p class="intro-text">
+            Mix the colours and paint the church correctly.
+        </p>
+
+        <div class="church-riddle-layout">
+
+            <div class="church-card">
+                <svg class="church-svg" viewBox="0 0 300 420" aria-label="Church colouring riddle">
+
+                    <path id="spire"
+                          class="paint-area"
+                          d="M138 118 L150 25 L162 118 L160 152 L140 152 Z">
+                    </path>
+
+                    <path id="body"
+                          class="paint-area"
+                          d="
+                            M125 152
+                            L175 152
+                            L176 220
+                            L205 240
+                            L258 285
+                            L252 295
+                            L245 294
+                            L238 405
+                            L62 405
+                            L55 294
+                            L48 295
+                            L42 285
+                            L95 240
+                            L124 220
+                            Z
+                        ">
+                    </path>
+
+                    <path id="door"
+                          class="paint-area"
+                          d="
+                            M130 405
+                            L130 335
+                            L150 320
+                            L170 335
+                            L170 405
+                            Z
+                        ">
+                    </path>
+
+                    <circle id="clock"
+                            class="paint-area"
+                            cx="150"
+                            cy="190"
+                            r="14">
+                    </circle>
+
+                    <path class="church-line" d="M125 152 L175 152"></path>
+                    <path class="church-line" d="M124 220 L176 220"></path>
+                    <path class="church-line" d="M105 238 L195 238"></path>
+                    <path class="church-line" d="M130 335 L150 320 L170 335"></path>
+                </svg>
+            </div>
+
+            <div class="palette-section">
+                <div class="paint-palette">
+                    <h2>Painter's Palette</h2>
+
+                    <div class="palette-grid">
+                        <div class="palette-item">
+                            <button class="color-btn color-white" data-color="white" aria-label="White"></button>
+                            <span>White</span>
+                        </div>
+
+                        <div class="palette-item">
+                            <button class="color-btn color-black" data-color="black" aria-label="Black"></button>
+                            <span>Black</span>
+                        </div>
+
+                        <div class="palette-item">
+                            <button class="color-btn color-yellow" data-color="yellow" aria-label="Yellow"></button>
+                            <span>Yellow</span>
+                        </div>
+
+                        <div class="palette-item">
+                            <button class="color-btn color-blue" data-color="blue" aria-label="Blue"></button>
+                            <span>Blue</span>
+                        </div>
+
+                        <div class="palette-item">
+                            <button class="color-btn color-red" data-color="red" aria-label="Red"></button>
+                            <span>Red</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="control-card">
+                    <p class="mini-steps">
+                        1. Choose colours · 2. Press mix · 3. Tap the church
+                    </p>
+
+                    <div class="palette-controls">
+                        <button class="mix-btn" id="mixBtn">Mix Paint</button>
+                        <button class="reset-btn" id="resetSelectionBtn">Clean Brush</button>
+                    </div>
+
+                    <div class="brush-panel">
+                        <div>
+                            <strong>Brush colour</strong>
+                            <div id="currentPaintName">None</div>
+                        </div>
+
+                        <div class="paint-preview" id="paintPreview"></div>
+                    </div>
+
+                    <button class="check-btn" id="checkBtn">
+                        Check Painting
+                    </button>
+
+                    <p id="feedback"></p>
+                </div>
+            </div>
+
+        </div>
+
+        <button class="dev-btn" onclick="window.location.href = nextPage">
+            DEV Continue
+        </button>
+    </div>
+
+    <game-navigation></game-navigation>
+
+    <script>
+        setupGameNavigation();
+    </script>
+
+    <script>
+        const COLORS = {
+            white: "#ffffff",
+            black: "#111111",
+            yellow: "#ffd84d",
+            blue: "#3b82f6",
+            red: "#e53935",
+            green: "#4caf50",
+            lightyellow: "#fff4a3",
+            grey: "#9e9e9e"
+        };
+
+        const COLOR_LABELS = {
+            white: "White",
+            black: "Black",
+            yellow: "Yellow",
+            blue: "Blue",
+            red: "Red",
+            green: "Green",
+            lightyellow: "Light yellow",
+            grey: "Grey"
+        };
+
+        const correctSolution = {
+            spire: "green",
+            body: "lightyellow",
+            door: "grey",
+            clock: "white"
+        };
+
+        const paintedAreas = {
+            spire: null,
+            body: null,
+            door: null,
+            clock: null
+        };
+
+        let selectedColors = [];
+        let activePaint = null;
+
+        const colorButtons = document.querySelectorAll(".color-btn");
+        const paintAreas = document.querySelectorAll(".paint-area");
+        const churchSvg = document.querySelector(".church-svg");
+        const mixBtn = document.getElementById("mixBtn");
+        const resetSelectionBtn = document.getElementById("resetSelectionBtn");
+        const checkBtn = document.getElementById("checkBtn");
+        const feedback = document.getElementById("feedback");
+        const currentPaintName = document.getElementById("currentPaintName");
+        const paintPreview = document.getElementById("paintPreview");
+
+        colorButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                const color = button.dataset.color;
+
+                if (selectedColors.includes(color)) {
+                    selectedColors = selectedColors.filter(item => item !== color);
+                    button.classList.remove("selected");
+                } else {
+                    if (selectedColors.length >= 2) {
+                        const removedColor = selectedColors.shift();
+                        const removedButton = document.querySelector(`.color-btn[data-color="${removedColor}"]`);
+
+                        if (removedButton) {
+                            removedButton.classList.remove("selected");
+                        }
+                    }
+
+                    selectedColors.push(color);
+                    button.classList.add("selected");
+                }
+
+                if (selectedColors.length === 1) {
+                    setActivePaint(selectedColors[0]);
+                    feedback.textContent = `${COLOR_LABELS[selectedColors[0]]} is on the brush.`;
+                    feedback.style.color = "white";
+                }
+
+                if (selectedColors.length === 2) {
+                    feedback.textContent = "Now press Mix Paint.";
+                    feedback.style.color = "white";
+                }
+
+                if (selectedColors.length === 0) {
+                    clearActivePaint();
+                    feedback.textContent = "";
+                }
+            });
+        });
+
+        mixBtn.addEventListener("click", () => {
+            if (selectedColors.length === 0) {
+                feedback.textContent = "Choose a colour first.";
+                feedback.style.color = "#ffcc00";
+                return;
+            }
+
+            if (selectedColors.length === 1) {
+                setActivePaint(selectedColors[0]);
+                feedback.textContent = `${COLOR_LABELS[selectedColors[0]]} is ready to paint.`;
+                feedback.style.color = "white";
+                return;
+            }
+
+            const mixedColor = mixColors(selectedColors[0], selectedColors[1]);
+
+            if (!mixedColor) {
+                feedback.textContent = "That mixture does not help here.";
+                feedback.style.color = "#ffcc00";
+                return;
+            }
+
+            setActivePaint(mixedColor);
+
+            feedback.textContent = `You mixed ${COLOR_LABELS[mixedColor]}. Tap the church.`;
+            feedback.style.color = "white";
+        });
+
+        resetSelectionBtn.addEventListener("click", () => {
+            selectedColors = [];
+            clearActivePaint();
+
+            colorButtons.forEach(button => {
+                button.classList.remove("selected");
+            });
+
+            feedback.textContent = "Brush cleaned.";
+            feedback.style.color = "white";
+        });
+
+        paintAreas.forEach(area => {
+            area.addEventListener("click", () => {
+                if (!activePaint) {
+                    feedback.textContent = "Choose or mix a colour first.";
+                    feedback.style.color = "#ffcc00";
+                    return;
+                }
+
+                const areaId = area.id;
+
+                paintedAreas[areaId] = activePaint;
+                area.style.fill = COLORS[activePaint];
+
+                feedback.textContent = `${areaName(areaId)} painted ${COLOR_LABELS[activePaint]}.`;
+                feedback.style.color = "white";
+            });
+        });
+
+        checkBtn.addEventListener("click", () => {
+            checkSolution();
+        });
+
+        function mixColors(colorA, colorB) {
+            const pair = [colorA, colorB].sort().join("+");
+
+            const recipes = {
+                "blue+yellow": "green",
+                "white+yellow": "lightyellow",
+                "black+white": "grey"
+            };
+
+            return recipes[pair] || null;
+        }
+
+        function setActivePaint(color) {
+            activePaint = color;
+            currentPaintName.textContent = COLOR_LABELS[color];
+            paintPreview.style.background = COLORS[color];
+            churchSvg.classList.add("ready-to-paint");
+        }
+
+        function clearActivePaint() {
+            activePaint = null;
+            currentPaintName.textContent = "None";
+            paintPreview.style.background = "transparent";
+            churchSvg.classList.remove("ready-to-paint");
+        }
+
+        function areaName(id) {
+            const names = {
+                spire: "Top",
+                body: "Main building",
+                door: "Door",
+                clock: "Clock"
+            };
+
+            return names[id] || "Area";
+        }
+
+        function checkSolution() {
+            const allPainted = Object.values(paintedAreas).every(value => value !== null);
+
+            if (!allPainted) {
+                feedback.textContent = "Paint all parts first.";
+                feedback.style.color = "#ffcc00";
+                return;
+            }
+
+            const correct = Object.keys(correctSolution).every(area => {
+                return paintedAreas[area] === correctSolution[area];
+            });
+
+            if (!correct) {
+                feedback.textContent = "Not correct yet. Check the colours again.";
+                feedback.style.color = "#ff7b7b";
+                return;
+            }
+
+            feedback.textContent = "Correct!";
+            feedback.style.color = "#7dff7d";
+
+            revealSuccess();
+        }
+
+        function revealSuccess() {
+            document.body.classList.add("success-dark");
+
+            const overlay = document.createElement("div");
+            overlay.className = "success-overlay";
+            document.body.appendChild(overlay);
+
+            setTimeout(() => {
+                overlay.classList.add("show");
+            }, 50);
+
+            setTimeout(() => {
+                const message = document.createElement("div");
+                message.className = "success-message";
+                message.textContent = "Correct colour signal!";
+                document.body.appendChild(message);
+            }, 1600);
+
+            setTimeout(() => {
+                window.location.href = nextPage;
+            }, 5000);
+        }
+    </script>
+</body>
+</html>

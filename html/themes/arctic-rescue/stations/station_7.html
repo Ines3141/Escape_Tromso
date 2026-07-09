@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+
+    <title>Draug Reveal</title>
+
+    <link rel="stylesheet" href="../../../../CSS/global.css">
+    <link rel="stylesheet" href="../../../../CSS/arctic-theme.css">
+
+    <script src="../../../../Stations/JAVA/navigation.js"></script>
+
+    <script>
+        const previousPage = "../final_page.html";
+        const nextPage = "../riddle/riddle_7_1_church.html";
+    </script>
+
+    <style>
+        body {
+            overflow: hidden;
+        }
+
+        .draug-page {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at center, #10283a 0%, #06111c 55%, #02060c 100%);
+            color: white;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        .storm-layer {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.08), transparent 18%), radial-gradient(circle at 80% 30%, rgba(255,255,255,0.05), transparent 20%), linear-gradient(180deg, rgba(0,0,0,0.1), rgba(0,0,0,0.65));
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .darkness {
+            position: absolute;
+            inset: 0;
+            background: black;
+            opacity: 0;
+            z-index: 20;
+            pointer-events: none;
+            transition: opacity 1.5s ease;
+        }
+
+            .darkness.full {
+                opacity: 1;
+            }
+
+        .spiral-stage {
+            position: absolute;
+            inset: 0;
+            z-index: 5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .spiral-card {
+            position: absolute;
+            width: 118px;
+            height: 76px;
+            border-radius: 16px;
+            background: linear-gradient(180deg, #f5efe0, #d8c8a2);
+            color: #1b1b1b;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 900;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            border: 2px solid rgba(255,255,255,0.45);
+            transform-origin: center;
+        }
+
+            .spiral-card::before {
+                content: "";
+                position: absolute;
+                inset: 8px;
+                border-radius: 10px;
+                border: 1px solid rgba(0,0,0,0.25);
+                pointer-events: none;
+            }
+
+        .center-glow {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(120, 210, 255, 0.2);
+            box-shadow: 0 0 40px rgba(120, 210, 255, 0.6);
+            opacity: 0;
+            z-index: 4;
+            transition: opacity 0.4s ease;
+        }
+
+            .center-glow.show {
+                opacity: 1;
+            }
+
+        .lightning {
+            position: absolute;
+            inset: 0;
+            z-index: 40;
+            background: white;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+            .lightning.flash {
+                animation: lightningFlash 0.75s ease;
+            }
+
+        @keyframes lightningFlash {
+            0% {
+                opacity: 0;
+            }
+
+            8% {
+                opacity: 1;
+            }
+
+            14% {
+                opacity: 0.15;
+            }
+
+            24% {
+                opacity: 0.95;
+            }
+
+            32% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        .draug-scene {
+            position: absolute;
+            inset: 0;
+            z-index: 30;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 1s ease;
+        }
+
+            .draug-scene.show {
+                opacity: 1;
+            }
+
+        .draug-wrapper {
+            position: relative;
+            width: min(78vw, 430px);
+            transform: scale(0.35);
+            filter: brightness(0.55);
+        }
+
+            .draug-wrapper.approach {
+                animation: draugApproach 5s ease forwards;
+            }
+
+        @keyframes draugApproach {
+            0% {
+                transform: scale(0.35) translateY(30px);
+                filter: brightness(0.35) blur(1px);
+            }
+
+            55% {
+                transform: scale(0.82) translateY(8px);
+                filter: brightness(0.65) blur(0);
+            }
+
+            100% {
+                transform: scale(1.15) translateY(0);
+                filter: brightness(0.9) blur(0);
+            }
+        }
+
+        .draug-image {
+            width: 100%;
+            display: block;
+            border-radius: 24px;
+            box-shadow: 0 0 50px rgba(130, 210, 255, 0.25), 0 25px 80px rgba(0, 0, 0, 0.85);
+        }
+
+        .draug-wrapper.talking {
+            animation: draugTalk 0.55s infinite alternate;
+        }
+
+        @keyframes draugTalk {
+            from {
+                transform: scale(1.13) translateY(0);
+                filter: brightness(0.92);
+            }
+
+            to {
+                transform: scale(1.17) translateY(-4px);
+                filter: brightness(1.05);
+            }
+        }
+
+        .speech-box {
+            position: absolute;
+            left: 50%;
+            bottom: 30px;
+            transform: translateX(-50%) translateY(25px);
+            width: min(88vw, 540px);
+            z-index: 50;
+            background: rgba(3, 12, 22, 0.92);
+            border: 1px solid rgba(150, 220, 255, 0.45);
+            border-radius: 22px;
+            padding: 18px;
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.6);
+            opacity: 0;
+            transition: opacity 0.7s ease, transform 0.7s ease;
+            pointer-events: none;
+        }
+
+            .speech-box.show {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+
+        .speech-name {
+            color: #7ee7ff;
+            font-weight: 900;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        .speech-text {
+            min-height: 54px;
+            line-height: 1.45;
+            font-size: 16px;
+        }
+
+        .continue-btn {
+            display: none;
+            margin: 16px auto 0;
+            padding: 13px 24px;
+            border: none;
+            border-radius: 999px;
+            background: linear-gradient(180deg, #2eb4ff, #168bd0);
+            color: white;
+            font-weight: 900;
+            cursor: pointer;
+            box-shadow: 0 10px 22px rgba(0,0,0,0.35);
+        }
+
+            .continue-btn.show {
+                display: block;
+                animation: buttonPop 0.4s ease forwards;
+            }
+
+        @keyframes buttonPop {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .skip-dev {
+            position: fixed;
+            right: 14px;
+            top: 14px;
+            z-index: 100000;
+            padding: 9px 14px;
+            border: none;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.14);
+            color: white;
+            cursor: pointer;
+        }
+
+        @media (max-width: 480px) {
+            .spiral-card {
+                width: 96px;
+                height: 64px;
+                font-size: 12px;
+            }
+
+            .draug-wrapper {
+                width: min(86vw, 360px);
+            }
+
+            .speech-box {
+                bottom: 24px;
+                padding: 15px;
+            }
+
+            .speech-text {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="draug-page">
+        <div class="storm-layer"></div>
+
+        <div class="spiral-stage" id="spiralStage">
+            <div class="center-glow" id="centerGlow"></div>
+
+            <div class="spiral-card" data-index="0">Location</div>
+            <div class="spiral-card" data-index="1">Date</div>
+            <div class="spiral-card" data-index="2">Frequency</div>
+            <div class="spiral-card" data-index="3">Route</div>
+        </div>
+
+        <div class="darkness" id="darkness"></div>
+        <div class="lightning" id="lightning"></div>
+
+        <div class="draug-scene" id="draugScene">
+            <div class="draug-wrapper" id="draugWrapper">
+                <img class="draug-image" id="draugImage" src="../../../../assets/images/draug.png" alt="Draug">
+            </div>
+        </div>
+
+        <div class="speech-box" id="speechBox">
+            <div class="speech-name">DRAUG</div>
+            <div class="speech-text" id="speechText"></div>
+            <button class="continue-btn" id="continueBtn">Continue</button>
+        </div>
+
+        <button class="skip-dev" onclick="window.location.href = nextPage">
+            DEV Skip
+        </button>
+    </div>
+
+    <script>
+        const draugImagePath = "../../../../assets/images/draug.jfif";
+
+        const cards = document.querySelectorAll(".spiral-card");
+        const spiralStage = document.getElementById("spiralStage");
+        const centerGlow = document.getElementById("centerGlow");
+        const darkness = document.getElementById("darkness");
+        const lightning = document.getElementById("lightning");
+        const draugScene = document.getElementById("draugScene");
+        const draugWrapper = document.getElementById("draugWrapper");
+        const draugImage = document.getElementById("draugImage");
+        const speechBox = document.getElementById("speechBox");
+        const speechText = document.getElementById("speechText");
+        const continueBtn = document.getElementById("continueBtn");
+
+        draugImage.src = draugImagePath;
+
+        const draugLines = [
+            "You gathered the four signs...",
+            "Location. Date. Frequency. Route.",
+            "The signal has reached me at last.",
+            "But the Arctic does not give answers freely."
+        ];
+
+        continueBtn.addEventListener("click", () => {
+            window.location.href = nextPage;
+        });
+
+        startSequence();
+
+        function startSequence() {
+            prepareCards();
+
+            setTimeout(() => {
+                startSpiralAnimation();
+            }, 700);
+        }
+
+        function prepareCards() {
+            const startPositions = [
+                { x: -140, y: -210, r: -12 },
+                { x: 150, y: -170, r: 10 },
+                { x: 165, y: 150, r: -8 },
+                { x: -150, y: 170, r: 12 }
+            ];
+
+            cards.forEach((card, index) => {
+                const pos = startPositions[index];
+
+                card.style.transform = `
+                        translate(${pos.x}px, ${pos.y}px)
+                        rotate(${pos.r}deg)
+                        scale(1)
+                    `;
+            });
+        }
+
+        function startSpiralAnimation() {
+            const duration = 7200;
+            const startTime = performance.now();
+
+            centerGlow.classList.add("show");
+
+            function animate(now) {
+                const elapsed = now - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+
+                /*
+                    acceleration:
+                    starts slowly, then becomes faster
+                */
+                const eased = progress * progress * progress;
+
+                const radius = 230 * (1 - eased);
+                const spin = eased * Math.PI * 9;
+
+                cards.forEach((card, index) => {
+                    const offset = (Math.PI * 2 / cards.length) * index;
+                    const angle = spin + offset;
+
+                    const wobble = Math.sin(progress * 10 + index) * 8 * (1 - eased);
+
+                    const x = Math.cos(angle) * (radius + wobble);
+                    const y = Math.sin(angle) * (radius + wobble);
+
+                    const rotate = angle * 50;
+                    const scale = 1 - eased * 0.35;
+
+                    card.style.transform = `
+                            translate(${x}px, ${y}px)
+                            rotate(${rotate}deg)
+                            scale(${scale})
+                        `;
+
+                    card.style.opacity = String(1 - Math.max(0, eased - 0.72) * 3.5);
+                });
+
+                darkness.style.opacity = String(Math.min(eased * 1.15, 1));
+
+                if (progress < 1) {
+                    requestAnimationFrame(animate);
+                } else {
+                    finishSpiral();
+                }
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        function finishSpiral() {
+            spiralStage.style.display = "none";
+            darkness.classList.add("full");
+
+            /*
+                4 seconds of complete darkness
+            */
+            setTimeout(() => {
+                flashLightning();
+            }, 4000);
+        }
+
+        function flashLightning() {
+            lightning.classList.add("flash");
+
+            setTimeout(() => {
+                darkness.style.opacity = "0.62";
+                darkness.classList.remove("full");
+
+                showDraug();
+            }, 350);
+        }
+
+        function showDraug() {
+            draugScene.classList.add("show");
+            draugWrapper.classList.add("approach");
+
+            setTimeout(() => {
+                showSpeech();
+            }, 5200);
+        }
+
+        function showSpeech() {
+            speechBox.classList.add("show");
+            draugWrapper.classList.remove("approach");
+            draugWrapper.classList.add("talking");
+
+            typeLines(draugLines, 0);
+        }
+
+        function typeLines(lines, index) {
+            if (index >= lines.length) {
+                draugWrapper.classList.remove("talking");
+                continueBtn.classList.add("show");
+                return;
+            }
+
+            typeText(lines[index], () => {
+                setTimeout(() => {
+                    typeLines(lines, index + 1);
+                }, 900);
+            });
+        }
+
+        function typeText(text, done) {
+            speechText.textContent = "";
+
+            let i = 0;
+
+            const interval = setInterval(() => {
+                speechText.textContent += text[i];
+                i++;
+
+                if (i >= text.length) {
+                    clearInterval(interval);
+                    done();
+                }
+            }, 38);
+        }
+    </script>
+    <game-navigation></game-navigation>
+    <script>
+        setupGameNavigation();
+    </script>
+</body>
+</html>

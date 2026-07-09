@@ -10,6 +10,10 @@
     <script src="../../../../Stations/JAVA/letter_templates.js"></script>
     <script src="../../../../Stations/JAVA/incoming_dispatch.js"></script>
     <script src="../../../../Stations/JAVA/navigation.js"></script>
+    <script>
+        const previousPage = "../riddle/riddle_5_4_location.html";
+        const nextPage = "../riddle/riddle_6_2_chat.html";
+    </script>
 </head>
 
 <body>
@@ -77,7 +81,7 @@
             </div>
         </div>
         <!-- for actual game do </button>style="display:none;">, but now it is just blocking -->
-        <button class="riddle-button" id="riddle_btn" onclick="window.location.href='../riddle/riddle_6.html'">
+        <button class="riddle-button" id="riddle_btn" onclick="window.location.href = nextPage">
             Solve Riddle
         </button>
         <script>
@@ -262,8 +266,10 @@
             }
         </script>
     </div>
-    <game-navigation previous="../riddle/riddle_5_location.html" next="../riddle/riddle_6.html">
-    </game-navigation>
+    <game-navigation></game-navigation>
+    <script>
+        setupGameNavigation();
+    </script>
 </body>
 
 </html>

@@ -1,4 +1,3 @@
-
 /* Stories of Messages */
 const STORIES = {
     dispatch_intro: {
@@ -83,6 +82,72 @@ const STORIES = {
                 wrongAnswer: "Are you there? Please write OKAY when you have reached the next station."
             }
 
+        ]
+    },
+    henry_rudi: {
+        title: "Henry Rudi",
+        status: "Online",
+        steps: [
+            {
+                type: "text",
+                sender: "Henry Rudi",
+                time: "10:17",
+                text: "I got some movement from different houses."
+            },
+            {
+                type: "text",
+                sender: "Henry Rudi",
+                time: "10:18",
+                text: "But I can't identify my favourite place \"Ølhallen\"."
+            },
+            {
+                type: "text",
+                sender: "Henry Rudi",
+                time: "10:19",
+                text: "Can you help me? I will send you the different photos."
+            },
+            {
+                type: "file",
+                name: "observatory_images.zip",
+                action: "henryRudiGallery"
+            },
+            {
+                type: "input",
+                variable: "henryRudiPeople",
+                question: "What do you see?",
+                placeholder: "Type your answer...",
+                acceptedAnswers: ["2", "two", "two.", "2.", "two people", "2 people"],
+                wrongAnswer: "Look carefully at the movement in the window."
+            },
+            {
+                type: "text",
+                sender: "Henry Rudi",
+                time: "10:22",
+                text: "YES, I remember that is correct! Now you only need the month."
+            },
+            {
+                type: "text",
+                sender: "Henry Rudi",
+                time: "10:23",
+                text: `
+                Go to the Wooden Cathedral:
+                <br>
+                <a href="https://www.google.com/maps/search/Wooden+Cathedral+Tromsø"
+                   target="_blank"
+                   style="color:#7ee7ff; font-weight:bold;">
+                   Open location
+                </a>
+            `
+            },
+            {
+                type: "input",
+                variable: "henryRudiLocation",
+                question: "Write okay when you are there.",
+                placeholder: "Write okay...",
+                acceptedAnswers: ["okay", "ok", "oki", "oke", "yes", "done", "there"],
+                wrongAnswer: "Tell me okay when you are there.",
+                redirect: "../final_page.html"
+            }
         ]
     }
 };

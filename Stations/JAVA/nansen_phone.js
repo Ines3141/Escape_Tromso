@@ -54,7 +54,6 @@ Explaination:
 => Creates the correct phone number 
 */
 const correctPhone = phoneCells.map(([row, col]) => String(correctGrid[row][col])).join("");
-const nextPage = "../stations/station_2.html";
 const grid = document.getElementById("magicGrid");
 /* Creates the grid automatically */
 for (let row = 0; row < 4; row++) {
@@ -220,8 +219,3 @@ function isGridCorrect() {
     }*/
     return true;
 }
-
-/* DEVELOPMENT ONLY - remove before release */
-document.getElementById("devContinueBtn").onclick = () => {
-    window.location.href = nextPage;
-};

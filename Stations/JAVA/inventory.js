@@ -1,8 +1,252 @@
 ﻿(function () {
     const STORAGE_KEY = "inventoryItems";
 
+    function injectInventoryStyles() {
+        if (document.getElementById("inventory-dossier-styles")) return;
+
+        const style = document.createElement("style");
+        style.id = "inventory-dossier-styles";
+
+        style.textContent = `
+            .inventory-dossier {
+                position: relative;
+                width: 100%;
+                min-height: 145px;
+                background: linear-gradient(180deg, #c69a58 0%, #b78646 100%);
+                border: 2px solid #8b6232;
+                border-radius: 10px;
+                box-shadow: 0 8px 18px rgba(0,0,0,0.18);
+                overflow: hidden;
+                padding: 14px;
+                box-sizing: border-box;
+            }
+
+            .inventory-dossier::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 18px;
+                width: 90px;
+                height: 18px;
+                background: #d3ab6a;
+                border: 2px solid #8b6232;
+                border-bottom: none;
+                border-radius: 8px 8px 0 0;
+            }
+
+            .inventory-dossier-label {
+                position: absolute;
+                bottom: 12px;
+                left: 14px;
+                right: 14px;
+                text-align: center;
+                font-weight: bold;
+                font-size: 14px;
+                color: #3d2a15;
+                letter-spacing: 0.5px;
+            }
+
+            .inventory-note {
+                position: absolute;
+                top: 20px;
+                right: 12px;
+                width: 92px;
+                min-height: 95px;
+                background: #f6edcc;
+                border: 1px solid #b8a16a;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+                transform: rotate(4deg);
+                padding: 8px;
+                box-sizing: border-box;
+                font-family: Georgia, "Times New Roman", serif;
+            }
+
+            .inventory-note::before {
+                content: "";
+                position: absolute;
+                top: -8px;
+                left: 50%;
+                width: 12px;
+                height: 12px;
+                margin-left: -6px;
+                background: #b53737;
+                border-radius: 50%;
+                box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+            }
+
+            .inventory-note h4 {
+                margin: 0 0 6px;
+                font-size: 10px;
+                text-transform: uppercase;
+                color: #49301a;
+                text-align: center;
+            }
+
+            .inventory-note .note-date {
+                font-size: 10px;
+                line-height: 1.2;
+                margin-bottom: 6px;
+                color: #3c2a1a;
+            }
+
+            .inventory-note ul {
+                margin: 0;
+                padding-left: 14px;
+                font-size: 9px;
+                line-height: 1.25;
+                color: #3c2a1a;
+            }
+
+            .inventory-dossier-preview-overlay {
+                position: fixed;
+                inset: 0;
+                z-index: 100001;
+                background: rgba(0,0,0,0.82);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 20px;
+            }
+
+            .inventory-dossier-preview-box {
+                background: #f4ead2;
+                color: #2b2418;
+                border-radius: 18px;
+                box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+                max-width: 950px;
+                width: 100%;
+                max-height: 90vh;
+                overflow-y: auto;
+                position: relative;
+                padding: 24px;
+                box-sizing: border-box;
+            }
+
+            .inventory-close-btn {
+                position: absolute;
+                top: 12px;
+                right: 12px;
+                z-index: 5;
+                width: 40px;
+                height: 40px;
+                border: none;
+                border-radius: 50%;
+                background: #111;
+                color: white;
+                font-size: 22px;
+                cursor: pointer;
+            }
+
+            .inventory-dossier.large {
+                min-height: 320px;
+                padding: 28px;
+            }
+
+            .inventory-dossier.large::before {
+                left: 32px;
+                width: 150px;
+                height: 28px;
+            }
+
+            .inventory-dossier.large .inventory-dossier-label {
+                font-size: 26px;
+                bottom: 28px;
+            }
+
+            .inventory-dossier.large .inventory-note {
+                width: 240px;
+                min-height: 230px;
+                top: 38px;
+                right: 32px;
+                padding: 18px 16px;
+            }
+
+            .inventory-dossier.large .inventory-note h4 {
+                font-size: 17px;
+                margin-bottom: 12px;
+            }
+
+            .inventory-dossier.large .inventory-note .note-date {
+                font-size: 15px;
+                margin-bottom: 12px;
+            }
+
+            .inventory-dossier.large .inventory-note ul {
+                font-size: 14px;
+                line-height: 1.4;
+            }
+
+            .inventory-preview-actions {
+                margin-top: 20px;
+                display: flex;
+                justify-content: center;
+            }
+
+            .inventory-open-file-btn {
+                border: none;
+                border-radius: 999px;
+                padding: 12px 22px;
+                font-weight: bold;
+                cursor: pointer;
+                background: #7a4f24;
+                color: white;
+                font-size: 15px;
+            }
+
+            .inventory-open-file-btn:hover {
+                background: #5f3d1b;
+            }
+
+            .inventory-file-overlay {
+                position: fixed;
+                inset: 0;
+                z-index: 100002;
+                background: rgba(0,0,0,0.88);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 20px;
+            }
+
+            .inventory-file-box {
+                background: #f5efe0;
+                color: #2b2418;
+                border-radius: 18px;
+                padding: 24px;
+                max-width: 850px;
+                width: 100%;
+                max-height: 88vh;
+                overflow-y: auto;
+                position: relative;
+                box-sizing: border-box;
+            }
+
+            @media (max-width: 650px) {
+                .inventory-dossier.large .inventory-note {
+                    position: static;
+                    width: 100%;
+                    min-height: auto;
+                    transform: none;
+                    margin-top: 30px;
+                }
+
+                .inventory-dossier.large .inventory-dossier-label {
+                    position: static;
+                    margin-top: 24px;
+                    text-align: left;
+                }
+            }
+        `;
+
+        document.head.appendChild(style);
+    }
+
     function getInventoryItems() {
-        return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+        try {
+            return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+        } catch {
+            return [];
+        }
     }
 
     function saveInventoryItems(items) {
@@ -12,10 +256,7 @@
     function addInventoryItem(item) {
         const items = getInventoryItems();
 
-        const exists = items.some(existing => existing.id === item.id);
-        if (exists) return;
-
-        items.push({
+        const newItem = {
             id: item.id,
             title: item.title || "Untitled Item",
             type: item.type || "image",
@@ -23,13 +264,29 @@
             full: item.full || item.thumb || "",
             description: item.description || "",
 
-            // Extra fields for newspaper items
+            birthDate: item.birthDate || "",
+            achievements: Array.isArray(item.achievements) ? item.achievements : [],
+
+            fileAction: item.fileAction || "",
+            fileTitle: item.fileTitle || item.title || "File",
+            fileHtml: item.fileHtml || "",
+            fileImage: item.fileImage || "",
+            fileDescription: item.fileDescription || "",
+
             newspaperTitle: item.newspaperTitle || "",
             newspaperDate: item.newspaperDate || "",
             newspaperImage: item.newspaperImage || "",
             newspaperImageDate: item.newspaperImageDate || "",
             newspaperText: item.newspaperText || ""
-        });
+        };
+
+        const existingIndex = items.findIndex(existing => existing.id === item.id);
+
+        if (existingIndex !== -1) {
+            items[existingIndex] = newItem;
+        } else {
+            items.push(newItem);
+        }
 
         saveInventoryItems(items);
     }
@@ -43,7 +300,43 @@
         localStorage.removeItem(STORAGE_KEY);
     }
 
+    function createAchievementList(item, limit = null) {
+        const list = Array.isArray(item.achievements) ? item.achievements : [];
+        const visible = limit ? list.slice(0, limit) : list;
+
+        if (visible.length === 0) {
+            return `<li>No notes yet</li>`;
+        }
+
+        return visible.map(entry => `<li>${entry}</li>`).join("");
+    }
+
+    function createDossierMarkup(item, large = false) {
+        return `
+            <div class="inventory-dossier ${large ? "large" : ""}">
+                <div class="inventory-note">
+                    <h4>Quick Facts</h4>
+
+                    <div class="note-date">
+                        <strong>Born:</strong><br>
+                        ${item.birthDate || "Unknown"}
+                    </div>
+
+                    <ul>
+                        ${createAchievementList(item, large ? null : 2)}
+                    </ul>
+                </div>
+
+                <div class="inventory-dossier-label">
+                    ${item.title}
+                </div>
+            </div>
+        `;
+    }
+
     function openInventory() {
+        injectInventoryStyles();
+
         const items = getInventoryItems();
 
         const overlay = document.createElement("div");
@@ -135,25 +428,29 @@
                 tile.style.alignItems = "center";
                 tile.style.gap = "10px";
 
-                tile.innerHTML = `
-                    <img src="${item.thumb}"
-                         alt="${item.title}"
-                         style="
-                            width:100%;
-                            max-width:100px;
-                            height:100px;
-                            object-fit:contain;
-                            border-radius:10px;
-                            background:#f4f4f4;
-                         ">
+                if (item.type === "dossier") {
+                    tile.innerHTML = createDossierMarkup(item, false);
+                } else {
+                    tile.innerHTML = `
+                        <img src="${item.thumb}"
+                             alt="${item.title}"
+                             style="
+                                width:100%;
+                                max-width:100px;
+                                height:100px;
+                                object-fit:contain;
+                                border-radius:10px;
+                                background:#f4f4f4;
+                             ">
 
-                    <strong style="
-                        font-size:14px;
-                        color:#061927;
-                    ">
-                        ${item.title}
-                    </strong>
-                `;
+                        <strong style="
+                            font-size:14px;
+                            color:#061927;
+                        ">
+                            ${item.title}
+                        </strong>
+                    `;
+                }
 
                 tile.addEventListener("click", () => {
                     openInventoryItem(item);
@@ -175,65 +472,41 @@
     }
 
     function openInventoryItem(item) {
-        if (item.type === "newspaper") {
-            openNewspaperItem(item);
+        injectInventoryStyles();
+
+        if (item.type === "dossier") {
+            openDossierPreview(item);
             return;
         }
 
+        openDefaultInventoryItem(item);
+    }
+
+    function openDefaultInventoryItem(item) {
         const overlay = document.createElement("div");
-        overlay.style.position = "fixed";
-        overlay.style.inset = "0";
-        overlay.style.zIndex = "100001";
-        overlay.style.background = "rgba(0,0,0,0.88)";
-        overlay.style.display = "flex";
-        overlay.style.justifyContent = "center";
-        overlay.style.alignItems = "center";
-        overlay.style.padding = "20px";
+        overlay.className = "inventory-file-overlay";
 
         const box = document.createElement("div");
-        box.style.background = "#f5efe0";
-        box.style.color = "#2b2418";
-        box.style.borderRadius = "18px";
-        box.style.padding = "20px";
-        box.style.maxWidth = "850px";
-        box.style.width = "100%";
-        box.style.maxHeight = "88vh";
-        box.style.overflowY = "auto";
+        box.className = "inventory-file-box";
         box.style.textAlign = "center";
-        box.style.position = "relative";
 
         box.innerHTML = `
-        <button id="closeInventoryItem" style="
-            position:absolute;
-            top:12px;
-            right:12px;
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            width:40px;
-            height:40px;
-            border:none;
-            border-radius:50%;
-            background:#111;
-            color:white;
-            font-size:22px;
-            cursor:pointer;
-        ">×</button>
+            <button class="inventory-close-btn" id="closeInventoryItem">×</button>
 
-        <h3 style="margin-top:0;">${item.title}</h3>
+            <h3 style="margin-top:0;">${item.title}</h3>
 
-        <img src="${item.full}"
-             alt="${item.title}"
-             style="
-                width:100%;
-                max-width:700px;
-                height:auto;
-                border-radius:12px;
-                box-shadow:0 10px 25px rgba(0,0,0,0.18);
-             ">
+            <img src="${item.full}"
+                 alt="${item.title}"
+                 style="
+                    width:100%;
+                    max-width:700px;
+                    height:auto;
+                    border-radius:12px;
+                    box-shadow:0 10px 25px rgba(0,0,0,0.18);
+                 ">
 
-        ${item.description ? `<p style="margin-top:16px; line-height:1.5;">${item.description}</p>` : ""}
-    `;
+            ${item.description ? `<p style="margin-top:16px; line-height:1.5;">${item.description}</p>` : ""}
+        `;
 
         overlay.appendChild(box);
         document.body.appendChild(overlay);
@@ -249,125 +522,80 @@
         });
     }
 
-    function openNewspaperItem(item) {
+    function openDossierPreview(item) {
         const overlay = document.createElement("div");
-        overlay.style.position = "fixed";
-        overlay.style.inset = "0";
-        overlay.style.zIndex = "100001";
-        overlay.style.background = "rgba(0,0,0,0.88)";
-        overlay.style.display = "flex";
-        overlay.style.justifyContent = "center";
-        overlay.style.alignItems = "center";
-        overlay.style.padding = "20px";
+        overlay.className = "inventory-dossier-preview-overlay";
 
-        const paper = document.createElement("div");
-        paper.style.background = "#f5efe0";
-        paper.style.color = "#231b12";
-        paper.style.width = "100%";
-        paper.style.maxWidth = "760px";
-        paper.style.maxHeight = "88vh";
-        paper.style.overflowY = "auto";
-        paper.style.padding = "28px";
-        paper.style.borderRadius = "10px";
-        paper.style.boxShadow = "0 20px 50px rgba(0,0,0,0.45)";
-        paper.style.position = "relative";
-        paper.style.fontFamily = "Georgia, 'Times New Roman', serif";
-        paper.style.border = "8px solid #d8c8a8";
+        const box = document.createElement("div");
+        box.className = "inventory-dossier-preview-box";
 
-        paper.innerHTML = `
-        <button id="closeNewspaper" style="
-            position:absolute;
-            top:12px;
-            right:12px;
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            width:40px;
-            height:40px;
-            border:none;
-            border-radius:50%;
-            background:#111;
-            color:white;
-            font-size:22px;
-            cursor:pointer;
-            font-family:Arial, sans-serif;
-        ">×</button>
+        box.innerHTML = `
+            <button class="inventory-close-btn" id="closeDossierPreview">×</button>
 
-        <div style="
-            text-align:center;
-            border-bottom:3px double #231b12;
-            padding-bottom:14px;
-            margin-bottom:18px;
-        ">
-            <div style="
-                font-size:13px;
-                letter-spacing:3px;
-                text-transform:uppercase;
-                margin-bottom:8px;
-            ">
-                Arctic Historical News
+            ${createDossierMarkup(item, true)}
+
+            <div class="inventory-preview-actions">
+                <button class="inventory-open-file-btn" id="openDossierFileBtn">
+                    Open file
+                </button>
             </div>
+        `;
 
-            <h1 style="
-                margin:0;
-                font-size:34px;
-                line-height:1.05;
-                text-transform:uppercase;
-            ">
-                ${item.newspaperTitle || item.title}
-            </h1>
-
-            <p style="
-                margin:8px 0 0;
-                font-size:14px;
-                font-style:italic;
-            ">
-                ${item.newspaperDate || ""}
-            </p>
-        </div>
-
-        <div style="
-            display:flex;
-            flex-direction:column;
-            gap:16px;
-        ">
-            <figure style="margin:0;">
-                <img src="${item.newspaperImage || item.full}"
-                     alt="${item.title}"
-                     style="
-                        width:100%;
-                        max-height:360px;
-                        object-fit:cover;
-                        filter:sepia(35%);
-                        border:2px solid #2b2418;
-                     ">
-
-                <figcaption style="
-                    font-size:13px;
-                    margin-top:6px;
-                    text-align:center;
-                    font-style:italic;
-                ">
-                    ${item.newspaperImageDate || ""}
-                </figcaption>
-            </figure>
-
-            <div style="
-                column-count:2;
-                column-gap:28px;
-                text-align:left;
-                font-size:17px;
-                line-height:1.55;
-            ">
-                ${item.newspaperText || item.description || ""}
-            </div>
-        </div>
-    `;
-
-        overlay.appendChild(paper);
+        overlay.appendChild(box);
         document.body.appendChild(overlay);
 
-        paper.querySelector("#closeNewspaper").addEventListener("click", () => {
+        box.querySelector("#closeDossierPreview").addEventListener("click", () => {
+            overlay.remove();
+        });
+
+        box.querySelector("#openDossierFileBtn").addEventListener("click", () => {
+            overlay.remove();
+            openDossierFile(item);
+        });
+
+        overlay.addEventListener("click", event => {
+            if (event.target === overlay) {
+                overlay.remove();
+            }
+        });
+    }
+
+    function openDossierFile(item) {
+        if (
+            item.fileAction &&
+            window.INVENTORY_FILES &&
+            typeof window.INVENTORY_FILES[item.fileAction] === "function"
+        ) {
+            window.INVENTORY_FILES[item.fileAction](item);
+            return;
+        }
+
+        openGenericDossierFile(item);
+    }
+
+    function openGenericDossierFile(item) {
+        const overlay = document.createElement("div");
+        overlay.className = "inventory-file-overlay";
+
+        const box = document.createElement("div");
+        box.className = "inventory-file-box";
+
+        box.innerHTML = `
+            <button class="inventory-close-btn" id="closeDossierFile">×</button>
+
+            <h1>${item.fileTitle || item.title}</h1>
+
+            ${item.fileImage ? `<img src="${item.fileImage}" alt="${item.title}" style="max-width:100%; border-radius:12px;">` : ""}
+
+            ${item.fileHtml || ""}
+
+            ${item.fileDescription ? `<p>${item.fileDescription}</p>` : ""}
+        `;
+
+        overlay.appendChild(box);
+        document.body.appendChild(overlay);
+
+        box.querySelector("#closeDossierFile").addEventListener("click", () => {
             overlay.remove();
         });
 
@@ -376,19 +604,10 @@
                 overlay.remove();
             }
         });
-
-        if (window.innerWidth <= 650) {
-            const text = paper.querySelector("div[style*='column-count']");
-            if (text) {
-                text.style.columnCount = "1";
-            }
-
-            const title = paper.querySelector("h1");
-            if (title) {
-                title.style.fontSize = "26px";
-            }
-        }
     }
+
+    injectInventoryStyles();
+
     window.getInventoryItems = getInventoryItems;
     window.addInventoryItem = addInventoryItem;
     window.removeInventoryItem = removeInventoryItem;

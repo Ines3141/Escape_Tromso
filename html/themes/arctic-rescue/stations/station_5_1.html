@@ -60,43 +60,7 @@ THINGS TO DO:
             <button id="btnA" class="answer-button"></button>
             <button id="btnB" class="answer-button"></button>
         </div>
-        <button id="profile" class="profile-button" onclick="openProfile()" style="display:none;">
-            Explorer Profile
-        </button>
-        <div id="profileOverlay" class="profile-overlay hidden">
-            <div class="profile-card">
-
-                <button class="close-profile" onclick="closeProfile()">×</button>
-
-                <img src="../../../../assets/images/Amundsen.jpg" class="profile-img">
-
-                <h2>Roald Amundsen</h2>
-
-                <p class="profile-subtitle">
-                    Polar Explorer • Expedition Leader
-                </p>
-
-                <div class="profile-tags">
-                    <span>🏆 First at the South Pole</span>
-                    <span>🧭 Northwest Passage</span>
-                    <span>✈️ Arctic Flight Pioneer</span>
-                </div>
-
-                <p>
-                    Roald Amundsen was one of the greatest explorers of all time.
-                    He became the first person to reach the South Pole and mastered
-                    survival techniques learned from Indigenous Arctic peoples. He went first
-                    trough the North West passage. He also went trough the North East Passage.
-                    He flew over the North pole with an airship Norge. He died 2 years later on
-                    a rescue mission of his italian collegue Umberto Nobile.
-                </p>
-
-                <div class="fun-fact">
-                    <strong>Fun Fact:</strong>
-                    He secretly changed his destination from the North Pole to the South Pole.
-                </div>
-            </div>
-        </div>
+        
         <!-- for actual game do </button>style="display:none;">, but now it is just blocking -->
         <button class="riddle-button" id="riddle_btn" onclick="window.location.href = nextPage">
             Solve Riddle
@@ -112,7 +76,6 @@ THINGS TO DO:
             const btnB = document.getElementById("btnB");
             const audio_btn = document.getElementById("audioBtn");
             const riddle_btn = document.getElementById("riddle_btn");
-            const profile_btn = document.getElementById("profile");
 
             const choices = document.getElementById("choices");
             const subtitle = document.getElementById("subtitle");
@@ -215,13 +178,6 @@ THINGS TO DO:
             audioB.addEventListener("timeupdate", () => {
                 updateSubtitle(audioB, subtitlesB);
             });
-            function openProfile() {
-                document.getElementById("profileOverlay").classList.remove("hidden");
-            }
-
-            function closeProfile() {
-                document.getElementById("profileOverlay").classList.add("hidden");
-            }
             const callScreen = document.getElementById("callScreen");
             const stationContent = document.getElementById("stationContent");
 
@@ -247,13 +203,8 @@ THINGS TO DO:
     <game-navigation></game-navigation>
     <script>
         setupGameNavigation();
-        addInventoryItem({
-            id: "profile-amundsen",
-            title: "Amundsen Profile",
-            type: "image",
-            thumb: "../../../../assets/images/file_placeholder.png",
-            full: "../../../../assets/images/file_placeholder.png",
-            description: "Profile folder collected at Station Amundsen."
+        loadInventoryScripts().then(() => {
+            addAmundsenProfileToInventory();
         });
     </script>
 </body>

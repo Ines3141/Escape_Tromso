@@ -1,23 +1,50 @@
-﻿function loadInventoryScript() {
-    /*
+﻿function loadScriptOnce(src, flagName) {
+    if (window[flagName]) {
+        return Promise.resolve();
+    }
 
-    */
-    if (window.inventoryScriptLoaded) return;
+    if (window[flagName + "Promise"]) {
+        return window[flagName + "Promise"];
+    }
 
-    const script = document.createElement("script");
-    script.src = "../../../../Stations/JAVA/inventory.js";
-    script.onload = () => {
-        window.inventoryScriptLoaded = true;
-        console.log("Inventory loaded.");
-    };
-    script.onerror = () => {
-        console.error("Inventory could not be loaded. Check the path.");
-    };
+    window[flagName + "Promise"] = new Promise((resolve, reject) => {
+        const existingScript = document.querySelector(`script[data-loader="${flagName}"]`);
 
-    document.head.appendChild(script);
+        if (existingScript) {
+            existingScript.addEventListener("load", resolve);
+            existingScript.addEventListener("error", reject);
+            return;
+        }
+
+        const script = document.createElement("script");
+        script.src = src;
+        script.dataset.loader = flagName;
+
+        script.onload = () => {
+            window[flagName] = true;
+            console.log(src + " loaded.");
+            resolve();
+        };
+
+        script.onerror = () => {
+            console.error(src + " could not be loaded. Check the path.");
+            reject();
+        };
+
+        document.head.appendChild(script);
+    });
+
+    return window[flagName + "Promise"];
 }
 
-loadInventoryScript();
+function loadInventoryScripts() {
+    return loadScriptOnce("../../../../Stations/JAVA/inventory.js", "inventoryScriptLoaded")
+        .then(() => {
+            return loadScriptOnce("../../../../Stations/JAVA/explorer_profiles.js", "explorerProfilesScriptLoaded");
+        });
+}
+
+loadInventoryScripts();
 class GameNavigation extends HTMLElement {
     constructor() {
         super();

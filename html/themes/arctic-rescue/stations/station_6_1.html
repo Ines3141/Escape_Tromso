@@ -4,166 +4,62 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
+
     <title>Station 6</title>
+
     <link rel="stylesheet" href="../../../../CSS/global.css">
     <link rel="stylesheet" href="../../../../CSS/station.css">
+
     <script src="../../../../Stations/JAVA/navigation.js"></script>
     <script src="../../../../Stations/JAVA/inventory.js"></script>
+    <script src="../../../../Stations/JAVA/rudi.js"></script>
     <script src="../../../../Stations/JAVA/story_data.js"></script>
     <script src="../../../../Stations/JAVA/story_chat.js"></script>
     <script src="../../../../Stations/JAVA/attachments.js"></script>
+
     <script>
         const previousPage = "../riddle/riddle_5_4_location.html";
         const nextPage = "../riddle/riddle_6_2_chat.html";
+
+        function resetDispatchChat() {
+            localStorage.removeItem("dispatch_henry_intro_step");
+            localStorage.removeItem("dispatch_henry_intro_scroll");
+            location.reload();
+        }
+
+        function resetRudiInventory() {
+            removeInventoryItem("profile-rudi");
+            location.reload();
+        }
     </script>
-    <style>
-        .attachment-modal {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.82);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            font-family: Arial, sans-serif;
-        }
-
-        .attachment-content {
-            width: min(90vw, 420px);
-            background: #061927;
-            color: white;
-            border: 2px solid #7ee7ff;
-            border-radius: 18px;
-            padding: 24px;
-            text-align: center;
-            box-shadow: 0 0 25px rgba(126, 231, 255, 0.35);
-        }
-
-        .dispatch-video {
-            width: 100%;
-            max-height: 60vh;
-            border-radius: 12px;
-            margin: 16px 0;
-            background: black;
-        }
-
-        .close-attachment,
-        .friend-request-button {
-            background: #7ee7ff;
-            color: #061927;
-            border: none;
-            border-radius: 999px;
-            padding: 10px 18px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-            .friend-request-button:disabled {
-                opacity: 0.7;
-                cursor: default;
-            }
-
-        .contact-avatar {
-            width: 78px;
-            height: 78px;
-            border-radius: 50%;
-            background: #7ee7ff;
-            color: #061927;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0 auto 14px;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .contact-subtitle {
-            color: #9eefff;
-            margin-top: -6px;
-        }
-
-        .contact-text {
-            font-size: 14px;
-            line-height: 1.4;
-        }
-
-        .request-status {
-            min-height: 22px;
-            margin-top: 14px;
-            color: #7ee7ff;
-            font-weight: bold;
-        }
-
-        .attachment-modal.accepted .attachment-content {
-            border-color: #6cff6c;
-            box-shadow: 0 0 25px rgba(108, 255, 108, 0.4);
-        }
-
-        .attachment-modal.accepted .request-status {
-            color: #6cff6c;
-        }
-    </style>
 </head>
 
 <body>
     <div class="box">
         <h1>Henry Rudi</h1>
+
         <story-chat story="dispatch_henry_intro"></story-chat>
 
-        <!-- for actual game do </button>style="display:none;">, but now it is just blocking -->
+        <!-- temporary test button -->
         <button class="riddle-button" id="riddle_btn" onclick="window.location.href = nextPage">
             Solve Riddle
         </button>
-        <button onclick="
-            localStorage.removeItem('dispatch_henry_intro_step');
-            localStorage.removeItem('dispatch_henry_intro_scroll');">
+
+        <button onclick="resetDispatchChat()">
             Reset chat
         </button>
-        <button onclick="
-    removeInventoryItem('profile-rudi');
-    location.reload();
-">
+
+        <button onclick="resetRudiInventory()">
             Reset Rudi Inventory
         </button>
     </div>
+
     <game-navigation></game-navigation>
+
     <script>
         setupGameNavigation();
-        addInventoryItem({
-            id: "profile-rudi",
-            title: "Rudi Profile",
-            type: "newspaper",
-
-            // This stays the placeholder in the inventory grid
-            thumb: "../../../../assets/images/file_placeholder.png",
-
-            // This can be the same as the newspaper image
-            full: "../../../../assets/images/rudi.jpg",
-
-            newspaperTitle: "The Arctic Hunter Henry Rudi",
-            newspaperDate: "Tromsø Historical Archive",
-
-            newspaperImage: "../../../../assets/images/henry_rudi.jpg",
-            newspaperImageDate: "Photograph taken during Henry Rudi's Arctic years.",
-
-            newspaperText: `
-        <p>
-            Henry Rudi became known as one of the experienced hunters of the Arctic.
-            He spent many years travelling through cold and dangerous landscapes,
-            learning how to read weather, tracks, ice, and animal movement.
-        </p>
-
-        <p>
-            In Tromsø, people remembered him not only for his Arctic knowledge,
-            but also for his connection to Ølhallen, one of the city's famous old pubs.
-            It was said to be one of his favourite places to return to after long journeys.
-        </p>
-
-        <p>
-            For this mission, Henry Rudi may know where to look next.
-            His memory of Tromsø and the Arctic could help the rescue team find the missing clue.
-        </p>
-    `
+        loadInventoryScripts().then(() => {
+            addRudiProfileToInventory();
         });
     </script>
 </body>

@@ -73,44 +73,6 @@
             <button id="btnB" class="answer-button"></button>
             <button id="btnC" class="answer-button" style="display:none;"></button>
         </div>
-        <button id="profile" class="profile-button" onclick="openProfile()" style="display:none;">
-            Explorer Profile
-        </button>
-
-        <div id="profileOverlay" class="profile-overlay hidden">
-            <div class="profile-card">
-                <button class="close-profile" onclick="closeProfile()">×</button>
-
-                <img src="../../../../assets/images/Nansen.jpg" class="profile-img" alt="Fridtjof Nansen">
-
-                <h2>Fridtjof Nansen</h2>
-                <p class="profile-subtitle">Scientist • Explorer • Humanitarian</p>
-
-                <div class="profile-tags">
-                    <span>🧊 Greenland Crossing</span>
-                    <span>🚢 Fram Expedition</span>
-                    <span>🕊 Nobel Peace Prize </span>
-                </div>
-
-                <p>
-                    Nansen was one of Norway's greatest polar explorers and scientist.
-                    He studied marine zoology and neuroanatomy.
-                    He crossed Greenland on skis 1888, had the
-                    Fram Expedition (1893–1896), which are supposed to go the North pole.
-                    He purposely froze his specially designed ship, the Fram, into the Arctic ice pack, allowing the
-                    natural drift of the ice to carry
-                    them toward the North Pole. Though he didn't reach the exact pole, he set a new "furthest north"
-                    record.
-                    He studied Arctic ice and ocean currents. Nansen helped over 400.000 refugees after World War I and
-                    invented the Nansen passport for stateless refugees.
-                </p>
-
-                <div class="fun-fact">
-                    <strong>Fun fact:</strong> Nansen tried to reach the North Pole by letting his ship drift with the
-                    ice.
-                </div>
-            </div>
-        </div>
         <div class="call-controls">
             <button class="call-action end-call" onclick="window.location.href = previousPage">
                 <span class="call-icon">📞</span>
@@ -142,7 +104,6 @@
             const btnA = document.getElementById("btnA");
             const btnB = document.getElementById("btnB");
             const btnC = document.getElementById("btnC");
-            const profile_btn = document.getElementById("profile");
 
             const choices = document.getElementById("choices");
             const person = document.querySelector(".person-container");
@@ -300,13 +261,7 @@
             });
 
 
-            function openProfile() {
-                document.getElementById("profileOverlay").classList.remove("hidden");
-            }
-
-            function closeProfile() {
-                document.getElementById("profileOverlay").classList.add("hidden");
-            }
+            
             const callScreen = document.getElementById("callScreen");
             const stationContent = document.getElementById("stationContent");
 
@@ -334,13 +289,8 @@
     <game-navigation></game-navigation>
     <script>
         setupGameNavigation();
-        addInventoryItem({
-            id: "profile-nansen",
-            title: "Nansen Profile",
-            type: "image",
-            thumb: "../../../../assets/images/file_placeholder.png",
-            full: "../../../../assets/images/file_placeholder.png",
-            description: "Profile folder collected at Station Nansen."
+        loadInventoryScripts().then(() => {
+            addNansenProfileToInventory();
         });
     </script>
 </body>

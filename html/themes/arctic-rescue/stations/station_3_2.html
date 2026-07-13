@@ -59,36 +59,6 @@ THINGS TO DO LATER:
         <button class="riddle-button" id="riddle_btn" onclick="window.location.href = nextPage">
             Solve Riddle
         </button>
-        <div id="profileOverlay" class="profile-overlay hidden">
-            <div class="profile-card">
-                <button class="close-profile" onclick="closeProfile()">×</button>
-                <img src="../../../../assets/images/Wanny.jpg" class="profile-img">
-                <h2>Wanny Woldstad</h2>
-                <p class="profile-subtitle">
-                    Hunter • Taxi Driver • Arctic Pioneer
-                </p>
-                <div class="profile-tags">
-                    <span>🏔 First Female Hunter on Svalbard</span>
-                    <span>🚕 First Female Taxi Driver in Northern Norway</span>
-                    <span>❄️ 5 Arctic Winters</span>
-                </div>
-
-                <p>
-                    Wanny Woldstad became one of the most famous women in Arctic history.
-                    She spent years hunting and living on Svalbard, proving that Arctic
-                    exploration was not only for men. She wrote a book about her experience:
-                    ""The first woman trapper in Svalbard"".
-                </p>
-
-                <div class="fun-fact">
-                    <strong>Fun Fact:</strong>
-                    Economically, she capitalized on her Svalbard fame by becoming a sought-after lecturer,
-                    delivering talks on radio and at folk high schools across northern Norway,
-                    where she shared vivid accounts of her trapping life to enthusiastic local audiences.
-                </div>
-
-            </div>
-        </div>
         <script>
             /* Audio */
             const audio = document.getElementById("voice");
@@ -102,7 +72,6 @@ THINGS TO DO LATER:
             const btnC = document.getElementById("btnC");
             const audio_btn = document.getElementById("audioBtn");
             const riddle_btn = document.getElementById("riddle_btn");
-            const profile_btn = document.getElementById("profile");
 
             const choices = document.getElementById("choices");
             const subtitle = document.getElementById("subtitle");
@@ -234,24 +203,13 @@ THINGS TO DO LATER:
             audioC.addEventListener("timeupdate", () => {
                 updateSubtitle(audioC, subtitlesC);
             });
-            function openProfile() {
-                document.getElementById("profileOverlay").classList.remove("hidden");
-            }
-            function closeProfile() {
-                document.getElementById("profileOverlay").classList.add("hidden");
-            }
         </script>
     </div>
     <game-navigation></game-navigation>
     <script>
         setupGameNavigation();
-        addInventoryItem({
-            id: "profile-wanny",
-            title: "wanny Profile",
-            type: "image",
-            thumb: "../../../../assets/images/file_placeholder.png",
-            full: "../../../../assets/images/file_placeholder.png",
-            description: "Profile folder collected at Station Wanny."
+        loadInventoryScripts().then(() => {
+            addWannyProfileToInventory();
         });
     </script>
 </body>

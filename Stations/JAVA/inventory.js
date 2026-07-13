@@ -21,7 +21,14 @@
             type: item.type || "image",
             thumb: item.thumb || "",
             full: item.full || item.thumb || "",
-            description: item.description || ""
+            description: item.description || "",
+
+            // Extra fields for newspaper items
+            newspaperTitle: item.newspaperTitle || "",
+            newspaperDate: item.newspaperDate || "",
+            newspaperImage: item.newspaperImage || "",
+            newspaperImageDate: item.newspaperImageDate || "",
+            newspaperText: item.newspaperText || ""
         });
 
         saveInventoryItems(items);
@@ -168,6 +175,11 @@
     }
 
     function openInventoryItem(item) {
+        if (item.type === "newspaper") {
+            openNewspaperItem(item);
+            return;
+        }
+
         const overlay = document.createElement("div");
         overlay.style.position = "fixed";
         overlay.style.inset = "0";
@@ -191,37 +203,37 @@
         box.style.position = "relative";
 
         box.innerHTML = `
-            <button id="closeInventoryItem" style="
-                position:absolute;
-                top:12px;
-                right:12px;
-                display:flex;
-                justify-content:center;
-                align-items:center;
-                width:40px;
-                height:40px;
-                border:none;
-                border-radius:50%;
-                background:#111;
-                color:white;
-                font-size:22px;
-                cursor:pointer;
-            ">×</button>
+        <button id="closeInventoryItem" style="
+            position:absolute;
+            top:12px;
+            right:12px;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            width:40px;
+            height:40px;
+            border:none;
+            border-radius:50%;
+            background:#111;
+            color:white;
+            font-size:22px;
+            cursor:pointer;
+        ">×</button>
 
-            <h3 style="margin-top:0;">${item.title}</h3>
+        <h3 style="margin-top:0;">${item.title}</h3>
 
-            <img src="${item.full}"
-                 alt="${item.title}"
-                 style="
-                    width:100%;
-                    max-width:700px;
-                    height:auto;
-                    border-radius:12px;
-                    box-shadow:0 10px 25px rgba(0,0,0,0.18);
-                 ">
+        <img src="${item.full}"
+             alt="${item.title}"
+             style="
+                width:100%;
+                max-width:700px;
+                height:auto;
+                border-radius:12px;
+                box-shadow:0 10px 25px rgba(0,0,0,0.18);
+             ">
 
-            ${item.description ? `<p style="margin-top:16px; line-height:1.5;">${item.description}</p>` : ""}
-        `;
+        ${item.description ? `<p style="margin-top:16px; line-height:1.5;">${item.description}</p>` : ""}
+    `;
 
         overlay.appendChild(box);
         document.body.appendChild(overlay);
@@ -237,6 +249,146 @@
         });
     }
 
+    function openNewspaperItem(item) {
+        const overlay = document.createElement("div");
+        overlay.style.position = "fixed";
+        overlay.style.inset = "0";
+        overlay.style.zIndex = "100001";
+        overlay.style.background = "rgba(0,0,0,0.88)";
+        overlay.style.display = "flex";
+        overlay.style.justifyContent = "center";
+        overlay.style.alignItems = "center";
+        overlay.style.padding = "20px";
+
+        const paper = document.createElement("div");
+        paper.style.background = "#f5efe0";
+        paper.style.color = "#231b12";
+        paper.style.width = "100%";
+        paper.style.maxWidth = "760px";
+        paper.style.maxHeight = "88vh";
+        paper.style.overflowY = "auto";
+        paper.style.padding = "28px";
+        paper.style.borderRadius = "10px";
+        paper.style.boxShadow = "0 20px 50px rgba(0,0,0,0.45)";
+        paper.style.position = "relative";
+        paper.style.fontFamily = "Georgia, 'Times New Roman', serif";
+        paper.style.border = "8px solid #d8c8a8";
+
+        paper.innerHTML = `
+        <button id="closeNewspaper" style="
+            position:absolute;
+            top:12px;
+            right:12px;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            width:40px;
+            height:40px;
+            border:none;
+            border-radius:50%;
+            background:#111;
+            color:white;
+            font-size:22px;
+            cursor:pointer;
+            font-family:Arial, sans-serif;
+        ">×</button>
+
+        <div style="
+            text-align:center;
+            border-bottom:3px double #231b12;
+            padding-bottom:14px;
+            margin-bottom:18px;
+        ">
+            <div style="
+                font-size:13px;
+                letter-spacing:3px;
+                text-transform:uppercase;
+                margin-bottom:8px;
+            ">
+                Arctic Historical News
+            </div>
+
+            <h1 style="
+                margin:0;
+                font-size:34px;
+                line-height:1.05;
+                text-transform:uppercase;
+            ">
+                ${item.newspaperTitle || item.title}
+            </h1>
+
+            <p style="
+                margin:8px 0 0;
+                font-size:14px;
+                font-style:italic;
+            ">
+                ${item.newspaperDate || ""}
+            </p>
+        </div>
+
+        <div style="
+            display:flex;
+            flex-direction:column;
+            gap:16px;
+        ">
+            <figure style="margin:0;">
+                <img src="${item.newspaperImage || item.full}"
+                     alt="${item.title}"
+                     style="
+                        width:100%;
+                        max-height:360px;
+                        object-fit:cover;
+                        filter:sepia(35%);
+                        border:2px solid #2b2418;
+                     ">
+
+                <figcaption style="
+                    font-size:13px;
+                    margin-top:6px;
+                    text-align:center;
+                    font-style:italic;
+                ">
+                    ${item.newspaperImageDate || ""}
+                </figcaption>
+            </figure>
+
+            <div style="
+                column-count:2;
+                column-gap:28px;
+                text-align:left;
+                font-size:17px;
+                line-height:1.55;
+            ">
+                ${item.newspaperText || item.description || ""}
+            </div>
+        </div>
+    `;
+
+        overlay.appendChild(paper);
+        document.body.appendChild(overlay);
+
+        paper.querySelector("#closeNewspaper").addEventListener("click", () => {
+            overlay.remove();
+        });
+
+        overlay.addEventListener("click", event => {
+            if (event.target === overlay) {
+                overlay.remove();
+            }
+        });
+
+        if (window.innerWidth <= 650) {
+            const text = paper.querySelector("div[style*='column-count']");
+            if (text) {
+                text.style.columnCount = "1";
+            }
+
+            const title = paper.querySelector("h1");
+            if (title) {
+                title.style.fontSize = "26px";
+            }
+        }
+    }
     window.getInventoryItems = getInventoryItems;
     window.addInventoryItem = addInventoryItem;
     window.removeInventoryItem = removeInventoryItem;

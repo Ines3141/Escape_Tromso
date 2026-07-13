@@ -109,7 +109,7 @@
     <div class="box">
         <h1>Henry Rudi</h1>
         <story-chat story="dispatch_henry_intro"></story-chat>
-        
+
         <!-- for actual game do </button>style="display:none;">, but now it is just blocking -->
         <button class="riddle-button" id="riddle_btn" onclick="window.location.href = nextPage">
             Solve Riddle
@@ -119,6 +119,12 @@
             localStorage.removeItem('dispatch_henry_intro_scroll');">
             Reset chat
         </button>
+        <button onclick="
+    removeInventoryItem('profile-rudi');
+    location.reload();
+">
+            Reset Rudi Inventory
+        </button>
     </div>
     <game-navigation></game-navigation>
     <script>
@@ -126,10 +132,38 @@
         addInventoryItem({
             id: "profile-rudi",
             title: "Rudi Profile",
-            type: "image",
+            type: "newspaper",
+
+            // This stays the placeholder in the inventory grid
             thumb: "../../../../assets/images/file_placeholder.png",
-            full: "../../../../assets/images/file_placeholder.png",
-            description: "Profile folder collected at Station Rudi."
+
+            // This can be the same as the newspaper image
+            full: "../../../../assets/images/rudi.jpg",
+
+            newspaperTitle: "The Arctic Hunter Henry Rudi",
+            newspaperDate: "Tromsø Historical Archive",
+
+            newspaperImage: "../../../../assets/images/henry_rudi.jpg",
+            newspaperImageDate: "Photograph taken during Henry Rudi's Arctic years.",
+
+            newspaperText: `
+        <p>
+            Henry Rudi became known as one of the experienced hunters of the Arctic.
+            He spent many years travelling through cold and dangerous landscapes,
+            learning how to read weather, tracks, ice, and animal movement.
+        </p>
+
+        <p>
+            In Tromsø, people remembered him not only for his Arctic knowledge,
+            but also for his connection to Ølhallen, one of the city's famous old pubs.
+            It was said to be one of his favourite places to return to after long journeys.
+        </p>
+
+        <p>
+            For this mission, Henry Rudi may know where to look next.
+            His memory of Tromsø and the Arctic could help the rescue team find the missing clue.
+        </p>
+    `
         });
     </script>
 </body>

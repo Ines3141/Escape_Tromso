@@ -7,265 +7,118 @@
     <title>Station 6</title>
     <link rel="stylesheet" href="../../../../CSS/global.css">
     <link rel="stylesheet" href="../../../../CSS/station.css">
-    <script src="../../../../Stations/JAVA/letter_templates.js"></script>
-    <script src="../../../../Stations/JAVA/incoming_dispatch.js"></script>
     <script src="../../../../Stations/JAVA/navigation.js"></script>
     <script src="../../../../Stations/JAVA/inventory.js"></script>
+    <script src="../../../../Stations/JAVA/story_data.js"></script>
+    <script src="../../../../Stations/JAVA/story_chat.js"></script>
+    <script src="../../../../Stations/JAVA/attachments.js"></script>
     <script>
         const previousPage = "../riddle/riddle_5_4_location.html";
         const nextPage = "../riddle/riddle_6_2_chat.html";
     </script>
+    <style>
+        .attachment-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.82);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            font-family: Arial, sans-serif;
+        }
+
+        .attachment-content {
+            width: min(90vw, 420px);
+            background: #061927;
+            color: white;
+            border: 2px solid #7ee7ff;
+            border-radius: 18px;
+            padding: 24px;
+            text-align: center;
+            box-shadow: 0 0 25px rgba(126, 231, 255, 0.35);
+        }
+
+        .dispatch-video {
+            width: 100%;
+            max-height: 60vh;
+            border-radius: 12px;
+            margin: 16px 0;
+            background: black;
+        }
+
+        .close-attachment,
+        .friend-request-button {
+            background: #7ee7ff;
+            color: #061927;
+            border: none;
+            border-radius: 999px;
+            padding: 10px 18px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+            .friend-request-button:disabled {
+                opacity: 0.7;
+                cursor: default;
+            }
+
+        .contact-avatar {
+            width: 78px;
+            height: 78px;
+            border-radius: 50%;
+            background: #7ee7ff;
+            color: #061927;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 14px;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .contact-subtitle {
+            color: #9eefff;
+            margin-top: -6px;
+        }
+
+        .contact-text {
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .request-status {
+            min-height: 22px;
+            margin-top: 14px;
+            color: #7ee7ff;
+            font-weight: bold;
+        }
+
+        .attachment-modal.accepted .attachment-content {
+            border-color: #6cff6c;
+            box-shadow: 0 0 25px rgba(108, 255, 108, 0.4);
+        }
+
+        .attachment-modal.accepted .request-status {
+            color: #6cff6c;
+        }
+    </style>
 </head>
 
 <body>
     <div class="box">
-        <h1>Station 6</h1>
-        <p>Henry Rudi</p>
-        <div class="person-container">
-            <img src="../../../../assets/images/rudi.jpg" alt="Station 6" class="imag-person">
-        </div>
-        <div class="audio-row">
-            <button class="audio-btn" id="audioBtn"> &#128266;</button>
-            <div id="subtitle" class="subtitle"></div>
-        </div>
-        <audio id="voice" preload="auto">
-            <source src="../../../../assets/audio/Rudi1.mp4" type="audio/mp4">
-        </audio>
-        <audio id="voiceA" preload="auto">
-            <source src="../../../../assets/audio/RudiA.mp4" type="audio/mp4">
-        </audio>
-        <audio id="voiceB" preload="auto">
-            <source src="../../../../assets/audio/RudiB.mp4" type="audio/mp4">
-        </audio>
-        <audio id="voiceC" preload="auto">
-            <source src="../../../../assets/audio/RudiC.mp4" type="audio/mp4">
-        </audio>
-
-        <div id="choices" style="display:none;">
-            <button id="btnA" class="answer-button"></button>
-            <button id="btnB" class="answer-button"></button>
-            <button id="btnC" class="answer-button" style="display:none;"></button>
-        </div>
-        <button id="profile" class="profile-button" onclick="openProfile()" style="display:none;">
-            Explorer Profile
-        </button>
-        <div id="profileOverlay" class="profile-overlay hidden">
-            <div class="profile-card">
-
-                <button class="close-profile" onclick="closeProfile()">×</button>
-
-                <img src="../../../../assets/images/Rudi.jpg" class="profile-img">
-
-                <h2>Henry Rudi</h2>
-
-                <p class="profile-subtitle">
-                    Trapper • Hunter • Arctic Survivor
-                </p>
-
-                <div class="profile-tags">
-                    <span>🐻 Polar Bear King</span>
-                    <span>❄️ 27 Winters on Svalbard</span>
-                    <span>🏕 Arctic Survival Expert</span>
-                </div>
-
-                <p>
-                    Henry Rudi spent most of his life in the High Arctic.
-                    His knowledge of weather, ice, and survival made him one of
-                    Svalbard's most legendary trappers.
-                </p>
-
-                <div class="fun-fact">
-                    <strong>Fun Fact:</strong>
-                    Henry spent his first winter on Svalbard when he was only 9 years old.
-                </div>
-
-            </div>
-        </div>
+        <h1>Henry Rudi</h1>
+        <story-chat story="dispatch_henry_intro"></story-chat>
+        
         <!-- for actual game do </button>style="display:none;">, but now it is just blocking -->
         <button class="riddle-button" id="riddle_btn" onclick="window.location.href = nextPage">
             Solve Riddle
         </button>
-        <script>
-            /* Audio */
-            const audio = document.getElementById("voice");
-            const audioA = document.getElementById("voiceA");
-            const audioB = document.getElementById("voiceB");
-            const audioC = document.getElementById("voiceC");
-
-            /* Buttons */
-            const btnA = document.getElementById("btnA");
-            const btnB = document.getElementById("btnB");
-            const btnC = document.getElementById("btnC");
-            const audio_btn = document.getElementById("audioBtn");
-            const riddle_btn = document.getElementById("riddle_btn");
-            const location_btn = document.getElementById("Location_btn");
-            const profile_btn = document.getElementById("profile");
-
-            const choices = document.getElementById("choices");
-            const settingsBtn = document.getElementById("settingsBtn");
-            const settingsMenu = document.getElementById("settingsMenu");
-            const subtitle = document.getElementById("subtitle");
-            const allAudios = [audio, audioA, audioB, audioC];
-            const volumeSlider = document.getElementById("volumeSlider");
-
-            const person = document.querySelector(".person-container");
-
-            location_btn.addEventListener("click", () => {
-                window.open('https://www.google.com/maps/search/Oelhallen+Tromsoe');
-            })
-            /* Change volume */
-            volumeSlider.addEventListener("input", () => {
-                allAudios.forEach(sound => {
-                    sound.volume = volumeSlider.value;
-                });
-            });
-            /* Start the audio file and the subtitels. */
-            audio_btn.addEventListener("click", () => {
-                if (audio.paused) {
-                    audio.play();
-                    person.classList.add("speaking");
-                } else {
-                    audio.pause();
-                    person.classList.remove("speaking");
-                }
-            });
-            /* If audio ends, show answer options A and B*/
-            audio.addEventListener("ended", () => {
-                person.classList.remove("speaking");
-                btnA.textContent =
-                    "We need help rescuing people trapped in the ice.";
-                btnB.textContent =
-                    "Polar Bear King? How did you get that nickname?";
-                btnC.style.display = "none";
-                choices.style.display = "block";
-            });
-            btnA.addEventListener("click", () => {
-                choices.style.display = "none";
-                if (audioA.paused) {
-                    audioA.play();
-                    person.classList.add("speaking");
-                } else {
-                    audioA.pause();
-                    person.classList.remove("speaking");
-                }
-            });
-            audioA.addEventListener("ended", () => {
-                person.classList.remove("speaking");
-                riddle_btn.style.display = "block";
-                profile_btn.style.display = "block";
-                /*
-                NO MORE INTERACTION
-                IF THIS IS THE LAST PART OF THE CONVERSATION
-                SHOW BUTTON
-                TO SOLVE RIDDLE IF ISNT YOU NEED MORE BLOCKS*/
-            });
-            btnB.addEventListener("click", () => {
-                choices.style.display = "none";
-                if (audioB.paused) {
-                    audioB.play();
-                    person.classList.add("speaking");
-                } else {
-                    audioB.pause();
-                    person.classList.remove("speaking");
-                }
-            });
-            audioB.addEventListener("ended", () => {
-                person.classList.remove("speaking");
-                btnA.style.display = "none";
-                btnB.style.display = "none";
-                btnC.textContent =
-                    "We need your help first. Our friends are trapped in the ice.";
-                btnC.style.display = "block";
-                choices.style.display = "block";
-            });
-            btnC.addEventListener("click", () => {
-                choices.style.display = "none";
-                if (audioC.paused) {
-                    audioC.play();
-                    person.classList.add("speaking");
-                } else {
-                    audioC.pause();
-                    person.classList.remove("speaking");
-                }
-            });
-            audioC.addEventListener("ended", () => {
-                person.classList.remove("speaking");
-                riddle_btn.style.display = "block";
-                profile_btn.style.display = "block";
-            });
-
-            const subtitles = [
-                { start: 0, end: 2, text: "Ahoy, explorers!" },
-                { start: 2, end: 5, text: "You can call me Polar Bear King." },
-                { start: 5, end: 7, text: "What brings you here? Looking for adventure?" }
-            ];
-            const subtitlesA = [
-                { start: 0, end: 2, text: "A rescue mission, eh?" },
-                { start: 2, end: 5, text: "Then let's get straight to business." },
-                { start: 5, end: 7, text: "I studied ocean currents and sea ice." },
-                { start: 7, end: 10, text: "I learned a thing or two about surviving in the ice." },
-                { start: 10, end: 13, text: "Take a look at these notes." },
-                { start: 13, end: 16, text: "They might help you determine the right date for your friends to leave.." }
-            ];
-            const subtitlesB = [
-                { start: 1, end: 3, text: "I spent trapping and hunting on Svalbard a lot." },
-                { start: 3, end: 6, text: "People call me the Polar Bear King." },
-                { start: 6, end: 10, text: "I encountered more than you image." },
-                { start: 10, end: 14, text: "I overwintered on Svalbard 27 times." },
-                { start: 14, end: 17, text: "And do you know something funny?" },
-                { start: 20, end: 23, text: "I spent my first winter there when I was only nine years old." },
-                { start: 23, end: 26, text: "What brings you here?" }
-            ];
-            const subtitlesC = [
-                { start: 1, end: 3, text: "Now that's a good reason!" },
-                { start: 3, end: 7, text: "The Arctic rewards patience and good timing." },
-                { start: 7, end: 11, text: "Take these notes." },
-                { start: 11, end: 14, text: "They may help you figure out the right date." },
-                { start: 14, end: 17, text: "Good luck!" }
-            ];
-
-            function updateSubtitle(audioFile, subtitleList) {
-                const current = audioFile.currentTime;
-
-                const line = subtitleList.find(sub =>
-                    current >= sub.start && current <= sub.end
-                );
-
-                subtitle.textContent = line ? line.text : "";
-            }
-
-            /* Add subtitels to all options */
-            audio.addEventListener("timeupdate", () => {
-                updateSubtitle(audio, subtitles);
-            });
-            audioA.addEventListener("timeupdate", () => {
-                updateSubtitle(audioA, subtitlesA);
-            });
-            audioB.addEventListener("timeupdate", () => {
-                updateSubtitle(audioB, subtitlesB);
-            });
-            audioC.addEventListener("timeupdate", () => {
-                updateSubtitle(audioC, subtitlesC);
-            });
-
-            settingsBtn.addEventListener("click", (event) => {
-                event.stopPropagation();
-                settingsMenu.classList.toggle("hidden");
-            });
-            settingsMenu.addEventListener("click", (event) => {
-                event.stopPropagation();
-            });
-            document.addEventListener("click", () => {
-                settingsMenu.classList.add("hidden");
-            });
-            function openProfile() {
-                document.getElementById("profileOverlay").classList.remove("hidden");
-            }
-
-            function closeProfile() {
-                document.getElementById("profileOverlay").classList.add("hidden");
-            }
-        </script>
+        <button onclick="
+            localStorage.removeItem('dispatch_henry_intro_step');
+            localStorage.removeItem('dispatch_henry_intro_scroll');">
+            Reset chat
+        </button>
     </div>
     <game-navigation></game-navigation>
     <script>

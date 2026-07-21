@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="../../../../CSS/global.css"> <!-- link to style sheet -->
     <script>
         const previousPage = "riddle_5_3_coordinates.html";
-        const nextPage = "../stations/station_6_1.html";
+        //const nextPage = "../stations/station_6_1.html";
+        const nextPage = "../stations/station_1_1.html?pass=after_amundsen"
     </script>
     <style>
         /* Specific style for solution image */
@@ -56,6 +57,7 @@
         const mapButton = document.getElementById("location");
 
         submitButton.addEventListener("click", () => {
+            localStorage.setItem("before_rudi", "true");
             window.location.href = nextPage;
         });
 

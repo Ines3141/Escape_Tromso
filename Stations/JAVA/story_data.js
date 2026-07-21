@@ -89,27 +89,31 @@ const STORIES = {
             {
                 type: "text",
                 sender: "Dispatch",
-                time: "10:35",
-                text: "Welcome back, Team {teamName}. We have received your update from the next station."
+                time: "10:37",
+                text: "This is before Nansen phone number."
             },
             {
-                type: "text",
-                sender: "Dispatch",
-                time: "10:36",
-                text: "The information you found is important. We are sending the next part of the mission now."
-            },
-            {
-                type: "file",
-                name: "new_dispatch_message.pdf",
-                open: "station-1-return"
+                type: "waitForFlag",
+                flag: "wanny_frequency",
+                value: "true"
             },
             {
                 type: "text",
                 sender: "Dispatch",
                 time: "10:37",
-                text: "Continue carefully. The Arctic conditions are getting worse."
+                text: "This is before Wanny."
+            },
+            {
+                type: "waitForFlag",
+                flag: "before_rudi",
+                value: "true"
+            },
+            {
+                type: "text",
+                sender: "Dispatch",
+                time: "10:37",
+                text: "This is before Henry Rudi."
             }
-
         ]
     },
     henry_rudi: {
@@ -126,7 +130,7 @@ const STORIES = {
                 type: "text",
                 sender: "Henry Rudi",
                 time: "10:18",
-                text: "But I can't identify my favourite place \"Ølhallen\"."
+                text: "But I can't identify my favourite place \"ï¿½lhallen\"."
             },
             {
                 type: "text",
@@ -145,37 +149,37 @@ const STORIES = {
                 question: "What do you see?",
                 placeholder: "Type your answer...",
                 acceptedAnswers: ["2", "two", "two.", "2.", "two people", "2 people"],
-                wrongAnswer: "Look carefully at the movement in the window."
+        wrongAnswer: "Look carefully at the movement in the window."
             },
-            {
-                type: "text",
-                sender: "Henry Rudi",
-                time: "10:22",
-                text: "YES, I remember that is correct! Now you only need the month."
+    {
+        type: "text",
+        sender: "Henry Rudi",
+        time: "10:22",
+        text: "YES, I remember that is correct! Now you only need the month."
             },
-            {
-                type: "text",
-                sender: "Henry Rudi",
-                time: "10:23",
-                text: `
+    {
+        type: "text",
+        sender: "Henry Rudi",
+        time: "10:23",
+        text: `
                 Go to the Wooden Cathedral:
                 <br>
-                <a href="https://www.google.com/maps/search/Wooden+Cathedral+Tromsø"
+                <a href="https://www.google.com/maps/search/Wooden+Cathedral+Tromsï¿½"
                    target="_blank"
                    style="color:#7ee7ff; font-weight:bold;">
                    Open location
                 </a>
             `
             },
-            {
-                type: "input",
-                variable: "henryRudiLocation",
-                question: "Write okay when you are there.",
+{
+    type: "input",
+        variable: "henryRudiLocation",
+            question: "Write okay when you are there.",
                 placeholder: "Write okay...",
-                acceptedAnswers: ["okay", "ok", "oki", "oke", "yes", "done", "there"],
-                wrongAnswer: "Tell me okay when you are there.",
-                redirect: "../final_page.html"
-            }
+                    acceptedAnswers: ["okay", "ok", "oki", "oke", "yes", "done", "there"],
+                        wrongAnswer: "Tell me okay when you are there.",
+                            redirect: "../final_page.html"
+}
         ]
     },
     dispatch_henry_intro: {

@@ -32,6 +32,11 @@
             wanny: {
                 previous: "../riddle/riddle_2_4_location.html",
                 next: "../riddle/riddle_3_1_frequency.html"
+            },
+
+            after_amundsen: {
+                previous: "../riddle/riddle_5_4_location.html",
+                next: "station_6_1.html"
             }
         };
 
@@ -100,6 +105,27 @@
             Reset chat
         </button>
         <button onclick="clearInventory();"> Reset Inventory </button>
+
+        <!-- DELETE THESE BUTTON ONLY FOR DEVELOPMENT-->
+        <button onclick="
+        localStorage.setItem('nansen_phonenumber', 'true');
+        location.reload();
+    ">
+            DEV: Unlock After nansen chat
+        </button>
+        <button onclick="
+        localStorage.setItem('wanny_frequency', 'true');
+        location.reload();
+    ">
+            DEV: Unlock Wanny Frequency chat
+        </button>
+        </button>
+        <button onclick="
+        localStorage.setItem('before_rudi', 'true');
+        location.reload();
+    ">
+            DEV: Unlock Before Rudi chat
+        </button>
     </div>
     <game-navigation></game-navigation>
     <script>

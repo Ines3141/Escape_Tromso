@@ -45,7 +45,8 @@
     z-index: 1;
     width: 100%;
     max-width: 430px;
-    min-height: 620px;
+    min-height: min(620px, calc(100vh - 40px));
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -153,11 +154,18 @@
     animation-delay: 0.4s;
 }
 
-.call-help { /* Position of text at the bottom. Instructions. */
-    margin-top: auto;
-    margin-bottom: 10px;
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 13px;
+/* Position of text at the bottom. Instructions. */
+.call-help {
+    position: relative;
+    z-index: 5;
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    margin: 24px 0 0;
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 14px;
+    line-height: 1.4;
+    text-align: center;
 }
 
 /* =========================================================
@@ -656,3 +664,148 @@
         font-size: 14px;
     }
 }
+
+/* =============================
+   AMUNDSEN CALL DESIGN
+   ============================= */
+
+
+/* -----------------------------
+   Call button container
+   ----------------------------- */
+
+.call-actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 42px;
+    margin-top: 34px;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition: opacity 0.35s ease, transform 0.35s ease, visibility 0.35s ease;
+}
+
+    .call-actions.controls-hidden {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateY(14px);
+    }
+
+    .call-actions.controls-visible {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateY(0);
+    }
+
+/* -----------------------------
+   Shared call-button design
+   ----------------------------- */
+
+.call-button {
+    width: 68px;
+    height: 68px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
+    transition: transform 0.18s ease, filter 0.18s ease, box-shadow 0.18s ease;
+}
+
+
+    /* White SVG phone icon */
+
+    .call-button svg {
+        width: 30px;
+        height: 30px;
+        fill: currentColor;
+    }
+
+
+/* -----------------------------
+   Accept button
+   ----------------------------- */
+
+.accept-call {
+    background: #22c55e;
+    animation: acceptPulse 1.4s infinite;
+}
+
+
+/* -----------------------------
+   Decline button
+   ----------------------------- */
+
+.decline-call {
+    background: #e63946;
+}
+
+
+    /* Rotate the phone into a hang-up position */
+
+    .decline-call svg {
+        transform: rotate(135deg);
+    }
+
+
+/* -----------------------------
+   Button interaction states
+   ----------------------------- */
+
+.call-button:hover {
+    transform: scale(1.08);
+    filter: brightness(1.08);
+}
+
+.call-button:active {
+    transform: scale(0.94);
+}
+
+.call-button:focus-visible {
+    outline: 3px solid rgba(255, 255, 255, 0.9);
+    outline-offset: 4px;
+}
+.call-actions.controls-hidden {
+    display: none;
+}
+
+.call-actions.controls-visible {
+    display: flex;
+    animation: showCallButtons 0.35s ease;
+}
+
+@keyframes showCallButtons {
+    from {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* -----------------------------
+   Accept-button pulse
+   ----------------------------- */
+
+@keyframes acceptPulse {
+    0%, 100% {
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3), 0 0 0 0 rgba(34, 197, 94, 0.45);
+    }
+
+    50% {
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3), 0 0 0 12px rgba(34, 197, 94, 0);
+    }
+}
+

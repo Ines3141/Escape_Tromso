@@ -40,29 +40,43 @@ THINGS TO DO:
 
             <h1>Roald Amundsen</h1>
             <p class="call-subtitle">Arctic Explorer</p>
-
-            <div class="call-actions">
-                <button class="decline-call"
+            <div id="callActions"
+                 class="call-actions controls-hidden">
+                <button class="call-button decline-call"
                         id="declineCallButton"
                         type="button"
                         aria-label="Decline call">
-                    ✕
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6.6 10.8c1.5 3 3.9 5.4 6.9 6.9l2.3-2.3c.3-.3.7-.4 1.1-.2
+                     1.2.4 2.5.6 3.8.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1
+                     C11 21 3 13 3 3c0-.6.4-1 1-1h3.2c.6 0 1 .4 1 1
+                     0 1.3.2 2.6.6 3.8.1.4 0 .8-.3 1.1L6.6 10.8z">
+                        </path>
+                    </svg>
                 </button>
 
-                <button class="accept-call"
+                <button class="call-button accept-call"
                         id="acceptCallButton"
                         type="button"
                         aria-label="Accept call">
-                    ☎
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6.6 10.8c1.5 3 3.9 5.4 6.9 6.9l2.3-2.3c.3-.3.7-.4 1.1-.2
+                     1.2.4 2.5.6 3.8.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1
+                     C11 21 3 13 3 3c0-.6.4-1 1-1h3.2c.6 0 1 .4 1 1
+                     0 1.3.2 2.6.6 3.8.1.4 0 .8-.3 1.1L6.6 10.8z">
+                        </path>
+                    </svg>
                 </button>
             </div>
-
-            <p class="call-help">
-                Tap green to answer
+            <p id="callHelp" class="call-help">
+                Tap anywhere on the screen
             </p>
         </div>
     </div>
-
+    <audio id="ringtone" preload="auto" loop>
+        <source src="../../../../assets/audio/Incoming_Call.m4a"
+                type="audio/mp4">
+    </audio>
     <!-- Station content -->
     <div id="stationContent" class="box" style="display: none;">
         <h1>Station 5</h1>
@@ -162,7 +176,7 @@ THINGS TO DO:
 
     <game-navigation></game-navigation>
 
-    <script>
+    <script>       
         // =====================================================
         // ELEMENTS
         // =====================================================
@@ -171,48 +185,25 @@ THINGS TO DO:
         const incomingText = document.getElementById("incomingText");
         const stationContent = document.getElementById("stationContent");
 
-        const acceptCallButton =
-            document.getElementById("acceptCallButton");
-
-        const declineCallButton =
-            document.getElementById("declineCallButton");
-
-        const person =
-            document.querySelector(".person-container");
-
-        const audioButton =
-            document.getElementById("audioBtn");
-
-        const subtitle =
-            document.getElementById("subtitle");
-
-        const choices =
-            document.getElementById("choices");
-
-        const riddleButton =
-            document.getElementById("riddle_btn");
+        const acceptCallButton = document.getElementById("acceptCallButton");
+        const declineCallButton = document.getElementById("declineCallButton");
+        const person = document.querySelector(".person-container");
+        const audioButton = document.getElementById("audioBtn");
+        const subtitle = document.getElementById("subtitle");
+        const choices = document.getElementById("choices");
+        const riddleButton = document.getElementById("riddle_btn");
+        const callActions = document.getElementById("callActions");
+        const callHelp = document.getElementById("callHelp");
+        const ringtone = document.getElementById("ringtone");
 
         // Audio IDs must match the HTML IDs above.
-        const audio1 =
-            document.getElementById("voice1");
-
-        const audio2 =
-            document.getElementById("voice2");
-
-        const audio2B =
-            document.getElementById("voice3");
-
-        const audio2C =
-            document.getElementById("voice4");
-
-        const audio3 =
-            document.getElementById("voice5");
-
-        const audio3D =
-            document.getElementById("voice6");
-
-        const audio3E =
-            document.getElementById("voice7");
+        const audio1 = document.getElementById("voice1");
+        const audio2 = document.getElementById("voice2");
+        const audio2B = document.getElementById("voice3");
+        const audio2C = document.getElementById("voice4");
+        const audio3 = document.getElementById("voice5");
+        const audio3D = document.getElementById("voice6");
+        const audio3E = document.getElementById("voice7");
 
         const allAudios = [
             audio1,
@@ -231,6 +222,58 @@ THINGS TO DO:
             D: document.getElementById("btnD"),
             E: document.getElementById("btnE")
         };
+
+        // =====================================================
+        // RINGTONE
+        // =====================================================
+        let ringtoneStarted = false;
+
+        async function activateIncomingCall() {
+            if (ringtoneStarted) {
+                return;
+            }
+
+            ringtone.muted = false;
+            ringtone.volume = 0.55;
+            ringtone.currentTime = 0;
+
+            try {
+                await ringtone.play();
+
+                ringtoneStarted = true;
+
+                callActions.classList.remove("controls-hidden");
+                callActions.classList.add("controls-visible");
+
+                callHelp.textContent =
+                    "Answer or decline the call";
+            } catch (error) {
+                console.error(
+                    "Ringtone could not start:",
+                    error
+                );
+
+                callHelp.textContent =
+                    "Tap again to enable the ringtone";
+            }
+        }
+
+        function stopRingtone() {
+            ringtone.pause();
+            ringtone.currentTime = 0;
+            ringtoneStarted = false;
+        }
+        callActions.addEventListener(
+            "pointerdown",
+            event => {
+                event.stopPropagation();
+            }
+        );
+
+        callScreen.addEventListener(
+            "pointerdown",
+            activateIncomingCall
+        );
 
         // =====================================================
         // ANSWER TEXT
@@ -343,24 +386,44 @@ THINGS TO DO:
         // INCOMING CALL
         // =====================================================
 
-        acceptCallButton.addEventListener("click", async () => {
-            callAccepted = true;
+        acceptCallButton.addEventListener(
+            "click",
+            async event => {
+                event.stopPropagation();
 
-            callScreen.style.display = "none";
-            stationContent.style.display = "block";
+                stopRingtone();
 
-            await playAudio(audio1);
-        });
+                callAccepted = true;
 
-        declineCallButton.addEventListener("click", () => {
-            incomingText.textContent = "Call missed...";
+                callScreen.style.display = "none";
+                stationContent.style.display = "block";
 
-            window.setTimeout(() => {
+                await playAudio(audio1);
+            }
+        );
+
+        declineCallButton.addEventListener(
+            "click",
+            event => {
+                event.stopPropagation();
+
+                stopRingtone();
+
                 incomingText.textContent =
-                    "Incoming call...";
-            }, 1200);
-        });
+                    "Call missed...";
 
+                callActions.classList.remove(
+                    "controls-visible"
+                );
+
+                callActions.classList.add(
+                    "controls-hidden"
+                );
+
+                callHelp.textContent =
+                    "The call was declined";
+            }
+        );
         // =====================================================
         // SPEAKER BUTTON
         // =====================================================
@@ -582,20 +645,15 @@ THINGS TO DO:
             const spokenText = text
                 .replace(/\*[^*]+\*/g, "")
                 .trim();
-
             const wordCount = spokenText
                 ? spokenText.split(/\s+/).length
                 : 2;
-
             return Math.max(wordCount, 3);
         }
 
         function buildSubtitleCues(audio) {
-            const lines =
-                subtitleLines.get(audio) || [];
-
+            const lines = subtitleLines.get(audio) || [];
             const duration = audio.duration;
-
             if (
                 !lines.length ||
                 !Number.isFinite(duration) ||
@@ -603,22 +661,12 @@ THINGS TO DO:
             ) {
                 return [];
             }
-
-            const weights =
-                lines.map(subtitleWeight);
-
-            const totalWeight =
-                weights.reduce(
-                    (sum, weight) => sum + weight,
-                    0
-                );
-
+            const weights = lines.map(subtitleWeight);
+            const totalWeight = weights.reduce((sum, weight) => sum + weight,0);
             let start = 0;
 
             return lines.map((text, index) => {
-                const isLastLine =
-                    index === lines.length - 1;
-
+                const isLastLine = index === lines.length - 1;
                 const lineDuration =
                     duration *
                     (weights[index] / totalWeight);
@@ -634,7 +682,6 @@ THINGS TO DO:
                 };
 
                 start = end;
-
                 return cue;
             });
         }

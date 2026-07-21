@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Nansen Diary</title>
+
+
+    <!-- Existing project CSS -->
+    <link rel="stylesheet" href="../CSS/global.css">
+    <link rel="stylesheet" href="../CSS/arctic-theme.css">
+
+
+    <!-- Diary CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./nansen_diary.css">
+
+
+    <script>
+        const previousPage = "../stations/station_2_2.html";
+        const nextPage = "station_2_4.html";
+    </script>
+
+    <!-- Nansen diary page turning logic -->
+    <script src="./nansen_diary.js" defer></script>
+
+</head>
+
+
+<body>
+
+
+    <div class="box">
+        <h1>Nansen's diary</h1>
+
+
+        <div class="book">
+
+            <!-- PAGE 1 -->
+            <div class="page">
+
+                <div class="sticky-note" id="stickyNote">
+                    <div class="note-text">
+                        Diary of Fridtjof Nansen<br>
+                        1861 - 1930<br><br>
+                        - Explorer<br>
+                        - scientist<br>
+                        - humanitarian<br>
+
+                    </div>
+
+                    <img src="./paperclip.png" class="paperclip" id="paperclip" alt="Paperclip">
+
+                </div>
+                <h2>July 2, 1893</h2>
+
+                <div class="photo-placeholder" data-watermark="C">
+                    <img src="photo1.jpg" alt="Fram expedition photo">
+                </div>
+
+                <p>
+                    After months of preparation, we are finally on our way. Today the Fram sets sail to the Geographic
+                    North Pole. The crew is full of excitement, but we all know it will be a long and challenging
+                    journey.
+                </p>
+
+            </div>
+
+
+
+            <!-- PAGE 2 -->
+            <div class="page">
+
+                <h2>September 18, 1893</h2>
+
+                <div class="photo-placeholder" data-watermark="K">
+                    <img src="photo2.jpg" alt="Fram expedition photo">
+                </div>
+
+                <p>
+                    We have been trapped in the ice for several weeks now. The Fram is drifting northward, and we are
+                    making slow progress. The cold is intense, but the crew remains determined and hopeful.
+                </p>
+
+            </div>
+
+
+
+            <!-- PAGE 3 -->
+            <div class="page">
+
+                <h2>March 14, 1895</h2>
+
+                <div class="photo-placeholder" data-watermark="E">
+                    <img src="photo3.jpg" alt="Fram expedition photo">
+                </div>
+
+                <p>
+                    Our progress has been slow, will we not reach the North Pole. I have decided we must try by foot. We
+                    have prepared sledges and supplies for the journey. I am thinking of taking Johansen with me, as he
+                    is an experienced Arctic traveler. The journey will be perilous, but we must try.
+                </p>
+
+            </div>
+
+
+            <!-- PAGE 4 -->
+            <div class="page">
+
+                <h2>April 7, 1895</h2>
+
+                <div class="photo-placeholder" data-watermark="A">
+                    <img src="photo4.jpg" alt="Fram expedition photo">
+                </div>
+
+                <p>
+                    After days of traveling over the ice, we have encountered a series of pressure ridges. The terrain
+                    is treacherous, some days we are drifting further south than we can advance north. Moreover, the ice
+                    becoming unstable, and we are constantly at risk of falling into the freezing waters below.
+                </p>
+
+            </div>
+
+
+
+            <!-- PAGE 5 -->
+            <div class="page">
+
+                <h2>August 17, 1895</h2>
+
+
+                <div class="photo-placeholder" data-watermark="O">
+                    <img src="photo5.jpg" alt="Fram expedition photo">
+                </div>
+
+
+                <p>
+                    Its months since we began our return journey. After months of struggle, killing our dogs for food,
+                    we reach jozefland. It was to late however, to attemt to reach the mainland and we had to overwinter
+                    on Jozefland.
+                </p>
+
+            </div>
+
+
+
+            <!-- PAGE 6 -->
+            <div class="page">
+
+
+                <h2>September 9, 1896</h2>
+
+
+                <div class="photo-placeholder" data-watermark="L">
+                    <img src="photo6.jpg" alt="Fram expedition photo">
+                </div>
+
+
+                <p>
+                    The Fram returned in triumph to Oslo (then Christiania), bringing back a wealth of oceanographic and
+                    meteorological data
+                </p>
+
+
+            </div>
+
+
+
+            <!-- Page controls -->
+            <div class="previous-corner"></div>
+
+            <div class="page-corner"></div>
+
+
+        </div>
+
+
+
+        <button class="submit-button" onclick="window.location.href = nextPage">
+
+            Continue
+
+        </button>
+
+
+
+    </div>
+
+
+
+    <game-navigation></game-navigation>
+
+
+    <script>
+
+        setupGameNavigation();
+
+    </script>
+
+
+
+    <!-- Local diary JS already loaded with defer in the head. Removed duplicate include. -->
+
+
+</body>
+
+</html>

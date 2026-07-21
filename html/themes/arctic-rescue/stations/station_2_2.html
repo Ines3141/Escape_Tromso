@@ -22,21 +22,18 @@
          tabindex="0"
          aria-label="Tap to call Fridtjof Nansen">
         <div class="call-card">
-            <p class="call-label">Audio call</p>
-
+            <p>Audio call</p>
             <div class="caller-photo">
                 <img src="../../../../assets/images/Nansen.jpg"
                      alt="Fridtjof Nansen">
             </div>
-
             <h1>Fridtjof Nansen</h1>
-            <p class="call-subtitle">Arctic Explorer</p>
+            <p>Arctic Explorer</p>
 
             <div class="call-status-row">
                 <p id="callStatus" class="call-status">
                     Ready to call
                 </p>
-
                 <span id="callDots"
                       class="call-dots"
                       aria-hidden="true"
@@ -46,7 +43,6 @@
                     <span></span>
                 </span>
             </div>
-
             <p id="callHelp" class="call-help">
                 Tap anywhere to place the call
             </p>
@@ -59,7 +55,7 @@
                 type="audio/mp4">
     </audio>
     <!-- Main conversation -->
-    <div id="stationContent" class="box hidden">
+    <div id="stationContent" class="box hidden nansen-call">
         <h1>Fridtjof Nansen</h1>
         <div class="person-container">
             <img src="../../../../assets/images/Nansen.jpg"
@@ -68,13 +64,6 @@
         </div>
 
         <div class="audio-row">
-            <button id="audioBtn"
-                    class="audio-btn"
-                    type="button"
-                    aria-label="Play or pause the current recording">
-                &#128266;
-            </button>
-
             <div id="subtitle"
                  class="subtitle"
                  aria-live="polite"></div>
@@ -143,21 +132,89 @@
                     class="answer-button"
                     type="button"></button>
         </div>
-        <div class="call-controls">
-            <button id="hangUpButton"
-                    class="call-action end-call"
-                    type="button">
-                <span class="call-icon">📞</span>
-                <small>Hang up</small>
-            </button>
+        <div class="call-toolbar-wrapper">
+            <!-- Reaction selection menu -->
+            <div id="reactionMenu"
+                 class="reaction-menu hidden"
+                 role="menu"
+                 aria-label="Send a reaction">
+                <button class="reaction-option"
+                        type="button"
+                        data-reaction="❤️"
+                        aria-label="Send heart reaction">
+                    ❤️
+                </button>
 
-            <button id="nextBtn"
-                    class="call-action continue-call hidden"
-                    type="button">
-                <span class="call-icon">➜</span>
-                <small>Continue</small>
-            </button>
+                <button class="reaction-option"
+                        type="button"
+                        data-reaction="👍"
+                        aria-label="Send thumbs-up reaction">
+                    👍
+                </button>
+
+                <button class="reaction-option"
+                        type="button"
+                        data-reaction="🥱"
+                        aria-label="Send yawning reaction">
+                    🥱
+                </button>
+            </div>
+
+            <!-- Main call controls -->
+            <div class="call-toolbar">
+                <!-- Audio -->
+                <button id="audioBtn"
+                        class="call-control-button audio-control"
+                        type="button"
+                        aria-label="Play or pause audio">
+                    <svg viewBox="0 0 24 24"
+                         aria-hidden="true">
+                        <path d="M11 5 6 9H3v6h3l5 4V5Z"></path>
+                        <path d="M15.5 8.5a5 5 0 0 1 0 7"></path>
+                        <path d="M18 6a8.5 8.5 0 0 1 0 12"></path>
+                    </svg>
+                </button>
+
+                <!-- Hang up -->
+                <button id="hangUpButton"
+                        class="call-control-button hangup-control"
+                        type="button"
+                        aria-label="Hang up">
+                    <svg viewBox="0 0 24 24"
+                         aria-hidden="true">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2
+                       19.79 19.79 0 0 1-8.63-3.07
+                       19.5 19.5 0 0 1-6-6
+                       19.79 19.79 0 0 1-3.07-8.63
+                       A2 2 0 0 1 4.11 2h3
+                       a2 2 0 0 1 2 1.72
+                       c.13.96.36 1.9.68 2.8
+                       a2 2 0 0 1-.45 2.11L8 9.91
+                       a16 16 0 0 0 6 6l1.27-1.27
+                       a2 2 0 0 1 2.11-.45
+                       c.9.32 1.84.55 2.8.68
+                       A2 2 0 0 1 22 16.92Z"></path>
+                    </svg>
+                </button>
+
+                <!-- More/reactions -->
+                <button id="moreButton"
+                        class="call-control-button more-control"
+                        type="button"
+                        aria-label="Open reactions"
+                        aria-expanded="false"
+                        aria-controls="reactionMenu">
+                    <span class="more-dots">•••</span>
+                </button>
+            </div>
         </div>
+
+        <!-- Keep the continue button separate -->
+        <button id="nextBtn"
+                class="continue-button hidden"
+                type="button">
+            Continue
+        </button>
     </div>
     <script>
         // =====================================================
@@ -332,6 +389,119 @@
             button.textContent = answerText[key];
             button.style.display = "none";
         });
+        const moreButton =
+            document.getElementById("moreButton");
+
+        const reactionMenu =
+            document.getElementById("reactionMenu");
+
+        const reactionButtons =
+            document.querySelectorAll(".reaction-option");
+
+        function openReactionMenu() {
+            reactionMenu.classList.remove("hidden");
+
+            moreButton.setAttribute(
+                "aria-expanded",
+                "true"
+            );
+        }
+
+        function closeReactionMenu() {
+            reactionMenu.classList.add("hidden");
+
+            moreButton.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+        }
+
+        function toggleReactionMenu(event) {
+            event.stopPropagation();
+
+            const isOpen =
+                !reactionMenu.classList.contains("hidden");
+
+            if (isOpen) {
+                closeReactionMenu();
+            } else {
+                openReactionMenu();
+            }
+        }
+
+        function showFloatingReaction(emoji) {
+            const reaction =
+                document.createElement("div");
+
+            reaction.className = "floating-reaction";
+            reaction.textContent = emoji;
+
+            /*
+             * Start the emoji above the three-dot button.
+             */
+            const buttonPosition =
+                moreButton.getBoundingClientRect();
+
+            const randomHorizontalOffset =
+                Math.random() * 60 - 30;
+
+            reaction.style.left =
+                `${buttonPosition.left +
+                buttonPosition.width / 2 +
+                randomHorizontalOffset
+                }px`;
+
+            reaction.style.top =
+                `${buttonPosition.top - 8}px`;
+
+            document.body.appendChild(reaction);
+
+            window.setTimeout(() => {
+                reaction.remove();
+            }, 1800);
+        }
+
+        moreButton.addEventListener(
+            "click",
+            toggleReactionMenu
+        );
+
+        reactionMenu.addEventListener(
+            "click",
+            event => {
+                event.stopPropagation();
+            }
+        );
+
+        reactionButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                const emoji =
+                    button.dataset.reaction;
+
+                showFloatingReaction(emoji);
+                closeReactionMenu();
+            });
+        });
+
+        /*
+         * Close the menu when the user clicks elsewhere.
+         */
+        document.addEventListener(
+            "click",
+            closeReactionMenu
+        );
+
+        /*
+         * Close it with Escape.
+         */
+        document.addEventListener(
+            "keydown",
+            event => {
+                if (event.key === "Escape") {
+                    closeReactionMenu();
+                }
+            }
+        );
 
         // =====================================================
         // CONVERSATION STATE

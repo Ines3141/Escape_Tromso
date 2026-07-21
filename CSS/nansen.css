@@ -4,12 +4,22 @@
 .call-screen {
     position: fixed;
     inset: 0;
-    background: radial-gradient(circle at top, #123b63, #020812 75%);
     z-index: 9999;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 20px;
+    color: white;
+    background:
+        radial-gradient(
+            circle at top,
+            #123b63,
+            #020812 75%
+        );
+    cursor: pointer;
+    transition:
+        opacity 0.45s ease,
+        visibility 0.45s ease;
 }
 .call-screen::before {
     content: "";
@@ -22,9 +32,9 @@
 
 .call-screen.call-ending {
      opacity: 0;
-        visibility: hidden;
-        pointer-events: none;
-    }
+     visibility: hidden;
+     pointer-events: none;
+}
 
 /* =========================================================
    CALL CARD
@@ -60,33 +70,35 @@
     position: relative;
     width: 170px;
     height: 170px;
-    margin: 0 auto 28px;
-    border: 4px solid rgba(255, 255, 255, 0.88);
+    margin: 0 auto 24px auto;
     border-radius: 50%;
-    overflow: hidden;
-    box-shadow: 0 0 0 8px rgba(37, 211, 102, 0.12), 0 14px 45px rgba(0, 0, 0, 0.45);
-    animation: callerPulse 2s infinite;
+    overflow: visible;
+    /* overflow: hidden; /* Anything outside the element’s boundaries is cut off. */
+    border: 4px solid rgba(125, 211, 252, 0.9);
+    box-shadow: 0 0 0 8px rgba(37, 211, 102, 0.12);
+    animation: ringPulse 1.2s infinite;
 }
 
-    .caller-photo::after {
-        content: "";
-        position: absolute;
-        inset: -12px;
-        border: 2px solid rgba(37, 211, 102, 0.3);
-        border-radius: 50%;
-        animation: outgoingRing 2s infinite;
-    }
+.caller-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
 
-    .caller-photo img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
+.caller-photo::after { /* ::after creates a decorative virtual element after the content inside .caller-photo*/
+    content: "";
+    position: absolute;
+    inset: -12px; /* Short for top, right, left, bottom = -12px */
+    border: 2px solid rgba(37, 211, 102, 0.3);
+    border-radius: 50%;
+    pointer-events: none; /* This element ignores mouse clicks and hover interactions. */
+    animation: outgoingRing 2s infinite;
+}
 
 /* =========================================================
    CALLER TEXT
    ========================================================= */
-
 .call-card h1 {
     margin: 0;
     color: white;
@@ -125,23 +137,23 @@
     margin-left: 7px;
 }
 
-    .call-dots span {
-        width: 5px;
-        height: 5px;
-        border-radius: 50%;
-        background: #d9fdd3;
-        animation: waitingDot 1.2s infinite;
-    }
+.call-dots span {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #d9fdd3;
+    animation: waitingDot 1.2s infinite;
+}
 
-        .call-dots span:nth-child(2) {
-            animation-delay: 0.2s;
-        }
+.call-dots span:nth-child(2) { /* : selects a state of an existing element*/
+    animation-delay: 0.2s;
+}
 
-        .call-dots span:nth-child(3) {
-            animation-delay: 0.4s;
-        }
+.call-dots span:nth-child(3) {
+    animation-delay: 0.4s;
+}
 
-.call-help {
+.call-help { /* Position of text at the bottom. Instructions. */
     margin-top: auto;
     margin-bottom: 10px;
     color: rgba(255, 255, 255, 0.5);
@@ -149,24 +161,233 @@
 }
 
 /* =========================================================
+   CALL TOOLBAR
+   ========================================================= */
+
+.call-toolbar-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 28px;
+}
+
+.call-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+    padding: 14px 18px;
+    background: rgba(9, 22, 35, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 999px;
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.call-control-button {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    color: white;
+    background: #23384d;
+    cursor: pointer;
+    transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+}
+
+    .call-control-button:hover {
+        transform: scale(1.07);
+        background: #2e4a65;
+    }
+
+    .call-control-button:active {
+        transform: scale(0.94);
+    }
+
+    .call-control-button:focus-visible {
+        outline: 3px solid rgba(125, 211, 252, 0.8);
+        outline-offset: 4px;
+    }
+
+    .call-control-button svg {
+        width: 29px;
+        height: 29px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+
+/* Audio button while audio is playing */
+
+.audio-control.is-active {
+    color: #082238;
+    background: #7dd3fc;
+    box-shadow: 0 0 0 7px rgba(125, 211, 252, 0.12);
+}
+
+/* Red hang-up button */
+
+.hangup-control {
+    color: white;
+    background: #e63946;
+}
+
+    .hangup-control:hover {
+        background: #c92836;
+    }
+
+    .hangup-control svg {
+        transform: rotate(135deg);
+    }
+
+/* Three dots */
+
+.more-dots {
+    position: relative;
+    top: -4px;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    line-height: 1;
+}
+
+/* =========================================================
+   REACTION MENU
+   ========================================================= */
+
+.reaction-menu {
+    position: absolute;
+    bottom: 88px;
+    left: 50%;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 11px;
+    background: rgba(255, 255, 255, 0.97);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 999px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    transform: translateX(-50%);
+    transform-origin: bottom center;
+    animation: reactionMenuOpen 0.18s ease-out;
+}
+
+    .reaction-menu::after {
+        content: "";
+        position: absolute;
+        bottom: -7px;
+        left: 50%;
+        width: 14px;
+        height: 14px;
+        background: white;
+        transform: translateX(-50%) rotate(45deg);
+    }
+
+.reaction-option {
+    position: relative;
+    z-index: 1;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    font-size: 29px;
+    cursor: pointer;
+    transition: transform 0.16s ease, background 0.16s ease;
+}
+
+    .reaction-option:hover {
+        transform: translateY(-4px) scale(1.12);
+        background: rgba(0, 0, 0, 0.06);
+    }
+
+/* =========================================================
+   FLOATING REACTION
+   ========================================================= */
+
+.floating-reaction {
+    position: fixed;
+    z-index: 12000;
+    font-size: 48px;
+    line-height: 1;
+    pointer-events: none;
+    animation: reactionFloat 1.7s ease-out forwards;
+}
+
+/* =========================================================
+   CONTINUE BUTTON
+   ========================================================= */
+
+.continue-button {
+    display: block;
+    margin: 24px auto 0;
+    padding: 13px 28px;
+    border: none;
+    border-radius: 999px;
+    color: white;
+    background: #245b78;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+
+@keyframes reactionMenuOpen {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(8px) scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0) scale(1);
+    }
+}
+
+@keyframes reactionFloat {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, 10px) scale(0.55);
+    }
+
+    18% {
+        opacity: 1;
+        transform: translate(-50%, 0) scale(1.15);
+    }
+
+    65% {
+        opacity: 1;
+        transform: translate(-50%, -105px) scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -190px) scale(1.25) rotate(8deg);
+    }
+}
+
+/* =========================================================
    CONNECTED STATION SCREEN
    ========================================================= */
 
-.nansen-call.box {
-    position: relative;
-    min-height: calc(100vh - 40px);
-    max-width: 700px;
-    margin: 20px auto;
-    padding: 36px 24px;
-    color: white;
-    background: radial-gradient( circle at top, rgba(37, 211, 102, 0.15), transparent 38% ), linear-gradient( 165deg, #172a25, #091512 72% );
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 28px;
-    box-shadow: 0 20px 55px rgba(0, 0, 0, 0.38);
-    overflow: hidden;
-}
 
-    .nansen-call.box::before {
+.nansen-call.box::before {
         content: "";
         position: absolute;
         inset: 0;

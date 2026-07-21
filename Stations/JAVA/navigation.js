@@ -1,23 +1,50 @@
-﻿function loadInventoryScript() {
-    /*
+﻿function loadScriptOnce(src, flagName) {
+    if (window[flagName]) {
+        return Promise.resolve();
+    }
 
-    */
-    if (window.inventoryScriptLoaded) return;
+    if (window[flagName + "Promise"]) {
+        return window[flagName + "Promise"];
+    }
 
-    const script = document.createElement("script");
-    script.src = "../../../../Stations/JAVA/inventory.js";
-    script.onload = () => {
-        window.inventoryScriptLoaded = true;
-        console.log("Inventory loaded.");
-    };
-    script.onerror = () => {
-        console.error("Inventory could not be loaded. Check the path.");
-    };
+    window[flagName + "Promise"] = new Promise((resolve, reject) => {
+        const existingScript = document.querySelector(`script[data-loader="${flagName}"]`);
 
-    document.head.appendChild(script);
+        if (existingScript) {
+            existingScript.addEventListener("load", resolve);
+            existingScript.addEventListener("error", reject);
+            return;
+        }
+
+        const script = document.createElement("script");
+        script.src = src;
+        script.dataset.loader = flagName;
+
+        script.onload = () => {
+            window[flagName] = true;
+            console.log(src + " loaded.");
+            resolve();
+        };
+
+        script.onerror = () => {
+            console.error(src + " could not be loaded. Check the path.");
+            reject();
+        };
+
+        document.head.appendChild(script);
+    });
+
+    return window[flagName + "Promise"];
 }
 
-loadInventoryScript();
+function loadInventoryScripts() {
+    return loadScriptOnce("../../../../Stations/JAVA/inventory.js", "inventoryScriptLoaded")
+        .then(() => {
+            return loadScriptOnce("../../../../Stations/JAVA/explorer_profiles.js", "explorerProfilesScriptLoaded");
+        });
+}
+
+loadInventoryScripts();
 class GameNavigation extends HTMLElement {
     constructor() {
         super();
@@ -201,8 +228,6 @@ class GameNavigation extends HTMLElement {
 
                     <div class="menu" id="hamburgerMenu">
                         <button id="inventoryBtn">Inventory</button>
-                        <button id="inboxBtn">Inbox</button>
-                        <button id="profileBtn">Profile</button>
                     </div>
                 </div>
 
@@ -225,8 +250,6 @@ class GameNavigation extends HTMLElement {
         const locationBtn = this.shadowRoot.getElementById("locationBtn");
 
         const inventoryBtn = this.shadowRoot.getElementById("inventoryBtn");
-        const inboxBtn = this.shadowRoot.getElementById("inboxBtn");
-        const profileBtn = this.shadowRoot.getElementById("profileBtn");
 
         const backBtn = this.shadowRoot.getElementById("backBtn");
         const forwardBtn = this.shadowRoot.getElementById("forwardBtn");
@@ -308,19 +331,9 @@ class GameNavigation extends HTMLElement {
 
         /* Opens the inventory.js file */
         inventoryBtn.addEventListener("click", () => {
-            if (typeof openInventory === "function") {
+            loadInventoryScripts().then(() => {
                 openInventory();
-            }
-        });
-
-        inboxBtn.addEventListener("click", () => {
-            openInbox();
-        });
-
-        profileBtn.addEventListener("click", () => {
-            if (typeof openProfile === "function") {
-                openProfile();
-            }
+            });
         });
 
         backBtn.addEventListener("click", () => {
@@ -338,173 +351,7 @@ class GameNavigation extends HTMLElement {
                 window.location.href = nextPage;
             }
         });
-
         updateButtons();
-        function getInboxLetters() {
-            return JSON.parse(localStorage.getItem("inboxLetters")) || [];
-        }
-
-        function hasUnreadLetters() {
-            return getInboxLetters().some(letter => !letter.read);
-        }
-        function openInbox() {
-            let inbox = getInboxLetters();
-
-            let overlay = document.createElement("div");
-            overlay.style.position = "fixed";
-            overlay.style.inset = "0";
-            overlay.style.zIndex = "100000";
-            overlay.style.background = "rgba(2, 8, 18, 0.95)";
-            overlay.style.display = "flex";
-            overlay.style.justifyContent = "center";
-            overlay.style.alignItems = "center";
-            overlay.style.padding = "20px";
-
-            let card = document.createElement("div");
-            card.style.background = "#f5efe0";
-            card.style.color = "#2b2418";
-            card.style.borderRadius = "18px";
-            card.style.padding = "24px";
-            card.style.maxWidth = "650px";
-            card.style.width = "100%";
-            card.style.maxHeight = "80vh";
-            card.style.overflowY = "auto";
-
-            function showInboxList() {
-                card.innerHTML = `
-                    <button id="closeInbox"
-                    style="
-                        display:flex;
-                        float:right;
-                        border:none;
-                        border-radius:50%;
-                        width:36px;
-                        height:36px;
-                        background:#111;
-                        color:white;
-                        font-size:22px;
-                        cursor:pointer;
-                        justify-content: center;
-                        align-items: center;
-                    ">
-                        ×
-                    </button>
-                    <h2>📨 Inbox</h2>
-                `;
-
-                if (inbox.length === 0) {
-                    card.innerHTML += `<p>No letters yet.</p>`;
-                } else {
-                    inbox.forEach((letter, index) => {
-                        card.innerHTML += `
-                            <div
-                                style="
-                                margin:14px 0;
-                                padding:14px;
-                                border-radius:12px;
-                                background:${letter.read ? "rgba(0,0,0,0.06)" : "rgba(255,0,0,0.12)"};
-                                border:${letter.read ? "none" : "2px solid red"};
-                            ">
-                            <h3>${letter.read ? "" : "🔴 "}${letter.title}</h3>
-                            <p style="color:#2b2418;">
-                                <strong>From:</strong> ${letter.from}
-                            </p>
-
-                            <button data-index="${index}" class="readLetterBtn" style="
-                                border:none;
-                                border-radius:10px;
-                                padding:10px 14px;
-                                background:#111;
-                                color:white;
-                                cursor:pointer;
-                            ">
-                                Read letter
-                            </button>
-                            </div>
-                        `;
-                    });
-                }
-
-                card.querySelector("#closeInbox").addEventListener("click", () => {
-                    overlay.remove();
-                });
-
-                card.querySelectorAll(".readLetterBtn").forEach(button => {
-                    button.addEventListener("click", () => {
-                        const index = button.dataset.index;
-                        showLetter(index);
-                    });
-                });
-            }
-
-            function showLetter(index) {
-                inbox[index].read = true;
-                localStorage.setItem("inboxLetters", JSON.stringify(inbox));
-
-                card.innerHTML = `
-                    <div style="
-                        display:flex;
-                        justify-content:space-between;
-                        align-items:center;
-                        margin-bottom:20px;
-                    ">
-                        <button id="backToInbox" style="
-                            border:none;
-                            border-radius:10px;
-                            padding:10px 14px;
-                            background:#111;
-                            color:white;
-                            cursor:pointer;
-                        ">
-                            ← Inbox
-                        </button>
-
-                        <button id="closeInbox" style="
-                            display:flex;
-                            border:none;
-                            border-radius:50%;
-                            width:40px;
-                            height:40px;
-                            background:#111;
-                            color:white;
-                            font-size:20px;
-                            cursor:pointer;
-                            justify-content: center;
-                            align-items: center;
-                        ">
-                            ✕
-                        </button>
-                    </div>
-
-                    <style>
-                        ${getLetterStyles()}
-                    </style>
-
-                    ${renderLetterHTML(inbox[index])}
-                `;
-
-                if (typeof setupMorseLamps === "function") {
-                    setupMorseLamps(card);
-                }
-
-                if (typeof setupYearLocks === "function") {
-                    setupYearLocks(card);
-                }
-
-                card.querySelector("#closeInbox").addEventListener("click", () => {
-                    overlay.remove();
-                });
-
-                card.querySelector("#backToInbox").addEventListener("click", () => {
-                    showInboxList();
-                });
-            }
-
-            overlay.appendChild(card);
-            document.body.appendChild(overlay);
-
-            showInboxList();
-        }
     }
 }
 function setupGameNavigation() {

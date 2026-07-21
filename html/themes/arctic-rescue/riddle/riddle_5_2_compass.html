@@ -4,36 +4,176 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
-    <title> Riddle Roald Amundsen</title>
-    <link rel="stylesheet" href="../../../../CSS/global.css"> <!-- link to style sheet -->
+
+    <title>Riddle Roald Amundsen</title>
+
+    <link rel="stylesheet" href="../../../../CSS/global.css">
     <link rel="stylesheet" href="../../../../CSS/arctic-theme.css">
+
     <script src="../../../../Stations/JAVA/navigation.js"></script>
+
     <script>
         const previousPage = "../stations/station_5_1.html";
         const nextPage = "riddle_5_3_coordinates.html";
     </script>
+
+    <style>
+        .number-task {
+            margin-top: 36px;
+        }
+
+            .number-task h2 {
+                margin-bottom: 8px;
+            }
+
+            .number-task p {
+                max-width: 650px;
+                margin: 0 auto 20px;
+                line-height: 1.5;
+            }
+
+        .expedition-cards {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            margin: 24px auto;
+            max-width: 900px;
+        }
+
+        .expedition-card {
+            background: #f5efe0;
+            color: #1b1b1b;
+            border-radius: 18px;
+            padding: 14px;
+            text-align: left;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+        }
+
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+            .card-top h3 {
+                margin: 0;
+                font-size: 20px;
+            }
+
+        .code-input {
+            width: 62px;
+            height: 54px;
+            border-radius: 50%;
+            background: #111;
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+            text-align: center;
+            border: 3px solid #444;
+            box-sizing: border-box;
+            flex-shrink: 0;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: textfield;
+            padding: 0;
+        }
+
+            .code-input::placeholder {
+                color: rgba(255, 255, 255, 0.6);
+            }
+
+            .code-input:focus {
+                outline: none;
+                border-color: #66d9ff;
+                box-shadow: 0 0 12px rgba(102, 217, 255, 0.8);
+            }
+
+        .expedition-card img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 10px;
+        }
+
+        .ship-info {
+            font-weight: bold;
+            margin: 8px 0 4px;
+            color: #111;
+            font-size: 16px;
+        }
+
+        .route-info {
+            margin: 0;
+            color: #263238;
+            opacity: 1;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        #numberMessage {
+            min-height: 24px;
+            margin-top: 14px;
+            font-weight: bold;
+        }
+
+        .submit-button {
+            margin-top: 12px;
+            padding: 14px 24px;
+            border: none;
+            border-radius: 999px;
+            background: #27a8ff;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .dev-button {
+            margin-top: 14px;
+            padding: 10px 18px;
+            border: none;
+            border-radius: 999px;
+            background: #555;
+            color: white;
+            cursor: pointer;
+        }
+
+        @media (min-width: 700px) {
+            .expedition-cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
 </head>
 
 <body>
     <div class="box">
         <h1>Amundsen Compass Puzzle</h1>
+
         <p>
             Rotate the inner circle until the explorer looks in the right direction. It will help you to find the
             connections.
         </p>
+
+        <!-- COMPASS PART STAYS THE SAME -->
         <div class="compass-wrapper">
             <span class="angle-label angle-0"> <br> Northpole </span>
-            <span class="angle-label angle-45"> <br> 71  </span>
-            <span class="angle-label angle-90">  North-East <br> passage </span>
+            <span class="angle-label angle-45"> <br> 71 </span>
+            <span class="angle-label angle-90"> North-East <br> passage </span>
             <span class="angle-label angle-135"> <br> 11 </span>
             <span class="angle-label angle-180"> <br> Southpole </span>
             <span class="angle-label angle-225"> <br> 15 </span>
             <span class="angle-label angle-270"> North-West <br> passage </span>
             <span class="angle-label angle-315"> <br> 22 </span>
+
             <div class="compass-container">
                 <img id="arcticMap" src="../../../../assets/images/Labyrinth_Amundsen.jpg">
             </div>
         </div>
+
         <div class="compass-buttons">
             <button type="button" onclick="rotateStep(-45)">⟲</button>
             <button type="button" onclick="rotateStep(45)">⟳</button>
@@ -41,62 +181,77 @@
 
         <audio id="clickSound" src="../../../../assets/audio/Click.m4a"></audio>
 
-        <h2>Match the ships</h2>
+        <!-- NEW BOTTOM PART -->
+        <div class="number-task">
+            <h2>Decode the expedition numbers</h2>
 
-        <div class="match-game">
+            <p>
+                Use the compass to connect each expedition with its number.
+                Enter the correct number on each card.
+            </p>
 
-            <div class="ship-card">
-                <div class="ship-name">&#9973; Fram</div>
-                <select id="fram">
-                    <option value="">Choose...</option>
-                    <option value="northwest">North-West Passage</option>
-                    <option value="northeast">North-East Passage</option>
-                    <option value="southpole">South Pole</option>
-                    <option value="northpole">North Pole</option>
-                </select>
+            <div class="expedition-cards">
+                <div class="expedition-card" data-id="northpole">
+                    <div class="card-top">
+                        <h3>North Pole</h3>
+                        <input class="code-input" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" placeholder="?">
+                    </div>
+
+                    <img src="../../../../assets/images/Norge.jfif" alt="Norge expedition">
+
+                    <p class="ship-info">✈ Norge</p>
+                    <p class="route-info">Airship expedition to the North Pole</p>
+                </div>
+
+                <div class="expedition-card" data-id="southpole">
+                    <div class="card-top">
+                        <h3>South Pole</h3>
+                        <input class="code-input" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" placeholder="?">
+                    </div>
+
+                    <img src="../../../../assets/images/Fram.jfif" alt="Fram expedition">
+
+                    <p class="ship-info">⛵ Fram</p>
+                    <p class="route-info">Expedition to the South Pole</p>
+                </div>
+
+                <div class="expedition-card" data-id="northeast">
+                    <div class="card-top">
+                        <h3>North-East Passage</h3>
+                        <input class="code-input" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" placeholder="?">
+                    </div>
+
+                    <img src="../../../../assets/images/Maud.jfif" alt="Maud expedition">
+
+                    <p class="ship-info">⛵ Maud</p>
+                    <p class="route-info">Expedition through the North-East Passage</p>
+                </div>
+
+                <div class="expedition-card" data-id="northwest">
+                    <div class="card-top">
+                        <h3>North-West Passage</h3>
+                        <input class="code-input" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" placeholder="?">
+                    </div>
+
+                    <img src="../../../../assets/images/Gjoa.jfif" alt="Gjøa expedition">
+
+                    <p class="ship-info">⛵ Gjøa</p>
+                    <p class="route-info">Expedition through the North-West Passage</p>
+                </div>
             </div>
 
-            <div class="ship-card">
-                <div class="ship-name">&#9973; Gjøa</div>
-                <select id="gjoa">
-                    <option value="">Choose...</option>
-                    <option value="northwest">North-West Passage</option>
-                    <option value="northeast">North-East Passage</option>
-                    <option value="southpole">South Pole</option>
-                    <option value="northpole">North Pole</option>
-                </select>
-            </div>
+            <p id="numberMessage"></p>
 
-            <div class="ship-card">
-                <div class="ship-name">&#9973; Maud</div>
-                <select id="maud">
-                    <option value="">Choose...</option>
-                    <option value="northwest">North-West Passage</option>
-                    <option value="northeast">North-East Passage</option>
-                    <option value="southpole">South Pole</option>
-                    <option value="northpole">North Pole</option>
-                </select>
-            </div>
+            <button class="submit-button" id="checkNumbersBtn">
+                Continue
+            </button>
 
-            <div class="ship-card">
-                <div class="ship-name">&#9992; Norge</div>
-                <select id="norge">
-                    <option value="">Choose...</option>
-                    <option value="northwest">North-West Passage</option>
-                    <option value="northeast">North-East Passage</option>
-                    <option value="southpole">South Pole</option>
-                    <option value="northpole">North Pole</option>
-                </select>
-            </div>
+            <br>
 
+            <button class="dev-button" onclick="window.location.href = nextPage">
+                DEV Continue
+            </button>
         </div>
-        <p id="message"></p>
-        <button class="submit-button" id="submit" onclick="checkPuzzle()">
-            Submit
-        </button>
-        <button class="submit-button" id="submit_just_for_now" onclick="window.location.href = nextPage">
-            Continue
-        </button>
 
         <script>
             let rotation = 225;
@@ -104,46 +259,64 @@
 
             const arcticMap = document.getElementById("arcticMap");
             const clickSound = document.getElementById("clickSound");
-            const message = document.getElementById("message");
+            const numberMessage = document.getElementById("numberMessage");
+            const checkNumbersBtn = document.getElementById("checkNumbersBtn");
 
             arcticMap.style.transform = `rotate(${rotation}deg)`;
+
             function rotateStep(degrees) {
                 rotation += degrees;
-
                 arcticMap.style.transform = `rotate(${rotation}deg)`;
 
                 clickSound.currentTime = 0;
                 clickSound.play();
             }
 
-            function checkPuzzle() {
-                const fram = document.getElementById("fram").value;
-                const gjoa = document.getElementById("gjoa").value;
-                const maud = document.getElementById("maud").value;
-                const norge = document.getElementById("norge").value;
+            const correctNumbers = {
+                northpole: "15",
+                southpole: "22",
+                northeast: "11",
+                northwest: "71"
+            };
 
-                const shipsCorrect =
-                    fram === "southpole" &&
-                    gjoa === "northwest" &&
-                    maud === "northeast" &&
-                    norge === "northpole";
+            checkNumbersBtn.addEventListener("click", () => {
+                const allCorrect = [...document.querySelectorAll(".expedition-card")].every(card => {
+                    const id = card.dataset.id;
+                    const input = card.querySelector(".code-input");
 
-                if (shipsCorrect) {
-                    message.textContent = "Correct! Amundsen would be proud.";
-                    message.style.color = "lightgreen";
+                    return input.value.trim() === correctNumbers[id];
+                });
 
-                    setTimeout(() => {
-                        window.location.href = nextPage;
-                    }, 1200);
-                } else {
-                    message.textContent = "Not quite. Check the direction and the ships.";
-                    message.style.color = "orange";
+                if (!allCorrect) {
+                    numberMessage.textContent = "One or more numbers are wrong. Check the compass again.";
+                    numberMessage.style.color = "orange";
+                    return;
                 }
-            }
-        </script>
 
+                localStorage.setItem("amundsenNumbersSolved", "true");
+
+                numberMessage.textContent = "Correct! The numbers are decoded.";
+                numberMessage.style.color = "lightgreen";
+
+                setTimeout(() => {
+                    window.location.href = nextPage;
+                }, 1000);
+            });
+
+            document.querySelectorAll(".code-input").forEach(input => {
+                input.addEventListener("input", () => {
+                    input.value = input.value.replace(/[^0-9]/g, "");
+
+                    if (input.value.length > 2) {
+                        input.value = input.value.slice(0, 2);
+                    }
+                });
+            });
+        </script>
     </div>
+
     <game-navigation></game-navigation>
+
     <script>
         setupGameNavigation();
     </script>

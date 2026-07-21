@@ -1,9 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signal Intercepted</title>
+
+    <script src="../../../../Stations/JAVA/navigation.js"></script>
+
+    <script>
+        const previousPage = "../riddle/riddle_3_4_location.html";
+        const nextPage = "../riddle/riddle_4_2_fish.html";
+    </script>
 
     <style>
         body {
@@ -28,7 +36,7 @@
             background: #0b2232;
             border-radius: 20px;
             padding: 20px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
         }
 
             .chat-box h2 {
@@ -36,7 +44,7 @@
             }
 
         .message {
-            background: rgba(255,255,255,0.08);
+            background: rgba(255, 255, 255, 0.08);
             border-radius: 14px;
             padding: 12px;
             margin: 10px 0;
@@ -96,7 +104,7 @@
             content: "";
             position: absolute;
             inset: 0;
-            background: repeating-linear-gradient( to bottom, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 2px, transparent 4px );
+            background: repeating-linear-gradient( to bottom, rgba(255, 255, 255, 0.03) 0px, rgba(255, 255, 255, 0.03) 1px, transparent 2px, transparent 4px );
             pointer-events: none;
             z-index: 2;
         }
@@ -104,7 +112,7 @@
         .noise {
             position: absolute;
             inset: 0;
-            background-image: radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px);
+            background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
             background-size: 6px 6px;
             opacity: 0.08;
             animation: noiseMove 0.15s infinite;
@@ -152,14 +160,14 @@
         .code-box {
             width: min(90vw, 700px);
             min-height: 220px;
-            background: rgba(0,0,0,0.7);
+            background: rgba(0, 0, 0, 0.7);
             border: 1px solid #00ff66;
             border-radius: 10px;
             padding: 20px;
             font-family: monospace;
             font-size: 14px;
             color: #00ff66;
-            box-shadow: 0 0 20px rgba(0,255,102,0.2);
+            box-shadow: 0 0 20px rgba(0, 255, 102, 0.2);
             overflow: hidden;
             display: none;
             z-index: 3;
@@ -204,7 +212,7 @@
         .mask-image {
             width: min(70vw, 360px);
             border-radius: 14px;
-            box-shadow: 0 0 35px rgba(255,255,255,0.18);
+            box-shadow: 0 0 35px rgba(255, 255, 255, 0.18);
             animation: maskPulse 1.6s infinite alternate;
         }
 
@@ -241,13 +249,13 @@
         video {
             width: 100%;
             border-radius: 16px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
             background: black;
         }
 
         .continue-btn {
             display: none;
-            margin-top: 18px;
+            margin: 18px auto 0;
             padding: 14px 26px;
             border: none;
             border-radius: 999px;
@@ -259,7 +267,7 @@
         }
 
             .continue-btn.show {
-                display: inline-block;
+                display: block;
             }
 
         .glitch {
@@ -304,6 +312,7 @@
             }
     </style>
 </head>
+
 <body>
     <div class="chat-page" id="chatPage">
         <div class="chat-box">
@@ -331,23 +340,32 @@
         </div>
 
         <div class="video-wrap" id="videoWrap">
-            <video id="hackerVideo" controls playsinline>
-                <source src="../../../../assets/videos/hacker_video.mp4" type="video/mp4">
+            <video id="hackerVideo" controls playsinline preload="auto" muted>
+                <source src="../../../../assets/images/hacker_video.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
+
             <button class="continue-btn" id="continueBtn">Continue</button>
         </div>
     </div>
 
     <div class="blackout" id="blackout"></div>
 
+    <!-- Keep these for later. They are not used in the JavaScript yet. -->
     <audio id="glitchSound" src="../../../../assets/audio/glitch.mp3" preload="auto"></audio>
     <audio id="staticSound" src="../../../../assets/audio/static.mp3" preload="auto"></audio>
     <audio id="boomSound" src="../../../../assets/audio/impact.mp3" preload="auto"></audio>
-    <audio id="monumentSound" src="../../../../assets/audio/Monument.mp4" preload="auto"></audio>
-    <script>
-        const nextPage = "next_page.html";
 
+    <!-- This is the only audio currently used. It starts when the user presses play on the video. -->
+    <audio id="monumentSound" src="../../../../assets/audio/Monument.mp4" preload="auto"></audio>
+
+    <game-navigation></game-navigation>
+
+    <script>
+        setupGameNavigation();
+    </script>
+
+    <script>
         const statusMessage = document.getElementById("statusMessage");
         const attackOverlay = document.getElementById("attackOverlay");
         const disconnectText = document.getElementById("disconnectText");
@@ -357,11 +375,9 @@
         const hackerVideo = document.getElementById("hackerVideo");
         const continueBtn = document.getElementById("continueBtn");
         const blackout = document.getElementById("blackout");
-
-        const glitchSound = document.getElementById("glitchSound");
-        const staticSound = document.getElementById("staticSound");
-        const boomSound = document.getElementById("boomSound");
         const monumentSound = document.getElementById("monumentSound");
+
+        let monumentStarted = false;
 
         const codeLines = [
             { text: "[ SIGNAL OVERRIDE INITIATED ]", cls: "code-red" },
@@ -392,6 +408,7 @@
                 }, 70);
 
                 count++;
+
                 if (count >= times) {
                     clearInterval(interval);
                 }
@@ -405,9 +422,6 @@
             setTimeout(() => {
                 attackOverlay.classList.add("active", "flicker");
                 disconnectText.classList.add("show");
-
-                glitchSound.play().catch(() => { });
-                staticSound.play().catch(() => { });
 
                 flickerBlackout(5, 130);
             }, 1200);
@@ -443,7 +457,6 @@
 
         function showMask() {
             flickerBlackout(3, 140);
-            boomSound.play().catch(() => { });
             maskWrap.classList.add("show");
 
             setTimeout(() => {
@@ -453,14 +466,32 @@
         }
 
         function showVideo() {
-            monumentSound.pause();
-            monumentSound.currentTime = 0;
-
             videoWrap.classList.add("show");
-            hackerVideo.play().catch(() => { });
+
+            hackerVideo.muted = true;
+            hackerVideo.controls = true;
+            hackerVideo.load();
         }
 
+        hackerVideo.addEventListener("play", () => {
+            if (!monumentStarted) {
+                monumentSound.currentTime = 0;
+                monumentSound.volume = 1;
+                monumentStarted = true;
+            }
+
+            monumentSound.play().catch(error => {
+                console.log("Audio could not start with video play:", error);
+            });
+        });
+
+        hackerVideo.addEventListener("pause", () => {
+            monumentSound.pause();
+        });
+
         hackerVideo.addEventListener("ended", () => {
+            monumentSound.pause();
+            monumentSound.currentTime = 0;
             continueBtn.classList.add("show");
         });
 
@@ -468,117 +499,116 @@
             window.location.href = nextPage;
         });
 
-        // start automatically
         setTimeout(() => {
             startAttackSequence();
         }, 1500);
     </script>
 </body>
+
 </html>
 
+<!-- < !DOCTYPE html >
+            <html lang="en">
 
-<!-- <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Station 4</title>
-    <link rel="stylesheet" href="../../../../CSS/global.css">
-    <link rel="stylesheet" href="../../../../CSS/station.css">
-    <script src="../../../../Stations/JAVA/navigation.js"></script>
+                <head>
+                    <meta charset="UTF-8">
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                            <title>Station 4</title>
+                            <link rel="stylesheet" href="../../../../CSS/global.css">
+                                <link rel="stylesheet" href="../../../../CSS/station.css">
+                                    <script src="../../../../Stations/JAVA/navigation.js"></script>
     <script src="../../../../Stations/JAVA/inventory.js"></script>
     <script>
         const previousPage = "../riddle/riddle_3_4_location.html";
         const nextPage = "../riddle/riddle_4_2_fish.html";
     </script>
-</head>
-<body>
-    <div class="box monument-theme">
-        <h1>Station 4</h1>
-        <p>Location: Hunter Fisher Monument, Stortorget</p>
-        <!--NO IDEAS YET NO RIDDLE BUT IT SHOULD BE DARK AND REMIND PEOPLE
-        <div class="image-container">
-            <img src="../../../../assets/images/Monument.jpg" alt="Station 4">
-        </div>
-        <div class="fog"></div>
-        <div class="audio-row">
-            <button class="audio-btn" id="audioBtn">&#128266;</button>
-            <div id="subtitle" class="subtitle"></div>
-        </div>
-        <audio id="voice" preload="auto">
-            <source src="../../../../assets/audio/Monument.mp4" type="audio/mp4">
-        </audio>
-        <button class="riddle-button" onclick="window.location.href = nextPage">
-            Solve Riddle
-        </button>
-    </div>
-    <script>
-        const audio = document.getElementById("voice");
-        const audio_btn = document.getElementById("audioBtn");
-        const subtitle = document.getElementById("subtitle");
+    </head>
+    <body>
+        <div class="box monument-theme">
+            <h1>Station 4</h1>
+            <p>Location: Hunter Fisher Monument, Stortorget</p>
+            <!--NO IDEAS YET NO RIDDLE BUT IT SHOULD BE DARK AND REMIND PEOPLE
+                    <div class="image-container">
+                        <img src="../../../../assets/images/Monument.jpg" alt="Station 4">
+                    </div>
+                    <div class="fog"></div>
+                    <div class="audio-row">
+                        <button class="audio-btn" id="audioBtn">&#128266;</button>
+                        <div id="subtitle" class="subtitle"></div>
+                    </div>
+                    <audio id="voice" preload="auto">
+                        <source src="../../../../assets/audio/Monument.mp4" type="audio/mp4">
+                    </audio>
+                    <button class="riddle-button" onclick="window.location.href = nextPage">
+                        Solve Riddle
+                    </button>
+                </div>
+                <script>
+                    const audio = document.getElementById("voice");
+                    const audio_btn = document.getElementById("audioBtn");
+                    const subtitle = document.getElementById("subtitle");
 
-        /* Buttons */
-        const location_btn = document.getElementById("Location_btn");
-        const settingsBtn = document.getElementById("settingsBtn");
-        const settingsMenu = document.getElementById("settingsMenu");
+                    /* Buttons */
+                    const location_btn = document.getElementById("Location_btn");
+                    const settingsBtn = document.getElementById("settingsBtn");
+                    const settingsMenu = document.getElementById("settingsMenu");
 
-        const volumeSlider = document.getElementById("volumeSlider");
+                    const volumeSlider = document.getElementById("volumeSlider");
 
-        const subtitles = [
-            { start: 0, end: 2, text: "The Arctic is unforgiving." },
-            { start: 2, end: 5, text: "Many brave fishers, trappers, sailors, and explorers lost their lives in these waters." },
-            { start: 5, end: 7, text: "This monument stands in memory of those who never returned home." },
-            { start: 7, end: 10, text: "Five Norwegian ships were caught in a powerful hurricane in 1952." },
-            { start: 10, end: 13, text: "Seventy-eight people lost their lives." },
-            { start: 13, end: 17, text: "Nature always has the final word." }
-        ];
+                    const subtitles = [
+                        { start: 0, end: 2, text: "The Arctic is unforgiving." },
+                        { start: 2, end: 5, text: "Many brave fishers, trappers, sailors, and explorers lost their lives in these waters." },
+                        { start: 5, end: 7, text: "This monument stands in memory of those who never returned home." },
+                        { start: 7, end: 10, text: "Five Norwegian ships were caught in a powerful hurricane in 1952." },
+                        { start: 10, end: 13, text: "Seventy-eight people lost their lives." },
+                        { start: 13, end: 17, text: "Nature always has the final word." }
+                    ];
 
-        location_btn.addEventListener("click", () => {
-            window.open('https://www.google.com/maps/search/Stortorget');
-        });
+                    location_btn.addEventListener("click", () => {
+                        window.open('https://www.google.com/maps/search/Stortorget');
+                    });
 
-        audio_btn.addEventListener("click", () => {
-            audio.currentTime = 0;
-            audio.play().catch(error => {
-                console.log("Audio error:", error);
-            });
-        });
-        audio.addEventListener("timeupdate", () => {
-            const current = audio.currentTime;
+                    audio_btn.addEventListener("click", () => {
+                        audio.currentTime = 0;
+                        audio.play().catch(error => {
+                            console.log("Audio error:", error);
+                        });
+                    });
+                    audio.addEventListener("timeupdate", () => {
+                        const current = audio.currentTime;
 
-            const line = subtitles.find(sub =>
-                current >= sub.start && current <= sub.end
-            );
+                        const line = subtitles.find(sub =>
+                            current >= sub.start && current <= sub.end
+                        );
 
-            subtitle.textContent = line ? line.text : "";
-        });
-        volumeSlider.addEventListener("input", () => {
-            audio.volume = volumeSlider.value;
-        });
-        settingsBtn.addEventListener("click", (event) => {
-            event.stopPropagation();
-            settingsMenu.classList.toggle("hidden");
-        });
-        settingsMenu.addEventListener("click", (event) => {
-            event.stopPropagation();
-        });
-        document.addEventListener("click", () => {
-            settingsMenu.classList.add("hidden");
-        });
-    </script>
-    <game-navigation></game-navigation>
-    <script>
-        setupGameNavigation();
-        addInventoryItem({
-            id: "profile-stortorget",
-            title: "Danger in the arctic",
-            type: "image",
-            thumb: "../../../../assets/images/file_placeholder.png",
-            full: "../../../../assets/images/file_placeholder.png",
-            description: "Profile folder collected at Station Arctic Danger."
-        });
-    </script>
-</body>
+                        subtitle.textContent = line ? line.text : "";
+                    });
+                    volumeSlider.addEventListener("input", () => {
+                        audio.volume = volumeSlider.value;
+                    });
+                    settingsBtn.addEventListener("click", (event) => {
+                        event.stopPropagation();
+                        settingsMenu.classList.toggle("hidden");
+                    });
+                    settingsMenu.addEventListener("click", (event) => {
+                        event.stopPropagation();
+                    });
+                    document.addEventListener("click", () => {
+                        settingsMenu.classList.add("hidden");
+                    });
+                </script>
+                <game-navigation></game-navigation>
+                <script>
+                    setupGameNavigation();
+                    addInventoryItem({
+                        id: "profile-stortorget",
+                        title: "Danger in the arctic",
+                        type: "image",
+                        thumb: "../../../../assets/images/file_placeholder.png",
+                        full: "../../../../assets/images/file_placeholder.png",
+                        description: "Profile folder collected at Station Arctic Danger."
+                    });
+                </script>
+            </body>
 
-</html> -->
+            </html> -->

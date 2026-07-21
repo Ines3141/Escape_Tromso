@@ -1,3 +1,6 @@
+/* =========================================================
+   SHARED CALL DESIGN
+   ========================================================= */
 .call-screen {
     position: fixed;
     inset: 0;
@@ -8,154 +11,427 @@
     justify-content: center;
     padding: 20px;
 }
+.call-screen::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient( circle at 50% 25%, rgba(37, 211, 102, 0.18), transparent 48% );
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+}
+
+.call-screen.call-ending {
+     opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+    }
+
+/* =========================================================
+   CALL CARD
+   ========================================================= */
 
 .call-card {
+    position: relative;
+    z-index: 1;
     width: 100%;
-    max-width: 420px;
+    max-width: 430px;
+    min-height: 620px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 52px 24px 36px;
     text-align: center;
-    color: white;
 }
+
+.call-label {
+    margin: 0 0 20px;
+    color: rgba(255, 255, 255, 0.68);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+}
+
+/* =========================================================
+   CALLER PHOTO
+   ========================================================= */
 
 .caller-photo {
+    position: relative;
     width: 170px;
     height: 170px;
-    margin: 0 auto 24px auto;
+    margin: 0 auto 28px;
+    border: 4px solid rgba(255, 255, 255, 0.88);
     border-radius: 50%;
     overflow: hidden;
-    border: 4px solid rgba(125, 211, 252, 0.9);
-    box-shadow: 0 0 35px rgba(125, 211, 252, 0.7);
-    animation: ringPulse 1.2s infinite;
+    box-shadow: 0 0 0 8px rgba(37, 211, 102, 0.12), 0 14px 45px rgba(0, 0, 0, 0.45);
+    animation: callerPulse 2s infinite;
 }
 
-            .caller-photo img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
+    .caller-photo::after {
+        content: "";
+        position: absolute;
+        inset: -12px;
+        border: 2px solid rgba(37, 211, 102, 0.3);
+        border-radius: 50%;
+        animation: outgoingRing 2s infinite;
+    }
 
-        .incoming-text {
-            color: #7dd3fc;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            font-size: 13px;
+    .caller-photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+/* =========================================================
+   CALLER TEXT
+   ========================================================= */
+
+.call-card h1 {
+    margin: 0;
+    color: white;
+    font-size: clamp(30px, 7vw, 42px);
+    font-weight: 600;
+}
+
+.call-subtitle {
+    margin: 8px 0 0;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 16px;
+}
+
+.call-status-row {
+    min-height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 24px;
+    color: #d9fdd3;
+    font-size: 16px;
+}
+
+.call-status {
+    margin: 0;
+}
+
+/* =========================================================
+   ANIMATED WAITING DOTS
+   ========================================================= */
+
+.call-dots {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-left: 7px;
+}
+
+    .call-dots span {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: #d9fdd3;
+        animation: waitingDot 1.2s infinite;
+    }
+
+        .call-dots span:nth-child(2) {
+            animation-delay: 0.2s;
         }
 
-        .call-subtitle {
-            color: #dbeafe;
+        .call-dots span:nth-child(3) {
+            animation-delay: 0.4s;
         }
 
-        .call-actions {
-            display: flex;
-            justify-content: center;
-            gap: 45px;
-            margin-top: 35px;
-        }
+.call-help {
+    margin-top: auto;
+    margin-bottom: 10px;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 13px;
+}
 
-        .accept-call,
-        .decline-call {
-            width: 60px;
-            height: 60px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 50%;
-            border: none;
-            font-size: 34px;
-            color: white;
-        }
+/* =========================================================
+   CONNECTED STATION SCREEN
+   ========================================================= */
 
-        .accept-call {
-            background: #00b894;
-            animation: shakeCall 0.8s infinite;
-        }
+.nansen-call.box {
+    position: relative;
+    min-height: calc(100vh - 40px);
+    max-width: 700px;
+    margin: 20px auto;
+    padding: 36px 24px;
+    color: white;
+    background: radial-gradient( circle at top, rgba(37, 211, 102, 0.15), transparent 38% ), linear-gradient( 165deg, #172a25, #091512 72% );
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 28px;
+    box-shadow: 0 20px 55px rgba(0, 0, 0, 0.38);
+    overflow: hidden;
+}
 
-        .decline-call {
-            background: #d63031;
-        }
+    .nansen-call.box::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background: linear-gradient( rgba(255, 255, 255, 0.025) 1px, transparent 1px );
+        background-size: 100% 34px;
+    }
 
-        .call-help {
-            margin-top: 20px;
-            color: #cfefff;
-            font-size: 14px;
-        }
+.nansen-call h1,
+.nansen-call p,
+.nansen-call .person-container,
+.nansen-call .audio-row,
+.nansen-call #choices,
+.nansen-call .call-controls {
+    position: relative;
+    z-index: 1;
+}
 
-        @keyframes ringPulse {
-            0% {
-                transform: scale(1);
-                box-shadow: 0 0 0 0 rgba(125,211,252,0.7);
-            }
+.nansen-call > h1 {
+    margin-bottom: 4px;
+    color: white;
+    text-align: center;
+}
 
-            70% {
-                transform: scale(1.04);
-                box-shadow: 0 0 0 22px rgba(125,211,252,0);
-            }
+.nansen-call > p {
+    margin-top: 0;
+    color: #aebac1;
+    text-align: center;
+}
 
-            100% {
-                transform: scale(1);
-                box-shadow: 0 0 0 0 rgba(125,211,252,0);
-            }
-        }
+/* Keep Nansen's picture, but make it look like a call avatar. */
 
-        @keyframes shakeCall {
-            0%, 100% {
-                transform: rotate(0deg);
-            }
+.nansen-call .person-container {
+    width: 190px;
+    height: 190px;
+    margin: 28px auto;
+    border: 4px solid rgba(37, 211, 102, 0.8);
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 0 0 8px rgba(37, 211, 102, 0.1), 0 15px 38px rgba(0, 0, 0, 0.4);
+}
 
-            25% {
-                transform: rotate(-8deg);
-            }
+    .nansen-call .person-container.speaking {
+        animation: connectedPulse 1.25s infinite;
+    }
 
-            75% {
-                transform: rotate(8deg);
-            }
-        }
+.nansen-call .imag-person {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
-        .call-controls {
-            display: flex;
-            justify-content: center;
-            gap: 18px;
-            margin-top: 26px;
-        }
+/* =========================================================
+   AUDIO AND SUBTITLES
+   ========================================================= */
 
-        .call-action {
-            width: 82px;
-            height: 82px;
-            border-radius: 26px;
-            border: 1px solid rgba(255,255,255,0.15);
-            padding: 8px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            cursor: pointer;
-            backdrop-filter: blur(10px);
-        }
+.nansen-call .audio-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    margin: 22px auto;
+}
 
-        .call-icon {
-            font-size: 28px;
-            line-height: 1;
-        }
+.nansen-call .audio-btn {
+    width: 62px;
+    height: 62px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 50%;
+    color: white;
+    background: #233831;
+    font-size: 26px;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
 
-        .call-action small {
-            margin-top: 6px;
-            font-size: 11px;
-            opacity: 0.85;
-        }
+    .nansen-call .audio-btn:hover {
+        transform: scale(1.06);
+        background: #2c4a40;
+    }
 
-        .end-call {
-            background: linear-gradient(145deg, #e63946, #9d0208);
-        }
+.nansen-call .subtitle {
+    width: min(100%, 560px);
+    min-height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 18px;
+    color: #e9edef;
+    background: rgba(32, 44, 51, 0.92);
+    border-radius: 16px 16px 16px 4px;
+    font-size: 17px;
+    line-height: 1.5;
+    text-align: center;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
+}
 
-        .info-call {
-            background: linear-gradient(145deg, #245b78, #123b63);
-        }
+/* =========================================================
+   ANSWER BUTTONS
+   ========================================================= */
 
-        .continue-call {
-            background: linear-gradient(145deg, #00c896, #007f5f);
-            box-shadow: 0 0 20px rgba(0, 200, 150, 0.45);
-        }
+.nansen-call #choices {
+    width: min(100%, 590px);
+    margin: 24px auto;
+}
 
-        .hidden {
-            display: none !important;
-        }
+.nansen-call .answer-button {
+    width: 100%;
+    margin: 10px 0;
+    padding: 15px 18px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    color: #e9edef;
+    background: #202c33;
+    font-size: 15px;
+    line-height: 1.4;
+    text-align: left;
+    cursor: pointer;
+    transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+}
+
+    .nansen-call .answer-button:hover {
+        transform: translateY(-2px);
+        background: #2a3942;
+        border-color: rgba(37, 211, 102, 0.55);
+    }
+
+/* =========================================================
+   BOTTOM CALL CONTROLS
+   ========================================================= */
+
+.call-controls {
+    display: flex;
+    justify-content: center;
+    gap: 22px;
+    margin-top: 30px;
+}
+
+.call-action {
+    width: 76px;
+    height: 76px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    border: none;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+    .call-action:hover {
+        transform: scale(1.07);
+        filter: brightness(1.08);
+    }
+
+.call-icon {
+    font-size: 27px;
+    line-height: 1;
+}
+
+.call-action small {
+    margin-top: 5px;
+    font-size: 10px;
+}
+
+.end-call {
+    background: #f15c6d;
+}
+
+.continue-call {
+    background: #25d366;
+}
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+
+@keyframes callerPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.025);
+    }
+}
+
+@keyframes outgoingRing {
+    0% {
+        opacity: 0.75;
+        transform: scale(0.94);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(1.2);
+    }
+}
+
+@keyframes waitingDot {
+    0%, 60%, 100% {
+        opacity: 0.3;
+        transform: translateY(0);
+    }
+
+    30% {
+        opacity: 1;
+        transform: translateY(-4px);
+    }
+}
+
+@keyframes connectedPulse {
+    0%, 100% {
+        box-shadow: 0 0 0 8px rgba(37, 211, 102, 0.1), 0 15px 38px rgba(0, 0, 0, 0.4);
+    }
+
+    50% {
+        box-shadow: 0 0 0 14px rgba(37, 211, 102, 0.18), 0 15px 38px rgba(0, 0, 0, 0.4);
+    }
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+    .call-card {
+        min-height: 560px;
+        padding-top: 35px;
+    }
+
+    .caller-photo {
+        width: 145px;
+        height: 145px;
+    }
+
+    .nansen-call.box {
+        min-height: 100vh;
+        margin: 0;
+        padding: 28px 16px;
+        border: none;
+        border-radius: 0;
+    }
+
+    .nansen-call .person-container {
+        width: 155px;
+        height: 155px;
+    }
+
+    .nansen-call .subtitle {
+        font-size: 15px;
+    }
+
+    .nansen-call .answer-button {
+        font-size: 14px;
+    }
+}

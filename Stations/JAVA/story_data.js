@@ -177,5 +177,47 @@ const STORIES = {
                 redirect: "../final_page.html"
             }
         ]
+    },
+    dispatch_henry_intro: {
+        title: "Dispatcher Team",
+        status: "Online",
+        steps: [
+            {
+                type: "text",
+                sender: "Dispatch",
+                time: "10:30",
+                text: "Good work, Team {teamName}. You reached the next station."
+            },
+            {
+                type: "text",
+                sender: "Dispatch",
+                time: "10:31",
+                text: "For the next part of the rescue mission, you need help from someone who knows the Arctic very well."
+            },
+            {
+                type: "text",
+                sender: "Dispatch",
+                time: "10:32",
+                text: "His name is Henry Rudi. We found some old information about him. Watch this first."
+            },
+            {
+                type: "file",
+                name: "henry_rudi_information.mp4",
+                action: "dispatchHenryVideo",
+                video: "../../../../assets/images/hacker_video.mp4"
+            },
+            {
+                type: "text",
+                sender: "Dispatch",
+                time: "10:35",
+                text: "We also found his contact. Send him a friend request so he can help you."
+            },
+            {
+                type: "file",
+                name: "Henry Rudi Contact",
+                action: "henryRudiContactRequest",
+                redirect: "../riddle/riddle_6_2_chat.html"
+            }
+        ]
     }
 };

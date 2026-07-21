@@ -1,7 +1,7 @@
 <!--
 THINGS TO DO:
     - Create css file for incoming call use is for station_2_2 and station_5_1
-      remove nansen.css file 
+      remove nansen.css file
 
 -->
 <!DOCTYPE html>
@@ -9,253 +9,702 @@ THINGS TO DO:
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
+
     <title>Station 5</title>
+
     <link rel="stylesheet" href="../../../../CSS/global.css">
     <link rel="stylesheet" href="../../../../CSS/station.css">
     <link rel="stylesheet" href="../../../../CSS/nansen.css">
+
     <script src="../../../../Stations/JAVA/navigation.js"></script>
     <script src="../../../../Stations/JAVA/inventory.js"></script>
+
     <script>
         const previousPage = "../riddle/riddle_4_3_location.html";
         const nextPage = "../riddle/riddle_5_2_compass.html";
     </script>
 </head>
+
 <body>
+    <!-- Incoming call -->
     <div id="callScreen" class="call-screen">
         <div class="call-card">
             <div class="caller-photo">
-                <img src="../../../../assets/images/Amundsen.jpg" alt="Amundsen">
+                <img src="../../../../assets/images/Amundsen.jpg"
+                     alt="Roald Amundsen">
             </div>
-            <p class="incoming-text">Incoming call...</p>
+
+            <p id="incomingText" class="incoming-text">
+                Incoming call...
+            </p>
+
             <h1>Roald Amundsen</h1>
             <p class="call-subtitle">Arctic Explorer</p>
+
             <div class="call-actions">
-                <button class="decline-call" onclick="declineCall()">✕</button>
-                <button class="accept-call" onclick="acceptCall()">☎</button>
+                <button class="decline-call"
+                        id="declineCallButton"
+                        type="button"
+                        aria-label="Decline call">
+                    ✕
+                </button>
+
+                <button class="accept-call"
+                        id="acceptCallButton"
+                        type="button"
+                        aria-label="Accept call">
+                    ☎
+                </button>
             </div>
-            <p class="call-help">Tap green to answer</p>
+
+            <p class="call-help">
+                Tap green to answer
+            </p>
         </div>
     </div>
-    <div class="box">
+
+    <!-- Station content -->
+    <div id="stationContent" class="box" style="display: none;">
         <h1>Station 5</h1>
         <p>Roald Amundsen</p>
+
         <div class="person-container">
-            <img src="../../../../assets/images/Amundsen.jpg" alt="Station 5" class="imag-person">
+            <img src="../../../../assets/images/Amundsen.jpg"
+                 alt="Roald Amundsen"
+                 class="imag-person">
         </div>
+
         <div class="audio-row">
-            <button class="audio-btn" id="audioBtn"> &#128266;</button>
-            <div id="subtitle" class="subtitle"></div>
+            <button class="audio-btn"
+                    id="audioBtn"
+                    type="button"
+                    aria-label="Play or pause the current message">
+                &#128266;
+            </button>
+
+            <div id="subtitle"
+                 class="subtitle"
+                 aria-live="polite"></div>
         </div>
-        <audio id="voice" preload="auto">
-            <source src="../../../../assets/audio/Amundsen1.mp4" type="audio/mp4">
-        </audio>
-        <audio id="voiceA" preload="auto">
-            <source src="../../../../assets/audio/AmundsenA.mp4" type="audio/mp4">
-        </audio>
-        <audio id="voiceB" preload="auto">
-            <source src="../../../../assets/audio/AmundsenB.mp4" type="audio/mp4">
+
+        <!-- Audio 1 -->
+        <audio id="voice1" preload="auto">
+            <source src="../../../../assets/audio/Amundsen/Amundsen_1.m4a"
+                    type="audio/mp4">
         </audio>
 
-        <div id="choices" style="display:none;">
-            <button id="btnA" class="answer-button"></button>
-            <button id="btnB" class="answer-button"></button>
+        <!-- Audio 2 -->
+        <audio id="voice2" preload="auto">
+            <source src="../../../../assets/audio/Amundsen/Amundsen_2.m4a"
+                    type="audio/mp4">
+        </audio>
+
+        <!-- Audio 2 B -->
+        <audio id="voice3" preload="auto">
+            <source src="../../../../assets/audio/Amundsen/Amundsen_2_B.m4a"
+                    type="audio/mp4">
+        </audio>
+
+        <!-- Audio 2 C -->
+        <audio id="voice4" preload="auto">
+            <source src="../../../../assets/audio/Amundsen/Amundsen_2_C.m4a"
+                    type="audio/mp4">
+        </audio>
+
+        <!-- Common audio after D or E -->
+        <audio id="voice5" preload="auto">
+            <source src="../../../../assets/audio/Amundsen/Amundsen_3.m4a"
+                    type="audio/mp4">
+        </audio>
+
+        <!-- Audio 3 D -->
+        <audio id="voice6" preload="auto">
+            <source src="../../../../assets/audio/Amundsen/Amundsen_3_D.m4a"
+                    type="audio/mp4">
+        </audio>
+
+        <!-- Audio 3 E -->
+        <audio id="voice7" preload="auto">
+            <source src="../../../../assets/audio/Amundsen/Amundsen_3_E.m4a"
+                    type="audio/mp4">
+        </audio>
+
+        <div id="choices" style="display: none;">
+            <button id="btnA"
+                    class="answer-button"
+                    type="button"></button>
+
+            <button id="btnB"
+                    class="answer-button"
+                    type="button"></button>
+
+            <button id="btnC"
+                    class="answer-button"
+                    type="button"></button>
+
+            <button id="btnD"
+                    class="answer-button"
+                    type="button"></button>
+
+            <button id="btnE"
+                    class="answer-button"
+                    type="button"></button>
         </div>
-        <button id="profile" class="profile-button" onclick="openProfile()" style="display:none;">
-            Explorer Profile
-        </button>
-        <div id="profileOverlay" class="profile-overlay hidden">
-            <div class="profile-card">
 
-                <button class="close-profile" onclick="closeProfile()">×</button>
-
-                <img src="../../../../assets/images/Amundsen.jpg" class="profile-img">
-
-                <h2>Roald Amundsen</h2>
-
-                <p class="profile-subtitle">
-                    Polar Explorer • Expedition Leader
-                </p>
-
-                <div class="profile-tags">
-                    <span>🏆 First at the South Pole</span>
-                    <span>🧭 Northwest Passage</span>
-                    <span>✈️ Arctic Flight Pioneer</span>
-                </div>
-
-                <p>
-                    Roald Amundsen was one of the greatest explorers of all time.
-                    He became the first person to reach the South Pole and mastered
-                    survival techniques learned from Indigenous Arctic peoples. He went first
-                    trough the North West passage. He also went trough the North East Passage.
-                    He flew over the North pole with an airship Norge. He died 2 years later on
-                    a rescue mission of his italian collegue Umberto Nobile.
-                </p>
-
-                <div class="fun-fact">
-                    <strong>Fun Fact:</strong>
-                    He secretly changed his destination from the North Pole to the South Pole.
-                </div>
-            </div>
-        </div>
-        <!-- for actual game do </button>style="display:none;">, but now it is just blocking -->
-        <button class="riddle-button" id="riddle_btn" onclick="window.location.href = nextPage">
+        <button class="riddle-button"
+                id="riddle_btn"
+                type="button"
+                style="display: none;"
+                onclick="window.location.href = nextPage">
             Solve Riddle
         </button>
-        <script>
-            /* Audio */
-            const audio = document.getElementById("voice");
-            const audioA = document.getElementById("voiceA");
-            const audioB = document.getElementById("voiceB");
+    </div>
 
-            /* Buttons */
-            const btnA = document.getElementById("btnA");
-            const btnB = document.getElementById("btnB");
-            const audio_btn = document.getElementById("audioBtn");
-            const riddle_btn = document.getElementById("riddle_btn");
-            const profile_btn = document.getElementById("profile");
+    <game-navigation></game-navigation>
 
-            const choices = document.getElementById("choices");
-            const subtitle = document.getElementById("subtitle");
-            const allAudios = [audio, audioA, audioB];
+    <script>
+        // =====================================================
+        // ELEMENTS
+        // =====================================================
 
-            const person = document.querySelector(".person-container");
+        const callScreen = document.getElementById("callScreen");
+        const incomingText = document.getElementById("incomingText");
+        const stationContent = document.getElementById("stationContent");
 
-            /* Start the audio file and the subtitels. */
-            audio_btn.addEventListener("click", () => {
-                if (audio.paused) {
-                    audio.play();
-                    person.classList.add("speaking");
-                } else {
+        const acceptCallButton =
+            document.getElementById("acceptCallButton");
+
+        const declineCallButton =
+            document.getElementById("declineCallButton");
+
+        const person =
+            document.querySelector(".person-container");
+
+        const audioButton =
+            document.getElementById("audioBtn");
+
+        const subtitle =
+            document.getElementById("subtitle");
+
+        const choices =
+            document.getElementById("choices");
+
+        const riddleButton =
+            document.getElementById("riddle_btn");
+
+        // Audio IDs must match the HTML IDs above.
+        const audio1 =
+            document.getElementById("voice1");
+
+        const audio2 =
+            document.getElementById("voice2");
+
+        const audio2B =
+            document.getElementById("voice3");
+
+        const audio2C =
+            document.getElementById("voice4");
+
+        const audio3 =
+            document.getElementById("voice5");
+
+        const audio3D =
+            document.getElementById("voice6");
+
+        const audio3E =
+            document.getElementById("voice7");
+
+        const allAudios = [
+            audio1,
+            audio2,
+            audio2B,
+            audio2C,
+            audio3,
+            audio3D,
+            audio3E
+        ];
+
+        const buttons = {
+            A: document.getElementById("btnA"),
+            B: document.getElementById("btnB"),
+            C: document.getElementById("btnC"),
+            D: document.getElementById("btnD"),
+            E: document.getElementById("btnE")
+        };
+
+        // =====================================================
+        // ANSWER TEXT
+        // =====================================================
+
+        const answerText = {
+            A: "Yes! How can we help you?",
+            B: "Thanks a lot! Good bye!",
+            C: "Thanks a lot! How did you know about it?",
+            D: "Yes, of course. We talked with him in the beginning. Why do you know him?",
+            E: "No, who is that?"
+        };
+
+        Object.entries(buttons).forEach(([key, button]) => {
+            button.textContent = answerText[key];
+            button.style.display = "none";
+        });
+
+        // =====================================================
+        // STATE
+        // =====================================================
+
+        let currentAudio = audio1;
+        let callAccepted = false;
+
+        // =====================================================
+        // CHOICE HELPERS
+        // =====================================================
+
+        function hideChoices() {
+            choices.style.display = "none";
+
+            Object.values(buttons).forEach(button => {
+                button.style.display = "none";
+            });
+        }
+
+        function showChoices(...keys) {
+            Object.entries(buttons).forEach(([key, button]) => {
+                button.style.display =
+                    keys.includes(key) ? "block" : "none";
+            });
+
+            choices.style.display = "block";
+        }
+
+        // =====================================================
+        // AUDIO HELPERS
+        // =====================================================
+
+        function stopOtherAudios(audioToKeep) {
+            allAudios.forEach(audio => {
+                if (audio !== audioToKeep) {
                     audio.pause();
-                    person.classList.remove("speaking");
+                    audio.currentTime = 0;
                 }
             });
-            /* If audio ends, show answer options A and B*/
-            audio.addEventListener("ended", () => {
-                person.classList.remove("speaking");
-                btnA.textContent =
-                    "Yes! We need your help to save our friends!";
-                btnB.textContent =
-                    "Yes, we need help. Do you have any Arctic experience?";
-                choices.style.display = "block";
-            });
-            btnA.addEventListener("click", () => {
-                choices.style.display = "none";
-                if (audioA.paused) {
-                    audioA.play();
-                    person.classList.add("speaking");
-                } else {
-                    audioA.pause();
-                    person.classList.remove("speaking");
-                }
-            });
-            audioA.addEventListener("ended", () => {
-                person.classList.remove("speaking");
-                riddle_btn.style.display = "block";
-                profile_btn.style.display = "block";
-                /*
-                NO MORE INTERACTION
-                IF THIS IS THE LAST PART OF THE CONVERSATION
-                SHOW BUTTON
-                TO SOLVE RIDDLE IF ISNT YOU NEED MORE BLOCKS*/
-            });
-            btnB.addEventListener("click", () => {
-                choices.style.display = "none";
-                if (audioB.paused) {
-                    audioB.play();
-                    person.classList.add("speaking");
-                } else {
-                    audioB.pause();
-                    person.classList.remove("speaking");
-                }
-            });
-            audioB.addEventListener("ended", () => {
-                person.classList.remove("speaking");
-                riddle_btn.style.display = "block";
-                profile_btn.style.display = "block";
-            });
+        }
 
-            const subtitles = [
-                { start: 0, end: 4, text: "Excellent! Are we heading off on another expedition?" }
-            ];
-            const subtitlesA = [
-                { start: 0, end: 2, text: "A rescue mission?" },
-                { start: 2, end: 5, text: "Now that's an adventure worth joining!" },
-                { start: 5, end: 7, text: "I left several safety depots during my expeditions." },
-                { start: 7, end: 10, text: "Take these coordinates and hurry on your way." },
-                { start: 10, end: 13, text: "Good luck!" }
-            ];
-            const subtitlesB = [
-                { start: 1, end: 3, text: "Do I have Arctic experience?" },
-                { start: 3, end: 6, text: "My dear explorer, I am Roald Amundsen!" },
-                { start: 6, end: 10, text: "I was the first person to reach the South Pole." },
-                { start: 10, end: 14, text: "The first to navigate the Northwest Passage" },
-                { start: 14, end: 17, text: "And among the first to fly across over the North pole." },
-                { start: 20, end: 23, text: "I practically considered the Arctic my home." },
-                { start: 23, end: 26, text: "I left several safety depots during my expeditions." },
-                { start: 26, end: 29, text: "Good luck!" },
-            ];
+        async function playAudio(audio, restart = true) {
+            if (!audio) {
+                subtitle.textContent =
+                    "The audio element could not be found.";
 
-            function updateSubtitle(audioFile, subtitleList) {
-                const current = audioFile.currentTime;
-
-                const line = subtitleList.find(sub =>
-                    current >= sub.start && current <= sub.end
-                );
-
-                subtitle.textContent = line ? line.text : "";
-            }
-            /* Add subtitels to all options */
-            audio.addEventListener("timeupdate", () => {
-                updateSubtitle(audio, subtitles);
-            });
-            audioA.addEventListener("timeupdate", () => {
-                updateSubtitle(audioA, subtitlesA);
-            });
-            audioB.addEventListener("timeupdate", () => {
-                updateSubtitle(audioB, subtitlesB);
-            });
-            function openProfile() {
-                document.getElementById("profileOverlay").classList.remove("hidden");
+                console.error("Missing audio element.");
+                return;
             }
 
-            function closeProfile() {
-                document.getElementById("profileOverlay").classList.add("hidden");
-            }
-            const callScreen = document.getElementById("callScreen");
-            const stationContent = document.getElementById("stationContent");
+            hideChoices();
+            stopOtherAudios(audio);
 
-            function acceptCall() {
-                callScreen.classList.add("hidden");
-                stationContent.classList.remove("hidden");
+            currentAudio = audio;
 
+            audio.muted = false;
+            audio.volume = 1;
+
+            if (restart) {
                 audio.currentTime = 0;
-                audio.play();
+            }
+
+            try {
+                await audio.play();
+                person.classList.add("speaking");
+            } catch (error) {
+                person.classList.remove("speaking");
+
+                subtitle.textContent =
+                    "Press the speaker button to continue.";
+
+                console.error(
+                    "Audio playback failed:",
+                    error
+                );
+            }
+        }
+
+        function finishConversation() {
+            hideChoices();
+
+            currentAudio = null;
+
+            subtitle.textContent = "";
+
+            person.classList.remove("speaking");
+
+            riddleButton.style.display = "block";
+        }
+
+        // =====================================================
+        // INCOMING CALL
+        // =====================================================
+
+        acceptCallButton.addEventListener("click", async () => {
+            callAccepted = true;
+
+            callScreen.style.display = "none";
+            stationContent.style.display = "block";
+
+            await playAudio(audio1);
+        });
+
+        declineCallButton.addEventListener("click", () => {
+            incomingText.textContent = "Call missed...";
+
+            window.setTimeout(() => {
+                incomingText.textContent =
+                    "Incoming call...";
+            }, 1200);
+        });
+
+        // =====================================================
+        // SPEAKER BUTTON
+        // =====================================================
+
+        audioButton.addEventListener("click", async () => {
+            if (!callAccepted || !currentAudio) {
+                return;
+            }
+
+            if (currentAudio.paused) {
+                try {
+                    currentAudio.muted = false;
+                    currentAudio.volume = 1;
+
+                    await currentAudio.play();
+
+                    person.classList.add("speaking");
+                } catch (error) {
+                    subtitle.textContent =
+                        "The audio could not be played.";
+
+                    console.error(
+                        "Audio playback failed:",
+                        error
+                    );
+                }
+
+                return;
+            }
+
+            currentAudio.pause();
+
+            person.classList.remove("speaking");
+        });
+
+        // =====================================================
+        // ANSWER BUTTONS
+        // =====================================================
+
+        buttons.A.addEventListener("click", () => {
+            playAudio(audio2);
+        });
+
+        buttons.B.addEventListener("click", () => {
+            playAudio(audio2B);
+        });
+
+        buttons.C.addEventListener("click", () => {
+            playAudio(audio2C);
+        });
+
+        buttons.D.addEventListener("click", () => {
+            playAudio(audio3D);
+        });
+
+        buttons.E.addEventListener("click", () => {
+            playAudio(audio3E);
+        });
+
+        // =====================================================
+        // CONVERSATION FLOW
+        // =====================================================
+
+        const afterAudio = new Map([
+            // Audio 1 ends.
+            [audio1, () => {
+                showChoices("A");
+            }],
+
+            // Audio 2 ends.
+            [audio2, () => {
+                showChoices("B", "C");
+            }],
+
+            // B ends the conversation.
+            [audio2B, () => {
+                finishConversation();
+            }],
+
+            // C continues to D and E.
+            [audio2C, () => {
+                showChoices("D", "E");
+            }],
+
+            // D automatically continues to common Audio 3.
+            [audio3D, () => {
+                playAudio(audio3);
+            }],
+
+            // E automatically continues to common Audio 3.
+            [audio3E, () => {
+                playAudio(audio3);
+            }],
+
+            // Common Audio 3 ends the conversation.
+            [audio3, () => {
+                finishConversation();
+            }]
+        ]);
+
+        allAudios.forEach(audio => {
+            audio.addEventListener("play", () => {
+                currentAudio = audio;
 
                 person.classList.add("speaking");
-            }
+            });
 
-            function declineCall() {
-                document.querySelector(".incoming-text").textContent = "Call missed...";
+            audio.addEventListener("pause", () => {
+                if (!audio.ended) {
+                    person.classList.remove("speaking");
+                }
+            });
 
-                setTimeout(() => {
-                    document.querySelector(".incoming-text").textContent = "Incoming call...";
-                }, 1200);
-            }
-        </script>
-    </div>
-    <game-navigation></game-navigation>
-    <script>
-        setupGameNavigation();
-        addInventoryItem({
-            id: "profile-amundsen",
-            title: "Amundsen Profile",
-            type: "image",
-            thumb: "../../../../assets/images/file_placeholder.png",
-            full: "../../../../assets/images/file_placeholder.png",
-            description: "Profile folder collected at Station Amundsen."
+            audio.addEventListener("ended", () => {
+                person.classList.remove("speaking");
+
+                subtitle.textContent = "";
+
+                const nextAction = afterAudio.get(audio);
+
+                if (nextAction) {
+                    nextAction();
+                }
+            });
+
+            audio.addEventListener("error", () => {
+                const source =
+                    audio.querySelector("source");
+
+                const path = source
+                    ? source.getAttribute("src")
+                    : "unknown audio path";
+
+                subtitle.textContent =
+                    "Audio file could not be loaded.";
+
+                person.classList.remove("speaking");
+
+                console.error(
+                    "Could not load audio:",
+                    path,
+                    audio.error
+                );
+            });
         });
+
+        // =====================================================
+        // SUBTITLE TEXT
+        // =====================================================
+
+        const subtitleLines = new Map([
+            [audio1, [
+                "Hello?",
+                "Can you hear me?",
+                "This is Roald Amundsen speaking."
+            ]],
+
+            [audio2, [
+                "No, I believe it is the other way around.",
+                "I heard from my colleagues that you are on a rescue mission.",
+                "During my expeditions, I had several safety depots.",
+                "I will send you some notes to help you find the coordinates.",
+                "These depots will help your crew.",
+                "You will find the notes in your inventory."
+            ]],
+
+            [audio2B, [
+                "No problem.",
+                "I would go myself if I could.",
+                "Good luck, explorers."
+            ]],
+
+            [audio2C, [
+                "I heard about it from my old friend Fridtjof.",
+                "Do you know who?"
+            ]],
+
+            [audio3D, [
+                "Then you have already spoken with a wise man.",
+                "Nansen advised me before my Northwest Passage expedition.",
+                "Later, I was allowed to use the Fram for an expedition that was meant to go north.",
+                "Small laugh.",
+                "But plans can change.",
+                "I took the Fram south instead — and reached the South Pole."
+            ]],
+
+            [audio3E, [
+                "Ah, my friends!",
+                "You know him properly as Nansen.",
+                "He was one of Norway's great polar explorers.",
+                "He advised me before my Northwest Passage expedition.",
+                "Later, I was allowed to use the Fram for an expedition that was meant to go north.",
+                "Small laugh.",
+                "But plans can change.",
+                "I took the Fram south instead — and reached the South Pole."
+            ]],
+
+            [audio3, [
+                "The crew you are searching for is trapped in the north.",
+                "I never reached the North Pole by ship.",
+                "But later, I crossed the Arctic Ocean by airship.",
+                "It was called Norge.",
+                "You understand the name, yes?",
+                "Norge — Norway.",
+                "But enough history.",
+                "Your friends need you.",
+                "Use my depot notes.",
+                "Find the coordinates."
+            ]]
+        ]);
+
+        // =====================================================
+        // AUTOMATIC SUBTITLE TIMING
+        // =====================================================
+
+        const subtitleCues = new Map();
+
+        function subtitleWeight(text) {
+            const spokenText = text
+                .replace(/\*[^*]+\*/g, "")
+                .trim();
+
+            const wordCount = spokenText
+                ? spokenText.split(/\s+/).length
+                : 2;
+
+            return Math.max(wordCount, 3);
+        }
+
+        function buildSubtitleCues(audio) {
+            const lines =
+                subtitleLines.get(audio) || [];
+
+            const duration = audio.duration;
+
+            if (
+                !lines.length ||
+                !Number.isFinite(duration) ||
+                duration <= 0
+            ) {
+                return [];
+            }
+
+            const weights =
+                lines.map(subtitleWeight);
+
+            const totalWeight =
+                weights.reduce(
+                    (sum, weight) => sum + weight,
+                    0
+                );
+
+            let start = 0;
+
+            return lines.map((text, index) => {
+                const isLastLine =
+                    index === lines.length - 1;
+
+                const lineDuration =
+                    duration *
+                    (weights[index] / totalWeight);
+
+                const end = isLastLine
+                    ? duration + 0.05
+                    : start + lineDuration;
+
+                const cue = {
+                    start,
+                    end,
+                    text
+                };
+
+                start = end;
+
+                return cue;
+            });
+        }
+
+        function prepareSubtitles(audio) {
+            subtitleCues.set(
+                audio,
+                buildSubtitleCues(audio)
+            );
+        }
+
+        function updateSubtitle(audio) {
+            const cues =
+                subtitleCues.get(audio) || [];
+
+            const currentTime =
+                audio.currentTime;
+
+            const cue = cues.find(item => {
+                return (
+                    currentTime >= item.start &&
+                    currentTime < item.end
+                );
+            });
+
+            subtitle.textContent =
+                cue ? cue.text : "";
+        }
+
+        allAudios.forEach(audio => {
+            audio.addEventListener(
+                "loadedmetadata",
+                () => {
+                    prepareSubtitles(audio);
+                }
+            );
+
+            audio.addEventListener(
+                "durationchange",
+                () => {
+                    prepareSubtitles(audio);
+                }
+            );
+
+            audio.addEventListener(
+                "timeupdate",
+                () => {
+                    updateSubtitle(audio);
+                }
+            );
+        });
+
+        // =====================================================
+        // GAME SETUP
+        // =====================================================
+
+        if (typeof setupGameNavigation === "function") {
+            setupGameNavigation();
+        }
+
+        if (typeof loadInventoryScripts === "function") {
+            loadInventoryScripts().then(() => {
+                if (
+                    typeof addAmundsenProfileToInventory ===
+                    "function"
+                ) {
+                    addAmundsenProfileToInventory();
+                }
+            });
+        }
     </script>
 </body>
-
 </html>

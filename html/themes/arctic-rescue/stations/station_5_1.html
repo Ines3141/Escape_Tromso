@@ -78,7 +78,9 @@ THINGS TO DO:
                 type="audio/mp4">
     </audio>
     <!-- Station content -->
-    <div id="stationContent" class="box" style="display: none;">
+    <div id="stationContent"
+         class="box nansen-call"
+         style="display: none;">
         <h1>Station 5</h1>
         <p>Roald Amundsen</p>
 
@@ -89,13 +91,6 @@ THINGS TO DO:
         </div>
 
         <div class="audio-row">
-            <button class="audio-btn"
-                    id="audioBtn"
-                    type="button"
-                    aria-label="Play or pause the current message">
-                &#128266;
-            </button>
-
             <div id="subtitle"
                  class="subtitle"
                  aria-live="polite"></div>
@@ -165,6 +160,80 @@ THINGS TO DO:
                     type="button"></button>
         </div>
 
+        <div class="call-toolbar-wrapper">
+            <!-- Reaction menu -->
+            <div id="reactionMenu"
+                 class="reaction-menu hidden"
+                 role="menu"
+                 aria-label="Send a reaction">
+                <button class="reaction-option"
+                        type="button"
+                        data-reaction="❤️"
+                        aria-label="Send heart reaction">
+                    ❤️
+                </button>
+
+                <button class="reaction-option"
+                        type="button"
+                        data-reaction="👍"
+                        aria-label="Send thumbs-up reaction">
+                    👍
+                </button>
+
+                <button class="reaction-option"
+                        type="button"
+                        data-reaction="🥱"
+                        aria-label="Send yawning reaction">
+                    🥱
+                </button>
+            </div>
+
+            <!-- Three call buttons -->
+            <div class="call-toolbar">
+                <!-- Audio -->
+                <button id="audioBtn"
+                        class="call-control-button audio-control"
+                        type="button"
+                        aria-label="Play or pause audio">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M11 5 6 9H3v6h3l5 4V5Z"></path>
+                        <path d="M15.5 8.5a5 5 0 0 1 0 7"></path>
+                        <path d="M18 6a8.5 8.5 0 0 1 0 12"></path>
+                    </svg>
+                </button>
+
+                <!-- Hang up -->
+                <button id="hangUpButton"
+                        class="call-control-button hangup-control"
+                        type="button"
+                        aria-label="Hang up">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2
+                       19.79 19.79 0 0 1-8.63-3.07
+                       19.5 19.5 0 0 1-6-6
+                       19.79 19.79 0 0 1-3.07-8.63
+                       A2 2 0 0 1 4.11 2h3
+                       a2 2 0 0 1 2 1.72
+                       c.13.96.36 1.9.68 2.8
+                       a2 2 0 0 1-.45 2.11L8 9.91
+                       a16 16 0 0 0 6 6l1.27-1.27
+                       a2 2 0 0 1 2.11-.45
+                       c.9.32 1.84.55 2.8.68
+                       A2 2 0 0 1 22 16.92Z"></path>
+                    </svg>
+                </button>
+
+                <!-- More/reactions -->
+                <button id="moreButton"
+                        class="call-control-button more-control"
+                        type="button"
+                        aria-label="Open reactions"
+                        aria-expanded="false"
+                        aria-controls="reactionMenu">
+                    <span class="more-dots">•••</span>
+                </button>
+            </div>
+        </div>
         <button class="riddle-button"
                 id="riddle_btn"
                 type="button"
@@ -172,6 +241,7 @@ THINGS TO DO:
                 onclick="window.location.href = nextPage">
             Solve Riddle
         </button>
+        <button onclick="window.location.href = nextPage"> DEV Continue </button>
     </div>
 
     <game-navigation></game-navigation>
@@ -195,6 +265,17 @@ THINGS TO DO:
         const callActions = document.getElementById("callActions");
         const callHelp = document.getElementById("callHelp");
         const ringtone = document.getElementById("ringtone");
+        const hangUpButton =
+            document.getElementById("hangUpButton");
+
+        const moreButton =
+            document.getElementById("moreButton");
+
+        const reactionMenu =
+            document.getElementById("reactionMenu");
+
+        const reactionButtons =
+            document.querySelectorAll(".reaction-option");
 
         // Audio IDs must match the HTML IDs above.
         const audio1 = document.getElementById("voice1");
@@ -223,6 +304,115 @@ THINGS TO DO:
             E: document.getElementById("btnE")
         };
 
+        // =====================================================
+        // REACTION
+        // =====================================================
+        function openReactionMenu() {
+            reactionMenu.classList.remove("hidden");
+
+            moreButton.setAttribute(
+                "aria-expanded",
+                "true"
+            );
+        }
+
+        function closeReactionMenu() {
+            reactionMenu.classList.add("hidden");
+
+            moreButton.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+        }
+
+        function toggleReactionMenu(event) {
+            event.stopPropagation();
+
+            const menuIsOpen =
+                !reactionMenu.classList.contains("hidden");
+
+            if (menuIsOpen) {
+                closeReactionMenu();
+            } else {
+                openReactionMenu();
+            }
+        }
+
+        function showFloatingReaction(emoji) {
+            const floatingReaction =
+                document.createElement("div");
+
+            floatingReaction.className =
+                "floating-reaction";
+
+            floatingReaction.textContent = emoji;
+
+            const buttonPosition =
+                moreButton.getBoundingClientRect();
+
+            const randomOffset =
+                Math.random() * 60 - 30;
+
+            floatingReaction.style.left =
+                `${buttonPosition.left +
+                buttonPosition.width / 2 +
+                randomOffset
+                }px`;
+
+            floatingReaction.style.top =
+                `${buttonPosition.top - 8}px`;
+
+            document.body.appendChild(
+                floatingReaction
+            );
+
+            window.setTimeout(() => {
+                floatingReaction.remove();
+            }, 1800);
+        }
+
+        moreButton.addEventListener(
+            "click",
+            toggleReactionMenu
+        );
+
+        reactionMenu.addEventListener(
+            "click",
+            event => {
+                event.stopPropagation();
+            }
+        );
+
+        reactionButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                const emoji =
+                    button.dataset.reaction;
+
+                showFloatingReaction(emoji);
+                closeReactionMenu();
+            });
+        });
+
+        document.addEventListener(
+            "click",
+            closeReactionMenu
+        );
+
+        document.addEventListener(
+            "keydown",
+            event => {
+                if (event.key === "Escape") {
+                    closeReactionMenu();
+                }
+            }
+        );
+
+        hangUpButton.addEventListener("click", () => {
+            stopRingtone();
+            stopOtherAudios(null);
+
+            window.location.href = previousPage;
+        });
         // =====================================================
         // RINGTONE
         // =====================================================
@@ -372,14 +562,12 @@ THINGS TO DO:
 
         function finishConversation() {
             hideChoices();
-
             currentAudio = null;
-
             subtitle.textContent = "";
-
             person.classList.remove("speaking");
-
             riddleButton.style.display = "block";
+            audioButton.classList.remove("is-active");
+            closeReactionMenu();
         }
 
         // =====================================================
@@ -529,15 +717,18 @@ THINGS TO DO:
                 currentAudio = audio;
 
                 person.classList.add("speaking");
+                audioButton.classList.add("is-active");
             });
 
             audio.addEventListener("pause", () => {
                 if (!audio.ended) {
                     person.classList.remove("speaking");
+                    audioButton.classList.remove("is-active");
                 }
             });
 
             audio.addEventListener("ended", () => {
+                audioButton.classList.remove("is-active");
                 person.classList.remove("speaking");
 
                 subtitle.textContent = "";

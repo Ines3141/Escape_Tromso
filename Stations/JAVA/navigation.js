@@ -38,10 +38,89 @@
 }
 
 function loadInventoryScripts() {
-    return loadScriptOnce("../../../../Stations/JAVA/inventory.js", "inventoryScriptLoaded")
-        .then(() => {
-            return loadScriptOnce("../../../../Stations/JAVA/explorer_profiles.js", "explorerProfilesScriptLoaded");
+    return loadStyleOnce(
+        "../../../../CSS/inventory.css",
+        "inventoryStylesLoaded"
+    )
+    .then(() => {
+        return loadScriptOnce(
+        "../../../../Stations/JAVA/inventory.js",
+        "inventoryScriptLoaded"
+          );
+    })
+    .then(() => {
+        return loadScriptOnce(
+        "../../../../Stations/JAVA/explorer_profiles.js",
+        "explorerProfilesScriptLoaded"
+        );
+    });
+}
+function loadStyleOnce(href, flagName) {
+    if (window[flagName]) {
+        return Promise.resolve();
+    }
+
+    if (window[flagName + "Promise"]) {
+        return window[flagName + "Promise"];
+    }
+
+    window[flagName + "Promise"] =
+        new Promise((resolve, reject) => {
+            const existingStyle =
+                document.querySelector(
+                    `link[data-loader="${flagName}"]`
+                );
+
+            if (existingStyle) {
+                /*
+                 * The stylesheet may already be fully loaded.
+                 */
+                if (existingStyle.sheet) {
+                    window[flagName] = true;
+                    resolve();
+                    return;
+                }
+
+                existingStyle.addEventListener(
+                    "load",
+                    () => {
+                        window[flagName] = true;
+                        resolve();
+                    },
+                    { once: true }
+                );
+
+                existingStyle.addEventListener(
+                    "error",
+                    reject,
+                    { once: true }
+                );
+
+                return;
+            }
+
+            const link =
+                document.createElement("link");
+
+            link.rel = "stylesheet";
+            link.href = href;
+            link.dataset.loader = flagName;
+
+            link.onload = () => {
+                window[flagName] = true;
+                console.log(href + " loaded.");
+                resolve();
+            };
+
+            link.onerror = () => {
+                console.error(href +" could not be loaded. Check the path.");
+                reject(new Error("Could not load stylesheet: " + href));
+            };
+
+            document.head.appendChild(link);
         });
+
+    return window[flagName + "Promise"];
 }
 
 loadInventoryScripts();

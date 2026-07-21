@@ -1,0 +1,357 @@
+/* =========================================================
+   INVENTORY FILES
+   Shared styles for explorer profiles and documents
+   ========================================================= */
+
+
+/* =========================================================
+   HENRY RUDI NEWSPAPER OVERLAY
+   ========================================================= */
+
+.rudi-newspaper-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100002;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 22px;
+    background: rgba(12, 8, 4, 0.88);
+}
+
+
+/* =========================================================
+   NEWSPAPER PAPER
+   ========================================================= */
+
+.rudi-newspaper-paper {
+    position: relative;
+    width: min(92vw, 820px);
+    max-height: 90vh;
+    box-sizing: border-box;
+    overflow-y: auto;
+    padding: 34px;
+    color: #1f160d;
+    background: radial-gradient( circle at 20% 15%, rgba(120, 90, 50, 0.12), transparent 28% ), radial-gradient( circle at 80% 45%, rgba(100, 70, 35, 0.11), transparent 30% ), linear-gradient( 135deg, #f1e4c5 0%, #e2cf9e 48%, #f5e8c8 100% );
+    border: 1px solid #6f5735;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.65), inset 0 0 55px rgba(80, 45, 15, 0.22);
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+
+ /*  Decorative inner newspaper border. */
+.rudi-newspaper-paper::before {
+    content: "";
+    position: absolute;
+    inset: 12px;
+    border: 2px solid rgba(63, 42, 22, 0.75);
+    pointer-events: none;
+}
+
+
+    /*
+ * Light horizontal texture over the paper.
+ */
+
+    .rudi-newspaper-paper::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: repeating-linear-gradient( 0deg, rgba(40, 25, 12, 0.035) 0, rgba(40, 25, 12, 0.035) 1px, transparent 1px, transparent 4px );
+        opacity: 0.5;
+        pointer-events: none;
+    }
+
+
+    /* =========================================================
+   FORCE NEWSPAPER TEXT TO BE DARK
+   ========================================================= */
+
+    /*
+ * These selectors prevent global.css from turning newspaper
+ * headings and paragraphs white.
+ */
+
+    .rudi-newspaper-paper,
+    .rudi-newspaper-paper h1,
+    .rudi-newspaper-paper h2,
+    .rudi-newspaper-paper h3,
+    .rudi-newspaper-paper p,
+    .rudi-newspaper-paper div,
+    .rudi-newspaper-paper span,
+    .rudi-newspaper-paper figure,
+    .rudi-newspaper-paper figcaption {
+        color: #1f160d !important;
+    }
+
+
+/* =========================================================
+   CLOSE BUTTON
+   ========================================================= */
+
+.rudi-newspaper-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    z-index: 4;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 1px solid #3b2a18;
+    border-radius: 50%;
+    color: #f5e8c8 !important;
+    background: #24190f;
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
+    transition: transform 0.18s ease, background 0.18s ease;
+}
+
+    .rudi-newspaper-close:hover {
+        transform: scale(1.08);
+        background: #4a2e18;
+    }
+
+    .rudi-newspaper-close:active {
+        transform: scale(0.94);
+    }
+
+    .rudi-newspaper-close:focus-visible {
+        outline: 3px solid #24190f;
+        outline-offset: 3px;
+    }
+
+
+/* =========================================================
+   NEWSPAPER HEADER
+   ========================================================= */
+
+.rudi-newspaper-header {
+    position: relative;
+    z-index: 2;
+    margin-bottom: 22px;
+    padding-bottom: 16px;
+    text-align: center;
+    border-bottom: 5px double #2d2115;
+}
+
+.rudi-newspaper-kicker {
+    margin-bottom: 8px;
+    color: #1f160d !important;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+.rudi-newspaper-header h1 {
+    margin: 0;
+    padding: 0 42px;
+    color: #1f160d !important;
+    font-size: clamp(32px, 6vw, 58px);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -1px;
+    text-transform: uppercase;
+}
+
+.rudi-newspaper-date {
+    margin-top: 10px;
+    color: #1f160d !important;
+    font-size: 14px;
+    font-style: italic;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   MAIN NEWSPAPER CONTENT
+   ========================================================= */
+
+.rudi-newspaper-main {
+    position: relative;
+    z-index: 2;
+}
+
+
+/* =========================================================
+   NEWSPAPER IMAGE
+   ========================================================= */
+
+.rudi-newspaper-figure {
+    margin: 0 0 16px;
+    padding: 10px;
+    background: rgba(255, 248, 220, 0.35);
+    border: 2px solid #3d2b18;
+}
+
+    .rudi-newspaper-figure img {
+        display: block;
+        width: 100%;
+        max-height: 380px;
+        object-fit: cover;
+        border: 1px solid #2d2115;
+        filter: sepia(55%) contrast(1.05) grayscale(20%);
+    }
+
+
+    /*
+ * This is the text shown directly underneath the image.
+ * It uses item.newspaperImageDate in JavaScript.
+ */
+
+    .rudi-newspaper-figure figcaption {
+        display: block;
+        margin-top: 10px;
+        padding: 4px 6px;
+        color: #1f160d !important;
+        font-size: 14px;
+        font-style: italic;
+        font-weight: 600;
+        line-height: 1.4;
+        text-align: center;
+    }
+
+
+/* =========================================================
+   DIVIDER
+   ========================================================= */
+
+.rudi-newspaper-divider {
+    height: 1px;
+    margin: 18px 0;
+    background: #2d2115;
+}
+
+
+/* =========================================================
+   ARTICLE HEADLINE
+   ========================================================= */
+
+.rudi-newspaper-body {
+    position: relative;
+    z-index: 2;
+}
+
+    .rudi-newspaper-body h2 {
+        margin: 0 0 12px;
+        padding: 8px 0;
+        color: #1f160d !important;
+        border-top: 2px solid #2d2115;
+        border-bottom: 2px solid #2d2115;
+        font-size: 28px;
+        font-weight: 800;
+        line-height: 1.05;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+
+/* =========================================================
+   ARTICLE TEXT
+   ========================================================= */
+
+.rudi-newspaper-text {
+    column-count: 2;
+    column-gap: 34px;
+    color: #1f160d !important;
+    font-size: 17px;
+    line-height: 1.55;
+    text-align: justify;
+}
+
+    .rudi-newspaper-text p {
+        margin-top: 0;
+        margin-bottom: 14px;
+        color: #1f160d !important;
+    }
+
+
+        /*
+ * Large first letter in the first paragraph.
+ */
+
+        .rudi-newspaper-text p:first-child::first-letter {
+            float: left;
+            padding-right: 8px;
+            color: #1f160d;
+            font-size: 54px;
+            font-weight: bold;
+            line-height: 0.9;
+        }
+
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+.rudi-newspaper-paper {
+    scrollbar-color: #6f5735 #e2cf9e;
+    scrollbar-width: thin;
+}
+
+    .rudi-newspaper-paper::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    .rudi-newspaper-paper::-webkit-scrollbar-track {
+        background: #e2cf9e;
+    }
+
+    .rudi-newspaper-paper::-webkit-scrollbar-thumb {
+        background: #6f5735;
+        border: 2px solid #e2cf9e;
+        border-radius: 999px;
+    }
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 650px) {
+    .rudi-newspaper-overlay {
+        align-items: flex-start;
+        padding: 10px;
+    }
+
+    .rudi-newspaper-paper {
+        width: 100%;
+        max-height: calc(100vh - 20px);
+        padding: 24px 20px;
+    }
+
+    .rudi-newspaper-header h1 {
+        padding: 0 32px;
+        font-size: clamp(28px, 10vw, 42px);
+    }
+
+    .rudi-newspaper-kicker {
+        font-size: 11px;
+        letter-spacing: 2px;
+    }
+
+    .rudi-newspaper-body h2 {
+        font-size: 22px;
+    }
+
+    .rudi-newspaper-text {
+        column-count: 1;
+        font-size: 16px;
+        text-align: left;
+    }
+
+    .rudi-newspaper-figure img {
+        max-height: 300px;
+    }
+
+    .rudi-newspaper-close {
+        top: 10px;
+        right: 10px;
+        width: 36px;
+        height: 36px;
+    }
+}

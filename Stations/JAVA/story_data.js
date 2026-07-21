@@ -149,37 +149,54 @@ const STORIES = {
                 question: "What do you see?",
                 placeholder: "Type your answer...",
                 acceptedAnswers: ["2", "two", "two.", "2.", "two people", "2 people"],
-        wrongAnswer: "Look carefully at the movement in the window."
+                wrongAnswer: "Look carefully at the movement in the window."
             },
-    {
-        type: "text",
-        sender: "Henry Rudi",
-        time: "10:22",
-        text: "YES, I remember that is correct! Now you only need the month."
+            {
+                type: "text",
+                sender: "Henry Rudi",
+                time: "10:22",
+                text: "YES, I remember. That is correct!"
             },
-    {
-        type: "text",
-        sender: "Henry Rudi",
-        time: "10:23",
-        text: `
-                Go to the Wooden Cathedral:
-                <br>
-                <a href="https://www.google.com/maps/search/Wooden+Cathedral+Troms�"
-                   target="_blank"
-                   style="color:#7ee7ff; font-weight:bold;">
-                   Open location
-                </a>
-            `
+            {
+                type: "text",
+                sender: "Henry Rudi",
+                time: "10:23",
+                text: "I don't remember the month. Check my profile. It should be around the time when I shot the polar bear."
             },
-{
-    type: "input",
-        variable: "henryRudiLocation",
-            question: "Write okay when you are there.",
-                placeholder: "Write okay...",
-                    acceptedAnswers: ["okay", "ok", "oki", "oke", "yes", "done", "there"],
-                        wrongAnswer: "Tell me okay when you are there.",
-                            redirect: "../final_page.html"
-}
+            {
+                type: "text",
+                sender: "Henry Rudi",
+                time: "10:24",
+                text: "Write the month here in the chat."
+            },
+            {
+                type: "input",
+                variable: "henryRudiMonth",
+                question: "In which month was it?",
+                placeholder: "Write the month...",
+                acceptedAnswers: [
+                    "june",
+                    "june.",
+                    "jun",
+                    "jun.",
+                    "6",
+                    "06"
+                ],
+                wrongAnswer: "Ahh, I don't think that is correct. Check my profile again."
+            },
+            {
+                type: "text",
+                sender: "Henry Rudi",
+                time: "10:26",
+                text: "Yes, June! Now I remember. That was the month."
+            },
+            {
+                type: "text",
+                sender: "Henry Rudi",
+                time: "10:26",
+                text: "Good luck explorers!"
+            }
+
         ]
     },
     dispatch_henry_intro: {

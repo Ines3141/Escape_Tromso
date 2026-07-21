@@ -1,16 +1,9 @@
-<!--Things to do:
-    - Fix so that the nansen call doesnt restart when you have done it already and goes back.
-    - Make it so that you can listen to the audio again
-    - Change text to outgoing talk 
-     
--->
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
-    <title>Station 2</title>
+    <title>Station 2 — Fridtjof Nansen</title>
     <link rel="stylesheet" href="../../../../CSS/global.css">
     <link rel="stylesheet" href="../../../../CSS/station.css">
     <link rel="stylesheet" href="../../../../CSS/nansen.css">
@@ -21,271 +14,768 @@
     <script src="../../../../Stations/JAVA/navigation.js"></script>
     <script src="../../../../Stations/JAVA/inventory.js"></script>
 </head>
-
 <body>
-    <div id="callScreen" class="call-screen">
+    <!-- Outgoing call screen -->
+    <div id="callScreen"
+         class="call-screen"
+         role="button"
+         tabindex="0"
+         aria-label="Tap to call Fridtjof Nansen">
         <div class="call-card">
+            <p class="call-label">Audio call</p>
+
             <div class="caller-photo">
-                <img src="../../../../assets/images/Nansen.jpg" alt="Nansen">
+                <img src="../../../../assets/images/Nansen.jpg"
+                     alt="Fridtjof Nansen">
             </div>
 
-            <p class="incoming-text">Outgoing call...</p>
             <h1>Fridtjof Nansen</h1>
             <p class="call-subtitle">Arctic Explorer</p>
 
-            <div class="call-actions">
-                <button class="decline-call" onclick="declineCall()">✕</button>
-                <button class="accept-call" onclick="acceptCall()">☎</button>
+            <div class="call-status-row">
+                <p id="callStatus" class="call-status">
+                    Ready to call
+                </p>
+
+                <span id="callDots"
+                      class="call-dots"
+                      aria-hidden="true"
+                      style="display: none;">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
             </div>
 
-            <p class="call-help">Tap green to answer</p>
+            <p id="callHelp" class="call-help">
+                Tap anywhere to place the call
+            </p>
         </div>
     </div>
-    <div class="box hidden" id="stationContent">
 
+    <!-- Keep the call sound outside the hidden conversation box -->
+    <audio id="outgoingCallSound" preload="auto" loop>
+        <source src="../../../../assets/audio/Outgoing_Call.m4a"
+                type="audio/mp4">
+    </audio>
+    <!-- Main conversation -->
+    <div id="stationContent" class="box hidden">
         <h1>Fridtjof Nansen</h1>
-
-
         <div class="person-container">
-            <img src="../../../../assets/images/Nansen.jpg" alt="Station 1" class="imag-person">
+            <img src="../../../../assets/images/Nansen.jpg"
+                 alt="Fridtjof Nansen"
+                 class="imag-person">
         </div>
 
         <div class="audio-row">
-            <button class="audio-btn" id="audioBtn"> &#128266;</button>
-            <div id="subtitle" class="subtitle"></div>
-        </div>
+            <button id="audioBtn"
+                    class="audio-btn"
+                    type="button"
+                    aria-label="Play or pause the current recording">
+                &#128266;
+            </button>
 
+            <div id="subtitle"
+                 class="subtitle"
+                 aria-live="polite"></div>
+        </div>
+        <!-- Initial message -->
         <audio id="voice0" preload="auto">
-            <source src="../../../../assets/audio/nansen_opening.mov" type="audio/mp4">
-        </audio> <!-- WORKS BUT WE SHOULD CHANGE TO MP$ OR MP3 AUDIO-->
-        <audio id="voiceA" preload="auto">
-            <source src="../../../../assets/audio/nansen_a.mov" type="audio/mp4">
+            <source src="../../../../assets/audio/Nansen/Nansen_1.m4a"
+                    type="audio/mp4">
         </audio>
-        <audio id="voiceB" preload="auto">
-            <source src="../../../../assets/audio/nansen_b.mov" type="audio/mp4">
+
+        <!-- Response after A -->
+        <audio id="voice1" preload="auto">
+            <source src="../../../../assets/audio/Nansen/Nansen_2.m4a"
+                    type="audio/mp4">
         </audio>
-        <audio id="voiceC" preload="auto">
-            <source src="../../../../assets/audio/nansen_c.mov" type="audio/mp4">
+
+        <!-- Response after B -->
+        <audio id="voice2" preload="auto">
+            <source src="../../../../assets/audio/Nansen/Nansen_3_B.m4a"
+                    type="audio/mp4">
         </audio>
-        <!-- preload auto: Load the audio file as soon as possible, even before the user presses play. -->
-        <div id="choices" style="display:none;">
-            <button id="btnA" class="answer-button"></button>
-            <button id="btnB" class="answer-button"></button>
-            <button id="btnC" class="answer-button" style="display:none;"></button>
+
+        <!-- Response after C -->
+        <audio id="voice3" preload="auto">
+            <source src="../../../../assets/audio/Nansen/Nansen_3_C.m4a"
+                    type="audio/mp4">
+        </audio>
+
+        <!-- Common response after D or E -->
+        <audio id="voice4" preload="auto">
+            <source src="../../../../assets/audio/Nansen/Nansen_4.m4a"
+                    type="audio/mp4">
+        </audio>
+
+        <!-- Response after D -->
+        <audio id="voice5" preload="auto">
+            <source src="../../../../assets/audio/Nansen/Nansen_4_D.m4a"
+                    type="audio/mp4">
+        </audio>
+
+        <!-- Response after E -->
+        <audio id="voice6" preload="auto">
+            <source src="../../../../assets/audio/Nansen/Nansen_4_E.m4a"
+                    type="audio/mp4">
+        </audio>
+
+        <!-- Answer buttons -->
+        <div id="choices" style="display: none;">
+            <button id="btnA"
+                    class="answer-button"
+                    type="button"></button>
+
+            <button id="btnB"
+                    class="answer-button"
+                    type="button"></button>
+
+            <button id="btnC"
+                    class="answer-button"
+                    type="button"></button>
+
+            <button id="btnD"
+                    class="answer-button"
+                    type="button"></button>
+
+            <button id="btnE"
+                    class="answer-button"
+                    type="button"></button>
         </div>
         <div class="call-controls">
-            <button class="call-action end-call" onclick="window.location.href = previousPage">
+            <button id="hangUpButton"
+                    class="call-action end-call"
+                    type="button">
                 <span class="call-icon">📞</span>
                 <small>Hang up</small>
             </button>
 
-            <button class="call-action info-call" onclick="openProfile()">
-                <span class="call-icon">i</span>
-                <small>Profile</small>
-            </button>
-
-            <button id="nextBtn" class="call-action continue-call hidden"
-                    onclick="window.location.href = nextPage">
+            <button id="nextBtn"
+                    class="call-action continue-call hidden"
+                    type="button">
                 <span class="call-icon">➜</span>
                 <small>Continue</small>
             </button>
         </div>
-        <!-- REMOVE LATER -->
-        <button onclick="window.location.href = nextPage"> DEV Continue</button>
-        <script>
-            /* Audio's file */
-            const audio = document.getElementById("voice0");
-            const audioA = document.getElementById("voiceA");
-            const audioB = document.getElementById("voiceB");
-            const audioC = document.getElementById("voiceC");
+    </div>
+    <script>
+        // =====================================================
+        // ELEMENTS
+        // =====================================================
+        const callScreen = document.getElementById("callScreen");
+        const callStatus = document.getElementById("callStatus");
+        const callDots = document.getElementById("callDots");
+        const stationContent = document.getElementById("stationContent");
+        const hangUpButton = document.getElementById("hangUpButton");
+        const nextButton = document.getElementById("nextBtn");
+        const audioButton = document.getElementById("audioBtn");
+        const subtitle = document.getElementById("subtitle");
+        const choices = document.getElementById("choices");
+        const person = document.querySelector(".person-container");
+        const callHelp = document.getElementById("callHelp");
 
-            /* Buttons */
-            const audio_btn = document.getElementById("audioBtn");
-            const btnA = document.getElementById("btnA");
-            const btnB = document.getElementById("btnB");
-            const btnC = document.getElementById("btnC");
+        // =====================================================
+        // AUDIO ELEMENTS
+        // =====================================================
+        const audioIntro = document.getElementById("voice0");
+        const audioMission = document.getElementById("voice1");
+        const audioB = document.getElementById("voice2");
+        const audioC = document.getElementById("voice3");
+        const audioCommon = document.getElementById("voice4");
+        const audioD = document.getElementById("voice5");
+        const audioE = document.getElementById("voice6");
 
-            const choices = document.getElementById("choices");
-            const person = document.querySelector(".person-container");
-            const allAudios = [audio, audioA, audioB, audioC];
+        const allAudios = [
+            audioIntro,
+            audioMission,
+            audioB,
+            audioC,
+            audioCommon,
+            audioD,
+            audioE
+        ];
 
-            const subtitle = document.getElementById("subtitle");
-            const teamName = localStorage.getItem("teamName") || "Explorer";
+        // =====================================================
+        // BUTTONS
+        // =====================================================
 
-            /* Start the audio file and the subtitels. */
-            audio_btn.addEventListener("click", () => {
-                if (audio.paused) {
-                    audio.play();
-                    person.classList.add("speaking");
-                } else {
-                    audio.pause();
-                    person.classList.remove("speaking");
-                }
-            });
-            /* If audio ends, show answer options A and B*/
-            audio.addEventListener("ended", () => {
-                person.classList.remove("speaking");
-                btnA.textContent =
-                    `We're Team ${teamName}. We need to rescue a crew trapped in the Arctic!`;
-                btnB.textContent =
-                    `We're Team ${teamName}. And who are you?`;
-                btnC.style.display = "none";
-                choices.style.display = "block";
-            });
+        const buttons = {
+            A: document.getElementById("btnA"),
+            B: document.getElementById("btnB"),
+            C: document.getElementById("btnC"),
+            D: document.getElementById("btnD"),
+            E: document.getElementById("btnE")
+        };
 
-            btnA.addEventListener("click", () => {
-                choices.style.display = "none";
-                if (audioA.paused) {
-                    audioA.play();
-                    person.classList.add("speaking");
-                } else {
-                    audioA.pause();
-                    person.classList.remove("speaking");
-                }
-            });
-            audioA.addEventListener("ended", () => {
-                person.classList.remove("speaking");
-                /*
-                riddle_btn.style.display = "block";
-                profile_btn.style.display = "block";
+        const outgoingCallSound =
+            document.getElementById("outgoingCallSound");
 
-                NO MORE INTERACTION
-                IF THIS IS THE LAST PART OF THE CONVERSATION
-                SHOW BUTTON
-                TO SOLVE RIDDLE IF ISNT YOU NEED MORE BLOCKS*/
-                document.getElementById("nextBtn").classList.remove("hidden");
-            });
+        const OUTGOING_CALL_DURATION = 8000;
 
-            btnB.addEventListener("click", () => {
-                choices.style.display = "none";
-                if (audioB.paused) {
-                    audioB.play();
-                    person.classList.add("speaking");
-                } else {
-                    audioB.pause();
-                    person.classList.remove("speaking");
-                }
-            });
-            audioB.addEventListener("ended", () => {
-                person.classList.remove("speaking");
-                btnA.style.display = "none";
-                btnB.style.display = "none";
-                btnC.textContent =
-                    "Our colleagues are trapped in the ice.";
-                btnC.style.display = "block";
-                choices.style.display = "block";
-            });
+        let outgoingCallTimer = null;
+        let callConnected = false;
+        let callStarted = false;
+        let currentAudio = audioIntro;
 
-            btnC.addEventListener("click", () => {
-                choices.style.display = "none";
-                if (audioC.paused) {
-                    audioC.play();
-                    person.classList.add("speaking");
-                } else {
-                    audioC.pause();
-                    person.classList.remove("speaking");
-                }
-            });
-            audioC.addEventListener("ended", () => {
-                person.classList.remove("speaking");
-                /*
-                riddle_btn.style.display = "block";
-                profile_btn.style.display = "block"; */
-                document.getElementById("nextBtn").classList.remove("hidden");
-            });
-
-            const subtitles = [
-                { start: 0, end: 3, text: "Hello there, fellow explorers!" },
-                { start: 3, end: 6, text: "In haste, I see." },
-                { start: 6, end: 9, text: "What brings you to Tromsø?" }
-            ];
-
-            const subtitlesA = [
-                { start: 0, end: 4, text: "A rescue mission in the Arctic, you say?" },
-                { start: 4, end: 8, text: "Then every moment counts." },
-                { start: 8, end: 12, text: "The Arctic can be an unforgiving place." },
-                { start: 12, end: 17, text: "Yet it is also a place of great beauty and many scientific secrets." },
-                { start: 17, end: 23, text: "During my years in the north, I studied the drift of sea ice and the great currents of the Arctic waters." },
-                { start: 23, end: 28, text: "It was work that brought me much pleasure and many adventures." },
-                { start: 28, end: 31, text: "Well, I’m drifting off." },
-                { start: 31, end: 35, text: "Please, take these notes." },
-                { start: 35, end: 39, text: "They may prove useful to the lost crew." },
-                { start: 39, end: 42, text: `Good luck, Team ${teamName}!` }
-            ];
-
-            const subtitlesB = [
-                { start: 0, end: 2, text: "A fair question." },
-                { start: 2, end: 6, text: "My name is Fridtjof Nansen." },
-                { start: 6, end: 10, text: "I was a scientist and explorer." },
-                { start: 10, end: 15, text: "Though I believe people have called me lots of things." },
-                { start: 15, end: 22, text: "Together with my colleague Otto Sverdrup, I became the first to cross Greenland on skis." },
-                { start: 22, end: 31, text: "Later, I attempted to reach the North Pole by sailing my ship into sea ice north of Siberia." },
-                { start: 31, end: 38, text: "I hoped the natural drift of the ice would bring me to the North Pole." },
-                { start: 38, end: 42, text: "We came close, but not close enough, unfortunately." },
-                { start: 42, end: 49, text: "Nevertheless, it yielded valuable knowledge of the Arctic Ocean." },
-                { start: 49, end: 54, text: "Something I hope people still remember me for." },
-                { start: 54, end: 58, text: "But that’s enough of my past." },
-                { start: 58, end: 61, text: "What brings you here?" }
-            ];
-
-            const subtitlesC = [
-                { start: 0, end: 4, text: "Now that’s something you should have said immediately!" },
-                { start: 4, end: 8, text: "Every minute matters in the Arctic." },
-                { start: 8, end: 14, text: "Fortunately, I know a thing or two about ice, currents, and getting unstuck." },
-                { start: 14, end: 19, text: "Take this clue, it may help your crew escape the ice." },
-                { start: 19, end: 22, text: `Good luck, Team ${teamName}!` }
-            ];
-
-            function updateSubtitle(audioFile, subtitleList) {
-                const current = audioFile.currentTime;
-
-                const line = subtitleList.find(sub =>
-                    current >= sub.start && current <= sub.end
-                );
-
-                subtitle.textContent = line ? line.text : "";
+        async function startOutgoingCall() {
+            if (callStarted) {
+                return;
             }
 
-            /* Add subtitels to all options */
-            audio.addEventListener("timeupdate", () => {
-                updateSubtitle(audio, subtitles);
-            });
-            audioA.addEventListener("timeupdate", () => {
-                updateSubtitle(audioA, subtitlesA);
-            });
-            audioB.addEventListener("timeupdate", () => {
-                updateSubtitle(audioB, subtitlesB);
-            });
-            audioC.addEventListener("timeupdate", () => {
-                updateSubtitle(audioC, subtitlesC);
-            });
+            callStarted = true;
 
+            callStatus.textContent = "Calling";
+            callDots.style.display = "inline-flex";
+            callHelp.textContent =
+                "Waiting for Nansen to answer";
 
-            
-            const callScreen = document.getElementById("callScreen");
-            const stationContent = document.getElementById("stationContent");
+            outgoingCallSound.muted = false;
+            outgoingCallSound.volume = 0.5;
+            outgoingCallSound.currentTime = 0;
 
-            function acceptCall() {
+            try {
+                await outgoingCallSound.play();
+            } catch (error) {
+                console.error(
+                    "Outgoing-call sound failed:",
+                    error
+                );
+
+                callHelp.textContent =
+                    "The calling sound could not be played";
+            }
+
+            outgoingCallTimer = window.setTimeout(
+                connectNansenCall,
+                OUTGOING_CALL_DURATION
+            );
+        }
+
+        function stopOutgoingSound() {
+            outgoingCallSound.pause();
+            outgoingCallSound.currentTime = 0;
+        }
+
+        function connectNansenCall() {
+            window.clearTimeout(outgoingCallTimer);
+
+            stopOutgoingSound();
+
+            callStatus.textContent = "Connected";
+            callDots.style.display = "none";
+            callHelp.textContent = "Call connected";
+
+            callScreen.classList.add("call-ending");
+
+            window.setTimeout(async () => {
                 callScreen.classList.add("hidden");
                 stationContent.classList.remove("hidden");
 
+                callConnected = true;
+
+                try {
+                    await playAudio(audioIntro);
+                } catch (error) {
+                    subtitle.textContent =
+                        "Press the speaker button to hear Nansen.";
+                }
+            }, 450);
+        }
+
+        /*
+         * The whole call screen acts as the start control.
+         * A real interaction is needed so browsers allow sound.
+         */
+        callScreen.addEventListener(
+            "pointerdown",
+            startOutgoingCall,
+            { once: true }
+        );
+
+        callScreen.addEventListener("keydown", event => {
+            if (
+                event.key === "Enter" ||
+                event.key === " "
+            ) {
+                event.preventDefault();
+                startOutgoingCall();
+            }
+        });
+
+        outgoingCallSound.addEventListener("error", () => {
+            const source =
+                outgoingCallSound.querySelector("source");
+
+            console.error(
+                "Could not load outgoing-call audio:",
+                source?.getAttribute("src"),
+                outgoingCallSound.error
+            );
+
+            callHelp.textContent =
+                "The calling sound file could not be found";
+        });
+
+        const teamName =
+            localStorage.getItem("teamName") || "XY";
+
+        const answerText = {
+            A: `We're Team ${teamName}. We need to rescue a crew trapped in the Arctic! Can you help us?`,
+            B: "Thank you, Nansen. Goodbye.",
+            C: "Thanks! We heard you are an important historic person. Can we ask why?",
+            D: "Oh yes, please send me everything!",
+            E: "No, not now. Was this all?"
+        };
+
+        Object.entries(buttons).forEach(([key, button]) => {
+            button.textContent = answerText[key];
+            button.style.display = "none";
+        });
+
+        // =====================================================
+        // CONVERSATION STATE
+        // =====================================================
+
+        const completedStorageKey =
+            "nansenConversationCompleted";
+        // =====================================================
+        // CHOICE FUNCTIONS
+        // =====================================================
+
+        function hideChoices() {
+            choices.style.display = "none";
+            Object.values(buttons).forEach(button => {
+                button.style.display = "none";
+            });
+        }
+
+        function showChoices(...keys) {
+            Object.entries(buttons).forEach(([key, button]) => {
+                button.style.display =
+                    keys.includes(key) ? "block" : "none";
+            });
+            choices.style.display = "block";
+        }
+
+        // =====================================================
+        // AUDIO FUNCTIONS
+        // =====================================================
+        function stopOtherAudios(audioToKeep) {
+            allAudios.forEach(audio => {
+                if (audio !== audioToKeep) {
+                    audio.pause();
+                    audio.currentTime = 0;
+                }
+            });
+        }
+        async function playAudio(audio, restart = true) {
+            if (!audio) {
+                subtitle.textContent =
+                    "The audio element could not be found.";
+                console.error("Missing Nansen audio element.");
+                return;
+            }
+            hideChoices();
+            stopOtherAudios(audio);
+            currentAudio = audio;
+            audio.muted = false;
+            audio.volume = 1;
+            if (restart) {
                 audio.currentTime = 0;
-                audio.play();
-
+            }
+            try {
+                await audio.play();
                 person.classList.add("speaking");
+            } catch (error) {
+                person.classList.remove("speaking");
+                subtitle.textContent =
+                    "Press the speaker button to continue.";
+                console.error(
+                    "Nansen audio playback failed:",
+                    error
+                );
             }
+        }
 
-            function declineCall() {
-                document.querySelector(".incoming-text").textContent = "Call missed...";
+        function finishConversation() {
+            hideChoices();
+            currentAudio = audioCommon;
+            subtitle.textContent = "";
+            person.classList.remove("speaking");
+            nextButton.classList.remove("hidden");
+            localStorage.setItem(
+                completedStorageKey,
+                "true"
+            );
+        }
 
-                setTimeout(() => {
-                    document.querySelector(".incoming-text").textContent = "Incoming call...";
-                }, 1200);
+        // =====================================================
+        // CALL SCREEN
+        // =====================================================
+
+
+
+        hangUpButton.addEventListener("click", () => {
+            stopOtherAudios(null);
+            window.location.href = previousPage;
+        });
+
+        nextButton.addEventListener("click", () => {
+            window.location.href = nextPage;
+        });
+
+        // =====================================================
+        // SPEAKER BUTTON
+        // =====================================================
+
+        audioButton.addEventListener(
+            "click",
+            async () => {
+                if (!callConnected || !currentAudio) {
+                    return;
+                }
+                if (currentAudio.paused) {
+                    /*
+                     * An ended audio remains positioned at its end.
+                     * Resetting it allows the player to replay it.
+                     */
+                    if (currentAudio.ended) {
+                        currentAudio.currentTime = 0;
+                    }
+                    currentAudio.muted = false;
+                    currentAudio.volume = 1;
+                    try {
+                        await currentAudio.play();
+                        person.classList.add("speaking");
+                    } catch (error) {
+                        subtitle.textContent =
+                            "The audio could not be played.";
+                        console.error(
+                            "Nansen audio playback failed:",
+                            error
+                        );
+                    }
+                    return;
+                }
+                currentAudio.pause();
+                person.classList.remove("speaking");
             }
+        );
+        // =====================================================
+        // ANSWER EVENTS
+        // =====================================================
+        buttons.A.addEventListener("click", () => {
+            playAudio(audioMission);
+        });
+        buttons.B.addEventListener("click", () => {
+            playAudio(audioB);
+        });
+        buttons.C.addEventListener("click", () => {
+            playAudio(audioC);
+        });
+        buttons.D.addEventListener("click", () => {
+            playAudio(audioD);
+        });
+        buttons.E.addEventListener("click", () => {
+            playAudio(audioE);
+        });
+        // =====================================================
+        // CONVERSATION FLOW
+        // =====================================================
+        const afterAudio = new Map([
+            /*
+             * Nansen_1:
+             * Show the one available answer, A.
+             */
+            [audioIntro, () => {
+                showChoices("A");
+            }],
 
-        </script>
+            /*
+             * Nansen_2:
+             * Show B and C.
+             */
+            [audioMission, () => {
+                showChoices("B", "C");
+            }],
 
-    </div>
+            /*
+             * Nansen_3_B:
+             * Goodbye branch.
+             */
+            [audioB, () => {
+                finishConversation();
+            }],
+
+            /*
+             * Nansen_3_C:
+             * Continue to D and E.
+             */
+            [audioC, () => {
+                showChoices("D", "E");
+            }],
+
+            /*
+             * Nansen_4_D:
+             * Automatically continue to Nansen_4.
+             */
+            [audioD, () => {
+                playAudio(audioCommon);
+            }],
+
+            /*
+             * Nansen_4_E:
+             * Automatically continue to Nansen_4.
+             */
+            [audioE, () => {
+                playAudio(audioCommon);
+            }],
+
+            /*
+             * Nansen_4:
+             * Finish the conversation.
+             */
+            [audioCommon, () => {
+                finishConversation();
+            }]
+        ]);
+        allAudios.forEach(audio => {
+            audio.muted = false;
+            audio.volume = 1;
+            audio.addEventListener("play", () => {
+                currentAudio = audio;
+                person.classList.add("speaking");
+            });
+            audio.addEventListener("pause", () => {
+                if (!audio.ended) {
+                    person.classList.remove("speaking");
+                }
+            });
+            audio.addEventListener("ended", () => {
+                person.classList.remove("speaking");
+                subtitle.textContent = "";
+                const nextAction =
+                    afterAudio.get(audio);
+                if (nextAction) {
+                    nextAction();
+                }
+            });
+            audio.addEventListener("error", () => {
+                const source =
+                    audio.querySelector("source");
+                const path = source
+                    ? source.getAttribute("src")
+                    : "Unknown audio path";
+                subtitle.textContent =
+                    "The audio file could not be loaded.";
+                person.classList.remove("speaking");
+                console.error(
+                    "Could not load Nansen audio:",
+                    path,
+                    audio.error
+                );
+            });
+        });
+
+        // =====================================================
+        // SUBTITLES
+        // =====================================================
+
+        const subtitleLines = new Map([
+            [audioIntro, [
+                "Yes?",
+                "Nansen speaking.",
+                "Who is calling at this hour?",
+                "Hello?"
+            ]],
+
+            [audioMission, [
+                "A rescue mission?",
+                "Then there's no time to waste!",
+                "During my expeditions, I spent years studying ocean currents and sea ice.",
+                "Take this information — it might help your crew find a way through the ice.",
+                "You will find it in the inventory."
+            ]],
+
+            [audioB, [
+                "Goodbye and good luck, explorers."
+            ]],
+
+            [audioC, [
+                "*humbled laugh*",
+                "Me, important?",
+                "I feel honoured.",
+                "Well, how do I summarize my life?",
+                "I did some work in my early years in neurobiology and wrote my PhD in Bergen.",
+                "If you want, I can send you my PhD thesis, if you are interested.",
+                "*laugh*"
+            ]],
+
+            [audioD, [
+                "*laugh*",
+                "My dear young fellows, it was more of a small joke.",
+                "But I am happy about your interest."
+            ]],
+
+            [audioE, [
+                "*laugh*",
+                "My dear young fellows, that was only in my younger years."
+            ]],
+
+            [audioCommon, [
+                "I was always drawn to the Arctic.",
+                "Together with my friend Otto Sverdrup and our companions, I crossed Greenland on skis.",
+                "Later, I tried to reach the North Pole in a different way:",
+                "by letting my ship, the Fram, drift with the sea ice.",
+                "I was also active in politics and humanitarian work.",
+                "But what I am most proud of is that, after the First World War, I was able to help many refugees.",
+                "For people without a country, I helped create a special passport.",
+                "But listen to me... I am drifting away.",
+                "*laughs softly*",
+                "You must rescue your team.",
+                "Good luck!",
+                "Goodbye."
+            ]]
+        ]);
+
+        // =====================================================
+        // AUTOMATIC SUBTITLE TIMING
+        // =====================================================
+
+        const subtitleCues = new Map();
+        function subtitleWeight(text) {
+            /*
+             * Stage directions receive a short visible duration.
+             */
+            const spokenText = text
+                .replace(/\*[^*]+\*/g, "")
+                .trim();
+
+            const wordCount = spokenText
+                ? spokenText.split(/\s+/).length
+                : 2;
+
+            return Math.max(wordCount, 3);
+        }
+
+        function buildSubtitleCues(audio) {
+            const lines =
+                subtitleLines.get(audio) || [];
+            const duration = audio.duration;
+            if (
+                !lines.length ||
+                !Number.isFinite(duration) ||
+                duration <= 0
+            ) {
+                return [];
+            }
+            const weights =
+                lines.map(subtitleWeight);
+            const totalWeight =
+                weights.reduce(
+                    (sum, weight) => sum + weight,
+                    0
+                );
+
+            let start = 0;
+
+            return lines.map((text, index) => {
+                const isLastLine =
+                    index === lines.length - 1;
+
+                const lineDuration =
+                    duration *
+                    (weights[index] / totalWeight);
+
+                const end = isLastLine
+                    ? duration + 0.05
+                    : start + lineDuration;
+
+                const cue = {
+                    start,
+                    end,
+                    text
+                };
+                start = end;
+                return cue;
+            });
+        }
+        function prepareSubtitles(audio) {
+            subtitleCues.set(
+                audio,
+                buildSubtitleCues(audio)
+            );
+        }
+        function updateSubtitle(audio) {
+            const cues =
+                subtitleCues.get(audio) || [];
+
+            const currentTime =
+                audio.currentTime;
+
+            const cue = cues.find(item => {
+                return (
+                    currentTime >= item.start &&
+                    currentTime < item.end
+                );
+            });
+
+            subtitle.textContent =
+                cue ? cue.text : "";
+        }
+        allAudios.forEach(audio => {
+            audio.addEventListener(
+                "loadedmetadata",
+                () => {
+                    prepareSubtitles(audio);
+                }
+            );
+
+            audio.addEventListener(
+                "durationchange",
+                () => {
+                    prepareSubtitles(audio);
+                }
+            );
+
+            audio.addEventListener(
+                "timeupdate",
+                () => {
+                    updateSubtitle(audio);
+                }
+            );
+
+            /*
+             * Metadata might already be available before
+             * these event listeners are registered.
+             */
+            if (audio.readyState >= 1) {
+                prepareSubtitles(audio);
+            }
+        });
+        // =====================================================
+        // PAGE SETUP
+        // =====================================================
+
+        localStorage.removeItem(
+            "nansenConversationCompleted"
+        );
+
+        callConnected = false;
+        callStarted = false;
+
+        callScreen.classList.remove("hidden");
+        callScreen.classList.remove("call-ending");
+
+        stationContent.classList.add("hidden");
+        nextButton.classList.add("hidden");
+
+        callStatus.textContent = "Ready to call";
+        callDots.style.display = "none";
+        callHelp.textContent =
+            "Tap anywhere to place the call";
+    </script>
     <game-navigation></game-navigation>
     <script>
         setupGameNavigation();
@@ -294,5 +784,4 @@
         });
     </script>
 </body>
-
 </html>

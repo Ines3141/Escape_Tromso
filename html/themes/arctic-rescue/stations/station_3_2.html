@@ -35,174 +35,444 @@ THINGS TO DO LATER:
             <button class="audio-btn" id="audioBtn"> &#128266;</button>
             <div id="subtitle" class="subtitle"></div>
         </div>
-        <audio id="voice" preload="auto">
-            <source src="../../../../assets/audio/Wanny1.mp4" type="audio/mp4">
+        <audio id="voice1" preload="auto">
+            <source src="../../../../assets/audio/Wanny/Wanny_1.m4a" type="audio/mp4">
         </audio>
-        <audio id="voiceA" preload="auto">
-            <source src="../../../../assets/audio/WannyA.mp4" type="audio/mp4">
+        <audio id="voice2" preload="auto">
+            <source src="../../../../assets/audio/Wanny/Wanny_2.m4a" type="audio/mp4">
         </audio>
-        <audio id="voiceB" preload="auto">
-            <source src="../../../../assets/audio/WannyB.mp4" type="audio/mp4">
+        <audio id="voice3" preload="auto">
+            <source src="../../../../assets/audio/Wanny/Wanny_3_B.m4a" type="audio/mp4">
         </audio>
-        <audio id="voiceC" preload="auto">
-            <source src="../../../../assets/audio/WannyC.mp4" type="audio/mp4">
+        <audio id="voice4" preload="auto">
+            <source src="../../../../assets/audio/Wanny/Wanny_3_C.m4a" type="audio/mp4">
+        </audio>
+        <audio id="voice7" preload="auto">
+            <source src="../../../../assets/audio/Wanny/Wanny_4.m4a" type="audio/mp4">
+        </audio>
+        <audio id="voice5" preload="auto">
+            <source src="../../../../assets/audio/Wanny/Wanny_4_D.m4a" type="audio/mp4">
+        </audio>
+        <audio id="voice6" preload="auto">
+            <source src="../../../../assets/audio/Wanny/Wanny_4_E.m4a" type="audio/mp4">
+        </audio>
+        <audio id="voice8" preload="auto">
+            <source src="../../../../assets/audio/Wanny/Wanny_5_F.m4a" type="audio/mp4">
+        </audio>
+        <audio id="voice9" preload="auto">
+            <source src="../../../../assets/audio/Wanny/Wanny_5_G.m4a" type="audio/mp4">
         </audio>
         <div id="choices" style="display:none;">
             <button id="btnA" class="answer-button"></button>
             <button id="btnB" class="answer-button"></button>
             <button id="btnC" class="answer-button" style="display:none;"></button>
+            <button id="btnD" class="answer-button" style="display:none;"></button>
+            <button id="btnE" class="answer-button" style="display:none;"></button>
+            <button id="btnF" class="answer-button" style="display:none;"></button>
+            <button id="btnG" class="answer-button" style="display:none;"></button>
         </div>
-        <button id="profile" class="profile-button" onclick="openProfile()" style="display:none;">
-            Explorer Profile
-        </button>
         <!-- for actual game do </button>style="display:none;">, but now it is just blocking -->
         <button class="riddle-button" id="riddle_btn" onclick="window.location.href = nextPage">
             Solve Riddle
         </button>
         <script>
-            /* Audio */
-            const audio = document.getElementById("voice");
-            const audioA = document.getElementById("voiceA");
-            const audioB = document.getElementById("voiceB");
-            const audioC = document.getElementById("voiceC");
-
-            /* Buttons */
-            const btnA = document.getElementById("btnA");
-            const btnB = document.getElementById("btnB");
-            const btnC = document.getElementById("btnC");
-            const audio_btn = document.getElementById("audioBtn");
-            const riddle_btn = document.getElementById("riddle_btn");
-
-            const choices = document.getElementById("choices");
-            const subtitle = document.getElementById("subtitle");
-            const allAudios = [audio, audioA, audioB, audioC];
-
             const person = document.querySelector(".person-container");
-            /* Start the audio file and the subtitels. */
-            audio_btn.addEventListener("click", () => {
-                if (audio.paused) {
-                    audio.play();
-                    person.classList.add("speaking");
-                } else {
-                    audio.pause();
-                    person.classList.remove("speaking");
-                }
+            const audioButton = document.getElementById("audioBtn");
+            const subtitle = document.getElementById("subtitle");
+            const choices = document.getElementById("choices");
+            const riddleButton = document.getElementById("riddle_btn");
+
+            const audio1 = document.getElementById("voice1");
+            const audio2 = document.getElementById("voice2");
+            const audio3B = document.getElementById("voice3");
+            const audio3C = document.getElementById("voice4");
+            const audio4D = document.getElementById("voice5");
+            const audio4E = document.getElementById("voice6");
+            const audio4 = document.getElementById("voice7");
+            const audio5F = document.getElementById("voice8");
+            const audio5G = document.getElementById("voice9");
+
+            const allAudios = [
+                audio1,
+                audio2,
+                audio3B,
+                audio3C,
+                audio4D,
+                audio4E,
+                audio4,
+                audio5F,
+                audio5G
+            ];
+
+            const buttons = {
+                A: document.getElementById("btnA"),
+                B: document.getElementById("btnB"),
+                C: document.getElementById("btnC"),
+                D: document.getElementById("btnD"),
+                E: document.getElementById("btnE"),
+                F: document.getElementById("btnF"),
+                G: document.getElementById("btnG")
+            };
+
+            // =====================================================
+            // ANSWER TEXT
+            // =====================================================
+
+            const answerText = {
+                A: "Yes! We need your help. A crew is trapped in the Arctic.",
+                B: "Thank you! Goodbye.",
+                C: "Thanks a lot! So you have also been on Svalbard?",
+                D: "Yes.",
+                E: "No.",
+                F: "Wow, that sounds impressive. We must continue with the rescue mission.",
+                G: "Wow! What about your family? Did they overwinter too?"
+            };
+
+            Object.entries(buttons).forEach(([key, button]) => {
+                button.textContent = answerText[key];
+                button.style.display = "none";
             });
-            /* If audio ends, show answer options A and B*/
-            audio.addEventListener("ended", () => {
-                person.classList.remove("speaking");
-                btnA.textContent =
-                    "We need help rescuing some friends.";
-                btnB.textContent =
-                    "First female hunter on Svalbard? Tell us more!";
-                btnC.style.display = "none";
-                choices.style.display = "block";
-            });
-            btnA.addEventListener("click", () => {
+
+            // =====================================================
+            // CONVERSATION STATE
+            // =====================================================
+
+            let currentAudio = audio1;
+            let conversationStarted = false;
+
+            function hideChoices() {
                 choices.style.display = "none";
-                if (audioA.paused) {
-                    audioA.play();
-                    person.classList.add("speaking");
-                } else {
-                    audioA.pause();
-                    person.classList.remove("speaking");
-                }
-            });
-            audioA.addEventListener("ended", () => {
-                person.classList.remove("speaking");
-                riddle_btn.style.display = "block";
-                profile_btn.style.display = "block";
-                /*
-                NO MORE INTERACTION
-                IF THIS IS THE LAST PART OF THE CONVERSATION
-                SHOW BUTTON
-                TO SOLVE RIDDLE IF ISNT YOU NEED MORE BLOCKS*/
-            });
-            btnB.addEventListener("click", () => {
-                choices.style.display = "none";
-                if (audioB.paused) {
-                    audioB.play();
-                    person.classList.add("speaking");
-                } else {
-                    audioB.pause();
-                    person.classList.remove("speaking");
-                }
-            });
-            audioB.addEventListener("ended", () => {
-                person.classList.remove("speaking");
-                btnA.style.display = "none";
-                btnB.style.display = "none";
-                btnC.textContent =
-                    "Our friends are trapped in the ice and need help.";
-                btnC.style.display = "block";
-                choices.style.display = "block";
-            });
-            btnC.addEventListener("click", () => {
-                choices.style.display = "none";
-                if (audioC.paused) {
-                    audioC.play();
-                    person.classList.add("speaking");
-                } else {
-                    audioC.pause();
-                    person.classList.remove("speaking");
-                }
-            });
-            audioC.addEventListener("ended", () => {
-                person.classList.remove("speaking");
-                riddle_btn.style.display = "block";
-                profile_btn.style.display = "block";
-            });
-
-            const subtitles = [
-                { start: 0, end: 2, text: "Huhuuuu!" },
-                { start: 2, end: 5, text: "I'm Wanny Woldstad." },
-                { start: 5, end: 8, text: "Hunter, trapper and adventurer." },
-                { start: 8, end: 10, text: "Need a ride?" }
-            ];
-            const subtitlesA = [
-                { start: 1, end: 3, text: "That's a proper reason to visit." },
-                { start: 3, end: 7, text: "Good communication can save lives." },
-                { start: 7, end: 11, text: "Take these notes on radio frequencies." },
-                { start: 11, end: 14, text: "They may help your rescue mission." },
-                { start: 14, end: 17, text: "Good luck, explorers!" }
-            ];
-            const subtitlesB = [
-                { start: 10, end: 13, text: "I was the first female hunter on Svalbard." },
-                { start: 13, end: 16, text: "And Northern Norway's first female taxi driver." },
-                { start: 16, end: 20, text: "I spent five winters on Svalbard." },
-                { start: 20, end: 23, text: "That teaches you a thing or two." }
-            ];
-            const subtitlesC = [
-                { start: 1, end: 3, text: "That's a proper reason to visit." },
-                { start: 3, end: 7, text: "Good communication can save lives." },
-                { start: 7, end: 11, text: "Take these notes on radio frequencies." },
-                { start: 11, end: 14, text: "They may help your rescue mission." },
-                { start: 14, end: 17, text: "Good luck, explorers!" }
-            ];
-
-            function updateSubtitle(audioFile, subtitleList) {
-                const current = audioFile.currentTime;
-
-                const line = subtitleList.find(sub =>
-                    current >= sub.start && current <= sub.end
-                );
-
-                subtitle.textContent = line ? line.text : "";
+                Object.values(buttons).forEach(button => {
+                    button.style.display = "none";
+                });
             }
 
-            /* Add subtitels to all options */
-            audio.addEventListener("timeupdate", () => {
-                updateSubtitle(audio, subtitles);
+            function showChoices(...keys) {
+                Object.entries(buttons).forEach(([key, button]) => {
+                    button.style.display = keys.includes(key)
+                        ? "block"
+                        : "none";
+                });
+                choices.style.display = "block";
+            }
+
+            function stopOtherAudios(audioToKeep) {
+                allAudios.forEach(audio => {
+                    if (audio !== audioToKeep) {
+                        audio.pause();
+                        audio.currentTime = 0;
+                    }
+                });
+            }
+
+            async function playAudio(audio, restart = true) {
+                hideChoices();
+                stopOtherAudios(audio);
+                currentAudio = audio;
+                if (restart) {
+                    audio.currentTime = 0;
+                }
+                try {
+                    await audio.play();
+                    person.classList.add("speaking");
+                } catch (error) {
+                    person.classList.remove("speaking");
+                    subtitle.textContent =
+                        "Press the speaker button to continue.";
+                    console.warn("Audio playback was blocked:", error);
+                }
+            }
+
+            function finishConversation() {
+                hideChoices();
+                subtitle.textContent = "";
+                riddleButton.style.display = "block";
+            }
+
+            // =====================================================
+            // MAIN AUDIO BUTTON
+            // =====================================================
+
+            audioButton.addEventListener("click", async () => {
+                // First click begins the conversation.
+                if (!conversationStarted) {
+                    conversationStarted = true;
+                    await playAudio(audio1);
+                    return;
+                }
+                if (!currentAudio) {
+                    return;
+                }
+                // Resume the current audio.
+                if (currentAudio.paused) {
+                    try {
+                        await currentAudio.play();
+                        person.classList.add("speaking");
+                    } catch (error) {
+                        console.warn("Audio playback failed:", error);
+                    }
+                    return;
+                }
+                // Pause the current audio.
+                currentAudio.pause();
+                person.classList.remove("speaking");
             });
-            audioA.addEventListener("timeupdate", () => {
-                updateSubtitle(audioA, subtitlesA);
+
+            // =====================================================
+            // ANSWER BUTTONS
+            // =====================================================
+
+            buttons.A.addEventListener("click", () => {
+                playAudio(audio2);
             });
-            audioB.addEventListener("timeupdate", () => {
-                updateSubtitle(audioB, subtitlesB);
+
+            buttons.B.addEventListener("click", () => {
+                playAudio(audio3B);
             });
-            audioC.addEventListener("timeupdate", () => {
-                updateSubtitle(audioC, subtitlesC);
+
+            buttons.C.addEventListener("click", () => {
+                playAudio(audio3C);
             });
+
+            buttons.D.addEventListener("click", () => {
+                playAudio(audio4D);
+            });
+
+            buttons.E.addEventListener("click", () => {
+                playAudio(audio4E);
+            });
+
+            buttons.F.addEventListener("click", () => {
+                playAudio(audio5F);
+            });
+
+            buttons.G.addEventListener("click", () => {
+                playAudio(audio5G);
+            });
+
+            // =====================================================
+            // CONVERSATION FLOW
+            // =====================================================
+
+            const afterAudio = new Map([
+                // Audio 1 ends: show the single A button.
+                [audio1, () => showChoices("A")],
+
+                // Audio 2 ends: show B and C.
+                [audio2, () => showChoices("B", "C")],
+
+                // Audio 3B or 3C ends: show D and E.
+                [audio3B, finishConversation],
+                [audio3C, () => showChoices("D", "E")],
+
+                // Audio 4D or 4E ends:
+                // automatically play the common Audio 4.
+                [audio4D, () => playAudio(audio4)],
+                [audio4E, () => playAudio(audio4)],
+
+                // Common Audio 4 ends: show F and G.
+                [audio4, () => showChoices("F", "G")],
+
+                // Final responses end the conversation.
+                [audio5F, finishConversation],
+                [audio5G, finishConversation]
+            ]);
+
+            allAudios.forEach(audio => {
+                audio.addEventListener("play", () => {
+                    currentAudio = audio;
+                    person.classList.add("speaking");
+                });
+
+                audio.addEventListener("pause", () => {
+                    if (!audio.ended) {
+                        person.classList.remove("speaking");
+                    }
+                });
+
+                audio.addEventListener("ended", () => {
+                    person.classList.remove("speaking");
+                    subtitle.textContent = "";
+
+                    const nextAction = afterAudio.get(audio);
+
+                    if (nextAction) {
+                        nextAction();
+                    }
+                });
+            });
+
+            // =====================================================
+            // SUBTITLE TEXT
+            // =====================================================
+
+            const subtitleLines = new Map([
+                [audio1, [
+                    "Hello?",
+                    "This is Wanny.",
+                    "I can barely hear you through the static.",
+                    "Can you hear me?"
+                ]],
+
+                [audio2, [
+                    "Straight to business, I like that!",
+                    "During my years on Svalbard, I learned how important good communication can be.",
+                    "Take these notes.",
+                    "You will find them in your inventory.",
+                    "They may help you find the right frequency to contact them."
+                ]],
+
+                [audio3B, [
+                    "Goodbye, and good luck.",
+                    "And remember: even a weak signal is still a signal."
+                ]],
+
+                [audio3C, [
+                    "Yes, I have.",
+                    "I overwintered there five times.",
+                    "Have you been to Svalbard?"
+                ]],
+
+                [audio4D, [
+                    "Then you know how beautiful it is — and how harsh it can be."
+                ]],
+
+                [audio4E, [
+                    "Not yet, hmm?",
+                    "More of a beach type?",
+                    "*small laugh*"
+                ]],
+
+                [audio4, [
+                    "But yes, Svalbard is not an easy place.",
+                    "Long months of darkness, cold, storms, isolation.",
+                    "I was the first female trapper on Svalbard.",
+                    "I hunted, trapped, repaired things, kept the hut going, and yes, I shot my first polar bear there.",
+                    "That was something I never forgot.",
+                    "Before I went on these adventures, I drove a taxi in Tromsø.",
+                    "Oh man, I met so many people who were crazy about going north.",
+                    "Speaking of that, I was also the first female taxi driver in the north.",
+                    "*laugh*"
+                ]],
+
+                [audio5F, [
+                    "Selvfølgelig — of course.",
+                    "Go on.",
+                    "Your crew is waiting.",
+                    "Good luck!"
+                ]],
+
+                [audio5G, [
+                    "My first husband died early, unfortunately.",
+                    "I had two sons, Alf and Bjørvik.",
+                    "The first time I overwintered, they stayed on the mainland.",
+                    "But later, they came with me to Svalbard and became trappers themselves.",
+                    "A family holiday, a little different.",
+                    "*laugh*",
+                    "I wrote a book about my experiences, if you ever want to read more.",
+                    "But now you need to continue your rescue mission.",
+                    "Good luck!"
+                ]]
+            ]);
+
+            // =====================================================
+            // AUTOMATIC SUBTITLE TIMING
+            // =====================================================
+
+            const subtitleCues = new Map();
+
+            function subtitleWeight(text) {
+                // Remove stage directions such as *laugh*
+                // before counting the words.
+                const spokenText = text
+                    .replace(/\*[^*]+\*/g, "")
+                    .trim();
+
+                const wordCount = spokenText
+                    ? spokenText.split(/\s+/).length
+                    : 2;
+
+                return Math.max(wordCount, 3);
+            }
+
+            function buildSubtitleCues(audio) {
+                const lines = subtitleLines.get(audio) || [];
+                const duration = audio.duration;
+
+                if (
+                    !lines.length ||
+                    !Number.isFinite(duration) ||
+                    duration <= 0
+                ) {
+                    return [];
+                }
+
+                const weights = lines.map(subtitleWeight);
+
+                const totalWeight = weights.reduce(
+                    (sum, weight) => sum + weight,
+                    0
+                );
+
+                let start = 0;
+
+                return lines.map((text, index) => {
+                    const isLastLine =
+                        index === lines.length - 1;
+
+                    const lineDuration =
+                        duration * (weights[index] / totalWeight);
+
+                    const end = isLastLine
+                        ? duration + 0.05
+                        : start + lineDuration;
+
+                    const cue = {
+                        start,
+                        end,
+                        text
+                    };
+
+                    start = end;
+
+                    return cue;
+                });
+            }
+
+            function prepareSubtitles(audio) {
+                subtitleCues.set(
+                    audio,
+                    buildSubtitleCues(audio)
+                );
+            }
+
+            function updateSubtitle(audio) {
+                const cues = subtitleCues.get(audio) || [];
+                const currentTime = audio.currentTime;
+                const cue = cues.find(item => {
+                    return (
+                        currentTime >= item.start &&
+                        currentTime < item.end
+                    );
+                });
+                subtitle.textContent = cue
+                    ? cue.text
+                    : "";
+            }
+
+            allAudios.forEach(audio => {
+                audio.addEventListener("loadedmetadata", () => {
+                    prepareSubtitles(audio);
+                });
+
+                audio.addEventListener("durationchange", () => {
+                    prepareSubtitles(audio);
+                });
+
+                audio.addEventListener("timeupdate", () => {
+                    updateSubtitle(audio);
+                });
+            });           
         </script>
     </div>
     <game-navigation></game-navigation>

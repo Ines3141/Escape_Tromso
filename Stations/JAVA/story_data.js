@@ -289,7 +289,7 @@ const STORIES = {
                 type: "file",
                 name: "henry_rudi_information.mp4",
                 action: "dispatchHenryVideo",
-                video: "../../../../assets/images/hacker_video.mp4"
+                video: "../../../../assets/animation/Henry_Rudi.mp4"
             },
             {
                 type: "text",

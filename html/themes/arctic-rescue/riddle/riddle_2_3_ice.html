@@ -5,157 +5,170 @@
     - create own script file, so one doesnt have the script in this file better overview
 
 THINGS TO CHANGE AT THE END:
-    - Remove devContinueBtn and function in script 
+    - Remove devContinueBtn and function in script
 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
-    <title>Riddle Nansen </title>
-    <!-- link to style sheet -->
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Nansen Ice Route</title>
+
     <link rel="stylesheet" href="../../../../CSS/global.css">
     <link rel="stylesheet" href="../../../../CSS/arctic-theme.css">
-    <script>
-        const previousPage = "../stations/station_2_2.html";
-        const nextPage = "riddle_2_4_location.html";
+
+    <!-- Defines the riddle and previous/next pages -->
+    <script src="../../../../Stations/JAVA/riddle_nansen.js"
+            defer>
     </script>
-    <!--<script src="../../../../Stations/JAVA/letter_templates.js"></script>
-    <script src="../../../../Stations/JAVA/incoming_dispatch.js"></script>-->
-    <script src="../../../../Stations/JAVA/navigation.js"></script>
+
+    <script src="../../../../Stations/JAVA/navigation.js"
+            defer>
+    </script>
 </head>
-<body>
-    <div class="box">
-        <p>
-            Which path do you have to take through the ice?
-            The year when Nansen got Nobel peace will help you.
-        </p>
-        <!-- NOT IN USE!
-        <incoming-dispatch letter-id="nansen-ice-dispatch"
-                           title="Incoming Dispatch"
-                           from="Dispatch Control">
-        </incoming-dispatch>
-        -->
-        <div class="ice-game">
-            <svg id="lineLayer"></svg>
-            <button class="number-dot" data-number="C" style="left:10%; top:10%;">C</button>
-            <button class="number-dot" data-number="O" style="left:60%; top:15%;">O</button>
-            <button class="number-dot" data-number="R" style="left:25%; top:30%;">R</button>
-            <button class="number-dot" data-number="I" style="left:5%; top:60%;">I</button>
-            <button class="number-dot" data-number="D" style="left:75%; top:70%;">D</button>
-            <button class="number-dot" data-number="N" style="left:50%; top:72%;">N</button>
-            <button class="number-dot" data-number="L" style="left:5%; top:88%;">L</button>
-            <button class="number-dot" data-number="A" style="left:85%; top:88%;">O</button>
-            <button class="number-dot" data-number="K" style="left:45%; top:25%;">K</button>
-            <button class="number-dot" data-number="E" style="left:50%; top:72%;">E</button>
+
+<body class="nansen-riddle-page">
+    <main class="box riddle-card">
+        <header class="riddle-header">
+            <span class="riddle-label">Nansen expedition</span>
+
+            <h1>Find the route through the ice</h1>
+
+            <p>
+                Connect the markers in the correct order.
+                Nansen's diary in your inventory will guide you.
+            </p>
+        </header>
+
+        <section class="ice-game"
+                 aria-label="Connect the correct number markers">
+            <div class="ice-overlay"></div>
+
+            <svg id="lineLayer"
+                 aria-hidden="true"></svg>
+
+            <!-- Correct route: 1 → 9 → 2 → 2 -->
+
+            <button type="button"
+                    class="number-dot"
+                    data-number="1"
+                    aria-label="Select number 1"
+                    style="left: 23%; top: 18%;">
+                1
+            </button>
+
+            <button type="button"
+                    class="number-dot"
+                    data-number="9"
+                    aria-label="Select number 9"
+                    style="left: 32%; top: 36%;">
+                9
+            </button>
+
+            <button type="button"
+                    class="number-dot"
+                    data-number="2"
+                    aria-label="Select first number 2"
+                    style="left: 72%; top: 52%;">
+                2
+            </button>
+
+            <button type="button"
+                    class="number-dot"
+                    data-number="2"
+                    aria-label="Select second number 2"
+                    style="left: 84%; top: 76%;">
+                2
+            </button>
+
+            <!-- Decoy markers -->
+
+            <button type="button"
+                    class="number-dot"
+                    data-number="8"
+                    aria-label="Select number 8"
+                    style="left: 72%; top: 17%;">
+                8
+            </button>
+
+            <button type="button"
+                    class="number-dot"
+                    data-number="4"
+                    aria-label="Select number 4"
+                    style="left: 10%; top: 62%;">
+                4
+            </button>
+
+            <button type="button"
+                    class="number-dot"
+                    data-number="0"
+                    aria-label="Select number 0"
+                    style="left: 48%; top: 85%;">
+                0
+            </button>
+
+            <button type="button"
+                    class="number-dot"
+                    data-number="7"
+                    aria-label="Select number 7"
+                    style="left: 91%; top: 31%;">
+                7
+            </button>
+
+            <button type="button"
+                    class="number-dot"
+                    data-number="3"
+                    aria-label="Select number 3"
+                    style="left: 12%; top: 87%;">
+                3
+            </button>
+        </section>
+
+        <div class="route-panel">
+            <span class="route-label">Your route</span>
+            <output id="selectedRoute" aria-live="polite">
+                —
+            </output>
         </div>
 
-        <p id="feedback"></p>
-        <button class="submit-button" id="check_nansen">
-            Check Answer
-        </button>
+        <p id="feedback"
+           class="riddle-feedback"
+           role="status"
+           aria-live="polite">
+        </p>
 
-        <button class="submit-button" id="submit_nansen" onclick="window.location.href = nextPage"
-                style="display:none;">
+        <div class="riddle-actions">
+            <button type="button"
+                    class="secondary-button"
+                    id="undo_nansen"
+                    disabled>
+                Undo
+            </button>
+
+            <button type="button"
+                    class="secondary-button"
+                    id="reset_nansen"
+                    disabled>
+                Reset
+            </button>
+
+            <button type="button"
+                    class="submit-button"
+                    id="check_nansen">
+                Check route
+            </button>
+        </div>
+
+        <button type="button"
+                class="submit-button continue-button"
+                id="submit_nansen"
+                hidden>
             Continue
         </button>
-        <!-- REMOVE LATER -->
-        <button onclick="window.location.href = nextPage">Continue (DEV)</button>
-        <script>            
-            const correctAnswer = ["C", "O", "L", "D"];
-            let selected = [];
-
-            const buttons = document.querySelectorAll(".number-dot");
-            const svg = document.getElementById("lineLayer");
-            const feedback = document.getElementById("feedback");
-            const game = document.querySelector(".ice-game");
-            const btn_submit = document.getElementById("submit_nansen");
-            const btn_check = document.getElementById("check_nansen");
-
-            buttons.forEach(button => {
-                button.addEventListener("click", () => {
-                    if (selected.includes(button)) return;
-
-                    selected.push(button);
-                    button.classList.add("selected");
-
-                    feedback.textContent = "";
-                    drawCurvedLines();
-                });
-            });
-
-            btn_check.addEventListener("click", () => {
-                checkAnswer();
-            });
-
-            function checkAnswer() {
-                const currentAnswer = selected.map(btn => btn.dataset.number);
-
-                if (JSON.stringify(currentAnswer) === JSON.stringify(correctAnswer)) {
-                    feedback.textContent = "Correct! The path through the ice is revealed.";
-                    feedback.style.color = "lightgreen";
-
-                    btn_submit.style.display = "";
-                    btn_check.style.display = "none";
-                } else {
-                    feedback.textContent = "Not quite. Try again.";
-                    feedback.style.color = "orange";
-
-                    setTimeout(resetGame, 1500);
-                }
-            }
-
-            function drawCurvedLines() {
-                svg.innerHTML = "";
-
-                for (let i = 0; i < selected.length - 1; i++) {
-                    const start = getCenter(selected[i]);
-                    const end = getCenter(selected[i + 1]);
-
-                    const midX = (start.x + end.x) / 2;
-                    const midY = (start.y + end.y) / 2 - 40;
-
-                    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-
-                    path.setAttribute(
-                        "d",
-                        `M ${start.x} ${start.y} Q ${midX} ${midY} ${end.x} ${end.y}`
-                    );
-
-                    path.setAttribute("stroke", "white");
-                    path.setAttribute("stroke-width", "4");
-                    path.setAttribute("fill", "none");
-                    path.setAttribute("stroke-linecap", "round");
-
-                    svg.appendChild(path);
-                }
-            }
-
-            function getCenter(element) {
-                const gameRect = game.getBoundingClientRect();
-                const rect = element.getBoundingClientRect();
-
-                return {
-                    x: rect.left + rect.width / 2 - gameRect.left,
-                    y: rect.top + rect.height / 2 - gameRect.top
-                };
-            }
-
-            function resetGame() {
-                selected = [];
-                svg.innerHTML = "";
-                feedback.textContent = "";
-                btn_submit.style.display = "none";
-                btn_check.style.display = "";
-
-                buttons.forEach(btn => btn.classList.remove("selected"));
-            }
-        </script>
-    </div>
+        <button onclick="window.location.href = nextPage">DEV Continue </button>
+    </main>
     <game-navigation></game-navigation>
-    <script>
-        setupGameNavigation();
-    </script>
 </body>
-
 </html>

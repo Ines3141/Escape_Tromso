@@ -80,42 +80,106 @@ const STORIES = {
                 placeholder: "Write OKAY",
                 correctAnswer: "okay",
                 wrongAnswer: "Are you there? Please write OKAY when you have reached the next station."
-            },
-            {
-                type: "waitForFlag",
-                flag: "nansen_phonenumber",
-                value: "true"
-            },
-            {
-                type: "text",
-                sender: "Dispatch",
-                time: "10:37",
-                text: "This is before Nansen phone number."
-            },
-            {
-                type: "waitForFlag",
-                flag: "wanny_frequency",
-                value: "true"
-            },
-            {
-                type: "text",
-                sender: "Dispatch",
-                time: "10:37",
-                text: "This is before Wanny."
-            },
-            {
-                type: "waitForFlag",
-                flag: "before_rudi",
-                value: "true"
-            },
-            {
-                type: "text",
-                sender: "Dispatch",
-                time: "10:37",
-                text: "This is before Henry Rudi."
             }
         ]
     },
+    nansen_dispatch: {
+        title: "Dispatcher Team",
+        status: "Online",
+        steps: [
+            {
+                type: "text",
+                sender: "Dispatch",
+                time: "10:30",
+                text: "Yes. NANSEN of course! He will help."
+            },
+            {
+                type: "text",
+                sender: "Dispatch",
+                time: "10:30",
+                text: "Do you know his phone number?"
+            },
+            {
+                type: "text",
+                sender: "Dispatch",
+                time: "10:31",
+                text: "We have some old files with his number, but we don't understand them."
+            },
+
+        ]
+    },
+
+    wanny_dispatch: {
+        title: "Dispatcher Team",
+        status: "Online",
+        steps: [
+            {
+                type: "text",
+                sender: "Dispatch",
+                time: "10:40",
+                text: "You need to get in contact with Wanny Wolstadt."
+            },
+            {
+                type: "text",
+                sender: "Dispatch",
+                time: "10:40",
+                text: "She was one of the first female hunters on Svalbard, and she is from Tromsø!"
+            },
+            {
+                type: "text",
+                sender: "Dispatch",
+                time: "10:41",
+                text: "We can't reach her! This is the last known location"
+            },
+            {
+                type: "text",
+                sender: "Dispatch",
+                time: "10:41",
+                text: "IMAGE HERE. REPLACE THIS"
+            },
+            {
+                type: "text",
+                sender: "Dispatch",
+                time: "10:42",
+                text: "This image is too blurry, we can't identify this. Can you figure out where this is and establish a connection with Wanny?"
+            },
+
+        ]
+    },
+
+    dispatch_final: {
+        title: "Dispatcher Team",
+        status: "Online",
+        steps: [
+            {
+                type: "text",
+                sender: "Dispatch",
+                time: "11:40",
+                text: "Nice job! We would love to meet you! "
+            },
+            {
+                type: "text",
+                sender: "Dispatch",
+                time: "11:40",
+                text: "You have all the information ready for the crew now. Send them this information using the following link."
+            },
+            {
+                type: "text",
+                sender: "Dispatch",
+                time: "11:42",
+                text: "LINK REPLACE THIS"
+            },
+            {
+                type: "text",
+                sender: "Dispatch",
+                time: "11:43",
+                text: "Good bye!!"
+            }
+        ]
+    },
+
+
+
     henry_rudi: {
         title: "Henry Rudi",
         status: "Online",

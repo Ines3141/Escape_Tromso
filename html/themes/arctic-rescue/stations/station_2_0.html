@@ -20,8 +20,8 @@
 
         const chatNavigation = {
             start: {
-                previous: "intro.html",
-                next: "../riddle/riddle_1_2_destination.html"
+                previous: "../riddle/riddle_1_2_destination.html",
+                next: "../riddle/riddle_2_1_phone.html"
             }
         };
 
@@ -44,37 +44,18 @@
         <h1>Station 1</h1>
         <p>Gateway to the Arctic</p>
 
-        <story-chat story="dispatch_intro"></story-chat>
+        <story-chat story="nansen_dispatch"></story-chat>
         <button id="profile" class="profile-button" onclick="openProfile()" style="display:none;">
             Explorer Gateway to arctic
         </button>
         <button class="riddle-button" id="riddle_btn" onclick="window.location.href=nextPage">
             Solve Riddle
         </button>
-        <button onclick="
-            localStorage.removeItem('dispatch_intro_step');
-            localStorage.removeItem('dispatch_intro_scroll');
-            localStorage.removeItem('dispatch_intro_upload_6');
-            localStorage.removeItem('teamName');
-            localStorage.removeItem('stationReady');
-            localStorage.removeItem('nansen_phonenumber');
-            location.reload();
-        ">
-            Reset chat
-        </button>
         <button onclick="clearInventory();"> Reset Inventory </button>
     </div>
     <game-navigation></game-navigation>
     <script>
         setupGameNavigation();
-        addInventoryItem({
-            id: "morse-sheet",
-            title: "Morse Code Sheet",
-            type: "image",
-            thumb: "../../../../assets/images/Morse_code.jpg",
-            full: "../../../../assets/images/Morse_code.jpg",
-            description: "An old paper with the Morse code alphabet and numbers."
-        });
     </script>
 </body>
 

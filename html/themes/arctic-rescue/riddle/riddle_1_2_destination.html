@@ -164,7 +164,7 @@
     </style>
     <script>
         const previousPage = "../stations/station_1_1.html?pass=start";
-        const nextPage = "../stations/station_1_1.html?pass=after_nansen";
+        const nextPage = "../stations/station_2_0.html";
     </script>
 </head>
 
@@ -220,12 +220,10 @@
     <script>
         function callExplorer(explorer) {
             if (explorer === "nansen") {
-                localStorage.setItem("nansen_phonenumber", "true");
-
                 document.body.classList.add("page-success");
 
                 setTimeout(() => {
-                    window.location.href = "../stations/station_1_1.html?pass=after_nansen";
+                    window.location.href = nextPage;
                 }, 500);
             } else {
                 const overlay = document.getElementById("dangerOverlay");

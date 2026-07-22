@@ -65,7 +65,7 @@ const STORIES = {
             {
                 type: "file",
                 name: "handwritten_note.pdf",
-                open: "station-1-signal"
+                action: "station1SignalLetter"
             },
             {
                 type: "text",

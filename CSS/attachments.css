@@ -1,40 +1,576 @@
-.sos-overlay,
-.image-overlay {
+/* =======================
+	SOS EMERGENCY OVERLAY STATION_1 CHAT 
+	====================== */
+
+.sos-overlay {
 	position: fixed;
 	inset: 0;
-	background: black;
-	z-index: 9999;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	z-index: 999999;
+	width: 100vw;
+	height: 100vh;
+	height: 100dvh;
+	display: grid;
+	place-items: center;
+	overflow: hidden;
+	isolation: isolate;
+	background: #000;
+	opacity: 1;
+	visibility: visible;
+	transition: opacity 350ms ease;
 }
-
-.sos-map {
-	width: 70vw;
-	height: 70vh;
-	background-image: url("../../../../assets/images/sos-map.jpg");
-	background-size: cover;
-	background-position: center;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+.sos-overlay.closing {
+	opacity: 0;
 }
-
-.sos-text {
-	color: red;
-	font-size: 80px;
-	font-weight: bold;
-	animation: sosBlink 0.8s infinite;
+.sos-blackout {
+	position: absolute;
+	inset: 0;
+	z-index: -2;
+	background: #000;
+	pointer-events: none;
 }
+.sos-overlay::before {
+	content: "";
+	position: absolute;
+	z-index: -1;
+	width: min(90vw, 850px);
+	height: min(90vw, 850px);
+	background: radial-gradient( circle, rgba(255, 0, 0, 0.34) 0%, rgba(255, 0, 0, 0.15) 32%, rgba(255, 0, 0, 0.04) 58%, transparent 74% );
+	border-radius: 50%;
+	animation: emergencyGlow 900ms ease-in-out infinite;
+	pointer-events: none;
+}
+@keyframes emergencyGlow {
+	0%, 100% {
+		opacity: 0.35;
+		transform: scale(0.86);
+	}
 
-@keyframes sosBlink {
 	50% {
-		opacity: 0.15;
+		opacity: 1;
+		transform: scale(1.08);
 	}
 }
 
-.sos-close {
+
+/* ----  Small close button ----- */
+
+.overlay-close {
+	position: absolute;
+	top: max(14px, env(safe-area-inset-top));
+	right: max(14px, env(safe-area-inset-right));
+	z-index: 5;
+	width: 38px;
+	height: 38px;
+	padding: 0;
+	display: grid;
+	place-items: center;
+	color: white;
+	background: rgba(15, 0, 0, 0.68);
+	border: 1px solid rgba(255, 255, 255, 0.35);
+	border-radius: 50%;
+	font-size: 28px;
+	font-weight: 300;
+	line-height: 1;
+	cursor: pointer;
+	box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.16);
+	backdrop-filter: blur(8px);
+	transition: transform 150ms ease, background 150ms ease;
+}
+
+.overlay-close:hover {
+	background: rgba(150, 0, 0, 0.8);
+	transform: scale(1.08);
+}
+.overlay-close:active {
+	transform: scale(0.94);
+}
+.overlay-close:focus-visible {
+	outline: 3px solid white;
+	outline-offset: 4px;
+}
+
+/* --------- Main danger visualization --------- */
+
+.sos-danger-effect {
+	position: relative;
+	z-index: 2;
+	width: min(82vw, 520px);
+	aspect-ratio: 1;
+	display: grid;
+	place-items: center;
+}
+
+/* Beacon assembly */
+
+.sos-beacon {
+	position: relative;
+	z-index: 3;
+	width: 150px;
+	height: 190px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	animation: beaconShake 180ms linear infinite;
+}
+
+.sos-beacon-light {
+	position: relative;
+	width: 120px;
+	height: 130px;
+	background: #d90000;
+	border: 7px solid #351515;
+	border-bottom-width: 11px;
+	border-radius: 65px 65px 18px 18px;
+	box-shadow: inset 0 5px 7px rgba(255, 255, 255, 0.15), inset 0 -14px 18px rgba(70, 0, 0, 0.6), inset 8px 0 10px rgba(255, 70, 70, 0.08), inset -8px 0 10px rgba(70, 0, 0, 0.22), 0 0 18px rgba(255, 0, 0, 0.9), 0 0 55px rgba(255, 0, 0, 0.72), 0 0 120px rgba(255, 0, 0, 0.45);
+	animation: beaconFlash 700ms steps(2, end) infinite;
+}
+
+
+/* Protective lamp bands */
+.sos-beacon-light::after {
+	content: "";
+	position: absolute;
+	inset: 9px 20px;
+	border-right: 5px solid rgba(45, 0, 0, 0.55);
+	border-left: 5px solid rgba(45, 0, 0, 0.55);
+	border-radius: 45%;
+	box-shadow: 21px 0 0 rgba(45, 0, 0, 0.38), -21px 0 0 rgba(45, 0, 0, 0.38);
+}
+.sos-beacon-base {
+	width: 145px;
+	height: 48px;
+	margin-top: -5px;
+	background: linear-gradient( 180deg, #596167, #22292d 60%, #101519 );
+	border: 5px solid #15191c;
+	border-radius: 8px 8px 18px 18px;
+	box-shadow: inset 0 2px 2px rgba(255, 255, 255, 0.18), 0 10px 20px rgba(0, 0, 0, 0.55);
+}
+
+/* Expanding warning waves */
+.sos-ring {
+	position: absolute;
+	width: 170px;
+	height: 170px;
+	border: 5px solid rgba(255, 55, 55, 0.75);
+	border-radius: 50%;
+	opacity: 0;
+	box-shadow: inset 0 0 20px rgba(255, 0, 0, 0.22), 0 0 20px rgba(255, 0, 0, 0.2);
+	animation: emergencyRing 2.1s ease-out infinite;
+}
+.sos-ring-two {
+	animation-delay: 700ms;
+}
+.sos-ring-three {
+	animation-delay: 1400ms;
+}
+
+/* Animations */
+@keyframes emergencyScreenPulse {
+	0%, 100% {
+		opacity: 0.2;
+	}
+	50% {
+		opacity: 1;
+	}
+}
+
+@keyframes emergencyScan {
+	from {
+		transform: translateY(-20%);
+	}
+	to {
+		transform: translateY(20%);
+	}
+}
+
+@keyframes beaconFlash {
+	0%, 45% {
+		filter: brightness(0.65);
+	}
+	46%, 100% {
+		filter: brightness(1.5);
+	}
+}
+
+@keyframes beaconRotate {
+	from {
+		transform: rotate(0deg) translateX(37px);
+	}
+	to {
+		transform: rotate(360deg) translateX(37px);
+	}
+}
+
+@keyframes beaconShake {
+	0%, 100% {
+		transform: translateX(0);
+	}
+	25% {
+		transform: translateX(-1px);
+	}
+	75% {
+		transform: translateX(1px);
+	}
+}
+
+@keyframes emergencyRing {
+	0% {
+		opacity: 0.9;
+		transform: scale(0.65);
+	}
+	100% {
+		opacity: 0;
+		transform: scale(3.8);
+	}
+}
+
+@media (max-width: 500px) {
+	.sos-beacon {
+		transform: scale(0.8);
+	}
+	.sos-danger-effect {
+		width: 95vw;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.sos-overlay::before,
+	.sos-overlay::after,
+	.sos-beacon,
+	.sos-beacon-light,
+	.sos-beacon-light::before,
+	.sos-ring {
+		animation: none;
+	}
+
+	.sos-beacon-light {
+		filter: brightness(1.2);
+	}
+}
+
+/* ===================
+	IMAGE PREVIEW 
+   =================== */
+
+.image-overlay {
 	position: fixed;
-	top: 20px;
-	right: 20px;
+	inset: 0;
+	z-index: 10000;
+	display: grid;
+	place-items: center;
+	padding: 24px;
+	background: rgba(1, 8, 14, 0.94);
+	opacity: 0;
+	visibility: hidden;
+	backdrop-filter: blur(8px);
+	transition: opacity 300ms ease, visibility 300ms ease;
+}
+
+.image-overlay.visible {
+	opacity: 1;
+	visibility: visible;
+}
+
+.image-preview-frame {
+	position: relative;
+	max-width: min(900px, 92vw);
+	max-height: 86vh;
+	padding: 10px;
+	background: #152935;
+	border: 1px solid rgba(255, 255, 255, 0.25);
+	border-radius: 12px;
+	box-shadow: 0 24px 70px rgba(0, 0, 0, 0.7), 0 0 30px rgba(75, 190, 225, 0.14);
+	transform: scale(0.9);
+	transition: transform 300ms ease;
+}
+
+.image-overlay.visible .image-preview-frame {
+	transform: scale(1);
+}
+
+.image-preview-frame img {
+	display: block;
+	max-width: 100%;
+	max-height: calc(86vh - 20px);
+	object-fit: contain;
+	border-radius: 6px;
+}
+
+/* ===================
+	LETTER STATION 1 BLINKING MORSE
+   =================== */
+
+/* ==================== SIGNAL LETTER OVERLAY ==================== */
+
+.signal-letter-overlay {
+	position: fixed;
+	inset: 0;
+	z-index: 100000;
+	width: 100vw;
+	height: 100vh;
+	height: 100dvh;
+	padding: 56px 18px 24px;
+	display: grid;
+	place-items: center;
+	overflow-y: auto;
+	background: rgba(0, 0, 0, 0.96);
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 250ms ease, visibility 250ms ease;
+}
+
+	.signal-letter-overlay.visible {
+		opacity: 1;
+		visibility: visible;
+	}
+
+	.signal-letter-overlay.closing {
+		opacity: 0;
+	}
+
+/* ==================== PAPER ==================== */
+
+.signal-letter-paper {
+	width: min(640px, 100%);
+	margin: auto;
+	padding: clamp(24px, 5vw, 42px);
+	color: #302719;
+	background: repeating-linear-gradient( to bottom, transparent 0, transparent 31px, rgba(86, 67, 38, 0.055) 32px ), #f2ead8;
+	border: 1px solid #c5b48f;
+	border-radius: 5px;
+	box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8), inset 0 0 40px rgba(89, 64, 28, 0.09);
+	transform: translateY(18px) rotate(-0.25deg);
+	transition: transform 300ms ease;
+}
+
+.signal-letter-overlay.visible
+.signal-letter-paper {
+	transform: translateY(0) rotate(-0.25deg);
+}
+
+/* ==================== LETTER HEADER ==================== */
+
+.signal-letter-header {
+	margin-bottom: 24px;
+	padding-bottom: 16px;
+	border-bottom: 2px solid rgba(72, 54, 30, 0.28);
+}
+
+.signal-letter-category {
+	display: inline-block;
+	margin-bottom: 9px;
+	padding: 5px 9px;
+	color: #f3e9d4;
+	background: #614b30;
+	border-radius: 3px;
+	font-family: "Courier New", monospace;
+	font-size: 10px;
+	font-weight: bold;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+}
+
+.signal-letter-header h2 {
+	margin: 0 0 8px;
+	color: #302719;
+	font-family: Georgia, "Times New Roman", serif;
+	font-size: clamp(27px, 5vw, 38px);
+	line-height: 1.1;
+}
+
+.signal-letter-sender {
+	margin: 0;
+	color: #665640;
+	font-family: "Courier New", monospace;
+	font-size: 13px;
+}
+
+/* ==================== LETTER CONTENT ==================== */
+
+.signal-letter-content {
+	color: #302719;
+	font-family: Georgia, "Times New Roman", serif;
+	font-size: 17px;
+	line-height: 1.65;
+}
+
+	.signal-letter-content p {
+		color: #302719;
+	}
+
+.signal-letter-signature {
+	margin-top: 28px;
+	font-style: italic;
+}
+
+/* ==================== RECOVERED NOTE ==================== */
+
+.signal-note {
+	margin: 22px 0;
+	padding: 18px 14px;
+	color: #262015;
+	background: rgba(75, 57, 33, 0.1);
+	border: 1px dashed rgba(70, 52, 29, 0.45);
+	border-radius: 5px;
+	font-family: "Courier New", monospace;
+	font-size: clamp(20px, 5vw, 27px);
+	font-weight: 700;
+	letter-spacing: 0.12em;
+	line-height: 1.4;
+	text-align: center;
+}
+
+/* ==================== SIGNAL PANEL ==================== */
+
+.signal-lamp-panel {
+	margin: 28px 0;
+	padding: 22px;
+	color: #ece7d7;
+	background: #253137;
+	border: 3px solid #736649;
+	border-radius: 8px;
+	text-align: center;
+	box-shadow: inset 0 0 18px rgba(0, 0, 0, 0.55), 0 8px 18px rgba(62, 45, 25, 0.22);
+}
+
+.signal-panel-title {
+	margin: 0 0 18px;
+	color: #d8cda9 !important;
+	font-family: "Courier New", monospace;
+	font-size: 12px;
+	font-weight: bold;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+}
+
+/* Simple circular signal lamp */
+
+.signal-lamp {
+	width: 86px;
+	height: 86px;
+	margin: 0 auto 20px;
+	background: #2b2921;
+	border: 7px solid #13181a;
+	border-radius: 50%;
+	box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.9), 0 4px 9px rgba(0, 0, 0, 0.45);
+	transition: background 80ms linear, box-shadow 80ms linear;
+}
+
+	.signal-lamp.on {
+		background: #ffdc58;
+		box-shadow: inset 0 0 9px rgba(255, 255, 255, 0.65), 0 0 16px rgba(255, 220, 88, 1), 0 0 42px rgba(255, 220, 88, 0.8), 0 0 90px rgba(255, 220, 88, 0.4);
+	}
+
+/* ==================== SIGNAL BUTTON ==================== */
+
+.signal-lamp-button {
+	min-width: 145px;
+	padding: 10px 17px;
+	color: #172025;
+	background: #d8cda9;
+	border: 2px solid #f1e8ca;
+	border-radius: 5px;
+	font-family: "Courier New", monospace;
+	font-size: 13px;
+	font-weight: bold;
+	cursor: pointer;
+	box-shadow: 0 4px 0 #756b50, 0 7px 10px rgba(0, 0, 0, 0.28);
+	transition: transform 120ms ease, background 120ms ease;
+}
+
+	.signal-lamp-button:hover {
+		background: #eee1b9;
+		transform: translateY(-1px);
+	}
+
+	.signal-lamp-button:active {
+		transform: translateY(3px);
+		box-shadow: 0 1px 0 #756b50, 0 3px 5px rgba(0, 0, 0, 0.25);
+	}
+
+	.signal-lamp-button.active {
+		color: white;
+		background: #8c382c;
+		border-color: #b55d4e;
+		box-shadow: 0 4px 0 #4d201b, 0 7px 10px rgba(0, 0, 0, 0.28);
+	}
+
+.signal-lamp-status {
+	min-height: 20px;
+	margin: 15px 0 0;
+	color: rgba(236, 231, 215, 0.75) !important;
+	font-family: "Courier New", monospace;
+	font-size: 11px;
+}
+
+/* ==================== CLOSE BUTTON ==================== */
+
+.signal-letter-close {
+	position: fixed;
+	top: max(14px, env(safe-area-inset-top));
+	right: max(14px, env(safe-area-inset-right));
+	z-index: 3;
+	width: 38px;
+	height: 38px;
+	padding: 0;
+	display: grid;
+	place-items: center;
+	color: white;
+	background: rgba(25, 25, 25, 0.9);
+	border: 1px solid rgba(255, 255, 255, 0.35);
+	border-radius: 50%;
+	font-family: Arial, sans-serif;
+	font-size: 28px;
+	font-weight: 300;
+	line-height: 1;
+	cursor: pointer;
+	transition: transform 150ms ease, background 150ms ease;
+}
+
+	.signal-letter-close:hover {
+		background: #813328;
+		transform: scale(1.08);
+	}
+
+	.signal-letter-close:active {
+		transform: scale(0.94);
+	}
+
+	.signal-letter-close:focus-visible,
+	.signal-lamp-button:focus-visible {
+		outline: 3px solid #ffd869;
+		outline-offset: 4px;
+	}
+
+/* ==================== MOBILE ==================== */
+
+@media (max-width: 520px) {
+	.signal-letter-overlay {
+		padding: 55px 10px max(14px, env(safe-area-inset-bottom));
+	}
+
+	.signal-letter-paper {
+		padding: 23px 17px;
+	}
+
+	.signal-letter-content {
+		font-size: 15px;
+	}
+
+	.signal-lamp-panel {
+		padding: 19px 13px;
+	}
+
+	.signal-note {
+		letter-spacing: 0.07em;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.signal-letter-overlay,
+	.signal-letter-paper,
+	.signal-lamp,
+	.signal-lamp-button {
+		transition: none;
+	}
 }

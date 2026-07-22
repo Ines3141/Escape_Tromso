@@ -429,7 +429,6 @@
             if (shouldAdvance) {
                 this.advance();
             }
-
             return;
         }
 

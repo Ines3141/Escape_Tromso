@@ -17,16 +17,13 @@
     <script src="../../../../Stations/JAVA/inventory.js"></script>
     <script>
         const chatPass = new URLSearchParams(window.location.search).get("pass") || "start";
-
         const chatNavigation = {
             start: {
                 previous: "intro.html",
                 next: "../riddle/riddle_1_2_destination.html"
             }
         };
-
         const currentNavigation = chatNavigation[chatPass] || chatNavigation.start;
-
         const previousPage = currentNavigation.previous;
         const nextPage = currentNavigation.next;
     </script>

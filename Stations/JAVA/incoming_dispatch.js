@@ -11,36 +11,7 @@
         const nextPage = this.getAttribute("next") || "#";
 
         const teamName = localStorage.getItem("teamName") || "XY";
-
         window.LETTERS = window.LETTERS || {
-            "station-1-signal": {
-                title: "Strange Signal Received",
-                hasLamp: true,
-                from: "Dispatch Control",
-                content: `
-                    <p>Hello Team ${teamName},</p>
-
-                    <p>
-                        We got this really strange signal from a blinking lamp.
-                        Along with it came this kind of note:
-                    </p>
-
-                    <div class="note">
-                        _ _ m _ and _ _ 9 m _
-                    </div>
-
-                    <p>
-                        Maybe you can do more with this information!
-                    </p>
-
-                    <p>
-                        Remember to look for help in the inventory.
-                    </p>
-
-                    <p>— Dispatch Control</p>
-                `
-            },
-
             "amundsen-dispatch": {
                 title: "Dispatch from Roald Amundsen",
                 from: "Roald Amundsen",
@@ -317,7 +288,6 @@
 
         this.shadowRoot.getElementById("openBtn").addEventListener("click", () => {
             this.openLetter(letterId, letter);
-            setupMorseLamps(this.shadowRoot);
             setupYearLocks(this.shadowRoot);
         });
 
@@ -351,7 +321,7 @@
                 title: letter.title,
                 from: letter.from,
                 content: letter.content,
-                hasLamp: letter.hasLamp || false,
+                /* hasLamp: letter.hasLamp || false, DONT NEED IT I THINK*/
                 read: false,
                 date: new Date().toISOString()
             });

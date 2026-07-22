@@ -197,34 +197,27 @@
             if (actualValue === expectedValue) {
                 this.advance();
             }
-
             return;
         }
-
         this.showTyping(step);
     }
     
     renderHistory() {
         for (let i = 0; i < this.currentStep; i++) {
             const step = this.story.steps[i];
-
             switch (step.type) {
                 case "text":
                     this.addText(step);
                     break;
-
                 case "file":
                     this.addFile(step, false);
                     break;
-
                 case "image":
                     this.addImage(step, false);
                     break;
-
                 case "input":
                     this.addSavedInput(step);
                     break;
-
                 case "upload":
                     this.addSavedUpload(step, i);
                     break;

@@ -355,3 +355,1058 @@
         height: 36px;
     }
 }
+
+/* =========================================================
+   ROALD AMUNDSEN EXPEDITION MAP
+   ========================================================= */
+
+.amundsen-map-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100002;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 22px;
+    background: rgba(3, 12, 20, 0.92);
+}
+
+
+/* =========================================================
+   MAP FILE CONTAINER
+   ========================================================= */
+
+.amundsen-map-file {
+    position: relative;
+    width: min(94vw, 820px);
+    max-height: 92vh;
+    overflow-y: auto;
+    box-sizing: border-box;
+    padding: 30px;
+    color: #2c2115;
+    background: radial-gradient( circle at 30% 15%, rgba(125, 91, 44, 0.12), transparent 30% ), linear-gradient( 135deg, #e9d8ad, #cfb77e );
+    border: 1px solid #59462e;
+    border-radius: 8px;
+    box-shadow: 0 28px 80px rgba(0, 0, 0, 0.7), inset 0 0 55px rgba(75, 47, 18, 0.25);
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+
+    /*
+ * Decorative inner border.
+ */
+
+    .amundsen-map-file::before {
+        content: "";
+        position: absolute;
+        inset: 12px;
+        border: 2px solid rgba(65, 45, 24, 0.65);
+        pointer-events: none;
+    }
+
+
+/* =========================================================
+   TITLE
+   ========================================================= */
+
+.amundsen-map-title {
+    position: relative;
+    z-index: 2;
+    margin: 0 45px 8px;
+    color: #281d12 !important;
+    font-size: clamp(30px, 6vw, 52px);
+    line-height: 1;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.amundsen-map-subtitle {
+    position: relative;
+    z-index: 2;
+    margin: 0 0 22px;
+    color: #49351f !important;
+    font-size: 15px;
+    font-style: italic;
+    font-weight: 600;
+    text-align: center;
+}
+
+
+/* =========================================================
+   CLOSE BUTTON
+   ========================================================= */
+
+.amundsen-map-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 20;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 1px solid #302217;
+    border-radius: 50%;
+    color: white !important;
+    background: #2b2118;
+    font-size: 25px;
+    line-height: 1;
+    cursor: pointer;
+    transition: transform 0.18s ease, background 0.18s ease;
+}
+
+    .amundsen-map-close:hover {
+        transform: scale(1.08);
+        background: #5b3822;
+    }
+
+    .amundsen-map-close:active {
+        transform: scale(0.94);
+    }
+
+    .amundsen-map-close:focus-visible {
+        outline: 3px solid white;
+        outline-offset: 3px;
+    }
+
+
+/* =========================================================
+   MAP VIEWER
+   ========================================================= */
+
+.amundsen-map-viewer {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 720px;
+    aspect-ratio: 46 / 35;
+    margin: 0 auto;
+    overflow: hidden;
+    background: #927c55;
+    border: 3px solid #3f3020;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4), inset 0 0 25px rgba(45, 27, 12, 0.25);
+}
+
+
+/* =========================================================
+   INDIVIDUAL MAPS
+   ========================================================= */
+
+.amundsen-map {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.96);
+    transform-origin: center;
+    transition: opacity 0.45s ease, transform 0.45s ease;
+}
+
+    .amundsen-map.active {
+        z-index: 2;
+        opacity: 1;
+        pointer-events: auto;
+        transform: scale(1);
+    }
+
+    .amundsen-map.zooming {
+        z-index: 3;
+        opacity: 0;
+        transform: scale(1.8);
+        pointer-events: none;
+    }
+
+    .amundsen-map img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: sepia(0.6) hue-rotate(15deg) saturate(1.2) brightness(0.95) contrast(1.05);
+    }
+
+
+/* =========================================================
+   MAP PINS
+   ========================================================= */
+
+.amundsen-map-pin {
+    position: absolute;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transform: translate(-50%, -100%);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    background: transparent;
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
+    filter: drop-shadow(0 4px 3px rgba(0, 0, 0, 0.65));
+    transition: transform 0.16s ease, filter 0.16s ease;
+}
+
+    .amundsen-map-pin:hover {
+        transform: translate(-50%, -100%) scale(1.15);
+        filter: drop-shadow(0 8px 5px rgba(0, 0, 0, 0.75));
+    }
+
+    .amundsen-map-pin:active {
+        transform: translate(-50%, -100%) scale(0.95);
+    }
+
+    .amundsen-map-pin:focus-visible {
+        outline: 3px solid white;
+        outline-offset: 2px;
+    }
+
+
+/* =========================================================
+   EXPEDITION NOTE
+   ========================================================= */
+
+.amundsen-map-note {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    z-index: 5;
+    width: min(46%, 250px);
+    box-sizing: border-box;
+    padding: 13px;
+    color: #281d12;
+    background: linear-gradient( 135deg, rgba(242, 222, 167, 0.96), rgba(190, 155, 90, 0.88) );
+    border: 1px solid rgba(60, 42, 20, 0.75);
+    box-shadow: 3px 5px 12px rgba(0, 0, 0, 0.35);
+    transform: rotate(-1deg);
+    font-family: "Caveat", "Segoe Print", "Comic Sans MS", cursive;
+}
+
+    .amundsen-map-note h2 {
+        margin: 0 0 7px;
+        color: #281d12 !important;
+        font-size: 22px;
+        line-height: 1;
+        text-align: left;
+    }
+
+    .amundsen-map-note p {
+        margin: 4px 0;
+        color: #281d12 !important;
+        font-size: 16px;
+        line-height: 1.25;
+        text-align: left;
+    }
+
+
+/* =========================================================
+   BACK BUTTON
+   ========================================================= */
+
+.amundsen-map-back {
+    position: absolute;
+    right: 14px;
+    bottom: 14px;
+    z-index: 6;
+    min-width: 105px;
+    padding: 10px 15px;
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    border-radius: 10px;
+    color: white;
+    background: rgba(24, 31, 35, 0.86);
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.16s ease, background 0.16s ease;
+}
+
+    .amundsen-map-back:hover {
+        transform: translateY(-2px);
+        background: rgba(55, 70, 78, 0.96);
+    }
+
+    .amundsen-map-back:active {
+        transform: translateY(1px);
+    }
+
+
+/* =========================================================
+   INSTRUCTION
+   ========================================================= */
+
+.amundsen-map-instruction {
+    position: relative;
+    z-index: 2;
+    margin: 17px 0 0;
+    color: #352719 !important;
+    font-size: 15px;
+    font-style: italic;
+    font-weight: 600;
+    text-align: center;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 650px) {
+    .amundsen-map-overlay {
+        align-items: flex-start;
+        padding: 10px;
+    }
+
+    .amundsen-map-file {
+        width: 100%;
+        max-height: calc(100vh - 20px);
+        padding: 24px 16px;
+    }
+
+    .amundsen-map-title {
+        margin-right: 42px;
+        margin-left: 42px;
+        font-size: clamp(27px, 9vw, 40px);
+    }
+
+    .amundsen-map-viewer {
+        aspect-ratio: 4 / 5;
+    }
+
+    .amundsen-map-note {
+        right: 10px;
+        bottom: 65px;
+        left: 10px;
+        width: auto;
+        max-height: 42%;
+        overflow-y: auto;
+        transform: none;
+    }
+
+        .amundsen-map-note h2 {
+            font-size: 19px;
+        }
+
+        .amundsen-map-note p {
+            font-size: 14px;
+        }
+
+    .amundsen-map-back {
+        right: 10px;
+        bottom: 10px;
+    }
+
+    .amundsen-map-pin {
+        width: 38px;
+        height: 38px;
+        font-size: 21px;
+    }
+}
+
+/* =========================================================
+   NANSEN DIARY
+   ========================================================= */
+
+.nansen-diary-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100002;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    background: rgba(0, 0, 0, 0.88);
+}
+
+.nansen-diary-shell {
+    position: relative;
+    width: min(520px, 100%);
+    max-height: 92vh;
+    padding: 24px 24px 30px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    border-radius: 18px;
+    background: linear-gradient( 180deg, #493621 0%, #24180f 100% );
+    box-shadow: 0 25px 65px rgba(0, 0, 0, 0.55);
+}
+
+.nansen-diary-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 3000;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 50%;
+    background: #111;
+    color: white;
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.nansen-diary-title {
+    margin: 0 50px 18px 0;
+    color: #f3e4bd;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 28px;
+    text-align: center;
+}
+
+.nansen-diary-book {
+    position: relative;
+    width: min( 400px, calc(100vw - 88px) );
+    height: clamp( 480px, 72vh, 550px );
+    margin: 10px auto;
+    perspective: 2000px;
+    touch-action: pan-y;
+}
+
+.nansen-diary-page {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+    background-image: var( --nansen-paper-image );
+    background-size: cover;
+    background-position: center;
+    border-radius: 12px;
+    transform-origin: left center;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.32);
+    transition: transform 0.8s cubic-bezier( 0.4, 0.1, 0.2, 1 ), opacity 0.8s ease;
+    backface-visibility: hidden;
+}
+
+    .nansen-diary-page::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background: linear-gradient( 90deg, rgba(60, 35, 15, 0.17), transparent 14%, transparent 85%, rgba(60, 35, 15, 0.08) );
+    }
+
+    .nansen-diary-page.flipped {
+        transform: rotateY(-180deg);
+        opacity: 0.12;
+        pointer-events: none;
+    }
+
+    .nansen-diary-page h2 {
+        position: relative;
+        z-index: 2;
+        margin: 0;
+        padding: 20px 22px 4px;
+        color: #3a2915;
+        font-family: "Caveat", cursive;
+        font-size: 23px;
+        text-align: left;
+    }
+
+    .nansen-diary-page p {
+        position: relative;
+        z-index: 2;
+        margin: 0;
+        padding: 6px 24px 18px;
+        color: #3a2915;
+        font-family: "Caveat", cursive;
+        font-size: 18px;
+        line-height: 1.35;
+    }
+
+.nansen-diary-photo {
+    position: relative;
+    z-index: 2;
+    width: 90%;
+    height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 8px auto 6px;
+    overflow: hidden;
+    background: transparent;
+    transform: rotate(-0.5deg);
+}
+
+    .nansen-diary-photo img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+        border-radius: 4px;
+        filter: sepia(0.22) contrast(0.94);
+    }
+
+    .nansen-diary-photo::after {
+        content: attr( data-watermark );
+        position: absolute;
+        left: 20%;
+        top: 20%;
+        transform: translate( -50%, -50% ) rotate(-5deg);
+        padding: 8px 16px;
+        border: 3px solid rgba( 120, 70, 30, 0.1 );
+        color: rgba( 120, 70, 30, 0.45 );
+        font-family: Georgia, serif;
+        font-size: 38px;
+        letter-spacing: 4px;
+        pointer-events: none;
+    }
+
+/* Page-turning buttons */
+
+.nansen-diary-next,
+.nansen-diary-previous {
+    position: absolute;
+    bottom: 0;
+    z-index: 1200;
+    width: 105px;
+    height: 105px;
+    border: none;
+    color: rgba( 70, 45, 20, 0.7 );
+    font-size: 42px;
+    cursor: pointer;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.nansen-diary-next {
+    right: 0;
+    text-align: right;
+    padding: 42px 16px 0 0;
+    background: linear-gradient( 135deg, transparent 48%, rgba( 100, 80, 40, 0.2 ) 50% );
+}
+
+.nansen-diary-previous {
+    left: 0;
+    text-align: left;
+    padding: 42px 0 0 16px;
+    background: linear-gradient( 225deg, transparent 48%, rgba( 100, 80, 40, 0.2 ) 50% );
+}
+
+    .nansen-diary-next:hover:not(:disabled),
+    .nansen-diary-previous:hover:not(:disabled) {
+        transform: scale(1.06);
+    }
+
+    .nansen-diary-next:disabled,
+    .nansen-diary-previous:disabled {
+        opacity: 0.15;
+        cursor: default;
+    }
+
+
+
+
+.nansen-diary-help {
+    margin: 18px 0 0;
+    color: #ead9af;
+    font-size: 14px;
+    text-align: center;
+}
+
+/* Mobile diary */
+
+@media (max-width: 520px) {
+    .nansen-diary-overlay {
+        padding: 8px;
+    }
+
+    .nansen-diary-shell {
+        padding: 18px 10px 24px;
+    }
+
+    .nansen-diary-title {
+        margin-right: 45px;
+        font-size: 23px;
+    }
+
+    .nansen-diary-book {
+        width: min( 370px, calc(100vw - 38px) );
+        height: clamp( 455px, 72vh, 520px );
+    }
+
+    .nansen-diary-photo {
+        height: 225px;
+    }
+
+    .nansen-diary-page h2 {
+        padding: 18px 18px 3px;
+        font-size: 21px;
+    }
+
+    .nansen-diary-page p {
+        padding: 5px 19px 14px;
+        font-size: 16px;
+        line-height: 1.28;
+    }
+}
+
+/* =========================================================
+   WANNY WOLDSTAD - ARCTIC TRAPPER CASE
+   ========================================================= */
+
+.wanny-case-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100002;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    background: radial-gradient( circle at center, rgba(60, 74, 78, 0.25), rgba(0, 0, 0, 0.92) );
+}
+
+.wanny-case-shell {
+    position: relative;
+    width: min(940px, 100%);
+    max-height: 92vh;
+    padding: 26px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 20px;
+    background: linear-gradient( 180deg, #22343a 0%, #101c21 100% );
+    color: #f3ead6;
+    box-shadow: 0 28px 70px rgba(0, 0, 0, 0.6);
+}
+
+.wanny-case-close {
+    position: absolute;
+    top: 13px;
+    right: 13px;
+    z-index: 100;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 50%;
+    background: #111;
+    color: white;
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.wanny-case-heading {
+    margin: 0 52px 8px 0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp( 27px, 4vw, 40px );
+    text-align: center;
+}
+
+.wanny-case-introduction {
+    max-width: 680px;
+    margin: 0 auto 30px;
+    color: #d7d2c1;
+    font-size: 16px;
+    line-height: 1.55;
+    text-align: center;
+}
+
+/* =========================================================
+   TRUNK
+   ========================================================= */
+
+.wanny-case-trunk {
+    position: relative;
+    max-width: 800px;
+    margin: 118px auto 0;
+    padding: 18px;
+    border: 5px solid #4e301d;
+    border-radius: 10px 10px 20px 20px;
+    background: repeating-linear-gradient( 90deg, #674329 0, #674329 58px, #5b3923 59px, #5b3923 64px );
+    box-shadow: 0 22px 35px rgba(0, 0, 0, 0.45), inset 0 0 20px rgba(0, 0, 0, 0.45);
+}
+
+.wanny-case-lid {
+    position: absolute;
+    left: 4%;
+    right: 4%;
+    top: -112px;
+    height: 125px;
+    border: 5px solid #4e301d;
+    border-radius: 18px 18px 6px 6px;
+    background: repeating-linear-gradient( 90deg, #755037 0, #755037 58px, #67442d 59px, #67442d 64px );
+    box-shadow: inset 0 0 22px rgba(0, 0, 0, 0.45), 0 -6px 20px rgba(0, 0, 0, 0.3);
+    transform: perspective(700px) rotateX(-22deg);
+    transform-origin: bottom center;
+}
+
+    .wanny-case-lid::before {
+        content: "W. WOLDSTAD - FIELD CASE";
+        position: absolute;
+        left: 50%;
+        top: 37px;
+        transform: translateX(-50%) rotate(-1deg);
+        min-width: 250px;
+        padding: 10px 16px;
+        border: 2px solid rgba(55, 35, 20, 0.45);
+        background: #c8b07b;
+        color: #3a2918;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 14px;
+        font-weight: bold;
+        letter-spacing: 1px;
+        text-align: center;
+    }
+
+    .wanny-case-lid::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: linear-gradient( 90deg, transparent 18%, rgba(44, 27, 17, 0.55) 18%, rgba(44, 27, 17, 0.55) 23%, transparent 23%, transparent 77%, rgba(44, 27, 17, 0.55) 77%, rgba(44, 27, 17, 0.55) 82%, transparent 82% );
+        pointer-events: none;
+    }
+
+.wanny-case-inside {
+    position: relative;
+    z-index: 3;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+    padding: 28px;
+    border: 3px solid #3c2718;
+    border-radius: 10px;
+    background: linear-gradient( 145deg, #35281f, #1f1813 );
+    box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.75);
+}
+
+/* =========================================================
+   OBJECTS INSIDE THE TRUNK
+   ========================================================= */
+
+.wanny-case-artifact {
+    position: relative;
+    min-height: 210px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    padding: 20px;
+    box-sizing: border-box;
+    border: 1px solid rgba(40, 28, 18, 0.45);
+    cursor: pointer;
+    transition: transform 0.22s ease, box-shadow 0.22s ease, filter 0.22s ease;
+}
+
+    .wanny-case-artifact:hover {
+        transform: translateY(-8px) rotate(0deg);
+        box-shadow: 0 18px 24px rgba(0, 0, 0, 0.4);
+        filter: brightness(1.05);
+    }
+
+    .wanny-case-artifact:focus-visible {
+        outline: 4px solid #e0ba64;
+        outline-offset: 4px;
+    }
+
+.wanny-case-artifact--taxi {
+    background: linear-gradient( 180deg, #f2e8cc, #d8c8a1 );
+    color: #32271b;
+    transform: rotate(-3deg);
+}
+
+.wanny-case-artifact--ledger {
+    background: linear-gradient( 90deg, #6e4a2c 0, #6e4a2c 12%, #b49060 13%, #b49060 100% );
+    color: #24180f;
+    transform: rotate(2deg);
+}
+
+.wanny-case-artifact--map {
+    background: linear-gradient( 145deg, #d9c28a, #b9955f );
+    color: #302113;
+    transform: rotate(-1deg);
+}
+
+.wanny-case-object-icon {
+    width: 92px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid currentColor;
+    color: inherit;
+    font-family: "Courier New", monospace;
+    font-size: 17px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.wanny-case-artifact--map
+.wanny-case-object-icon {
+    border-style: dashed;
+}
+
+.wanny-case-object-name {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.wanny-case-object-description {
+    font-size: 13px;
+    line-height: 1.35;
+    text-align: center;
+}
+
+.wanny-case-artifact::after {
+    content: attr(data-letter);
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid #783d2f;
+    border-radius: 50%;
+    color: #783d2f;
+    font-family: Georgia, serif;
+    font-size: 22px;
+    font-weight: bold;
+    opacity: 0;
+    transform: rotate(-14deg) scale(1.5);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.wanny-case-artifact.found::after {
+    opacity: 0.9;
+    transform: rotate(-14deg) scale(1);
+}
+
+/* =========================================================
+   LETTER BOARD
+   ========================================================= */
+
+.wanny-case-letter-board {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-top: 4px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.wanny-case-letter-label {
+    margin-right: 8px;
+    color: #d8ccb5;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.wanny-case-letter-slot {
+    width: 48px;
+    height: 52px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #9c7848;
+    border-radius: 6px;
+    background: #efe1bc;
+    color: #3a2818;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 28px;
+    font-weight: bold;
+    box-shadow: inset 0 0 10px rgba(80, 45, 20, 0.2);
+}
+
+/* =========================================================
+   OBJECT INFORMATION PANEL
+   ========================================================= */
+
+.wanny-case-detail {
+    position: absolute;
+    inset: 75px 30px 30px;
+    z-index: 50;
+    padding: 30px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    border: 4px solid #6a482a;
+    border-radius: 15px;
+    background: linear-gradient( 145deg, #efe4c8, #cdb685 );
+    color: #2d2116;
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.6);
+}
+
+    .wanny-case-detail[hidden] {
+        display: none;
+    }
+
+.wanny-case-detail-back {
+    border: 1px solid #57402b;
+    border-radius: 999px;
+    padding: 9px 15px;
+    background: #4c3523;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.wanny-case-detail-object {
+    width: 120px;
+    height: 86px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 26px auto 15px;
+    border: 4px double #5d4026;
+    color: #412d1d;
+    font-family: "Courier New", monospace;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.wanny-case-detail-title {
+    margin: 0 0 16px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 30px;
+    text-align: center;
+}
+
+.wanny-case-detail-body {
+    max-width: 650px;
+    margin: 0 auto;
+    font-size: 18px;
+    line-height: 1.65;
+}
+
+    .wanny-case-detail-body p {
+        margin: 0 0 16px;
+    }
+
+.wanny-case-detail-letter {
+    width: fit-content;
+    margin: 24px auto 0;
+    padding: 12px 20px;
+    border: 3px solid #783d2f;
+    color: #783d2f;
+    font-family: Georgia, serif;
+    font-size: 24px;
+    font-weight: bold;
+    transform: rotate(-2deg);
+}
+
+/* =========================================================
+   FINAL MESSAGE
+   ========================================================= */
+
+.wanny-case-complete {
+    max-width: 760px;
+    margin: 28px auto 0;
+    padding: 24px;
+    border: 1px solid rgba(224, 186, 100, 0.6);
+    border-radius: 12px;
+    background: rgba(7, 13, 16, 0.48);
+    text-align: center;
+}
+
+    .wanny-case-complete[hidden] {
+        display: none;
+    }
+
+    .wanny-case-complete h2 {
+        margin: 0 0 12px;
+        color: #e0ba64;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 30px;
+        letter-spacing: 5px;
+    }
+
+    .wanny-case-complete p {
+        margin: 0 auto 16px;
+        max-width: 650px;
+        color: #ded7c8;
+        font-size: 16px;
+        line-height: 1.6;
+    }
+
+.wanny-case-reflection {
+    margin: 22px 0 0;
+    padding: 18px 20px;
+    border-left: 4px solid #e0ba64;
+    background: rgba(255, 255, 255, 0.06);
+    color: #f1e6cc;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 20px;
+    font-style: italic;
+    line-height: 1.5;
+    text-align: left;
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 720px) {
+    .wanny-case-overlay {
+        padding: 8px;
+    }
+
+    .wanny-case-shell {
+        padding: 22px 12px 26px;
+    }
+
+    .wanny-case-trunk {
+        margin-top: 105px;
+        padding: 10px;
+    }
+
+    .wanny-case-lid {
+        top: -100px;
+        height: 112px;
+    }
+
+        .wanny-case-lid::before {
+            min-width: 190px;
+            font-size: 11px;
+        }
+
+    .wanny-case-inside {
+        grid-template-columns: 1fr;
+        padding: 18px;
+    }
+
+    .wanny-case-artifact {
+        min-height: 155px;
+    }
+
+    .wanny-case-letter-board {
+        flex-wrap: wrap;
+    }
+
+    .wanny-case-letter-label {
+        width: 100%;
+        margin: 0;
+        text-align: center;
+    }
+
+    .wanny-case-detail {
+        inset: 68px 10px 10px;
+        padding: 20px 16px;
+    }
+
+    .wanny-case-detail-title {
+        font-size: 25px;
+    }
+
+    .wanny-case-detail-body {
+        font-size: 16px;
+    }
+}

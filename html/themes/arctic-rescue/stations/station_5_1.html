@@ -924,25 +924,12 @@ THINGS TO DO:
                 }
             );
         });
-
-        // =====================================================
-        // GAME SETUP
-        // =====================================================
-
-        if (typeof setupGameNavigation === "function") {
-            setupGameNavigation();
-        }
-
-        if (typeof loadInventoryScripts === "function") {
-            loadInventoryScripts().then(() => {
-                if (
-                    typeof addAmundsenProfileToInventory ===
-                    "function"
-                ) {
-                    addAmundsenProfileToInventory();
-                }
-            });
-        }
+    </script>
+    <script>
+        setupGameNavigation();
+        loadInventoryScripts().then(() => {
+            addAmundsenProfileToInventory();
+        });
     </script>
 </body>
 </html>

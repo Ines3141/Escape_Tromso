@@ -254,40 +254,29 @@
     }
 
     function addInventoryItem(item) {
+        if (!item || !item.id) {
+            console.error("Inventory item requires an id:", item);
+            return;
+        }
         const items = getInventoryItems();
 
+        /* Store the complete item. Do not manually list all possible properties. */
         const newItem = {
+            ...item,
             id: item.id,
             title: item.title || "Untitled Item",
-            type: item.type || "image",
-            thumb: item.thumb || "",
-            full: item.full || item.thumb || "",
-            description: item.description || "",
+            type: item.type || "image"};
 
-            birthDate: item.birthDate || "",
-            achievements: Array.isArray(item.achievements) ? item.achievements : [],
-
-            fileAction: item.fileAction || "",
-            fileTitle: item.fileTitle || item.title || "File",
-            fileHtml: item.fileHtml || "",
-            fileImage: item.fileImage || "",
-            fileDescription: item.fileDescription || "",
-
-            newspaperTitle: item.newspaperTitle || "",
-            newspaperDate: item.newspaperDate || "",
-            newspaperImage: item.newspaperImage || "",
-            newspaperImageDate: item.newspaperImageDate || "",
-            newspaperText: item.newspaperText || ""
-        };
-
-        const existingIndex = items.findIndex(existing => existing.id === item.id);
+        const existingIndex = items.findIndex(existing => {
+                return existing.id === item.id;
+            });
 
         if (existingIndex !== -1) {
+            /* Replace the old saved version. */
             items[existingIndex] = newItem;
         } else {
             items.push(newItem);
         }
-
         saveInventoryItems(items);
     }
 

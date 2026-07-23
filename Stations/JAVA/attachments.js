@@ -1,4 +1,6 @@
 window.ATTACHMENTS = {
+    playSos(step, done)
+
     sosSignal(step, done) {
         const overlay = document.createElement("div");
         overlay.className = "sos-overlay";
@@ -196,7 +198,7 @@ window.ATTACHMENTS = {
                 </p>
 
                 <p class="signal-letter-signature">
-                    — Dispatch Control
+                    ï¿½ Dispatch Control
                 </p>
             </div>
         </article>
@@ -492,6 +494,32 @@ window.ATTACHMENTS = {
         };
     },
 
+    dispatchSosAudio(step, done) {
+        const modal = document.createElement("div");
+        modal.className = "attachment-modal";
+        modal.innerHTML = `
+            <div class="attachment-content audio-content">
+                <h2>Dispatch Audio</h2>
+
+                <audio controls class="dispatch-audio">
+                    <source src="${step.audio || step.src || step.video}" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+
+                <button class="close-attachment">Close</button>
+            </div>
+        `;
+
+        document.body.appendChild(modal);
+
+        modal.querySelector(".close-attachment").onclick = () => {
+            modal.remove();
+
+            if (done) {
+                done();
+            }
+        };
+    },
 
 
     henryRudiContactRequest(step, done) {

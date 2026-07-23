@@ -8,7 +8,7 @@ const STORIES = {
                 type: "file",
                 sender: "Unknown",
                 time: "10:14",
-                name: "mayday_echo1.jpg",
+                name: "mayday_echo1.mp3",
                 action: "dispatchSosAudio",
                 audio: "../../../../assets/audio/sos.mp3"
             },

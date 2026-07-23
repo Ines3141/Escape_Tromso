@@ -1,5 +1,4 @@
 window.ATTACHMENTS = {
-    playSos(step, done)
 
     sosSignal(step, done) {
         const overlay = document.createElement("div");
@@ -502,7 +501,7 @@ window.ATTACHMENTS = {
                 <h2>Dispatch Audio</h2>
 
                 <audio controls class="dispatch-audio">
-                    <source src="${step.audio || step.src || step.video}" type="audio/mpeg">
+                    <source src="${step.audio}" type="audio/mp3">
                     Your browser does not support the audio element.
                 </audio>
 

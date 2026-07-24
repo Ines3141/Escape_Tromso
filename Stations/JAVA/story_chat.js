@@ -134,33 +134,128 @@
                 cursor: pointer;
             }
 
-            .modal {
-                position: fixed;
-                inset: 0;
-                background: rgba(0,0,0,0.85);
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                z-index: 999;
-            }
+            /* ================= IMAGE PREVIEW ================= */
 
-            .modal-content {
-                background: #061927;
-                color: white;
-                padding: 20px;
-                border-radius: 12px;
-                max-width: 90%;
-                max-height: 90%;
-                text-align: center;
-            }
+.modal {
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
 
-            .modal-content img {
-                max-width: 100%;
-                max-height: 75vh;
-            }
-            .close {
-                margin-top: 15px;
-            }
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 24px;
+
+    background: rgba(0, 0, 0, 0.94);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    max-width: 94vw;
+    max-height: 90vh;
+
+    padding: 8px;
+
+    background: #102733;
+
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 10px;
+
+    box-shadow:
+        0 24px 70px rgba(0, 0, 0, 0.75),
+        0 0 25px rgba(80, 190, 225, 0.12);
+}
+
+.modal-content img {
+    display: block;
+
+    max-width: 100%;
+    max-height: calc(90vh - 16px);
+
+    object-fit: contain;
+
+    border-radius: 6px;
+}
+
+/* Small X inside the picture container */
+
+.image-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 2;
+
+    width: 34px;
+    height: 34px;
+    padding: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+    background: rgba(8, 20, 27, 0.84);
+
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+
+    font-family: Arial, sans-serif;
+    font-size: 25px;
+    font-weight: 300;
+    line-height: 1;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.55),
+        inset 0 1px 1px rgba(255, 255, 255, 0.14);
+
+    transition:
+        transform 150ms ease,
+        background 150ms ease;
+}
+
+.image-close:hover {
+    background: #8b3329;
+    transform: scale(1.08);
+}
+
+.image-close:active {
+    transform: scale(0.94);
+}
+
+.image-close:focus-visible {
+    outline: 3px solid #ffd76d;
+    outline-offset: 3px;
+}
+
+@media (max-width: 500px) {
+    .modal {
+        padding: 10px;
+    }
+
+    .modal-content {
+        max-width: 96vw;
+        max-height: 96vh;
+        padding: 5px;
+    }
+
+    .modal-content img {
+        max-height: calc(96vh - 10px);
+    }
+
+    .image-close {
+        top: 8px;
+        right: 8px;
+    }
+}
         </style>
             <div class="chat">
                 <div class="header">
@@ -287,23 +382,81 @@
             this.advance();
         }
     }
-    openImageFullscreen(src) {
+    openImageFullscreen(src, alt = "Image preview") {
         const modal = document.createElement("div");
         modal.className = "modal";
 
+        modal.setAttribute("role", "dialog");
+        modal.setAttribute("aria-modal", "true");
+        modal.setAttribute("aria-label", alt);
+
         modal.innerHTML = `
         <div class="modal-content">
-            <img src="${src}">
-            <br>
-            <button class="close">Close</button>
+            <button
+                type="button"
+                class="image-close"
+                aria-label="Close image preview"
+            >
+                &times;
+            </button>
+
+            <img src="${src}" alt="${alt}">
         </div>
     `;
 
-        modal.querySelector(".close").onclick = () => {
+        const closeButton = modal.querySelector(".image-close");
+        const image = modal.querySelector("img");
+
+        let closed = false;
+
+        const closeModal = () => {
+            if (closed) return;
+
+            closed = true;
+
+            document.removeEventListener(
+                "keydown",
+                handleKeydown
+            );
+
             modal.remove();
         };
 
+        const handleKeydown = event => {
+            if (event.key === "Escape") {
+                closeModal();
+            }
+        };
+
+        closeButton.addEventListener("click", event => {
+            event.stopPropagation();
+            closeModal();
+        });
+
+        image.addEventListener("click", event => {
+            /*
+             * Clicking the image must not close the modal.
+             */
+            event.stopPropagation();
+        });
+
+        modal.addEventListener("click", event => {
+            /*
+             * Clicking the black background closes the modal.
+             */
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+
+        document.addEventListener(
+            "keydown",
+            handleKeydown
+        );
+
         this.shadowRoot.appendChild(modal);
+
+        closeButton.focus();
     }
 
     addText(step) {
@@ -432,32 +585,55 @@
             return;
         }
 
+        
+
+        if (step.image) {
+            this.openImageFullscreen(
+                step.image,
+                step.name || "Attachment preview",
+                () => {
+                    if (shouldAdvance) {
+                        this.advance();
+                    }
+                }
+            );
+
+            return;
+        }
+
+        /*
+         * Only used when the attachment has no valid image.
+         */
         const modal = document.createElement("div");
         modal.className = "modal";
 
-        const content = document.createElement("div");
-        content.className = "modal-content";
+        modal.innerHTML = `
+    <div class="modal-content attachment-error">
+        <button
+            type="button"
+            class="image-close"
+            aria-label="Close attachment"
+        >
+            &times;
+        </button>
 
-        if (step.image) {
-            content.innerHTML = `<img src="${step.image}" alt="${step.name}">`;
-        } else {
-            content.innerHTML = `<p>Attachment not found: ${step.name}</p>`;
-        }
+        <p>
+            Attachment not found:
+            ${step.name || "Unknown attachment"}
+        </p>
+    </div>
+`;
 
-        const close = document.createElement("button");
-        close.className = "close";
-        close.textContent = "Close";
+        const closeButton = modal.querySelector(".image-close");
 
-        close.onclick = () => {
+        closeButton.addEventListener("click", () => {
             modal.remove();
 
             if (shouldAdvance) {
                 this.advance();
             }
-        };
+        });
 
-        content.appendChild(close);
-        modal.appendChild(content);
         this.shadowRoot.appendChild(modal);
     }
     addSavedInput(step) {

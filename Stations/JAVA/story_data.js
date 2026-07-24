@@ -8,10 +8,17 @@ const STORIES = {
                 type: "file",
                 sender: "Unknown",
                 time: "10:14",
+                name: "signal.jpg",
+                action: "sosSignal"
+            },            
+            /*{
+                type: "file",
+                sender: "Unknown",
+                time: "10:14",
                 name: "mayday_echo1.mp3",
                 action: "dispatchSosAudio",
                 audio: "../../../../assets/audio/sos.mp3"
-            },
+            },*/
             {
                 type: "text",
                 sender: "Dispatch",

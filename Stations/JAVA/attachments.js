@@ -1,5 +1,6 @@
-window.ATTACHMENTS = {
+/* dispatchSosAudio(step, done) Not neccessary anymore */ 
 
+window.ATTACHMENTS = {
     sosSignal(step, done) {
         const overlay = document.createElement("div");
         overlay.className = "sos-overlay";
@@ -31,8 +32,8 @@ window.ATTACHMENTS = {
 
             <audio class="sos-audio" preload="auto" loop>
                 <source
-                    src="../../../../assets/audio/SOS_signal.m4a"
-                    type="audio/mp4"
+                    src="../../../../assets/audio/sos.mp3"
+                    type="audio/mp3"
                 >
             </audio>
         `;
@@ -197,7 +198,7 @@ window.ATTACHMENTS = {
                 </p>
 
                 <p class="signal-letter-signature">
-                    � Dispatch Control
+                    - Dispatch Control
                 </p>
             </div>
         </article>
@@ -493,7 +494,7 @@ window.ATTACHMENTS = {
         };
     },
 
-    dispatchSosAudio(step, done) {
+    /* dispatchSosAudio(step, done) {
         const modal = document.createElement("div");
         modal.className = "attachment-modal";
         modal.innerHTML = `
@@ -518,7 +519,7 @@ window.ATTACHMENTS = {
                 done();
             }
         };
-    },
+    }, */
 
 
     henryRudiContactRequest(step, done) {

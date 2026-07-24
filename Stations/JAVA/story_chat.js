@@ -210,7 +210,7 @@
     font-size: 25px;
     font-weight: 300;
     line-height: 1;
-
+    
     cursor: pointer;
 
     box-shadow:

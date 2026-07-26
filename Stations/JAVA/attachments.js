@@ -1,6 +1,156 @@
-/* dispatchSosAudio(step, done) Not neccessary anymore */ 
+/* dispatchSosAudio(step, done) Not neccessary anymore 
+- FOR Me: 
+    - modal is simply a box that appears above the page 
+      and temporarily takes focus.
+    - openImageFullscreen(...) creates a modal 
+    - <div class="modal-content attachment-error"> creates a box just for an error 
+      when the file is not loading 
+    - video modal: <div class="modal-content video-modal-content">
 
-window.ATTACHMENTS = {
+this.attachShadow({ mode: "open" }); (is in stroy chat)
+    - A Shadow DOM is like a private mini-page inside <story-chat>.
+    - Only affect things in story-chat 
+
+FOR ALL HINT: ChatGPT said that the order how the links are added matters:
+    - USE THIS ORDER: story_data.js, attachments.js, story_chat.js
+
+*/
+/* Creates uniform closing button for all the attchaments */
+window.ATTACHMENT_UI = (() => {
+    let activeOverlay = null;
+    function closeActive() {
+        if (activeOverlay?.close) {
+            activeOverlay.close();
+        }
+    }
+    function open({
+        label = "Attachment",
+        content,
+        panelClass = "",
+        onClose = null
+    }) {
+        closeActive();
+
+        const overlay = document.createElement("div");
+        overlay.className = "attachment-overlay";
+        overlay.setAttribute("role", "dialog");
+        overlay.setAttribute("aria-modal", "true");
+        overlay.setAttribute("aria-label", label);
+
+        const panel = document.createElement("div");
+        panel.className = `attachment-panel ${panelClass}`.trim();
+
+        const closeButton = document.createElement("button");
+        closeButton.type = "button";
+        closeButton.className = "attachment-close";
+        closeButton.setAttribute("aria-label", `Close ${label}`);
+        closeButton.innerHTML = "&times;";
+
+        panel.appendChild(closeButton);
+        panel.appendChild(content);
+        overlay.appendChild(panel);
+        document.body.appendChild(overlay);
+
+        let closed = false;
+
+        function close() {
+            if (closed) return;
+
+            closed = true;
+
+            document.removeEventListener("keydown", handleKeydown);
+
+            const video = panel.querySelector("video");
+
+            if (video) {
+                video.pause();
+                video.removeAttribute("src");
+                video.load();
+            }
+
+            overlay.classList.remove("visible");
+
+            window.setTimeout(() => {
+                overlay.remove();
+                if (activeOverlay?.overlay === overlay) {
+                    activeOverlay = null;
+                }
+                if (typeof onClose === "function") {
+                    onClose();
+                }
+            }, 180);
+        }
+        function handleKeydown(event) {
+            if (event.key === "Escape") {
+                close();
+            }
+        }
+        closeButton.addEventListener("click", close);
+        panel.addEventListener("click", event => {
+            event.stopPropagation();
+        });
+
+        overlay.addEventListener("click", event => {
+            if (event.target === overlay) {
+                close();
+            }
+        });
+
+        document.addEventListener("keydown", handleKeydown);
+
+        activeOverlay = {overlay, panel, close};
+
+        requestAnimationFrame(() => {
+            overlay.classList.add("visible");
+            closeButton.focus();
+        });
+        return activeOverlay;
+    }
+    return {open, closeActive};
+})();
+window.ATTACHMENTS = window.ATTACHMENTS || {};
+window.ATTACHMENTS.openMessage = function (
+    title,
+    message,
+    onClose = null
+) {
+    const content = document.createElement("div");
+    content.className = "attachment-message";
+
+    const heading = document.createElement("h2");
+    heading.textContent = title;
+
+    const paragraph = document.createElement("p");
+    paragraph.textContent = message;
+
+    content.append(heading, paragraph);
+
+    window.ATTACHMENT_UI.open({
+        label: title,
+        content,
+        panelClass: "attachment-panel--message",
+        onClose
+    });
+};
+window.ATTACHMENTS.openImage = function (
+    step,
+    onClose = null
+) {
+    const image = document.createElement("img");
+
+    image.className = "attachment-media attachment-image";
+    image.src = step.src || step.image;
+    image.alt = step.alt || step.name || "Image preview";
+
+    window.ATTACHMENT_UI.open({
+        label: image.alt,
+        content: image,
+        panelClass: "attachment-panel--media",
+        onClose
+    });
+};
+
+Object.assign(window.ATTACHMENTS, {
     sosSignal(step, done) {
         const overlay = document.createElement("div");
         overlay.className = "sos-overlay";
@@ -402,178 +552,559 @@ window.ATTACHMENTS = {
     },
 
     imagePreview(step, done) {
-        const overlay = document.createElement("div");
-        overlay.className = "image-overlay";
-        overlay.setAttribute("role", "dialog");
-        overlay.setAttribute("aria-modal", "true");
-        overlay.setAttribute("aria-label", "Image preview");
+        window.ATTACHMENTS.openImage(step, done);
+    },
 
-        overlay.innerHTML = `
-        <button
-            type="button"
-            class="overlay-close"
-            aria-label="Close image preview"
-        >
-            &times;
-        </button>
+    /* ============================
+       DISPATCH VIDEO HENRY RUDI 
+       ============================  */ 
+    dispatchHenryVideo(step, done) {
+        const video = document.createElement("video");
+        video.className = "attachment-media attachment-video";
 
-        <div class="image-preview-frame">
-            <img
-                src="${step.src}"
-                alt="${step.alt || "Received transmission image"}"
-            >
+        video.controls = true;
+        video.playsInline = true;
+        video.preload = "metadata";
+
+        const source = document.createElement("source");
+        source.src = step.video;
+        source.type = "video/mp4";
+
+        video.appendChild(source);
+        video.append("Your browser does not support video.");
+
+        window.ATTACHMENT_UI.open({
+            label: step.name || "Video",
+            content: video,
+            panelClass: "attachment-panel--media",
+            onClose: done
+        });
+    },
+    /* ============================
+       FRIEND REQUEST HERNY RUDI
+       ============================ */
+    henryRudiContactRequest(step, done) {
+        const content = document.createElement("div");
+        content.className = "contact-request";
+
+        content.innerHTML = `
+        <div class="contact-request__label">
+            New contact
         </div>
+
+        <div class="contact-request__profile">
+            <div
+                class="contact-request__avatar
+                       contact-request__initials"
+                aria-hidden="true"
+            >
+                HR
+            </div>
+
+            <div class="contact-request__identity">
+                <h2>Henry Rudi</h2>
+                <p>Dispatch contact</p>
+            </div>
+        </div>
+
+        <div class="contact-request__body">
+            <p>
+                Send Henry Rudi a secure contact request?
+            </p>
+
+            <p class="contact-request__hint">
+                Henry must accept the request before a secure
+                communication connection can be established.
+            </p>
+        </div>
+
+        <div class="contact-request__actions">
+            <button
+                type="button"
+                class="contact-request__send"
+            >
+                Send request
+            </button>
+
+            <button
+                type="button"
+                class="contact-request__dismiss"
+            >
+                Cancel
+            </button>
+        </div>
+
+        <p
+            class="contact-request__status"
+            role="status"
+            aria-live="polite"
+        ></p>
     `;
 
-        document.body.appendChild(overlay);
-
-        const closeButton = overlay.querySelector(".overlay-close");
-
-        requestAnimationFrame(() => {
-            overlay.classList.add("visible");
+        const overlay = window.ATTACHMENT_UI.open({
+            label: "Send Henry Rudi a contact request",
+            content,
+            panelClass: "attachment-panel--contact"
         });
 
-        let closed = false;
+        const sendButton = content.querySelector(
+            ".contact-request__send"
+        );
 
-        const close = () => {
-            if (closed) {
-                return;
-            }
+        const dismissButton = content.querySelector(
+            ".contact-request__dismiss"
+        );
 
-            closed = true;
+        const status = content.querySelector(
+            ".contact-request__status"
+        );
 
-            document.removeEventListener("keydown", handleKeydown);
+        dismissButton.addEventListener("click", () => {
+            overlay.close();
+        });
 
-            overlay.classList.remove("visible");
+        sendButton.addEventListener("click", () => {
+            sendButton.disabled = true;
+            dismissButton.disabled = true;
+
+            status.textContent =
+                "Sending secure contact request…";
 
             window.setTimeout(() => {
-                overlay.remove();
+                localStorage.setItem(
+                    "henry_rudi_contact_request",
+                    "sent"
+                );
 
-                if (typeof done === "function") {
-                    done();
-                }
-            }, 300);
-        };
+                content.classList.add("sent");
 
-        const handleKeydown = event => {
-            if (event.key === "Escape") {
-                close();
-            }
-        };
+                status.textContent =
+                    "Contact request sent to Henry Rudi.";
 
-        closeButton.addEventListener("click", close);
-        document.addEventListener("keydown", handleKeydown);
+                sendButton.textContent = "Request sent";
 
-        closeButton.focus();
+                window.setTimeout(() => {
+                    overlay.close();
+
+                    if (typeof done === "function") {
+                        done();
+                    }
+
+                    if (step.redirect) {
+                        window.location.href = step.redirect;
+                    }
+                }, 900);
+            }, 700);
+        });
     },
+    /* ============================
+       HENRY RUDI RIDDLE GALLERY
+       ============================ */
+    henryRudiGallery(step, done) {
+        const galleryImages = [
+            "../../../../assets/images/Rudi_1.jpg",
+            "../../../../assets/images/Rudi_2.jpg",
+            "../../../../assets/images/Rudi_3.jpg",
+            "../../../../assets/images/Rudi_2.jpg"
+        ];
 
-    dispatchHenryVideo(step, done) {
-        const modal = document.createElement("div");
-        modal.className = "attachment-modal";
-        modal.innerHTML = `
-            <div class="attachment-content video-content">
-                <h2>Dispatch Video</h2>
+        const resultVideos = [
+            "../../../../assets/animation/HR_correct.mp4",
+            "../../../../assets/animation/HR_wrong1.mp4",
+            "../../../../assets/animation/HR_wrong2.mp4",
+            "../../../../assets/animation/HR_wrong3.mp4"
+        ];
 
-                <video controls class="dispatch-video">
-                    <source src="${step.video}" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
+        const content = document.createElement("div");
+        content.className = "henry-gallery";
 
-                <button class="close-attachment">Close</button>
-            </div>
+        content.innerHTML = `
+        <h2>${step.name || "Henry Rudi"}</h2>
+
+        <div class="henry-gallery__grid"></div>
+
+        <p class="henry-gallery__feedback">
+            Select the image that matches the signal.
+        </p>
+    `;
+
+        const overlay = window.ATTACHMENT_UI.open({
+            label: step.name || "Henry Rudi gallery",
+            content,
+            panelClass: "attachment-panel--henry-gallery"
+        });
+
+        const galleryGrid = content.querySelector(
+            ".henry-gallery__grid"
+        );
+
+        let videoPlaying = false;
+
+        galleryImages.forEach((imageSource, index) => {
+            const imageButton = document.createElement("button");
+
+            imageButton.type = "button";
+            imageButton.className = "henry-gallery__item";
+
+            imageButton.innerHTML = `
+            <img
+                src="${imageSource}"
+                alt="Observatory image ${index + 1}"
+            >
         `;
 
-        document.body.appendChild(modal);
-
-        modal.querySelector(".close-attachment").onclick = () => {
-            modal.remove();
-
-            if (done) {
-                done();
-            }
-        };
-    },
-
-    /* dispatchSosAudio(step, done) {
-        const modal = document.createElement("div");
-        modal.className = "attachment-modal";
-        modal.innerHTML = `
-            <div class="attachment-content audio-content">
-                <h2>Dispatch Audio</h2>
-
-                <audio controls class="dispatch-audio">
-                    <source src="${step.audio}" type="audio/mp3">
-                    Your browser does not support the audio element.
-                </audio>
-
-                <button class="close-attachment">Close</button>
-            </div>
-        `;
-
-        document.body.appendChild(modal);
-
-        modal.querySelector(".close-attachment").onclick = () => {
-            modal.remove();
-
-            if (done) {
-                done();
-            }
-        };
-    }, */
-
-
-    henryRudiContactRequest(step, done) {
-        const modal = document.createElement("div");
-        modal.className = "attachment-modal";
-        modal.innerHTML = `
-            <div class="attachment-content contact-content">
-                <div class="contact-avatar">HR</div>
-
-                <h2>Henry Rudi</h2>
-                <p class="contact-subtitle">Arctic hunter and explorer</p>
-
-                <p class="contact-text">
-                    Henry Rudi may have information that can help the lost crew.
-                </p>
-
-                <button class="friend-request-button">Send friend request</button>
-
-                <p class="request-status"></p>
-            </div>
-        `;
-
-        document.body.appendChild(modal);
-
-        const button = modal.querySelector(".friend-request-button");
-        const status = modal.querySelector(".request-status");
-
-        button.onclick = () => {
-            button.disabled = true;
-            button.textContent = "Sending request...";
-            status.textContent = "";
-
-            setTimeout(() => {
-                button.textContent = "Request sent";
-                status.textContent = "Waiting for Henry Rudi to answer...";
-            }, 900);
-
-            setTimeout(() => {
-                status.textContent = "Friend request accepted!";
-                modal.classList.add("accepted");
-            }, 2300);
-
-            setTimeout(() => {
-                modal.remove();
-
-                if (step.redirect) {
-                    window.location.href = step.redirect;
+            imageButton.addEventListener("click", () => {
+                if (videoPlaying) {
                     return;
                 }
 
-                if (done) {
-                    done();
+                videoPlaying = true;
+                imageButton.classList.add("selected");
+
+                playHenryRudiResultVideo(
+                    resultVideos[index],
+                    () => {
+                        videoPlaying = false;
+
+                        if (
+                            index === 0 &&
+                            typeof done === "function"
+                        ) {
+                            done();
+                        }
+                    }
+                );
+            });
+
+            galleryGrid.appendChild(imageButton);
+        });
+    },
+    /* ========================
+    HACKER ACTION
+     ========================== */
+     signalInterceptAttack(step, done) {
+        const overlay = document.createElement("div");
+
+        overlay.className =
+            "attack-overlay scanlines active flicker";
+
+        overlay.innerHTML = `
+            <div class="noise"></div>
+
+            <div class="disconnect-text glitch show">
+                Connection interrupted
+            </div>
+
+            <div class="code-box"></div>
+
+            <div class="mask-wrap">
+                <img
+                    class="mask-image"
+                    src="../../../../assets/images/mask_hacker.png"
+                    alt="Masked intruder"
+                >
+
+                <div class="mask-text">
+                    We have taken over this communication channel.
+                </div>
+            </div>
+
+            <div class="video-wrap">
+                <video
+                    class="hacker-video"
+                    controls
+                    playsinline
+                    preload="auto"
+                    muted
+                >
+                    <source
+                        src="../../../../assets/images/hacker_video.mp4"
+                        type="video/mp4"
+                    >
+                </video>
+
+                <button
+                    type="button"
+                    class="continue-btn"
+                >
+                    Continue
+                </button>
+            </div>
+
+            <div class="blackout"></div>
+
+            <audio
+                class="monument-sound"
+                src="../../../../assets/audio/Hacker.mp3"
+                preload="auto"
+            ></audio>
+        `;
+
+        document.body.appendChild(overlay);
+
+        const disconnectText =
+            overlay.querySelector(".disconnect-text");
+
+        const codeBox =
+            overlay.querySelector(".code-box");
+
+        const maskWrap =
+            overlay.querySelector(".mask-wrap");
+
+        const videoWrap =
+            overlay.querySelector(".video-wrap");
+
+        const video =
+            overlay.querySelector(".hacker-video");
+
+        const continueButton =
+            overlay.querySelector(".continue-btn");
+
+        const blackout =
+            overlay.querySelector(".blackout");
+
+        const monumentSound =
+            overlay.querySelector(".monument-sound");
+
+        const codeLines = [
+            {
+                text: "[ SIGNAL OVERRIDE INITIATED ]",
+                cls: "code-red"
+            },
+            {
+                text: "inject_channel(dispatcher.main_link)",
+                cls: "code-green"
+            },
+            {
+                text: "bypass_protocol(alpha.473)",
+                cls: "code-blue"
+            },
+            {
+                text: "target_team = 'expedition'",
+                cls: "code-yellow"
+            },
+            {
+                text: "disabling remote relay...",
+                cls: "code-green"
+            },
+            {
+                text: "intercept_success = TRUE",
+                cls: "code-red"
+            },
+            {
+                text: "opening private transmission...",
+                cls: "code-blue"
+            }
+        ];
+
+        function flickerBlackout(times = 4, delay = 120) {
+            let count = 0;
+
+            const interval = setInterval(() => {
+                blackout.classList.add("show");
+
+                setTimeout(() => {
+                    blackout.classList.remove("show");
+                }, 70);
+
+                count++;
+
+                if (count >= times) {
+                    clearInterval(interval);
                 }
+            }, delay);
+        }
+
+        function showCodeAnimation() {
+            let index = 0;
+
+            const interval = setInterval(() => {
+                const line = codeLines[index];
+
+                const div = document.createElement("div");
+                div.className = `code-line ${line.cls}`;
+                div.textContent = line.text;
+
+                codeBox.appendChild(div);
+                index++;
+
+                if (index >= codeLines.length) {
+                    clearInterval(interval);
+
+                    setTimeout(() => {
+                        codeBox.classList.remove("show");
+                        showMask();
+                    }, 1400);
+                }
+            }, 500);
+        }
+
+        function showMask() {
+            flickerBlackout(3, 140);
+            maskWrap.classList.add("show");
+
+            setTimeout(() => {
+                maskWrap.classList.remove("show");
+                showVideo();
             }, 3500);
-        };
+        }
+
+        function showVideo() {
+            videoWrap.classList.add("show");
+            video.load();
+        }
+
+        video.addEventListener("play", () => {
+            monumentSound.play().catch(error => {
+                console.log(
+                    "Audio could not start:",
+                    error
+                );
+            });
+        });
+
+        video.addEventListener("pause", () => {
+            monumentSound.pause();
+        });
+
+        video.addEventListener("ended", () => {
+            monumentSound.pause();
+            monumentSound.currentTime = 0;
+            continueButton.classList.add("show");
+        });
+
+        continueButton.addEventListener("click", () => {
+            overlay.remove();
+
+            if (typeof done === "function") {
+                done();
+            }
+
+            window.location.href =
+                "../riddle/riddle_4_2_fish.html";
+        });
+
+        setTimeout(() => {
+            flickerBlackout(5, 130);
+        }, 1200);
+
+        setTimeout(() => {
+            disconnectText.textContent =
+                "Unauthorized access";
+        }, 2500);
+
+        setTimeout(() => {
+            disconnectText.classList.remove("show");
+            codeBox.classList.add("show");
+            showCodeAnimation();
+        }, 3800);
     }
-};
+});
+
+/* =========================
+  LOGIC OF THE ANIMATION VIDEO RIDDLE RUDI 
+  ========================== */
+function playHenryRudiResultVideo(
+    videoSource,
+    onFinished
+) {
+    const video = document.createElement("video");
+
+    video.className =
+        "attachment-media attachment-video";
+
+    video.src = videoSource;
+    video.autoplay = true;
+    video.playsInline = true;
+    video.preload = "auto";
+    video.controls = false;
+
+    let completed = false;
+    let videoOverlay = null;
+
+    function complete() {
+        if (completed) {
+            return;
+        }
+
+        completed = true;
+
+        video.pause();
+        video.removeAttribute("src");
+        video.load();
+
+        if (videoOverlay) {
+            videoOverlay.close();
+        }
+    }
+
+    videoOverlay = window.ATTACHMENT_UI.open({
+        label: "Henry Rudi result",
+        content: video,
+        panelClass: "attachment-panel--media",
+
+        onClose() {
+            if (typeof onFinished === "function") {
+                onFinished();
+            }
+        }
+    });
+
+    video.addEventListener(
+        "ended",
+        complete,
+        { once: true }
+    );
+
+    video.addEventListener(
+        "error",
+        () => {
+            console.error(
+                "Could not load Henry Rudi video:",
+                videoSource,
+                video.error
+            );
+
+            complete();
+        },
+        { once: true }
+    );
+
+    video.play().catch(error => {
+        console.error(
+            "Could not start Henry Rudi video:",
+            videoSource,
+            error
+        );
+
+        complete();
+    });
+}
+
+
+/* dispatchSosAudio(step, done) {
+    const modal = document.createElement("div");
+    modal.className = "attachment-modal";
+    modal.innerHTML = `
+        <div class="attachment-content audio-content">
+            <h2>Dispatch Audio</h2>
+
+            <audio controls class="dispatch-audio">
+                <source src="${step.audio}" type="audio/mp3">
+                Your browser does not support the audio element.
+            </audio>
+
+            <button class="close-attachment">Close</button>
+        </div>
+    `;
+
+    document.body.appendChild(modal);
+
+    modal.querySelector(".close-attachment").onclick = () => {
+        modal.remove();
+
+        if (done) {
+            done();
+        }
+    };
+}, */

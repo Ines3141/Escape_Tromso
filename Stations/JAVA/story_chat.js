@@ -133,129 +133,23 @@
                 border-radius: 8px;
                 cursor: pointer;
             }
+            :host {
+                display: flex;
+                justify-content: center;
+                box-sizing: border-box;
+                width: 100%;
+                max-width: 100%;
+                margin: 20px auto 0;
+            }
+            .chat-link {
+                color: #4aa8ff;
+                text-decoration: underline;
+                cursor: pointer;
+            }
 
-            /* ================= IMAGE PREVIEW ================= */
-
-.modal {
-    position: fixed;
-    inset: 0;
-    z-index: 999999;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    padding: 24px;
-
-    background: rgba(0, 0, 0, 0.94);
-    backdrop-filter: blur(5px);
-}
-
-.modal-content {
-    position: relative;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    max-width: 94vw;
-    max-height: 90vh;
-
-    padding: 8px;
-
-    background: #102733;
-
-    border: 1px solid rgba(255, 255, 255, 0.22);
-    border-radius: 10px;
-
-    box-shadow:
-        0 24px 70px rgba(0, 0, 0, 0.75),
-        0 0 25px rgba(80, 190, 225, 0.12);
-}
-
-.modal-content img {
-    display: block;
-
-    max-width: 100%;
-    max-height: calc(90vh - 16px);
-
-    object-fit: contain;
-
-    border-radius: 6px;
-}
-
-/* Small X inside the picture container */
-
-.image-close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 2;
-
-    width: 34px;
-    height: 34px;
-    padding: 0;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    color: white;
-    background: rgba(8, 20, 27, 0.84);
-
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    border-radius: 50%;
-
-    font-family: Arial, sans-serif;
-    font-size: 25px;
-    font-weight: 300;
-    line-height: 1;
-    
-    cursor: pointer;
-
-    box-shadow:
-        0 4px 12px rgba(0, 0, 0, 0.55),
-        inset 0 1px 1px rgba(255, 255, 255, 0.14);
-
-    transition:
-        transform 150ms ease,
-        background 150ms ease;
-}
-
-.image-close:hover {
-    background: #8b3329;
-    transform: scale(1.08);
-}
-
-.image-close:active {
-    transform: scale(0.94);
-}
-
-.image-close:focus-visible {
-    outline: 3px solid #ffd76d;
-    outline-offset: 3px;
-}
-
-@media (max-width: 500px) {
-    .modal {
-        padding: 10px;
-    }
-
-    .modal-content {
-        max-width: 96vw;
-        max-height: 96vh;
-        padding: 5px;
-    }
-
-    .modal-content img {
-        max-height: calc(96vh - 10px);
-    }
-
-    .image-close {
-        top: 8px;
-        right: 8px;
-    }
-}
+            .chat-link:hover {
+                color: #7bc3ff;
+            }
         </style>
             <div class="chat">
                 <div class="header">
@@ -316,6 +210,12 @@
                 case "upload":
                     this.addSavedUpload(step, i);
                     break;
+                case "link":
+                    this.addLink(step, false);
+                    break;
+                case "action":
+                    // Do not replay completed animations.
+                    break;
             }
         }
     }
@@ -357,6 +257,12 @@
             case "image":
                 this.addImage(step);
                 break;
+            case "link":
+                this.addLink(step);
+                break;
+            case "action":
+                this.runAction(step);
+                break;
         }
     }
     addImage(step, shouldAdvance = true) {
@@ -382,81 +288,8 @@
             this.advance();
         }
     }
-    openImageFullscreen(src, alt = "Image preview") {
-        const modal = document.createElement("div");
-        modal.className = "modal";
-
-        modal.setAttribute("role", "dialog");
-        modal.setAttribute("aria-modal", "true");
-        modal.setAttribute("aria-label", alt);
-
-        modal.innerHTML = `
-        <div class="modal-content">
-            <button
-                type="button"
-                class="image-close"
-                aria-label="Close image preview"
-            >
-                &times;
-            </button>
-
-            <img src="${src}" alt="${alt}">
-        </div>
-    `;
-
-        const closeButton = modal.querySelector(".image-close");
-        const image = modal.querySelector("img");
-
-        let closed = false;
-
-        const closeModal = () => {
-            if (closed) return;
-
-            closed = true;
-
-            document.removeEventListener(
-                "keydown",
-                handleKeydown
-            );
-
-            modal.remove();
-        };
-
-        const handleKeydown = event => {
-            if (event.key === "Escape") {
-                closeModal();
-            }
-        };
-
-        closeButton.addEventListener("click", event => {
-            event.stopPropagation();
-            closeModal();
-        });
-
-        image.addEventListener("click", event => {
-            /*
-             * Clicking the image must not close the modal.
-             */
-            event.stopPropagation();
-        });
-
-        modal.addEventListener("click", event => {
-            /*
-             * Clicking the black background closes the modal.
-             */
-            if (event.target === modal) {
-                closeModal();
-            }
-        });
-
-        document.addEventListener(
-            "keydown",
-            handleKeydown
-        );
-
-        this.shadowRoot.appendChild(modal);
-
-        closeButton.focus();
+    openImageFullscreen(src, alt = "Image preview", onClose = null) {
+        window.ATTACHMENTS.openImage({src, name: alt, alt}, onClose);
     }
 
     addText(step) {
@@ -478,7 +311,6 @@
 
         this.shadowRoot.querySelector("#messages").appendChild(div);
     }
-
     addInput(step) {
         const container = document.createElement("div");
         container.className = "input-box";
@@ -756,6 +588,52 @@
         if (step.variable) {
             localStorage.setItem(step.variable, value);
         }
+    }
+    addLink(step, shouldAdvance = true) {
+        const div = document.createElement("div");
+
+        div.className =
+            "message " +
+            (step.sender === "user" ? "from-user" : "from-phone");
+
+        div.innerHTML = `
+        <span class="time">${step.time || ""}</span>
+        <span class="chat-link">${step.text}</span>
+    `;
+
+        div.onclick = () => {
+            if (shouldAdvance) {
+                this.currentStep++;
+                localStorage.setItem(
+                    this.storyName + "_step",
+                    this.currentStep
+                );
+            }
+
+            window.location.href = step.href;
+        };
+
+        this.shadowRoot
+            .querySelector("#messages")
+            .appendChild(div);
+    }
+    runAction(step) {
+        const actionFunction =
+            window.ATTACHMENTS &&
+            window.ATTACHMENTS[step.action];
+
+        if (typeof actionFunction !== "function") {
+            console.error(
+                `Attachment action "${step.action}" was not found.`
+            );
+
+            this.advance();
+            return;
+        }
+
+        actionFunction(step, () => {
+            this.advance();
+        });
     }
 }
 customElements.define("story-chat", StoryChat);

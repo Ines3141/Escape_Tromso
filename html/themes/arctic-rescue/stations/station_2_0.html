@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../../../../CSS/global.css">
     <link rel="stylesheet" href="../../../../CSS/station.css">
     <link rel="stylesheet" href="../../../../CSS/attachments.css">
+
     <script src="../../../../Stations/JAVA/letter_templates.js"></script>
     <script src="../../../../Stations/JAVA/incoming_dispatch.js"></script>
     <script src="../../../../Stations/JAVA/attachments.js"></script>
@@ -41,9 +42,6 @@
 
 <body>
     <div class="box">
-        <h1>Station 1</h1>
-        <p>Gateway to the Arctic</p>
-
         <story-chat story="nansen_dispatch"></story-chat>
         <button id="profile" class="profile-button" onclick="openProfile()" style="display:none;">
             Explorer Gateway to arctic
@@ -52,8 +50,29 @@
             Solve Riddle
         </button>
         <button onclick="clearInventory();"> Reset Inventory </button>
+        <button type="button" onclick="resetCurrentChat()">
+            Dev: Reset Chat
+        </button>
     </div>
     <game-navigation></game-navigation>
+    <script>
+        function resetCurrentChat() {
+            const chat = document.querySelector("story-chat");
+            const storyName = chat.getAttribute("story");
+
+            localStorage.removeItem(storyName + "_step");
+            localStorage.removeItem(storyName + "_scroll");
+
+            // Remove saved uploads belonging to this chat.
+            for (const key of Object.keys(localStorage)) {
+                if (key.startsWith(storyName + "_upload_")) {
+                    localStorage.removeItem(key);
+                }
+            }
+
+            window.location.reload();
+        }
+    </script>
     <script>
         setupGameNavigation();
     </script>

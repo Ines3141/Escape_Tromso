@@ -1,5 +1,7 @@
 <!-- QUESTIONS: 
    - Is this necessary? "Send the selected image index back to the story chat.
+   - SPLIT story_chat attachments.js/css in several files, so one does not have to load 
+     so much what one does not need!
     
  -->
 <!DOCTYPE html>
@@ -8,342 +10,33 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
-
     <title>Riddle Henry Rudi</title>
-
     <link rel="stylesheet" href="../../../../CSS/global.css">
     <link rel="stylesheet" href="../../../../CSS/arctic-theme.css">
+    <link rel="stylesheet" href="../../../../CSS/attachments.css">
 
     <script src="../../../../Stations/JAVA/navigation.js"></script>
     <script src="../../../../Stations/JAVA/story_data.js"></script>
+    <script src="../../../../Stations/JAVA/attachments.js"></script>
     <script src="../../../../Stations/JAVA/story_chat.js"></script>
-
     <script>
         const previousPage = "../stations/station_6_1.html";
         const nextPage = "riddle_6_3_location.html";
     </script>
-
-    <style>
-        story-chat {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-
-        .gallery-overlay {
-            position: fixed;
-            inset: 0;
-            z-index: 999999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: rgba(0, 0, 0, 0.92);
-            padding: 20px;
-        }
-
-        .gallery-box {
-            width: 100%;
-            max-width: 520px;
-            background: #061927;
-            color: white;
-            padding: 20px;
-            border-radius: 18px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55);
-        }
-
-            .gallery-box h2 {
-                margin-top: 0;
-            }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin: 16px 0;
-        }
-
-        .gallery-close {
-            float: right;
-            border: none;
-            background: none;
-            color: white;
-            font-size: 34px;
-            cursor: pointer;
-        }
-
-        .gallery-item {
-            border: 3px solid transparent;
-            border-radius: 14px;
-            overflow: hidden;
-            padding: 0;
-            background: none;
-            cursor: pointer;
-        }
-
-            .gallery-item.selected {
-                border-color: #4cd137;
-            }
-
-            .gallery-item img {
-                width: 100%;
-                height: 130px;
-                object-fit: cover;
-                display: block;
-            }
-
-
-
-        .animation-stage {
-            position: fixed;
-            inset: 0;
-            z-index: 1000000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.96);
-        }
-
-        .animation-video-box {
-            position: relative;
-            width: 100%;
-            max-width: 720px;
-        }
-
-        .animation-stage video {
-            width: 100%;
-            max-height: 88vh;
-            display: block;
-            object-fit: contain;
-            background: black;
-            border-radius: 18px;
-            box-shadow: 0 20px 70px rgba(0, 0, 0, 0.7);
-        }
-
-        .animation-close {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            z-index: 2;
-            width: 46px;
-            height: 46px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0;
-            border: 1px solid rgba(255, 255, 255, 0.35);
-            border-radius: 50%;
-            color: white;
-            background: rgba(0, 0, 0, 0.65);
-            font-size: 30px;
-            line-height: 1;
-            cursor: pointer;
-            transition: background 0.2s ease, transform 0.2s ease;
-        }
-
-            .animation-close:hover {
-                background: rgba(230, 57, 70, 0.95);
-                transform: scale(1.08);
-            }
-
-            .animation-close:active {
-                transform: scale(0.94);
-            }
-
-            .animation-close:focus-visible {
-                outline: 3px solid white;
-                outline-offset: 3px;
-            }
-    </style>
 </head>
-
 <body>
     <div class="box">
-        <h1>Henry Rudi's Lock</h1>
-
         <story-chat story="henry_rudi"></story-chat>
-        <button onclick="
-        localStorage.removeItem('henry_rudi_step');
-        localStorage.removeItem('henry_rudi_scroll');
-        localStorage.removeItem('henryRudiPeople');
-        localStorage.removeItem('henryRudiLocation');
-        location.reload();">
-            Reset chat
+            <button onclick=" localStorage.removeItem('henry_rudi_step');
+                localStorage.removeItem('henry_rudi_scroll');
+                localStorage.removeItem('henryRudiPeople');
+                localStorage.removeItem('henryRudiLocation');
+                location.reload();">
+                Reset chat
         </button>
         <button onclick="window.location.href = nextPage">DEV Continue </button>
     </div>
-    <script>
-        window.ATTACHMENTS = window.ATTACHMENTS || {};
-        window.ATTACHMENTS.henryRudiGallery =
-            function (step, done) {
-                const galleryImages = [
-                    "../../../../assets/images/Rudi_1.jpg",
-                    "../../../../assets/images/Rudi_2.jpg",
-                    "../../../../assets/images/Rudi_3.jpg",
-                    "../../../../assets/images/Rudi_2.jpg"
-                ];
-
-                /*
-                 * Each image starts the video at the same array position.
-                 */
-                const resultVideos = [
-                    "../../../../assets/animation/HR_correct.mp4",
-                    "../../../../assets/animation/HR_wrong1.mp4",
-                    "../../../../assets/animation/HR_wrong2.mp4",
-                    "../../../../assets/animation/HR_wrong3.mp4"
-                ];
-
-                let videoPlaying = false;
-                const overlay = document.createElement("div");
-                overlay.className = "gallery-overlay";
-                overlay.innerHTML = `
-                        <div class="gallery-box">
-                        <button class="gallery-close" type="button" aria-label="Close gallery">
-                            ×
-                        </button>
-                        <h2>${step.name}</h2>
-                        <div class="gallery-grid"></div>
-                        <p class="gallery-feedback">
-                            Select the image that matches the signal.
-                        </p>
-                        </div>`;
-
-                document.body.appendChild(overlay);
-                const galleryGrid = overlay.querySelector(".gallery-grid");
-                const closeGalleryButton = overlay.querySelector(".gallery-close");
-
-                galleryImages.forEach((imageSource, index) => {
-                    const imageButton = document.createElement("button");
-                    imageButton.className = "gallery-item";
-                    imageButton.type = "button";
-                    imageButton.innerHTML = `
-                            <img src="${imageSource}"
-                        alt="Observatory image ${index + 1}">`;
-
-                    imageButton.addEventListener(
-                        "click",
-                        () => {
-                            if (videoPlaying) { return; }
-                            videoPlaying = true;
-                            playResultVideo(
-                                resultVideos[index],
-                                () => {
-                                    videoPlaying = false;
-                                    imageButton.classList.remove("selected");                                
-                                }
-                            );
-                        }
-                    );
-
-                    galleryGrid.appendChild(imageButton);
-                });
-
-                closeGalleryButton.addEventListener(
-                    "click",
-                    () => {
-                        if (!videoPlaying) {
-                            overlay.remove();
-                        }
-                    }
-                );
-            };
-
-
-        function playResultVideo(videoSource, onFinished) {
-            const stage = document.createElement("div");
-            stage.className = "animation-stage";
-            const videoBox = document.createElement("div");
-            videoBox.className = "animation-video-box";
-            const video = document.createElement("video");
-
-            video.src = videoSource;
-            video.autoplay = true;
-            video.playsInline = true;
-            video.preload = "auto";
-            video.muted = false;
-            video.controls = false;
-
-            const closeVideoButton = document.createElement("button");
-            closeVideoButton.className = "animation-close";
-            closeVideoButton.type = "button";
-
-            closeVideoButton.setAttribute(
-                "aria-label",
-                "Close video"
-            );
-
-            closeVideoButton.textContent = "×";
-
-            videoBox.appendChild(video);
-            videoBox.appendChild(closeVideoButton);
-            stage.appendChild(videoBox);
-
-            document.body.appendChild(stage);
-
-            /*
-             * Prevent the finish function from running twice.
-             */
-            let hasFinished = false;
-
-            function finishVideo() {
-                if (hasFinished) {
-                    return;
-                }
-
-                hasFinished = true;
-
-                video.pause();
-                video.removeAttribute("src");
-                video.load();
-
-                stage.remove();
-
-                onFinished();
-            }
-
-            /*
-             * Finishing naturally and clicking X
-             * are treated in exactly the same way.
-             */
-            video.addEventListener(
-                "ended",
-                finishVideo,
-                { once: true }
-            );
-
-            closeVideoButton.addEventListener(
-                "click",
-                finishVideo
-            );
-
-            video.addEventListener(
-                "error",
-                () => {
-                    console.error(
-                        "Could not load video:",
-                        videoSource,
-                        video.error
-                    );
-
-                    finishVideo();
-                },
-                { once: true }
-            );
-
-            video.play().catch(error => {
-                console.error(
-                    "Could not start video:",
-                    videoSource,
-                    error
-                );
-
-                finishVideo();
-            });
-        }
-    </script>
-
     <game-navigation></game-navigation>
-
     <script>
         setupGameNavigation();
     </script>

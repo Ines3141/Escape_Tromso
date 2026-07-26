@@ -102,10 +102,11 @@ const STORIES = {
                 text: "Yes. NANSEN of course! He will help."
             },
             {
-                type: "text",
-                sender: "Dispatch",
-                time: "10:30",
-                text: "Do you know his phone number?"
+                type: "input",
+                time: "10:32",
+                question: "Do you know his phone number?",
+                placeholder: "Write your answer...",
+                variable: "nansen_phone_answer"
             },
             {
                 type: "text",
@@ -113,10 +114,15 @@ const STORIES = {
                 time: "10:31",
                 text: "We have some old files with his number, but we don't understand them."
             },
-
+            {
+                type: "link",
+                sender: "Dispatch",
+                time: "10:31",
+                text: "Files",
+                href: "../riddle/riddle_2_1_phone.html"
+            }
         ]
     },
-
     wanny_dispatch: {
         title: "Dispatcher Team",
         status: "Online",
@@ -140,10 +146,10 @@ const STORIES = {
                 text: "We can't reach her! This is the last known location"
             },
             {
-                type: "text",
+                type: "file",
                 sender: "Dispatch",
                 time: "10:41",
-                text: "IMAGE HERE. REPLACE THIS"
+                image: "../../../../assets/images/Wanny_Painting_Blurred.png"
             },
             {
                 type: "text",
@@ -151,43 +157,87 @@ const STORIES = {
                 time: "10:42",
                 text: "This image is too blurry, we can't identify this. Can you figure out where this is and establish a connection with Wanny?"
             },
-
+            {
+                type: "link",
+                sender: "Dispatch",
+                time: "10:31",
+                text: "Wanny_Radio_Connection.hpf",
+                href: "../riddle/riddle_3_1_frequency.html"
+            }
         ]
     },
+    signal_intercepted: {
+        title: "Dispatcher Team",
+        status: "Online",
 
-    dispatch_final: {
+        steps: [
+            {
+                type: "text",
+                sender: "Dispatch",
+                time: "10:30",
+                text: "We are receiving your signal..."
+            },
+            {
+                type: "text",
+                sender: "Dispatch",
+                time: "10:30",
+                text: "Stay connected. We are sending the next coordinates."
+            },
+            {
+                type: "text",
+                sender: "Dispatch",
+                time: "10:31",
+                text: "Connection stable."
+            },
+            {
+                type: "action",
+                action: "signalInterceptAttack"
+            }
+        ]
+    },
+    dispatch_henry_intro: {
         title: "Dispatcher Team",
         status: "Online",
         steps: [
             {
                 type: "text",
                 sender: "Dispatch",
-                time: "11:40",
-                text: "Nice job! We would love to meet you! "
+                time: "10:30",
+                text: "Good work, Team {teamName}. You reached the next station."
             },
             {
                 type: "text",
                 sender: "Dispatch",
-                time: "11:40",
-                text: "You have all the information ready for the crew now. Send them this information using the following link."
+                time: "10:31",
+                text: "For the next part of the rescue mission, you need help from someone who knows the Arctic very well."
             },
             {
                 type: "text",
                 sender: "Dispatch",
-                time: "11:42",
-                text: "LINK REPLACE THIS"
+                time: "10:32",
+                text: "His name is Henry Rudi. We found some old information about him. Watch this first."
+            },
+            {
+                type: "file",
+                name: "henry_rudi_information.mp4",
+                action: "dispatchHenryVideo",
+                video: "../../../../assets/animation/Henry_Rudi.mp4"
             },
             {
                 type: "text",
                 sender: "Dispatch",
-                time: "11:43",
-                text: "Good bye!!"
+                time: "10:35",
+                text: "We also found his contact. Send him a friend request so he can help you."
+            },
+            {
+                type: "file",
+                name: "Henry Rudi Contact",
+                action: "henryRudiContactRequest",
+                avatar: "../../../../assets/images/rudi.jpg",
+                redirect: "../riddle/riddle_6_2_chat.html"
             }
         ]
     },
-
-
-
     henry_rudi: {
         title: "Henry Rudi",
         status: "Online",
@@ -271,45 +321,34 @@ const STORIES = {
 
         ]
     },
-    dispatch_henry_intro: {
+    dispatch_final: {
         title: "Dispatcher Team",
         status: "Online",
         steps: [
             {
                 type: "text",
                 sender: "Dispatch",
-                time: "10:30",
-                text: "Good work, Team {teamName}. You reached the next station."
+                time: "11:40",
+                text: "Nice job! We would love to meet you! "
             },
             {
                 type: "text",
+                sender: "Dispatch",
+                time: "11:40",
+                text: "You have all the information ready for the crew now. Send them this information using the following link."
+            },
+            {
+                type: "text",
+                sender: "Dispatch",
+                time: "11:43",
+                text: "Good bye!!"
+            },
+            {
+                type: "link",
                 sender: "Dispatch",
                 time: "10:31",
-                text: "For the next part of the rescue mission, you need help from someone who knows the Arctic very well."
-            },
-            {
-                type: "text",
-                sender: "Dispatch",
-                time: "10:32",
-                text: "His name is Henry Rudi. We found some old information about him. Watch this first."
-            },
-            {
-                type: "file",
-                name: "henry_rudi_information.mp4",
-                action: "dispatchHenryVideo",
-                video: "../../../../assets/animation/Henry_Rudi.mp4"
-            },
-            {
-                type: "text",
-                sender: "Dispatch",
-                time: "10:35",
-                text: "We also found his contact. Send him a friend request so he can help you."
-            },
-            {
-                type: "file",
-                name: "Henry Rudi Contact",
-                action: "henryRudiContactRequest",
-                redirect: "../riddle/riddle_6_2_chat.html"
+                text: "Upload_Important_files.com",
+                href: "../final_page.html"
             }
         ]
     }

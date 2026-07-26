@@ -30,24 +30,11 @@
         const previousPage = currentNavigation.previous;
         const nextPage = currentNavigation.next;
     </script>
-    <style>
-        story-chat {
-            display: block;
-            width: fit-content;
-            margin: 0 auto;
-        }
-    </style>
 </head>
 
 <body>
     <div class="box">
-        <h1>Station 1</h1>
-        <p>Gateway to the Arctic</p>
-
         <story-chat story="wanny_dispatch"></story-chat>
-        <button id="profile" class="profile-button" onclick="openProfile()" style="display:none;">
-            Explorer Gateway to arctic
-        </button>
         <button class="riddle-button" id="riddle_btn" onclick="window.location.href=nextPage">
             Solve Riddle
         </button>

@@ -23,13 +23,37 @@ const STORIES = {
                 type: "text",
                 sender: "Dispatch",
                 time: "10:15",
-                text: "Hello! We received an SOS signal and need your help!"
+                text: "Hello!"
             },
             {
                 type: "text",
                 sender: "Dispatch",
                 time: "10:15",
-                text: "A research ship is stuck in the Arctic. The crew needs essential survival information."
+                text: "We received an SOS from one of our teams."
+            },
+            {
+                type: "text",
+                sender: "Dispatch",
+                time: "10:15",
+                text: "Can you help us?"
+            },
+            {
+                type: "text",
+                sender: "Dispatch",
+                time: "10:15",
+                text: "A research ship is stuck in the Arctic."
+            },
+            {
+                type: "text",
+                sender: "Dispatch",
+                time: "10:15",
+                text: "The crew is running out of time."
+            },
+            {
+                type: "text",
+                sender: "Dispatch",
+                time: "10:15",
+                text: "They need essential survival information."
             },
             {
                 type: "text",
@@ -40,24 +64,29 @@ const STORIES = {
             {
                 type: "input",
                 variable: "teamName",
-                question: "Please send us your team name.",
+                question: "Send us your team name.",
                 placeholder: "Team name"
             },
             {
                 type: "text",
                 sender: "Dispatch",
                 time: "10:20",
-                text: "Fantastic, Team {teamName}! Now we need to confirm your location. We will send you a photo of where to start."
+                text: "Thanks, Team {teamName}. Now we need to confirm your location. We will send you a photo of where to start."
+            },
+            {
+                type: "file",
+                name: "starting_point.jpg",
+                image: "../../../../assets/images/Station_1_gate.jfif"
             },
             {
                 type: "upload",
-                question: "Please send us a picture of you at the Gateway to the Arctic to confirm your location."
+                question: "Send us a picture of you at the Gateway to the Arctic to confirm your location."
             },
             {
                 type: "text",
                 sender: "Dispatch",
                 time: "10:22",
-                text: "Perfect! We verified your location. You must now follow the trail of four historic explorers to help the lost crew."
+                text: "Location confirmed. You must now follow the trail of four historic explorers to help the lost crew."
             },
             {
                 type: "text",
@@ -87,7 +116,7 @@ const STORIES = {
                 question: "",
                 placeholder: "Write OKAY",
                 correctAnswer: "okay",
-                wrongAnswer: "Are you there? Please write OKAY when you have reached the next station."
+                wrongAnswer: "Are you there? Write OKAY when you have reached the next station."
             }
         ]
     },
@@ -99,20 +128,38 @@ const STORIES = {
                 type: "text",
                 sender: "Dispatch",
                 time: "10:30",
-                text: "Yes. NANSEN of course! He will help."
+                text: "Yes. Nansen! Of course! He will help."
+            },
+            {
+                type: "text",
+                sender: "Dispatch",
+                time: "10:30",
+                text: "He will help."
             },
             {
                 type: "input",
                 time: "10:32",
-                question: "Do you know his phone number?",
+                question: "Do you have his phone number?",
                 placeholder: "Write your answer...",
                 variable: "nansen_phone_answer"
             },
             {
                 type: "text",
                 sender: "Dispatch",
+                time: "10:30",
+                text: "No?"
+            },
+            {
+                type: "text",
+                sender: "Dispatch",
                 time: "10:31",
-                text: "We have some old files with his number, but we don't understand them."
+                text: "We found some old notes."
+            },
+            {
+                type: "text",
+                sender: "Dispatch",
+                time: "10:32",
+                text: "See if you can figure them out."
             },
             {
                 type: "link",
@@ -131,19 +178,25 @@ const STORIES = {
                 type: "text",
                 sender: "Dispatch",
                 time: "10:40",
-                text: "You need to get in contact with Wanny Wolstadt."
+                text: "Next person is the local hunter Wanny Wolstadt."
             },
             {
                 type: "text",
                 sender: "Dispatch",
                 time: "10:40",
-                text: "She was one of the first female hunters on Svalbard, and she is from Tromsø!"
+                text: "She was the first female hunter on Svalbard!"
             },
             {
                 type: "text",
                 sender: "Dispatch",
                 time: "10:41",
-                text: "We can't reach her! This is the last known location"
+                text: "We've lost contact with her."
+            },
+            {
+                type: "text",
+                sender: "Dispatch",
+                time: "10:41",
+                text: "This is the last image we received."
             },
             {
                 type: "file",
@@ -154,8 +207,20 @@ const STORIES = {
             {
                 type: "text",
                 sender: "Dispatch",
+                time: "10:43",
+                text: "But it is too blurry, we can't identify this."
+            },
+            {
+                type: "text",
+                sender: "Dispatch",
                 time: "10:42",
-                text: "This image is too blurry, we can't identify this. Can you figure out where this is and establish a connection with Wanny?"
+                text: "You need to see it properly to establish a connection with her."
+            },
+            {
+                type: "text",
+                sender: "Dispatch",
+                time: "10:42",
+                text: "Click on the following link to go to the radio."
             },
             {
                 type: "link",
@@ -181,13 +246,13 @@ const STORIES = {
                 type: "text",
                 sender: "Dispatch",
                 time: "10:30",
-                text: "Stay connected. We are sending the next coordinates."
+                text: "Stand by...."
             },
             {
                 type: "text",
                 sender: "Dispatch",
                 time: "10:31",
-                text: "Connection stable."
+                text: "Uploading coordinates..."
             },
             {
                 type: "action",
@@ -246,19 +311,56 @@ const STORIES = {
                 type: "text",
                 sender: "Henry Rudi",
                 time: "10:17",
-                text: "I got some movement from different houses."
+                text: "Hello?"
             },
             {
                 type: "text",
                 sender: "Henry Rudi",
-                time: "10:18",
-                text: "But I can't identify my favourite place \"�lhallen\"."
+                time: "10:17",
+                text: "Oslo people wrote me that someone will contact me, because they need help."
+            },
+            {
+                type: "input",
+                time: "10:32",
+                question: "Is this someone you?",
+                placeholder: "Write your answer...",
+                variable: "henry_answer"
+            },
+            {
+                type: "text",
+                sender: "Henry Rudi",
+                time: "10:17",
+                text: "Great!"
+            },
+            {
+                type: "text",
+                sender: "Henry Rudi",
+                time: "10:17",
+                text: "Then I am writing to the right people."
+            },
+            {
+                type: "text",
+                sender: "Henry Rudi",
+                time: "10:17",
+                text: "I think I can help."
+            },
+            {
+                type: "text",
+                sender: "Henry Rudi",
+                time: "10:17",
+                text: "We're looking for the departure date, right?."
+            },                
+            {
+                type: "text",
+                sender: "Henry Rudi",
+                time: "10:19",
+                text: "Found these in my archive."
             },
             {
                 type: "text",
                 sender: "Henry Rudi",
                 time: "10:19",
-                text: "Can you help me? I will send you the different photos."
+                text: "See if one looks familiar to my favourite place \"&#248lhallen\".."
             },
             {
                 type: "file",
@@ -316,7 +418,7 @@ const STORIES = {
                 type: "text",
                 sender: "Henry Rudi",
                 time: "10:26",
-                text: "Good luck explorers!"
+                text: "Take care."
             }
 
         ]

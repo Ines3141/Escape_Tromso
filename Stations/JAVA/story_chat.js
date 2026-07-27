@@ -169,7 +169,7 @@
         setTimeout(() => {
             const savedScroll = Number(localStorage.getItem(this.storyName + "_scroll")) || 0;
             chatBox.scrollTop = savedScroll;
-        }, 0);
+        }, 1000);
 
         this.next();
     }
@@ -233,7 +233,7 @@
         setTimeout(() => {
             typing.remove();
             this.showStep(step);
-        }, 180);
+        }, 1000);
     }
 
     showStep(step) {

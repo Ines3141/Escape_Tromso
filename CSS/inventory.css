@@ -1278,19 +1278,20 @@
     font-family: Georgia, "Times New Roman", serif;
     font-size: 30px;
     text-align: center;
+    color:#222;
 }
 
 .wanny-case-detail-body {
     max-width: 650px;
     margin: 0 auto;
+    color: #222 !important;
     font-size: 18px;
     line-height: 1.65;
 }
-
-    .wanny-case-detail-body p {
-        margin: 0 0 16px;
+    .wanny-case-detail-body p,
+    .wanny-case-detail-body strong {
+        color: #222 !important;
     }
-
 .wanny-case-detail-letter {
     width: fit-content;
     margin: 24px auto 0;

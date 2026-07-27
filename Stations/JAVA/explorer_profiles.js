@@ -878,11 +878,8 @@ CONNECTIONS:
 
         overlay.innerHTML = `
         <section class="wanny-case-shell">
-            <button
-                class="wanny-case-close"
-                type="button"
-                aria-label="Close Wanny Woldstad file"
-            >
+            <button class="wanny-case-close" type="button"
+                aria-label="Close Wanny Woldstad file">
                 &#215;
             </button>
 
@@ -897,19 +894,10 @@ CONNECTIONS:
             </p>
 
             <div class="wanny-case-trunk">
-                <div
-                    class="wanny-case-lid"
-                    aria-hidden="true"
-                ></div>
-
+                <div class="wanny-case-lid" aria-hidden="true"></div>
                 <div class="wanny-case-inside">
-
                     <!-- TAXI FARE CARD -->
-                    <button
-                        class="
-                            wanny-case-artifact
-                            wanny-case-artifact--taxi
-                        "
+                    <button class="wanny-case-artifact wanny-case-artifact--taxi"
                         type="button"
                         data-artifact="taxi"
                         data-letter="F"
@@ -1023,16 +1011,11 @@ CONNECTIONS:
                 class="wanny-case-detail"
                 hidden
             >
-                <button
-                    class="wanny-case-detail-back"
-                    type="button"
-                >
+                <button class="wanny-case-detail-back"
+                    type="button">
                     Back to trunk
                 </button>
-
-                <div class="wanny-case-detail-object">
-                </div>
-
+                <div class="wanny-case-detail-object"></div>
                 <h2 class="wanny-case-detail-title">
                 </h2>
 
@@ -1045,15 +1028,8 @@ CONNECTIONS:
 
 
             <!-- FINAL MESSAGE -->
-            <section
-                class="wanny-case-complete"
-                aria-live="polite"
-                hidden
-            >
-                <h2>
-                    FOX
-                </h2>
-
+            <section class="wanny-case-complete" aria-live="polite" hidden>
+                <h2> FOX </h2>
                 <p>
                     The Arctic fox was part of the
                     trapping landscape Wanny learned
@@ -1217,10 +1193,7 @@ CONNECTIONS:
             );
 
 
-        const detailPanel =
-            overlay.querySelector(
-                ".wanny-case-detail"
-            );
+        const detailPanel = overlay.querySelector(".wanny-case-detail");
 
 
         const detailObject =

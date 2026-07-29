@@ -145,7 +145,7 @@ CONNECTIONS:
                 "Connected with Troms\u00F8 and \u00F8lhallen"
             ],
 
-            fileTitle: "Henry Rudi – Arctic Profile",
+            fileTitle: "Henry Rudi ï¿½ Arctic Profile",
             fileImage: PROFILE_IMAGES.rudi,
 
             newspaperTitle: "The Arctic Hunter Henry Rudi",
@@ -257,7 +257,7 @@ CONNECTIONS:
                     >
 
                     <div class="amundsen-map-note">
-                        <h2>1903–1906</h2>
+                        <h2>1903-1906</h2>
 
                         <p>
                             <strong>Goal:</strong>
@@ -266,7 +266,7 @@ CONNECTIONS:
 
                         <p>
                             <strong>Vessel:</strong>
-                            Gjøa
+                            GjÃ¸a
                         </p>
 
                         <p>
@@ -294,7 +294,7 @@ CONNECTIONS:
                     >
 
                     <div class="amundsen-map-note">
-                        <h2>1910–1912</h2>
+                        <h2>1910ï¿½1912</h2>
 
                         <p>
                             <strong>Goal:</strong>
@@ -331,7 +331,7 @@ CONNECTIONS:
                     >
 
                     <div class="amundsen-map-note">
-                        <h2>1918–1925</h2>
+                        <h2>1918ï¿½1925</h2>
 
                         <p>
                             <strong>Goal:</strong>
@@ -417,7 +417,7 @@ CONNECTIONS:
                     "Important Norwegian polar explorer"
                 ],
 
-                fileTitle: "Roald Amundsen – Expedition Map",
+                fileTitle: "Roald Amundsen ï¿½ Expedition Map",
                 fileImage: PROFILE_IMAGES.amundsen,
                 mapTitle: "Amundsen's Expeditions",
                 worldMapImage: explorerAsset("../../assets/images/Amundsen/worldmap.jpg"),
@@ -515,8 +515,8 @@ CONNECTIONS:
                     </div>
 
                     <p>
-                        Our progress has been slow, will
-                        we not reach the North Pole.
+                        Our progress has been slow, we
+                        will not reach the North Pole.
 
                         I have decided we must try by foot.
 
@@ -551,8 +551,8 @@ CONNECTIONS:
 
                     <p>
                         After days of traveling over the
-                        ice, we have encountered a series
-                        of pressure ridges.
+                        ice, we encountered a series
+                        of ice ridges.
 
                         The terrain is treacherous, some
                         days we are drifting further south
@@ -586,13 +586,12 @@ CONNECTIONS:
                         Its months since we began our
                         return journey.
 
-                        After months of struggle, killing
-                        our dogs for food, we reach
-                        jozefland.
+                        With no dogs left, we managed to
+                        reach Jozefland.
 
-                        It was to late however, to attemt
-                        to reach the mainland and we had
-                        to overwinter on Jozefland.
+                        It is too late however, to attemt
+                        to reach the mainland and we have
+                        to overwinter here.
                     </p>
                 </article>
 

@@ -668,7 +668,7 @@ Object.assign(window.ATTACHMENTS, {
             dismissButton.disabled = true;
 
             status.textContent =
-                "Sending secure contact request…";
+                "Sending secure contact requestï¿½";
 
             window.setTimeout(() => {
                 localStorage.setItem(
@@ -815,10 +815,9 @@ Object.assign(window.ATTACHMENTS, {
                     controls
                     playsinline
                     preload="auto"
-                    muted
                 >
                     <source
-                        src="../../../../assets/images/hacker_video.mp4"
+                        src="../../../../assets/images/monument_video.mp4"
                         type="video/mp4"
                     >
                 </video>
@@ -832,12 +831,6 @@ Object.assign(window.ATTACHMENTS, {
             </div>
 
             <div class="blackout"></div>
-
-            <audio
-                class="monument-sound"
-                src="../../../../assets/audio/Hacker.mp3"
-                preload="auto"
-            ></audio>
         `;
 
         document.body.appendChild(overlay);
@@ -862,9 +855,6 @@ Object.assign(window.ATTACHMENTS, {
 
         const blackout =
             overlay.querySelector(".blackout");
-
-        const monumentSound =
-            overlay.querySelector(".monument-sound");
 
         const codeLines = [
             {

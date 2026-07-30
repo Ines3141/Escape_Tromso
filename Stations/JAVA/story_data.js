@@ -185,7 +185,7 @@ const STORIES = {
                 type: "text",
                 sender: "Dispatch",
                 time: "10:40",
-                text: "Next person is the local hunter Wanny Wolstadt."
+                text: "Wanny Wolstadt should be able to help you as well."
             },
             {
                 type: "text",
@@ -197,7 +197,7 @@ const STORIES = {
                 type: "text",
                 sender: "Dispatch",
                 time: "10:41",
-                text: "We've lost contact with her."
+                text: "But, we've lost contact with her."
             },
             {
                 type: "text",
@@ -287,13 +287,13 @@ const STORIES = {
                 type: "text",
                 sender: "Dispatch",
                 time: "10:32",
-                text: "His name is Henry Rudi. We found some old information about him. Watch this first."
+                text: "His name is Henry Rudi. Watch this video first."
             },
             {
                 type: "file",
                 name: "henry_rudi_information.mp4",
                 action: "dispatchHenryVideo",
-                video: "../../../../assets/animation/Henry_Rudi.mp4"
+                video: "../../../../assets/animation/HenriRudi.mp4"
             },
             {
                 type: "text",

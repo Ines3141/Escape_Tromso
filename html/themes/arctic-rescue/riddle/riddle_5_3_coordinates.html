@@ -180,7 +180,7 @@
             justify-content: center;
             align-items: center;
             gap: 18px;
-            font-size: 54px;
+            font-size: clamp(30px, 8vw, 54px);
             color: white;
             pointer-events: none;
         }
@@ -198,14 +198,13 @@
                 .final-code span:nth-child(2) {
                     animation-delay: 0.2s, 1.4s;
                 }
-
-                .final-code span:nth-child(3) {
-                    animation-delay: 0.4s, 1.6s;
-                }
-
-                .final-code span:nth-child(4) {
-                    animation-delay: 0.6s, 1.8s;
-                }
+        .year-input[readonly] {
+            background: #dff4ff;
+            border-color: lightblue;
+            color: #1b1b1b;
+            font-weight: bold;
+            cursor: not-allowed;
+        }
 
         @keyframes moveToCenter {
             to {
@@ -255,7 +254,7 @@
 
                 <label class="year-label">
                     Missing year:
-                    <input class="year-input" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="4" placeholder="1900–1926">
+                    <input class="year-input" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="4" placeholder="1900-1926">
                 </label>
             </div>
 
@@ -268,8 +267,7 @@
                 <img src="../../../../assets/images/Fram.jfif" alt="South Pole expedition">
 
                 <label class="year-label">
-                    Missing year:
-                    <input class="year-input" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="4" placeholder="1900–1926">
+                    <input class="year-input" type="text" value="1910" readonly>
                 </label>
             </div>
 
@@ -283,7 +281,7 @@
 
                 <label class="year-label">
                     Missing year:
-                    <input class="year-input" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="4" placeholder="1900–1926">
+                    <input class="year-input" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="4" placeholder="1900-1926">
                 </label>
             </div>
 
@@ -296,8 +294,7 @@
                 <img src="../../../../assets/images/Gjoa.jfif" alt="North-West passage expedition">
 
                 <label class="year-label">
-                    Missing year:
-                    <input class="year-input" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="4" placeholder="1900–1926">
+                    <input class="year-input" type="text" value="1903" readonly>
                 </label>
             </div>
         </div>
@@ -478,14 +475,12 @@
                 const finalCode = document.createElement("div");
                 finalCode.className = "final-code";
 
-                correctOrder.forEach(id => {
-                    const card = document.querySelector(`.expedition-card[data-id="${id}"]`);
-                    const number = card.querySelector(".code-number").textContent;
+                const coordinates = ["71.22N", "11.15W"];
 
-                    const numberSpan = document.createElement("span");
-                    numberSpan.textContent = number;
-
-                    finalCode.appendChild(numberSpan);
+                coordinates.forEach(coordinate => {
+                    const coordinateSpan = document.createElement("span");
+                    coordinateSpan.textContent = coordinate;
+                    finalCode.appendChild(coordinateSpan);
                 });
 
                 document.body.appendChild(finalCode);

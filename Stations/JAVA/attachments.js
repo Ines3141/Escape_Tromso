@@ -250,7 +250,7 @@ Object.assign(window.ATTACHMENTS, {
         document.addEventListener("keydown", handleKeydown);
 
         /*
-         * Automatically close after ten seconds.
+         * Automatically close after 12 seconds.
          */
         closeTimer = window.setTimeout(close, 12000);
 

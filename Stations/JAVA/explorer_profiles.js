@@ -1,4 +1,4 @@
-/*
+﻿/*
 QUESTIONS:
 - addImageFallbacks(container) Do I need this?
 
@@ -145,7 +145,7 @@ CONNECTIONS:
                 "Connected with Troms\u00F8 and \u00F8lhallen"
             ],
 
-            fileTitle: "Henry Rudi � Arctic Profile",
+            fileTitle: "Henry Rudi – Arctic Profile",
             fileImage: PROFILE_IMAGES.rudi,
 
             newspaperTitle: "The Arctic Hunter Henry Rudi",
@@ -189,7 +189,9 @@ CONNECTIONS:
         const gjoaMapImage = item.gjoaMapImage || PROFILE_IMAGES.placeholder;
         const framMapImage = item.framMapImage || PROFILE_IMAGES.placeholder;
         const maudMapImage = item.maudMapImage || PROFILE_IMAGES.placeholder;
+        const northPoleMapImage = item.northPoleMapImage || PROFILE_IMAGES.placeholder;
 
+        
         overlay.innerHTML = `
             <section class="amundsen-map-file">
                 <button
@@ -244,20 +246,82 @@ CONNECTIONS:
                     >
                         &#128205;
                     </button>
+                    <button
+                        class="amundsen-map-pin"
+                        type="button"
+                        data-target-map="northPoleMap"
+                        aria-label="View the North Pole expedition"
+                        style="left: 52%; top: 15%;">
+                        &#128205;
+                    </button>
+                </div>
+                <!====================
+                   North Pole expedition 
+                  ==================== -->
+
+                <div class="amundsen-map" data-map-id="northPoleMap">
+                    <img
+                        src="${northPoleMapImage}"
+                        alt="Map of Amundsen's North Pole expedition"
+                    >
+
+                    <div class="amundsen-map-note">
+                        <h2>1926</h2>
+
+                        <p>
+                            <strong>Goal:</strong>
+                            Fly across the North Pole.
+                        </p>
+
+                        <p>
+                            <strong>Airship:</strong>
+                            Norge
+                        </p>
+
+                        <p>
+                            Amundsen joined Lincoln Ellsworth and Umberto Nobile
+                            aboard the airship Norge for a flight across the Arctic.
+                        </p>
+                    </div>
+                    <div class="amundsen-fact">
+                        <button
+                            class="amundsen-fact-button"
+                            type="button"
+                            aria-expanded="false"
+                            aria-label="Show an additional fact"
+                        >
+                            ?
+                        </button>
+
+                        <div class="amundsen-fact-content" hidden>
+                            <strong>Did you know?</strong>
+
+                            <p>
+                                Maud remained trapped in Arctic ice for several years.
+                                The expedition collected observations about weather,
+                                sea ice, ocean currents, and the Earth's magnetic field.
+                            </p>
+                        </div>
+                    </div>
+                    <button
+                        class="amundsen-map-back"
+                        type="button"
+                    >
+                        &larr; Back
+                    </button>
                 </div>
 
                 <!-- Northwest Passage -->
                 <div
                     class="amundsen-map"
-                    data-map-id="gjoaMap"
-                >
+                    data-map-id="gjoaMap">
                     <img
                         src="${gjoaMapImage}"
                         alt="Map of Amundsen's Northwest Passage expedition"
                     >
 
                     <div class="amundsen-map-note">
-                        <h2>1903�1906</h2>
+                        <h2>1903-1906</h2>
 
                         <p>
                             <strong>Goal:</strong>
@@ -266,12 +330,15 @@ CONNECTIONS:
 
                         <p>
                             <strong>Vessel:</strong>
-                            Gj�a
+                            Gj\u00F8a
                         </p>
 
                         <p>
-                            Amundsen and his crew completed the first
-                            successful navigation of the passage.
+                            Amundsen became the first to sail
+                            the entire Northwest Passage.
+                            He spent two winters with the Inuit,
+                            learning Arctic survival, dog sledding,
+                            and fur clothing.
                         </p>
                     </div>
 
@@ -283,19 +350,13 @@ CONNECTIONS:
                     </button>
                 </div>
 
-                <!-- South Pole / Fram -->
-                <div
-                    class="amundsen-map"
-                    data-map-id="framMap"
-                >
-                    <img
-                        src="${framMapImage}"
-                        alt="Map of Amundsen's Fram and South Pole expedition"
-                    >
-
+                <!-- =================
+                     South Pole / Fram 
+                     ================= -->
+                <div class="amundsen-map" data-map-id="framMap">
+                    <img src="${framMapImage}" alt="Map of Amundsen's Fram and South Pole expedition">
                     <div class="amundsen-map-note">
-                        <h2>1910�1912</h2>
-
+                        <h2>1910-1912</h2>
                         <p>
                             <strong>Goal:</strong>
                             Reach the South Pole
@@ -308,7 +369,8 @@ CONNECTIONS:
 
                         <p>
                             Amundsen's team reached the South Pole
-                            in December 1911.
+                            in December 1911. Robert Falcon Scott's British 
+                            expedition arrived about five weeks later.
                         </p>
                     </div>
 
@@ -320,7 +382,9 @@ CONNECTIONS:
                     </button>
                 </div>
 
-                <!-- Maud expedition -->
+                <!-- =========================
+                     Maud expedition 
+                     ========================= -->
                 <div
                     class="amundsen-map"
                     data-map-id="maudMap"
@@ -331,11 +395,11 @@ CONNECTIONS:
                     >
 
                     <div class="amundsen-map-note">
-                        <h2>1918�1925</h2>
+                        <h2>1918-1925</h2>
 
                         <p>
                             <strong>Goal:</strong>
-                            Explore the Northeast Passage
+                            Drift across the Arctic Ocean toward the North Pole.
                         </p>
 
                         <p>
@@ -344,11 +408,38 @@ CONNECTIONS:
                         </p>
 
                         <p>
-                            The expedition gathered scientific
-                            information about the Arctic.
+                            Inspired by Nansen's Fram expedition,
+                            Amundsen hoped the drifting sea ice
+                            would carry Maud toward the North Pole.
+                            After completing the Northeast Passage,
+                            he abandoned the planned drift to the pole.
                         </p>
                     </div>
+                    <div class="amundsen-fact">
+                        <button
+                            class="amundsen-fact-button"
+                            type="button"
+                            aria-expanded="false"
+                            aria-label="Show a surprising fact"
+                        >
+                            ?
+                            <span class="amundsen-fact-label">Did you know?</span>
+                        </button>
 
+                        <div
+                            class="amundsen-fact-content"
+                            role="note"
+                            hidden
+                        >
+                            <strong>Did you know?</strong>
+
+                            <p>
+                                The Maud expedition recorded weather,
+                                sea-ice conditions, ocean currents,
+                                and changes in the Earth's magnetic field.
+                            </p>
+                        </div>
+                    </div>
                     <button
                         class="amundsen-map-back"
                         type="button"
@@ -363,6 +454,43 @@ CONNECTIONS:
             </p>
         </section>`;
         document.body.appendChild(overlay);
+        overlay
+            .querySelectorAll(".amundsen-fact-button")
+            .forEach(button => {
+                button.addEventListener("click", event => {
+                    event.stopPropagation();
+
+                    const factBox =
+                        button.closest(".amundsen-fact");
+
+                    const factContent =
+                        factBox?.querySelector(
+                            ".amundsen-fact-content"
+                        );
+
+                    if (!factContent) {
+                        console.error(
+                            "No fact content found for this button."
+                        );
+                        return;
+                    }
+
+                    const willOpen = factContent.hidden;
+
+                    factContent.hidden = !willOpen;
+
+                    button.setAttribute(
+                        "aria-expanded",
+                        String(willOpen)
+                    );
+
+                    button.classList.toggle(
+                        "is-open",
+                        willOpen
+                    );
+                });
+            });
+        
         addImageFallbacks(overlay);
 
         const worldMap = overlay.querySelector('[data-map-id="worldMap"]');
@@ -410,20 +538,22 @@ CONNECTIONS:
                 type: "dossier",
                 fileAction: "amundsenFile",
                 birthDate: "16 July 1872",
-                achievements: [
-                    "First to reach the South Pole",
-                    "First to navigate the Northwest Passage",
-                    "Used the Fram for polar expeditions",
-                    "Important Norwegian polar explorer"
-                ],
+                achievements: 
+                    [
+                        "First through the Northwest Passage",
+                        "First to reach the South Pole",
+                        "First verified flight across the North Pole",
+                        "Learned Arctic survival from the Inuit"
+                    ],
 
-                fileTitle: "Roald Amundsen � Expedition Map",
+                fileTitle: "Roald Amundsen – Expedition Map",
                 fileImage: PROFILE_IMAGES.amundsen,
                 mapTitle: "Amundsen's Expeditions",
                 worldMapImage: explorerAsset("../../assets/images/Amundsen/worldmap.jpg"),
                 gjoaMapImage: explorerAsset("../../assets/images/Amundsen/northwest-passage-large.jpg"),
                 framMapImage: explorerAsset("../../assets/images/Amundsen/fram.jpg"),
-                maudMapImage: explorerAsset("../../assets/images/Amundsen/fram.jpg")
+                maudMapImage: explorerAsset("../../assets/images/Amundsen/Maud_Amundsen.jfif"),
+                northPoleMapImage: explorerAsset("../../assets/images/Amundsen/northpole_norge_amundsen.jfif")
             });
         };
 
@@ -869,321 +999,504 @@ CONNECTIONS:
    ========================================================= */
 
     function openWannyTrapperCase(item) {
-        const overlay =
-            document.createElement("div");
+        const overlay = document.createElement("div");
+        overlay.className = "wanny-case-overlay";
 
-        overlay.className =
-            "wanny-case-overlay";
+        /*
+         * Change these filenames when your actual image
+         * names are different.
+         */
+        const wannyPortraitImage =
+            explorerAsset(
+                "../../assets/images/rudi.jpg"
+            );
 
+        const wannyDogsImage =
+            explorerAsset(
+                "../../assets/images/rudi.jpg"
+            );
 
         overlay.innerHTML = `
-        <section class="wanny-case-shell">
-            <button class="wanny-case-close" type="button"
-                aria-label="Close Wanny Woldstad file">
+        <section
+            class="wanny-case-shell"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="wannyCaseTitle"
+        >
+            <button
+                class="wanny-case-close"
+                type="button"
+                aria-label="Close Wanny Woldstad file"
+            >
                 &#215;
             </button>
 
-            <h1 class="wanny-case-heading">
-                ${item.fileTitle || "Wanny Woldstad - Arctic Trapper Case"}
-            </h1>
+            <header class="wanny-case-header">
+                <p class="wanny-case-kicker">
+                    Personal belongings from Svalbard
+                </p>
 
-            <p class="wanny-case-introduction">
-                Examine the objects inside Wanny's
-                field case. Each object reveals part
-                of her life and one hidden letter.
-            </p>
+                <h1
+                    class="wanny-case-heading"
+                    id="wannyCaseTitle"
+                >
+                    ${item.fileTitle ||
+            "Wanny Woldstad"
+            }
+                </h1>
 
-            <div class="wanny-case-trunk">
-                <div class="wanny-case-lid" aria-hidden="true"></div>
-                <div class="wanny-case-inside">
-                    <!-- TAXI FARE CARD -->
-                    <button class="wanny-case-artifact wanny-case-artifact--taxi"
-                        type="button"
-                        data-artifact="taxi"
-                        data-letter="F"
-                    >
-                        <span class="wanny-case-object-icon">
-                            TAXI
-                        </span>
+                <p class="wanny-case-introduction">
+                    Explore three parts of Wanny's life.
+                    Look carefully when examining each object.
+                </p>
+            </header>
 
-                        <span class="wanny-case-object-name">
-                            Fare Card
-                        </span>
+            <div
+                class="wanny-case-progress"
+                aria-live="polite"
+            >
+                <span
+                    class="wanny-case-letter-slot"
+                    data-letter-slot="licence"
+                >
+                    ?
+                </span>
 
-                        <span
-                            class="wanny-case-object-description"
-                        >
-                            A reminder of Wanny's life
-                            in Troms\u00F8 before Svalbard.
-                        </span>
-                    </button>
+                <span
+                    class="wanny-case-letter-slot"
+                    data-letter-slot="dogs"
+                >
+                    ?
+                </span>
 
-
-                    <!-- CABIN LEDGER -->
-                    <button
-                        class="
-                            wanny-case-artifact
-                            wanny-case-artifact--ledger
-                        "
-                        type="button"
-                        data-artifact="ledger"
-                        data-letter="O"
-                    >
-                        <span class="wanny-case-object-icon">
-                            LEDGER
-                        </span>
-
-                        <span class="wanny-case-object-name">
-                            Cabin Ledger
-                        </span>
-
-                        <span
-                            class="wanny-case-object-description"
-                        >
-                            A record of the many kinds
-                            of work needed to survive.
-                        </span>
-                    </button>
-
-
-                    <!-- TRAPLINE MAP -->
-                    <button
-                        class="
-                            wanny-case-artifact
-                            wanny-case-artifact--map
-                        "
-                        type="button"
-                        data-artifact="map"
-                        data-letter="X"
-                    >
-                        <span class="wanny-case-object-icon">
-                            MAP
-                        </span>
-
-                        <span class="wanny-case-object-name">
-                            Trapline Map
-                        </span>
-
-                        <span
-                            class="wanny-case-object-description"
-                        >
-                            Routes, tracks, cabins,
-                            weather, and dangerous ice.
-                        </span>
-                    </button>
-
-
-                    <div
-                        class="wanny-case-letter-board"
-                        aria-live="polite"
-                    >
-                        <span class="wanny-case-letter-label">
-                            Letters discovered:
-                        </span>
-
-                        <span
-                            class="wanny-case-letter-slot"
-                            data-letter-slot="taxi"
-                        >
-                            ?
-                        </span>
-
-                        <span
-                            class="wanny-case-letter-slot"
-                            data-letter-slot="ledger"
-                        >
-                            ?
-                        </span>
-
-                        <span
-                            class="wanny-case-letter-slot"
-                            data-letter-slot="map"
-                        >
-                            ?
-                        </span>
-                    </div>
-                </div>
+                <span
+                    class="wanny-case-letter-slot"
+                    data-letter-slot="book"
+                >
+                    ?
+                </span>
             </div>
 
+            <!-- CASE -->
+            <section class="wanny-case-trunk">
+                <div
+                    class="wanny-case-lid"
+                    aria-hidden="true"
+                ></div>
 
-            <!-- OBJECT INFORMATION -->
+                <div class="wanny-case-inside">
+                    <button
+                        class="
+                            wanny-case-artifact
+                            wanny-case-artifact--licence
+                        "
+                        type="button"
+                        data-artifact="licence"
+                    >
+                        <span
+                            class="wanny-case-artifact-symbol"
+                            aria-hidden="true"
+                        >
+                            ID
+                        </span>
+
+                        <span class="wanny-case-object-name">
+                            Wanny's Licence
+                        </span>
+
+                        <span class="wanny-case-object-description">
+                            How taxi driving opened the road
+                            toward Svalbard.
+                        </span>
+                    </button>
+
+                    <button
+                        class="
+                            wanny-case-artifact
+                            wanny-case-artifact--dogs
+                        "
+                        type="button"
+                        data-artifact="dogs"
+                    >
+                        <span
+                            class="wanny-case-artifact-symbol"
+                            aria-hidden="true"
+                        >
+                            K + S
+                        </span>
+
+                        <span class="wanny-case-object-name">
+                            Wanny's Dogs
+                        </span>
+
+                        <span class="wanny-case-object-description">
+                            Karo and Strøm were trusted
+                            Arctic companions.
+                        </span>
+                    </button>
+
+                    <button
+                        class="
+                            wanny-case-artifact
+                            wanny-case-artifact--book
+                        "
+                        type="button"
+                        data-artifact="book"
+                    >
+                        <span
+                            class="wanny-case-artifact-symbol"
+                            aria-hidden="true"
+                        >
+                            WW
+                        </span>
+
+                        <span class="wanny-case-object-name">
+                            Wanny's Book
+                        </span>
+
+                        <span class="wanny-case-object-description">
+                            Memories of food, hunting,
+                            darkness and courage.
+                        </span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- STORY VIEW -->
             <section
                 class="wanny-case-detail"
                 hidden
             >
-                <button class="wanny-case-detail-back"
-                    type="button">
-                    Back to trunk
+                <button
+                    class="wanny-case-detail-back"
+                    type="button"
+                    aria-label="Return to the case"
+                >
+                    &#8592;
                 </button>
-                <div class="wanny-case-detail-object"></div>
-                <h2 class="wanny-case-detail-title">
-                </h2>
 
-                <div class="wanny-case-detail-body">
-                </div>
+                <p class="wanny-case-detail-number"></p>
 
-                <div class="wanny-case-detail-letter">
-                </div>
+                <h2 class="wanny-case-detail-title"></h2>
+
+                <div class="wanny-case-detail-body"></div>
+
+                <button
+                    class="wanny-case-magnifier"
+                    type="button"
+                    aria-label="Examine the object"
+                    title="Examine object"
+                >
+                    &#128269;
+                </button>
             </section>
 
+            <!-- OBJECT ZOOM -->
+            <section
+                class="wanny-case-object-view"
+                hidden
+            >
+                <button
+                    class="wanny-case-object-back"
+                    type="button"
+                    aria-label="Return from the object"
+                >
+                    &#8592;
+                </button>
 
-            <!-- FINAL MESSAGE -->
-            <section class="wanny-case-complete" aria-live="polite" hidden>
-                <h2> FOX </h2>
+                <p class="wanny-case-object-instruction">
+                    Look carefully. One capital letter is
+                    hidden somewhere in the object.
+                </p>
+
+                <div class="wanny-case-detail-object"></div>
+            </section>
+
+            <!-- LETTER QUESTION -->
+            <section
+                class="wanny-case-question"
+                hidden
+                aria-live="polite"
+            >
+                <p class="wanny-case-question-kicker">
+                    Observation test
+                </p>
+
+                <h2>
+                    Which letter did you find?
+                </h2>
+
+                <div
+                    class="wanny-case-answer-options"
+                    role="group"
+                    aria-label="Choose the hidden letter"
+                ></div>
+
+                <p
+                    class="wanny-case-answer-feedback"
+                    aria-live="polite"
+                ></p>
+
+                <button
+                    class="wanny-case-question-continue"
+                    type="button"
+                    hidden
+                >
+                    Return to the case
+                </button>
+
+                <button
+                    class="wanny-case-question-look-again"
+                    type="button"
+                >
+                    Look again
+                </button>
+            </section>
+
+            <!-- COMPLETION -->
+            <section
+                class="wanny-case-complete"
+                hidden
+                aria-live="polite"
+            >
+                <div
+                    class="wanny-case-fox-symbol"
+                    aria-hidden="true"
+                >
+                    🦊
+                </div>
+
+                <p class="wanny-case-complete-kicker">
+                    Word discovered
+                </p>
+
+                <div class="wanny-case-final-word">
+                    <span>F</span>
+                    <span>O</span>
+                    <span>X</span>
+                </div>
+
+                <h2>The Arctic Fox</h2>
+
                 <p>
-                    The Arctic fox was part of the
-                    trapping landscape Wanny learned
-                    to understand.
-
-                    But the objects in her case reveal
-                    more than trapping alone.
+                    The Arctic fox survives intense cold,
+                    darkness and scarce food by adapting to
+                    its surroundings.
                 </p>
 
                 <p>
-                    Arctic survival depended on travel,
-                    planning, food, repairs, clothing,
-                    equipment, observation, and the
-                    daily maintenance of the cabin.
+                    Wanny also adapted to isolation, difficult
+                    work, dangerous hunting and the long
+                    darkness of an Arctic winter.
                 </p>
 
                 <blockquote class="wanny-case-reflection">
-                    Which parts of Wanny's Arctic work
-                    are remembered as heroic, and which
-                    parts are too easily treated as
-                    ordinary?
+                    Which required more courage: hunting in
+                    the Arctic, or continuing through months
+                    of darkness and isolation?
                 </blockquote>
+
+                <button
+                    class="wanny-case-complete-return"
+                    type="button"
+                >
+                    Return to the case
+                </button>
             </section>
         </section>
     `;
 
-
-        document.body.appendChild(
-            overlay
-        );
-
+        /*
+         * Append exactly as the other explorer profiles do.
+         */
+        document.body.appendChild(overlay);
 
         /*
-         * Information connected to each object.
+         * Add fallbacks after the HTML containing the images
+         * has been inserted.
          */
+        addImageFallbacks(overlay);
+
         const artifacts = {
-            taxi: {
-                title:
-                    "Taxi Fare Card",
-
-                objectLabel:
-                    "TAXI",
-
-                letter:
-                    "F",
+            licence: {
+                number: "Object 1 of 3",
+                title: "Wanny's Driver's Licence",
+                letter: "F",
+                choices: ["E", "F", "T"],
 
                 body: `
                 <p>
-                    Before travelling to Svalbard,
-                    Wanny worked as a taxi driver
-                    in Troms\u00F8.
+                    After becoming a widow, Wanny needed an
+                    income to support her family. She began
+                    driving a taxi in Tromsø.
                 </p>
 
                 <p>
-                    Her work connected her with many
-                    different people, including men
-                    returning from life and work in
-                    the Arctic.
+                    Through her passengers she met people
+                    connected to Arctic hunting and trapping.
+                    Among them was Anders Sæterdal, who later
+                    invited her to overwinter on Svalbard.
                 </p>
+            `,
 
-                <p>
-                    The fare card represents the
-                    beginning of an unexpected journey:
-                    an ordinary working life becoming
-                    connected to the polar world.
-                </p>
+                visual: `
+                <article class="wanny-licence">
+                    <header class="wanny-licence-heading">
+                        <div>
+                            <small>KONGERIKET NORGE</small>
+                            <strong>FØRERKORT</strong>
+                        </div>
 
-                <p>
-                    The first letter is taken from
-                    <strong>FARE</strong>.
-                </p>
+                        <span>TROMSØ</span>
+                    </header>
+
+                    <div class="wanny-licence-main">
+                        <figure class="wanny-licence-photo">
+                            <img
+                                src="${wannyPortraitImage}"
+                                alt="Portrait of Wanny Woldstad"
+                            >
+                        </figure>
+
+                        <dl class="wanny-licence-information">
+                            <div>
+                                <dt>Navn</dt>
+                                <dd>Wanny Woldstad</dd>
+                            </div>
+
+                            <div>
+                                <dt>Yrke</dt>
+                                <dd>Drosjesjåfør</dd>
+                            </div>
+
+                            <div>
+                                <dt>Utstedt</dt>
+                                <dd>Tromsø</dd>
+                            </div>
+
+                            <div>
+                                <dt>Registrering</dt>
+                                <dd>TR-F-32</dd>
+                            </div>
+                        </dl>
+                    </div>
+
+                    <div class="wanny-licence-signature">
+                        Wanny Woldstad
+                    </div>
+                </article>
             `
             },
 
-            ledger: {
-                title:
-                    "Cabin Work Ledger",
-
-                objectLabel:
-                    "LEDGER",
-
-                letter:
-                    "O",
+            dogs: {
+                number: "Object 2 of 3",
+                title: "Karo and Strøm",
+                letter: "O",
+                choices: ["C", "O", "Q"],
 
                 body: `
                 <p>
-                    Life in a trapping cabin required
-                    much more than checking traps.
+                    Karo and Strøm were working companions,
+                    not simply pets. They helped during
+                    journeys and dangerous hunts.
                 </p>
 
                 <p>
-                    Food had to be prepared. Clothing
-                    and equipment had to be repaired.
-                    The cabin had to be kept usable,
-                    fuel had to be managed, and routes
-                    had to be planned.
+                    The dogs could locate polar-bear dens
+                    beneath the snow. Their courage sometimes
+                    made hunting more difficult because Wanny
+                    and Anders had to avoid shooting them.
                 </p>
+            `,
 
-                <p>
-                    Wanny participated in trapping work
-                    while also carrying out the daily
-                    work that made survival possible.
-                </p>
+                visual: `
+                <article class="wanny-photo-object">
+                    <figure class="wanny-historical-photo">
+                        <img
+                            src="${wannyDogsImage}"
+                            alt="Wanny Woldstad with her dogs"
+                        >
 
-                <p>
-                    The second letter is connected to
-                    the cabin <strong>OVEN</strong>.
-                </p>
+                        <figcaption>
+                            Wanny with her Arctic companions,
+                            Karo and Strøm.
+                        </figcaption>
+                    </figure>
+
+                    <span
+                        class="wanny-photo-reference"
+                        aria-hidden="true"
+                    >
+                        PHOTO O-17
+                    </span>
+                </article>
             `
             },
 
-            map: {
-                title:
-                    "Trapline Map",
-
-                objectLabel:
-                    "MAP",
-
-                letter:
-                    "X",
+            book: {
+                number: "Object 3 of 3",
+                title: "A Page from Wanny's Book",
+                letter: "X",
+                choices: ["K", "X", "Y"],
 
                 body: `
                 <p>
-                    The map represents Wanny's seasons
-                    in Svalbard.
+                    Wanny later wrote about the difficult and
+                    sometimes monotonous parts of Arctic life.
                 </p>
 
                 <p>
-                    A trapper needed to understand
-                    routes between cabins, changing
-                    weather, snow conditions, animal
-                    tracks, dangerous ice, and the
-                    distance to supplies.
+                    Food, weather and isolation could weaken
+                    motivation. A successful hunt or an
+                    unexpected bird could become an important
+                    source of courage.
                 </p>
+            `,
 
-                <p>
-                    Arctic fox tracks were part of the
-                    landscape she had to observe and
-                    interpret.
-                </p>
+                visual: `
+                <article class="wanny-book">
+                    <div class="wanny-book-page">
+                        <p class="wanny-book-date">
+                            A winter day on Svalbard
+                        </p>
 
-                <p>
-                    The final letter is found at the
-                    route marked with an
-                    <strong>X</strong>.
-                </p>
+                        <p>
+                            Bear steak, bear cakes and
+                            bear-meat soup. Slowly, one
+                            almost became a bear.
+                        </p>
+
+                        <p>
+                            The snowy owl escaped, but four
+                            ptarmigan were caught.
+                        </p>
+
+                        <span class="wanny-book-page-number">
+                            27
+                        </span>
+                    </div>
+
+                    <div class="wanny-book-page">
+                        <p class="wanny-book-large-quote">
+                            Small successes could return
+                            courage to a difficult winter.
+                        </p>
+
+                        <span class="wanny-book-edition">
+                            Appendix X
+                        </span>
+                    </div>
+                </article>
             `
             }
         };
 
+        const solvedArtifacts = new Set();
 
-        const foundArtifacts =
-            new Set();
-
+        const trunk =
+            overlay.querySelector(
+                ".wanny-case-trunk"
+            );
 
         const artifactButtons =
             Array.from(
@@ -1192,151 +1505,375 @@ CONNECTIONS:
                 )
             );
 
-
-        const detailPanel = overlay.querySelector(".wanny-case-detail");
-
-
-        const detailObject =
+        const detailPanel =
             overlay.querySelector(
-                ".wanny-case-detail-object"
+                ".wanny-case-detail"
             );
 
+        const detailNumber =
+            overlay.querySelector(
+                ".wanny-case-detail-number"
+            );
 
         const detailTitle =
             overlay.querySelector(
                 ".wanny-case-detail-title"
             );
 
-
         const detailBody =
             overlay.querySelector(
                 ".wanny-case-detail-body"
             );
-
-
-        const detailLetter =
-            overlay.querySelector(
-                ".wanny-case-detail-letter"
-            );
-
 
         const detailBackButton =
             overlay.querySelector(
                 ".wanny-case-detail-back"
             );
 
+        const magnifierButton =
+            overlay.querySelector(
+                ".wanny-case-magnifier"
+            );
+
+        const objectView =
+            overlay.querySelector(
+                ".wanny-case-object-view"
+            );
+
+        const objectBackButton =
+            overlay.querySelector(
+                ".wanny-case-object-back"
+            );
+
+        const detailObject =
+            overlay.querySelector(
+                ".wanny-case-detail-object"
+            );
+
+        const questionPanel =
+            overlay.querySelector(
+                ".wanny-case-question"
+            );
+
+        const answerOptions =
+            overlay.querySelector(
+                ".wanny-case-answer-options"
+            );
+
+        const answerFeedback =
+            overlay.querySelector(
+                ".wanny-case-answer-feedback"
+            );
+
+        const continueButton =
+            overlay.querySelector(
+                ".wanny-case-question-continue"
+            );
+
+        const lookAgainButton =
+            overlay.querySelector(
+                ".wanny-case-question-look-again"
+            );
 
         const completionPanel =
             overlay.querySelector(
                 ".wanny-case-complete"
             );
 
+        const completionReturnButton =
+            overlay.querySelector(
+                ".wanny-case-complete-return"
+            );
 
-        /*
-         * Refresh the F, O, X display.
-         */
-        function updateLetters() {
-            Object.keys(
-                artifacts
-            ).forEach(key => {
-                const slot =
-                    overlay.querySelector(
-                        `[data-letter-slot="${key}"]`
-                    );
+        let currentArtifactKey = null;
 
-                slot.textContent =
-                    foundArtifacts.has(key)
-                        ? artifacts[key].letter
-                        : "?";
-            });
-
-
-            if (
-                foundArtifacts.size ===
-                Object.keys(artifacts).length
-            ) {
-                completionPanel.hidden =
-                    false;
-            }
+        function hideAllViews() {
+            trunk.hidden = true;
+            detailPanel.hidden = true;
+            objectView.hidden = true;
+            questionPanel.hidden = true;
+            completionPanel.hidden = true;
         }
 
+        function showCase() {
+            hideAllViews();
+            trunk.hidden = false;
 
-        /*
-         * Open information about one object.
-         */
-        function openArtifact(
-            artifactKey,
-            button
-        ) {
+            overlay
+                .querySelector(".wanny-case-header")
+                ?.scrollIntoView({
+                    block: "start"
+                });
+        }
+
+        function updateLetterBoard() {
+            Object.entries(artifacts).forEach(
+                ([key, artifact]) => {
+                    const slot =
+                        overlay.querySelector(
+                            `[data-letter-slot="${key}"]`
+                        );
+
+                    const solved =
+                        solvedArtifacts.has(key);
+
+                    slot.textContent =
+                        solved
+                            ? artifact.letter
+                            : "?";
+
+                    slot.classList.toggle(
+                        "discovered",
+                        solved
+                    );
+                }
+            );
+
+            artifactButtons.forEach(button => {
+                button.classList.toggle(
+                    "found",
+                    solvedArtifacts.has(
+                        button.dataset.artifact
+                    )
+                );
+            });
+        }
+
+        function openArtifact(artifactKey) {
             const artifact =
                 artifacts[artifactKey];
-
 
             if (!artifact) {
                 return;
             }
 
+            currentArtifactKey =
+                artifactKey;
 
-            foundArtifacts.add(
-                artifactKey
-            );
-
-
-            button.classList.add(
-                "found"
-            );
-
-
-            detailObject.textContent =
-                artifact.objectLabel;
-
+            detailNumber.textContent =
+                artifact.number;
 
             detailTitle.textContent =
                 artifact.title;
 
-
             detailBody.innerHTML =
                 artifact.body;
 
+            detailObject.innerHTML =
+                artifact.visual;
 
-            detailLetter.textContent =
-                `Letter discovered: ${artifact.letter}`;
+            hideAllViews();
+            detailPanel.hidden = false;
 
-
-            detailPanel.hidden =
-                false;
-
-
-            updateLetters();
+            detailPanel.scrollIntoView({
+                block: "start"
+            });
         }
 
+        function openObjectView() {
+            if (!currentArtifactKey) {
+                return;
+            }
 
-        artifactButtons.forEach(
-            button => {
-                button.addEventListener(
+            hideAllViews();
+            objectView.hidden = false;
+
+            objectView.scrollIntoView({
+                block: "start"
+            });
+        }
+
+        function openLetterQuestion() {
+            const artifact =
+                artifacts[currentArtifactKey];
+
+            if (!artifact) {
+                showCase();
+                return;
+            }
+
+            /*
+             * Already solved objects return directly.
+             */
+            if (
+                solvedArtifacts.has(
+                    currentArtifactKey
+                )
+            ) {
+                showCase();
+                return;
+            }
+
+            answerOptions.innerHTML = "";
+            answerFeedback.textContent = "";
+            answerFeedback.className =
+                "wanny-case-answer-feedback";
+
+            continueButton.hidden = true;
+            lookAgainButton.hidden = false;
+
+            artifact.choices.forEach(letter => {
+                const answerButton =
+                    document.createElement("button");
+
+                answerButton.type = "button";
+                answerButton.className =
+                    "wanny-case-answer-button";
+
+                answerButton.textContent =
+                    letter;
+
+                answerButton.addEventListener(
                     "click",
                     () => {
-                        openArtifact(
-                            button.dataset.artifact,
-                            button
+                        checkAnswer(
+                            letter,
+                            answerButton
                         );
                     }
                 );
+
+                answerOptions.appendChild(
+                    answerButton
+                );
+            });
+
+            hideAllViews();
+            questionPanel.hidden = false;
+        }
+
+        function checkAnswer(
+            selectedLetter,
+            selectedButton
+        ) {
+            const artifact =
+                artifacts[currentArtifactKey];
+
+            if (!artifact) {
+                return;
             }
-        );
 
+            if (
+                selectedLetter ===
+                artifact.letter
+            ) {
+                solvedArtifacts.add(
+                    currentArtifactKey
+                );
 
+                answerOptions
+                    .querySelectorAll("button")
+                    .forEach(button => {
+                        button.disabled = true;
+
+                        button.classList.toggle(
+                            "correct",
+                            button.textContent ===
+                            artifact.letter
+                        );
+                    });
+
+                answerFeedback.textContent =
+                    `Correct — you found ${artifact.letter}.`;
+
+                answerFeedback.classList.add(
+                    "correct"
+                );
+
+                continueButton.hidden = false;
+                lookAgainButton.hidden = true;
+
+                updateLetterBoard();
+                return;
+            }
+
+            selectedButton.classList.add(
+                "wrong"
+            );
+
+            answerFeedback.textContent =
+                "Not quite. Examine the object again.";
+
+            answerFeedback.classList.add(
+                "wrong"
+            );
+        }
+
+        function continueAfterQuestion() {
+            if (
+                solvedArtifacts.size ===
+                Object.keys(artifacts).length
+            ) {
+                hideAllViews();
+                completionPanel.hidden = false;
+                return;
+            }
+
+            showCase();
+        }
+
+        artifactButtons.forEach(button => {
+            button.addEventListener(
+                "click",
+                () => {
+                    openArtifact(
+                        button.dataset.artifact
+                    );
+                }
+            );
+        });
+
+        /*
+         * Story arrow:
+         * unsolved → question
+         * solved → case
+         */
         detailBackButton.addEventListener(
             "click",
             () => {
-                detailPanel.hidden =
-                    true;
+                if (
+                    solvedArtifacts.has(
+                        currentArtifactKey
+                    )
+                ) {
+                    showCase();
+                    return;
+                }
+
+                openLetterQuestion();
             }
         );
 
+        magnifierButton.addEventListener(
+            "click",
+            openObjectView
+        );
 
-        updateLetters();
+        /*
+         * Leaving the enlarged object asks the question.
+         */
+        objectBackButton.addEventListener(
+            "click",
+            openLetterQuestion
+        );
 
+        lookAgainButton.addEventListener(
+            "click",
+            openObjectView
+        );
+
+        continueButton.addEventListener(
+            "click",
+            continueAfterQuestion
+        );
+
+        completionReturnButton.addEventListener(
+            "click",
+            showCase
+        );
+
+        updateLetterBoard();
+        showCase();
 
         addOverlayClosing(
             overlay,
@@ -1350,12 +1887,7 @@ CONNECTIONS:
     /*
      * Inventory action for Wanny.
      */
-    window.INVENTORY_FILES.wannyCase =
-        function (item) {
-            openWannyTrapperCase(
-                item
-            );
-        };
+    window.INVENTORY_FILES.wannyCase = function (item) {openWannyTrapperCase(item);   };
 
 
     /*

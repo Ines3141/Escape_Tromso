@@ -11,6 +11,34 @@
         const previousPage = "../stations/station_4_1.html";
         const nextPage = "riddle_4_3_location.html";
     </script>
+    <style>
+        .cube-arrow {
+            width: 50px;
+            height: 50px;
+            padding: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            border-radius: 50%;
+            background: #333;
+            color: white;
+            font-size: 28px;
+            line-height: 1;
+            cursor: pointer;
+            background: lightblue;
+            color: #123;
+        }
+
+            .cube-arrow:hover {
+                background: #555;
+                transform: scale(1.08);
+            }
+
+            .cube-arrow:active {
+                transform: scale(0.95);
+            }
+    </style>
 </head>
 
 <body>
@@ -40,8 +68,8 @@
             </div>
         </div>
         <div class="cube-buttons">
-            <button onclick="rotateCube(-90)">Rotate Left</button>
-            <button onclick="rotateCube(90)">Rotate Right</button>
+            <button class="cube-arrow" onclick="rotateCube(-90)">←</button>
+            <button class="cube-arrow" onclick="rotateCube(90)">→</button>
         </div>
         <button onclick="checkCube()">Check Answer</button>
 

@@ -5,10 +5,16 @@ const STORIES = {
         status: "Online",
         steps: [
             {
+                type: "text",
+                sender: "Dispatch",
+                time: "10:15",
+                text: "Hello, we received this SOS-signal from one of our research vessels:!"
+            },
+            {
                 type: "file",
-                sender: "Unknown",
+                sender: "Dispatch",
                 time: "10:14",
-                name: "signal.jpg",
+                name: "SOS_Echo1.mp3",
                 action: "sosSignal"
             },            
             /*{
@@ -19,29 +25,18 @@ const STORIES = {
                 action: "dispatchSosAudio",
                 audio: "../../../../assets/audio/sos.mp3"
             },*/
+
             {
                 type: "text",
                 sender: "Dispatch",
                 time: "10:15",
-                text: "Hello!"
-            },
-            {
-                type: "text",
-                sender: "Dispatch",
-                time: "10:15",
-                text: "We received an SOS from one of our teams."
+                text: "We don't have the knowledge and resources to run a rescue operation."
             },
             {
                 type: "text",
                 sender: "Dispatch",
                 time: "10:15",
                 text: "Can you help us?"
-            },
-            {
-                type: "text",
-                sender: "Dispatch",
-                time: "10:15",
-                text: "A research ship is stuck in the Arctic."
             },
             {
                 type: "text",
@@ -71,8 +66,14 @@ const STORIES = {
                 type: "text",
                 sender: "Dispatch",
                 time: "10:20",
-                text: "Thanks, Team {teamName}. Now we need to confirm your location. We will send you a photo of where to start."
+                text: "Thanks, Team {teamName}. You can start your mission once you're at the Gateway to the Arctic."
             },
+            {
+                type: "text",
+                sender: "Dispatch",
+                time: "10:20",
+                text: "Here's a photo to help you locate the place."
+            },        
             {
                 type: "file",
                 name: "starting_point.jpg",
@@ -80,23 +81,30 @@ const STORIES = {
             },
             {
                 type: "upload",
-                question: "Send us a picture of you at the Gateway to the Arctic to confirm your location."
+                question: "Send us a team picture once you're there, to confirm your location."
             },
             {
                 type: "text",
                 sender: "Dispatch",
                 time: "10:22",
-                text: "Location confirmed. You must now follow the trail of four historic explorers to help the lost crew."
+                text: "Location confirmed."
+            },
+            {
+                type: "text",
+                sender: "Dispatch",
+                time: "10:22",
+                text: "Tromsø has a rich history of Arctic exploration. We're sure some former explorers can help you out."
+"
             },
             {
                 type: "text",
                 sender: "Dispatch",
                 time: "10:24",
-                text: "We received the first letters for your mission. Good luck, Team {teamName}!"
+                text: "These files should help you get in touch with one of Norway's best. Good luck, {teamName}!"
             },
             {
                 type: "file",
-                name: "treasure_map.jpg",
+                name: "next_location.jpg",
                 image: "../../../../assets/images/station_1_test.jpg"
             },
             {
@@ -108,7 +116,7 @@ const STORIES = {
                 type: "text",
                 sender: "Dispatch",
                 time: "10:26",
-                text: "Write us OKAY, when you reached the next station."
+                text: "Write us OKAY, when you reached the next location."
             },
             {
                 type: "input",
@@ -116,7 +124,7 @@ const STORIES = {
                 question: "",
                 placeholder: "Write OKAY",
                 correctAnswer: "okay",
-                wrongAnswer: "Are you there? Write OKAY when you have reached the next station."
+                wrongAnswer: "Are you there? Write OKAY when you have reached the next location."
             }
         ]
     },
@@ -128,7 +136,7 @@ const STORIES = {
                 type: "text",
                 sender: "Dispatch",
                 time: "10:30",
-                text: "Yes. Nansen! Of course! He will help."
+                text: "Yes. Nansen! Of course!"
             },
             {
                 type: "text",
@@ -159,7 +167,7 @@ const STORIES = {
                 type: "text",
                 sender: "Dispatch",
                 time: "10:32",
-                text: "See if you can figure them out."
+                text: "See if you can figure it out."
             },
             {
                 type: "link",

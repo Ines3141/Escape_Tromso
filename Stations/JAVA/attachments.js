@@ -701,17 +701,23 @@ Object.assign(window.ATTACHMENTS, {
        HENRY RUDI RIDDLE GALLERY
        ============================ */
     henryRudiGallery(step, done) {
+        /*
+         * Correct answer is position 3.
+         * JavaScript index 2 = third position.
+         */
+        const correctIndex = 2;
+
         const galleryImages = [
-            "../../../../assets/images/Rudi_1.jpg",
-            "../../../../assets/images/Rudi_2.jpg",
-            "../../../../assets/images/Rudi_3.jpg",
-            "../../../../assets/images/Rudi_2.jpg"
+            "../../../../assets/images/Rudi/wrong1_wb.png",
+            "../../../../assets/images/Rudi/wrong2_wb.png",
+            "../../../../assets/images/Rudi/correct_wb.png",
+            "../../../../assets/images/Rudi/wrong3_wb.png"
         ];
 
         const resultVideos = [
-            "../../../../assets/animation/HR_correct.mp4",
             "../../../../assets/animation/HR_wrong1.mp4",
             "../../../../assets/animation/HR_wrong2.mp4",
+            "../../../../assets/animation/HR_correct.mp4",
             "../../../../assets/animation/HR_wrong3.mp4"
         ];
 
@@ -722,16 +728,24 @@ Object.assign(window.ATTACHMENTS, {
         <h2>${step.name || "Henry Rudi"}</h2>
 
         <div class="henry-gallery__grid"></div>
+        `;
 
-        <p class="henry-gallery__feedback">
-            Select the image that matches the signal.
-        </p>
-    `;
-
-        const overlay = window.ATTACHMENT_UI.open({
+        const galleryOverlay = window.ATTACHMENT_UI.open({
             label: step.name || "Henry Rudi gallery",
             content,
-            panelClass: "attachment-panel--henry-gallery"
+            panelClass: "attachment-panel--henry-gallery",
+
+            onClose() {
+                if (completed) {
+                    return;
+                }
+
+                completed = true;
+
+                if (typeof done === "function") {
+                    done();
+                }
+            }
         });
 
         const galleryGrid = content.querySelector(
@@ -739,6 +753,21 @@ Object.assign(window.ATTACHMENTS, {
         );
 
         let videoPlaying = false;
+        let completed = false;
+
+        function continueStory() {
+            if (completed) {
+                return;
+            }
+
+            completed = true;
+
+            galleryOverlay.close();
+
+            if (typeof done === "function") {
+                done();
+            }
+        }
 
         galleryImages.forEach((imageSource, index) => {
             const imageButton = document.createElement("button");
@@ -747,31 +776,36 @@ Object.assign(window.ATTACHMENTS, {
             imageButton.className = "henry-gallery__item";
 
             imageButton.innerHTML = `
-            <img
-                src="${imageSource}"
-                alt="Observatory image ${index + 1}"
-            >
-        `;
+        <img
+            src="${imageSource}"
+            alt="Observatory image ${index + 1}"
+        >
+    `;
 
             imageButton.addEventListener("click", () => {
-                if (videoPlaying) {
+                if (videoPlaying || completed) {
                     return;
                 }
 
                 videoPlaying = true;
+
+                galleryGrid
+                    .querySelectorAll(".henry-gallery__item")
+                    .forEach(button => {
+                        button.classList.remove("selected");
+                    });
+
                 imageButton.classList.add("selected");
 
                 playHenryRudiResultVideo(
                     resultVideos[index],
+
                     () => {
                         videoPlaying = false;
+                    },
 
-                        if (
-                            index === 0 &&
-                            typeof done === "function"
-                        ) {
-                            done();
-                        }
+                    () => {
+                        videoPlaying = false;
                     }
                 );
             });
@@ -784,9 +818,7 @@ Object.assign(window.ATTACHMENTS, {
      ========================== */
      signalInterceptAttack(step, done) {
         const overlay = document.createElement("div");
-
-        overlay.className =
-            "attack-overlay scanlines active flicker";
+        overlay.className = "attack-overlay scanlines active flicker";
 
         overlay.innerHTML = `
             <div class="noise"></div>
@@ -814,12 +846,13 @@ Object.assign(window.ATTACHMENTS, {
                     class="hacker-video"
                     controls
                     playsinline
-                    preload="auto"
-                >
+                    preload="auto">
                     <source
                         src="../../../../assets/images/monument_video.mp4"
                         type="video/mp4"
                     >
+
+                    Your browser does not support this video.
                 </video>
 
                 <button
@@ -835,26 +868,13 @@ Object.assign(window.ATTACHMENTS, {
 
         document.body.appendChild(overlay);
 
-        const disconnectText =
-            overlay.querySelector(".disconnect-text");
-
-        const codeBox =
-            overlay.querySelector(".code-box");
-
-        const maskWrap =
-            overlay.querySelector(".mask-wrap");
-
-        const videoWrap =
-            overlay.querySelector(".video-wrap");
-
-        const video =
-            overlay.querySelector(".hacker-video");
-
-        const continueButton =
-            overlay.querySelector(".continue-btn");
-
-        const blackout =
-            overlay.querySelector(".blackout");
+        const disconnectText = overlay.querySelector(".disconnect-text");
+        const codeBox = overlay.querySelector(".code-box");
+        const maskWrap = overlay.querySelector(".mask-wrap");
+        const videoWrap = overlay.querySelector(".video-wrap");
+        const video = overlay.querySelector(".hacker-video");
+        const continueButton = overlay.querySelector(".continue-btn");
+        const blackout = overlay.querySelector(".blackout");
 
         const codeLines = [
             {
@@ -944,24 +964,29 @@ Object.assign(window.ATTACHMENTS, {
             video.load();
         }
 
-        video.addEventListener("play", () => {
-            monumentSound.play().catch(error => {
-                console.log(
-                    "Audio could not start:",
-                    error
-                );
-            });
-        });
+         function showContinueButton() {
+             console.log("Showing Continue button");
 
-        video.addEventListener("pause", () => {
-            monumentSound.pause();
-        });
+             continueButton.classList.add("show");
+             video.classList.add("finished");
+         }
 
-        video.addEventListener("ended", () => {
-            monumentSound.pause();
-            monumentSound.currentTime = 0;
-            continueButton.classList.add("show");
-        });
+         video.addEventListener("ended", showContinueButton);
+
+         video.addEventListener("timeupdate", () => {
+             if (
+                 Number.isFinite(video.duration) &&
+                 video.duration > 0 &&
+                 video.currentTime >= video.duration - 0.5
+             ) {
+                 showContinueButton();
+             }
+         });
+
+         video.addEventListener("error", () => {
+             console.error("Video error:", video.error);
+             showContinueButton();
+         });
 
         continueButton.addEventListener("click", () => {
             overlay.remove();
@@ -996,53 +1021,109 @@ Object.assign(window.ATTACHMENTS, {
   ========================== */
 function playHenryRudiResultVideo(
     videoSource,
+    onBack,
     onFinished
 ) {
-    const video = document.createElement("video");
+    const videoOverlay = document.createElement("div");
 
-    video.className =
-        "attachment-media attachment-video";
+    videoOverlay.className =
+        "henry-result-overlay visible";
 
-    video.src = videoSource;
-    video.autoplay = true;
-    video.playsInline = true;
-    video.preload = "auto";
-    video.controls = false;
+    videoOverlay.setAttribute("role", "dialog");
+    videoOverlay.setAttribute("aria-modal", "true");
+    videoOverlay.setAttribute(
+        "aria-label",
+        "Henry Rudi result video"
+    );
 
-    let completed = false;
-    let videoOverlay = null;
+    videoOverlay.innerHTML = `
+        <div class="henry-result-panel">
+            <button
+                type="button"
+                class="henry-result-back"
+            >
+                ← Back to gallery
+            </button>
 
-    function complete() {
-        if (completed) {
+            <video
+                class="henry-result-video"
+                playsinline
+                preload="auto"
+                autoplay
+            >
+                <source
+                    src="${videoSource}"
+                    type="video/mp4"
+                >
+
+                Your browser does not support this video.
+            </video>
+        </div>
+    `;
+
+    document.body.appendChild(videoOverlay);
+
+    const video = videoOverlay.querySelector(
+        ".henry-result-video"
+    );
+
+    const backButton = videoOverlay.querySelector(
+        ".henry-result-back"
+    );
+
+    let closed = false;
+    let finished = false;
+
+    function removeOverlay() {
+        if (closed) {
             return;
         }
 
-        completed = true;
+        closed = true;
 
         video.pause();
-        video.removeAttribute("src");
-        video.load();
 
-        if (videoOverlay) {
-            videoOverlay.close();
+        videoOverlay.classList.remove("visible");
+
+        window.setTimeout(() => {
+            videoOverlay.remove();
+        }, 180);
+    }
+
+    function returnToGallery() {
+        if (finished) {
+            return;
+        }
+
+        removeOverlay();
+
+        if (typeof onBack === "function") {
+            onBack();
         }
     }
 
-    videoOverlay = window.ATTACHMENT_UI.open({
-        label: "Henry Rudi result",
-        content: video,
-        panelClass: "attachment-panel--media",
-
-        onClose() {
-            if (typeof onFinished === "function") {
-                onFinished();
-            }
+    function finishVideo() {
+        if (finished) {
+            return;
         }
-    });
+
+        finished = true;
+
+        removeOverlay();
+
+        if (typeof onFinished === "function") {
+            onFinished();
+        }
+    }
+
+    backButton.addEventListener(
+        "click",
+        returnToGallery
+    );
 
     video.addEventListener(
         "ended",
-        complete,
+        finishVideo,
         { once: true }
     );
 
@@ -1050,24 +1131,23 @@ function playHenryRudiResultVideo(
         "error",
         () => {
             console.error(
-                "Could not load Henry Rudi video:",
+                "Henry Rudi video failed:",
                 videoSource,
                 video.error
             );
 
-            complete();
+            returnToGallery();
         },
         { once: true }
     );
 
     video.play().catch(error => {
-        console.error(
-            "Could not start Henry Rudi video:",
-            videoSource,
+        console.warn(
+            "Autoplay was blocked:",
             error
         );
 
-        complete();
+        video.controls = true;
     });
 }
 

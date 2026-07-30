@@ -283,26 +283,6 @@ CONNECTIONS:
                             aboard the airship Norge for a flight across the Arctic.
                         </p>
                     </div>
-                    <div class="amundsen-fact">
-                        <button
-                            class="amundsen-fact-button"
-                            type="button"
-                            aria-expanded="false"
-                            aria-label="Show an additional fact"
-                        >
-                            ?
-                        </button>
-
-                        <div class="amundsen-fact-content" hidden>
-                            <strong>Did you know?</strong>
-
-                            <p>
-                                Maud remained trapped in Arctic ice for several years.
-                                The expedition collected observations about weather,
-                                sea ice, ocean currents, and the Earth's magnetic field.
-                            </p>
-                        </div>
-                    </div>
                     <button
                         class="amundsen-map-back"
                         type="button"
@@ -357,7 +337,6 @@ CONNECTIONS:
                     <img src="${framMapImage}" alt="Map of Amundsen's Fram and South Pole expedition">
                     <div class="amundsen-map-note">
                         <h2>1910-1912</h2>
-                        <h2>1910�1912</h2>
 
                         <p>
                             <strong>Goal:</strong>
@@ -597,7 +576,7 @@ CONNECTIONS:
                 <!-- PAGE 1 -->
                 <article class="nansen-diary-page">
                     <h2> July 2, 1893 </h2>
-                    <div class="nansen-diary-photo" data-watermark="C">
+                    <div class="nansen-diary-photo" data-watermark="S">
                         <img src="${photo1}" alt="Fram expedition photograph">
                     </div>
                     <p>
@@ -616,7 +595,7 @@ CONNECTIONS:
                 <!-- PAGE 2 -->
                 <article class="nansen-diary-page">
                     <h2> September 18, 1893 </h2>
-                    <div class="nansen-diary-photo" data-watermark="K">
+                    <div class="nansen-diary-photo" data-watermark="L">
                         <img src="${photo2}" alt="Fram expedition photograph">
                     </div>
                     <p>
@@ -674,7 +653,7 @@ CONNECTIONS:
 
                     <div
                         class="nansen-diary-photo"
-                        data-watermark="A"
+                        data-watermark="I"
                     >
                         <img
                             src="${photo4}"
@@ -707,7 +686,7 @@ CONNECTIONS:
 
                     <div
                         class="nansen-diary-photo"
-                        data-watermark="O"
+                        data-watermark="G"
                     >
                         <img
                             src="${photo5}"
@@ -737,7 +716,7 @@ CONNECTIONS:
 
                     <div
                         class="nansen-diary-photo"
-                        data-watermark="L"
+                        data-watermark="H"
                     >
                         <img
                             src="${photo6}"
@@ -1008,15 +987,8 @@ CONNECTIONS:
          * Change these filenames when your actual image
          * names are different.
          */
-        const wannyPortraitImage =
-            explorerAsset(
-                "../../assets/images/rudi.jpg"
-            );
-
-        const wannyDogsImage =
-            explorerAsset(
-                "../../assets/images/rudi.jpg"
-            );
+        const wannyPortraitImage = explorerAsset("../../assets/images/Wanny/Wanny.jpg");
+        const wannyDogsImage = explorerAsset("../../assets/images/Wanny/Wanny_Dogs.jpg");
 
         overlay.innerHTML = `
         <section
@@ -1378,7 +1350,7 @@ CONNECTIONS:
 
                             <div>
                                 <dt>Registrering</dt>
-                                <dd>TR-F-32</dd>
+                                <dd>TROMS-F-06</dd>
                             </div>
                         </dl>
                     </div>
@@ -1429,7 +1401,7 @@ CONNECTIONS:
                         class="wanny-photo-reference"
                         aria-hidden="true"
                     >
-                        PHOTO O-17
+                        PHOTO O - 15 
                     </span>
                 </article>
             `

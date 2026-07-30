@@ -377,7 +377,7 @@ const STORIES = {
             {
                 type: "input",
                 variable: "henryRudiPeople",
-                question: "What do you see?",
+                question: "Which number  do you see?", /* CHANGE IT LATER BACK TO WHAT DO YOU SEE */ 
                 placeholder: "Type your answer...",
                 acceptedAnswers: ["2", "two", "two.", "2.", "two people", "2 people"],
                 wrongAnswer: "Look carefully at the movement in the window."

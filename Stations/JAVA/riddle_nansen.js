@@ -8,7 +8,7 @@ window.previousPage = "../stations/station_2_2.html";
 window.nextPage = "riddle_2_4_location.html";
 
 document.addEventListener("DOMContentLoaded", () => {
-    const correctAnswer = "1922";
+    const correctAnswer = "SLEIGH";
     const selectedButtons = [];
 
     const game = document.querySelector(".ice-game");

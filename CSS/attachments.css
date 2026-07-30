@@ -1027,33 +1027,52 @@
 }
 
 .video-wrap {
+	position: fixed;
+	inset: 0;
+	z-index: 50;
 	display: none;
-	z-index: 5;
-	width: min(92vw, 850px);
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 14px;
+	padding: 18px;
+	overflow: auto;
+	background: rgba(0, 0, 0, 0.94);
 }
 
 	.video-wrap.show {
-		display: block;
+		display: flex;
 	}
 
 .hacker-video {
-	width: 100%;
-	border-radius: 16px;
-	background: black;
-	box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+	max-height: calc(100dvh - 155px);
+	display: block;
+	width: auto;
+	max-width: min(92vw, 520px);
+	height: auto;
+	object-fit: contain;
+	background: #000;
 }
 
 .continue-btn {
+	position: fixed;
+	left: 50%;
+	bottom: calc(70px + env(safe-area-inset-bottom));
+	z-index: 10005;
 	display: none;
-	margin: 18px auto 0;
-	padding: 14px 26px;
-	border: none;
-	border-radius: 999px;
-	background: #27a8ff;
-	color: white;
-	cursor: pointer;
+	min-width: 150px;
+	padding: 12px 24px;
+	border: 2px solid #00ff66;
+	border-radius: 6px;
+	background: #050505;
+	color: #00ff66;
 	font-size: 1rem;
 	font-weight: bold;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	cursor: pointer;
+	transform: translateX(-50%);
+	box-shadow: 0 0 18px rgba(0, 255, 102, 0.45);
 }
 
 	.continue-btn.show {
@@ -1090,7 +1109,7 @@
 .blackout {
 	position: fixed;
 	inset: 0;
-	z-index: 10000;
+	z-index: 100;
 	background: black;
 	opacity: 0;
 	pointer-events: none;
@@ -1100,3 +1119,103 @@
 	.blackout.show {
 		opacity: 1;
 	}
+
+
+@media (max-width: 600px) {
+	.video-wrap {
+		justify-content: center;
+		padding: 10px 10px 80px;
+		overflow: hidden;
+	}
+
+	.hacker-video {
+		width: auto;
+		max-width: 100%;
+		max-height: calc(100dvh - 100px);
+	}
+	.continue-btn {
+		bottom: calc(72px + env(safe-area-inset-bottom));
+	}
+}
+
+/* ==========================
+   HENRY RUDI RESULT VIDEO
+   ========================== */
+
+.henry-result-overlay {
+	position: fixed;
+	inset: 0;
+	z-index: 999999;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 18px;
+	background: rgba(0, 0, 0, 0.96);
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+	transition: opacity 0.18s ease, visibility 0.18s ease;
+}
+
+	.henry-result-overlay.visible {
+		opacity: 1;
+		visibility: visible;
+		pointer-events: auto;
+	}
+
+.henry-result-panel {
+	position: relative;
+	z-index: 2;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 14px;
+	width: min(94vw, 760px);
+	max-height: calc(100dvh - 30px);
+}
+.henry-result-back {
+	align-self: flex-start;
+	padding: 9px 14px;
+	border: 1px solid rgba(255, 255, 255, 0.45);
+	border-radius: 6px;
+	background: rgba(10, 18, 24, 0.95);
+	color: #ffffff;
+	font: inherit;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+	.henry-result-back:hover,
+	.henry-result-back:focus-visible {
+		border-color: #ffffff;
+		background: rgba(28, 42, 52, 0.98);
+	}
+
+.henry-result-video {
+	display: block;
+	width: 100%;
+	height: auto;
+	max-height: calc(100dvh - 100px);
+	object-fit: contain;
+	background: #000;
+	border-radius: 8px;
+}
+
+@media (max-width: 600px) {
+	.henry-result-overlay {
+		padding: 10px;
+	}
+
+	.henry-result-panel {
+		width: 100%;
+	}
+
+	.henry-result-video {
+		max-height: calc(100dvh - 85px);
+	}
+
+	.henry-result-back {
+		padding: 8px 12px;
+		font-size: 0.9rem;
+	}
+}

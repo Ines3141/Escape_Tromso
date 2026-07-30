@@ -94,7 +94,6 @@ const STORIES = {
                 sender: "Dispatch",
                 time: "10:22",
                 text: "Tromsø has a rich history of Arctic exploration. We're sure some former explorers can help you out."
-"
             },
             {
                 type: "text",

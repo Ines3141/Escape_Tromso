@@ -298,17 +298,21 @@
 
         .team-photo-frame {
             background: white;
-            padding: 12px 12px 50px 12px;
-            width: 260px;
+            padding: 12px 12px 50px;
+            width: min(100%, 320px);
             margin: 25px auto;
             transform: rotate(-2deg);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, .35);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+            overflow: visible;
         }
 
-        .team-photo-frame img {
-            width: 100%;
-            display: block;
-        }
+            .team-photo-frame img {
+                display: block;
+                width: 100%;
+                height: auto;
+                max-width: 100%;
+                object-fit: contain;
+            }
 
         .memory-caption {
             text-align: center;
@@ -421,22 +425,123 @@
             }
         }
         async function downloadMemoryCard() {
+            const originalCard = document.getElementById("memoryCard");
+            const originalImage =
+                document.getElementById("teamPhotoDisplay");
 
-            const card = document.getElementById("memoryCard");
+            if (!originalImage.src) {
+                alert("No team photo was found.");
+                return;
+            }
 
-            const canvas = await html2canvas(card, {
-                scale: 2,
-                backgroundColor: "#FFFFFF"
-            });
+            try {
+                // Wait until the uploaded image is fully decoded.
+                if (typeof originalImage.decode === "function") {
+                    await originalImage.decode();
+                } else if (!originalImage.complete) {
+                    await new Promise((resolve, reject) => {
+                        originalImage.addEventListener("load", resolve, {
+                            once: true
+                        });
 
-            const link = document.createElement("a");
+                        originalImage.addEventListener("error", reject, {
+                            once: true
+                        });
+                    });
+                }
 
-            link.download =
-                `${localStorage.getItem("teamName")}_Polar_Rescue.png`;
+                // Wait for fonts before creating the canvas.
+                if (document.fonts?.ready) {
+                    await document.fonts.ready;
+                }
 
-            link.href = canvas.toDataURL("image/png");
+                // Copy the card so it is no longer inside the animated letter.
+                const exportCard = originalCard.cloneNode(true);
 
-            link.click();
+                exportCard.id = "memoryCardExport";
+
+                Object.assign(exportCard.style, {
+                    position: "fixed",
+                    left: "-10000px",
+                    top: "0",
+                    width: "700px",
+                    height: "auto",
+                    margin: "0",
+                    padding: "32px 32px 90px",
+                    background: "#ffffff",
+                    transform: "none",
+                    overflow: "visible",
+                    boxSizing: "border-box",
+                    boxShadow: "none",
+                    borderRadius: "0"
+                });
+
+                const exportImage = exportCard.querySelector("img");
+
+                Object.assign(exportImage.style, {
+                    display: "block",
+                    width: "100%",
+                    height: "auto",
+                    maxWidth: "100%",
+                    maxHeight: "none",
+                    objectFit: "contain"
+                });
+
+                const exportCaption =
+                    exportCard.querySelector(".memory-caption");
+
+                Object.assign(exportCaption.style, {
+                    position: "static",
+                    width: "100%",
+                    marginTop: "24px",
+                    textAlign: "center",
+                    transform: "none"
+                });
+
+                document.body.appendChild(exportCard);
+
+                // Give the browser one frame to calculate its correct size.
+                await new Promise(resolve => {
+                    requestAnimationFrame(() => {
+                        requestAnimationFrame(resolve);
+                    });
+                });
+
+                const canvas = await html2canvas(exportCard, {
+                    scale: 2,
+                    backgroundColor: "#ffffff",
+                    useCORS: true,
+                    allowTaint: true,
+                    logging: false,
+                    width: exportCard.scrollWidth,
+                    height: exportCard.scrollHeight,
+                    windowWidth: exportCard.scrollWidth,
+                    windowHeight: exportCard.scrollHeight
+                });
+
+                exportCard.remove();
+
+                const teamName =
+                    localStorage.getItem("teamName") || "Team";
+
+                const link = document.createElement("a");
+
+                link.download =
+                    `${teamName}_Polar_Rescue.png`;
+
+                link.href = canvas.toDataURL("image/png");
+                link.click();
+            } catch (error) {
+                console.error("Memory card download failed:", error);
+
+                document
+                    .getElementById("memoryCardExport")
+                    ?.remove();
+
+                alert(
+                    "The memory card could not be created. Please try again."
+                );
+            }
         }
     </script>
     <game-navigation previous="final_page.html" next="../riddle/riddle_2.html">

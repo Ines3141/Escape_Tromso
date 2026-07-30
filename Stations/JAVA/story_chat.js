@@ -547,24 +547,36 @@
             const reader = new FileReader();
 
             reader.onload = () => {
+                const imageData = reader.result;
+
                 localStorage.setItem(
                     this.storyName + "_upload_" + this.currentStep,
                     JSON.stringify({
-                        src: reader.result,
+                        src: imageData,
                         name: file.name
                     })
                 );
+
+                localStorage.setItem("teamPhoto", imageData);
 
                 container.remove();
 
                 const div = document.createElement("div");
                 div.className = "message from-user";
+
                 div.innerHTML = `
-                <span class="time">uploaded</span>
-                <img class="chat-image" src="${reader.result}" alt="${file.name}">`;
+                    <span class="time">uploaded</span>
+                    <img
+                        class="chat-image"
+                        src="${imageData}"
+                        alt="${file.name}"
+                    >
+                `;
+
                 div.querySelector("img").onclick = () => {
-                    this.openImageFullscreen(reader.result);
+                    this.openImageFullscreen(imageData);
                 };
+
                 messages.appendChild(div);
                 this.advance();
             };

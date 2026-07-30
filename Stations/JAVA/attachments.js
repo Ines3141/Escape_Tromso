@@ -846,7 +846,8 @@ Object.assign(window.ATTACHMENTS, {
                     class="hacker-video"
                     controls
                     playsinline
-                    preload="auto">
+                    preload="auto"
+                    style="width: auto; height: 80%;">
                     <source
                         src="../../../../assets/images/monument_video.mp4"
                         type="video/mp4"

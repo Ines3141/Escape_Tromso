@@ -151,7 +151,7 @@ CONNECTIONS:
             newspaperTitle: "The Arctic Hunter Henry Rudi",
             newspaperDate: "Troms\u00F8 Historical Archive",
             newspaperImage: PROFILE_IMAGES.rudi,
-            newspaperImageDate: "Photograph taken in June.",
+            newspaperImageDate: "Rudi shot this polar bear. Photograph taken in June.",
 
             newspaperText: `
                 <p>
@@ -377,7 +377,6 @@ CONNECTIONS:
 
                     <div class="amundsen-map-note">
                         <h2>1918-1925</h2>
-                        <h2>1918�1925</h2>
 
                         <p>
                             <strong>Goal:</strong>

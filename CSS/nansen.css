@@ -628,42 +628,7 @@
     display: none !important;
 }
 
-/* =========================================================
-   MOBILE
-   ========================================================= */
 
-@media (max-width: 600px) {
-    .call-card {
-        min-height: 560px;
-        padding-top: 35px;
-    }
-
-    .caller-photo {
-        width: 145px;
-        height: 145px;
-    }
-
-    .nansen-call.box {
-        min-height: 100vh;
-        margin: 0;
-        padding: 28px 16px;
-        border: none;
-        border-radius: 0;
-    }
-
-    .nansen-call .person-container {
-        width: 155px;
-        height: 155px;
-    }
-
-    .nansen-call .subtitle {
-        font-size: 15px;
-    }
-
-    .nansen-call .answer-button {
-        font-size: 14px;
-    }
-}
 
 /* =============================
    AMUNDSEN CALL DESIGN
@@ -809,3 +774,84 @@
     }
 }
 
+/* =========================================================
+   MOBILE FOR NANSEN AND AMUNDSEN
+   ========================================================= */
+
+@media (max-width: 600px) {
+    .call-card {
+        min-height: 560px;
+        padding-top: 35px;
+    }
+
+    .caller-photo {
+        width: 145px;
+        height: 145px;
+    }
+
+    .nansen-call.box {
+        min-height: 100vh;
+        margin: 0;
+        padding: 28px 16px;
+        border: none;
+        border-radius: 0;
+    }
+
+    .nansen-call .person-container {
+        width: 155px;
+        height: 155px;
+    }
+
+    .nansen-call .subtitle {
+        font-size: 15px;
+    }
+
+    .nansen-call .answer-button {
+        font-size: 14px;
+    }
+
+    .call-actions {
+        gap: 24px;
+        margin-top: 22px;
+    }
+
+    .call-button {
+        width: 50px;
+        height: 50px;
+        flex-basis: 50px;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.28);
+    }
+
+        .call-button svg {
+            width: 22px;
+            height: 22px;
+        }
+    .call-toolbar-wrapper {
+        width: 100%;
+        margin-top: 18px;
+    }
+
+    .call-toolbar {
+        width: min(100%, 260px);
+        gap: 12px;
+        padding: 10px 12px;
+        border-radius: 22px;
+    }
+
+    .call-control-button {
+        width: 48px;
+        height: 48px;
+        flex: 0 0 48px;
+    }
+
+        .call-control-button svg {
+            width: 21px;
+            height: 21px;
+        }
+
+    .more-dots {
+        top: -2px;
+        font-size: 22px;
+        letter-spacing: 1px;
+    }
+}

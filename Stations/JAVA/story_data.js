@@ -264,6 +264,13 @@ const STORIES = {
             {
                 type: "action",
                 action: "signalInterceptAttack"
+            },
+            {
+                type: "link",
+                sender: "Dispatch",
+                time: "10:31",
+                text: "Riddle_Hacker.png",
+                href: "../riddle/riddle_4_2_fish.html"
             }
         ]
     },

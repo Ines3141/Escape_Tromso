@@ -18,6 +18,9 @@
     </script>
 
     <style>
+        :root {
+            --game-navigation-height: 64px;
+        }
         body {
             overflow: hidden;
         }
@@ -214,10 +217,13 @@
         .speech-box {
             position: absolute;
             left: 50%;
-            bottom: 30px;
+            bottom: calc( var(--game-navigation-height) + env(safe-area-inset-bottom) + 18px );
             transform: translateX(-50%) translateY(25px);
             width: min(88vw, 540px);
+            max-height: calc( 100dvh - var(--game-navigation-height) - env(safe-area-inset-bottom) - 40px );
             z-index: 50;
+            box-sizing: border-box;
+            overflow-y: auto;
             background: rgba(3, 12, 22, 0.92);
             border: 1px solid rgba(150, 220, 255, 0.45);
             border-radius: 22px;
@@ -231,6 +237,7 @@
             .speech-box.show {
                 opacity: 1;
                 transform: translateX(-50%) translateY(0);
+                pointer-events: auto;
             }
 
         .speech-name {
@@ -248,7 +255,7 @@
 
         .continue-btn {
             display: none;
-            margin: 16px auto 0;
+            margin: 16px auto 20px;
             padding: 13px 24px;
             border: none;
             border-radius: 999px;
@@ -289,24 +296,34 @@
             cursor: pointer;
         }
 
-        @media (max-width: 480px) {
-            .spiral-card {
-                width: 96px;
-                height: 64px;
-                font-size: 12px;
-            }
-
-            .draug-wrapper {
-                width: min(86vw, 360px);
+        @media (max-width: 600px) {
+            :root {
+                --game-navigation-height: 58px;
             }
 
             .speech-box {
-                bottom: 24px;
-                padding: 15px;
+                bottom: calc( var(--game-navigation-height) + env(safe-area-inset-bottom) + 12px );
+                width: calc(100vw - 24px);
+                max-height: calc( 100dvh - var(--game-navigation-height) - env(safe-area-inset-bottom) - 28px );
+                padding: 14px;
+                border-radius: 16px;
+            }
+
+            .speech-name {
+                margin-bottom: 5px;
+                font-size: 13px;
             }
 
             .speech-text {
+                min-height: 44px;
                 font-size: 14px;
+                line-height: 1.35;
+            }
+
+            .continue-btn {
+                margin: 10px auto 2px;
+                padding: 9px 18px;
+                font-size: 13px;
             }
         }
     </style>
@@ -337,7 +354,7 @@
         <div class="speech-box" id="speechBox">
             <div class="speech-name">DRAUG</div>
             <div class="speech-text" id="speechText"></div>
-            <button class="continue-btn" id="continueBtn">Continue</button>
+            <button type="button" class="continue-btn" id="continueBtn" >Continue</button>
         </div>
 
         <button class="skip-dev" onclick="window.location.href = nextPage">
@@ -361,6 +378,9 @@
         const continueBtn = document.getElementById("continueBtn");
 
         draugImage.src = draugImagePath;
+        continueBtn.addEventListener("click", () => {
+            window.location.href = nextPage;
+        });
 
         const draugLines = [
             "You gathered the four signs...",
@@ -369,11 +389,53 @@
             "But the Arctic does not give answers freely."
         ];
 
-        continueBtn.addEventListener("click", () => {
-            window.location.href = nextPage;
-        });
+        function resetSequence() {
+            /*
+             * Reset the four cards.
+             */
+            cards.forEach(card => {
+                card.style.display = "";
+                card.style.opacity = "1";
+                card.style.transform = "";
+            });
 
-        startSequence();
+            /*
+             * Reset the stage and visual effects.
+             */
+            spiralStage.style.display = "flex";
+
+            centerGlow.classList.remove("show");
+
+            darkness.classList.remove("full");
+            darkness.style.opacity = "0";
+
+            lightning.classList.remove("flash");
+
+            /*
+             * Reset the Draug scene.
+             */
+            draugScene.classList.remove("show");
+
+            draugWrapper.classList.remove(
+                "approach",
+                "talking"
+            );
+
+            /*
+             * Reset the speech.
+             */
+            speechBox.classList.remove("show");
+            speechText.textContent = "";
+
+            continueBtn.classList.remove("show");
+        }
+        function restartSequence() {
+            resetSequence();
+
+            window.setTimeout(() => {
+                startSequence();
+            }, 50);
+        }
 
         function startSequence() {
             prepareCards();
@@ -523,6 +585,9 @@
                 }
             }, 38);
         }
+        window.addEventListener("pageshow", () => {
+            restartSequence();
+        });
     </script>
     <game-navigation></game-navigation>
     <script>

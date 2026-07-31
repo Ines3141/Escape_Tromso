@@ -220,41 +220,97 @@
                 position: relative;
                 box-sizing: border-box;
             }
+            .inventory-main-close {
+                appearance: none;
 
-            @media (max-width: 650px) {
-            .inventory-dossier.large .inventory-note {
-                position: static;
-                width: 100%;
-                min-height: auto;
-                transform: none;
-                margin-top: 30px;
-            }
-
-            .inventory-dossier.large .inventory-dossier-label {
-                position: static;
-                margin-top: 24px;
-                text-align: left;
-            }
-
-            .inventory-dossier-preview-box,
-            .inventory-file-box {
-                max-height: calc(100dvh - 20px);
-                padding: 12px;
-                overflow-y: auto;
-            }
-
-            .inventory-close-btn {
-                position: sticky;
-                top: 0;
-                right: auto;
-                z-index: 20;
+                width: 34px;
+                height: 34px;
+                min-width: 34px;
+                min-height: 34px;
 
                 display: grid;
                 place-items: center;
 
-                margin: 0 0 12px auto;
-                flex: 0 0 40px;
+                padding: 0;
+                margin: 0;
+
+                border: none;
+                border-radius: 50%;
+
+                background: #111;
+                color: white;
+
+                font-family: Arial, sans-serif;
+                font-size: 21px;
+                line-height: 1;
+
+                cursor: pointer;
             }
+            @media (max-width: 600px) {
+                .inventory-main-close {
+                    width: 30px;
+                    height: 30px;
+                    min-width: 30px;
+                    min-height: 30px;
+
+                    font-size: 19px;
+                }
+                .inventory-dossier.large
+                .inventory-note {
+                    position: static;
+                    width: 100%;
+                    min-height: auto;
+                    transform: none;
+                    margin-top: 30px;
+                }
+
+                .inventory-dossier.large .inventory-dossier-label {
+                    position: static;
+                    margin-top: 24px;
+                    text-align: left;
+                }
+
+                .inventory-dossier-preview-box,
+                .inventory-file-box {
+                    max-height: calc(100dvh - 20px);
+                    padding: 12px;
+                    overflow-y: auto;
+                }
+
+                .inventory-close-btn {
+                    appearance: none;
+
+                    position: sticky;
+                    top: 4px;
+                    right: auto;
+                    z-index: 30;
+
+                    width: 30px;
+                    height: 30px;
+                    min-width: 30px;
+                    min-height: 30px;
+
+                    display: grid;
+                    place-items: center;
+
+                    margin: 0 0 -30px auto;
+                    padding: 0;
+
+                    border: 1px solid rgba(255, 255, 255, 0.35);
+                    border-radius: 50%;
+
+                    background: rgba(20, 20, 20, 0.92);
+                    color: white;
+
+                    font-family: Arial, sans-serif;
+                    font-size: 19px;
+                    font-weight: 400;
+                    line-height: 1;
+
+                    box-shadow: 0 3px 9px rgba(0, 0, 0, 0.3);
+
+                    cursor: pointer;
+                }
         }
         `;
 
@@ -380,19 +436,14 @@
             ">
                 <h2 style="margin:0;">🎒 Inventory</h2>
 
-                <button id="closeInventory" style="
-                    display:flex;
-                    justify-content:center;
-                    align-items:center;
-                    width:40px;
-                    height:40px;
-                    border:none;
-                    border-radius:50%;
-                    background:#111;
-                    color:white;
-                    font-size:22px;
-                    cursor:pointer;
-                ">×</button>
+                <button
+                    id="closeInventory"
+                    class="inventory-main-close"
+                    type="button"
+                    aria-label="Close inventory"
+                >
+                    x
+                </button>
             </div>
 
             <div id="inventoryGrid" style="

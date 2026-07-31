@@ -86,6 +86,51 @@
             min-height: 24px;
             font-weight: bold;
         }
+        @media (max-width: 600px) {
+            .signal-console {
+                width: 100%;
+                max-width: 100%;
+                box-sizing: border-box;
+                margin: 10px auto;
+                padding: 14px 10px;
+            }
+
+            .knob-row {
+                gap: clamp(10px, 4vw, 16px);
+            }
+
+            .knob-control {
+                flex: 0 0 auto;
+                min-width: 0;
+            }
+
+            .knob {
+                width: 56px !important;
+                height: 56px !important;
+                min-width: 56px !important;
+                min-height: 56px !important;
+                flex: 0 0 56px;
+                padding: 0 !important;
+                border-radius: 50% !important;
+                aspect-ratio: 1 / 1;
+            }
+
+            .knob-marker {
+                top: 4px;
+                width: 4px;
+                height: 14px;
+            }
+
+            .knob-number {
+                margin-top: 5px;
+                font-size: 18px;
+            }
+
+            .knob-control p {
+                margin-top: 5px;
+                font-size: 11px;
+            }
+        }
     </style>
 
 </head>

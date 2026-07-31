@@ -135,6 +135,7 @@ CONNECTIONS:
             id: "profile-rudi",
             title: "Henry Rudi",
             type: "dossier",
+            thumb: PROFILE_IMAGES.placeholder,
             fileAction: "rudiNewspaper",
 
             birthDate: "26 February 1889",
@@ -517,6 +518,7 @@ CONNECTIONS:
                 id: "profile-amundsen",
                 title: "Roald Amundsen",
                 type: "dossier",
+                thumb: PROFILE_IMAGES.placeholder,
                 fileAction: "amundsenFile",
                 birthDate: "16 July 1872",
                 achievements: 
@@ -961,6 +963,7 @@ CONNECTIONS:
                 id: "profile-nansen",
                 title: "Fridtjof Nansen",
                 type: "dossier",
+                thumb: PROFILE_IMAGES.placeholder,
                 fileAction: "nansenDiary",
                 birthDate: "10 October 1861",
                 achievements: [
@@ -1881,6 +1884,8 @@ CONNECTIONS:
 
                 type:
                     "dossier",
+
+                thumb: PROFILE_IMAGES.placeholder,
 
                 fileAction:
                     "wannyCase",

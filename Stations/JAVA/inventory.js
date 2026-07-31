@@ -45,6 +45,99 @@
                 color: #3d2a15;
                 letter-spacing: 0.5px;
             }
+            /* =========================================================
+               PROFILE TILE IN THE INVENTORY GRID
+               ========================================================= */
+
+            .inventory-profile-tile {
+                width: 100%;
+                overflow: hidden;
+
+                border: 1px solid rgba(81, 57, 30, 0.3);
+                border-radius: 10px;
+
+                background: #efe0bd;
+                color: #302115;
+
+                box-shadow:
+                    0 5px 12px rgba(0, 0, 0, 0.14);
+            }
+
+            .inventory-profile-image {
+                position: relative;
+
+                width: 100%;
+                aspect-ratio: 4 / 3;
+
+                overflow: hidden;
+
+                background:
+                    linear-gradient(
+                        145deg,
+                        #d3ad6d,
+                        #a9793e
+                    );
+            }
+
+            .inventory-profile-image img {
+                display: block;
+
+                width: 100%;
+                height: 100%;
+
+                object-fit: cover;
+            }
+
+            .inventory-profile-badge {
+                position: absolute;
+                right: 8px;
+                bottom: 8px;
+
+                width: 36px;
+                height: 36px;
+
+                display: grid;
+                place-items: center;
+
+                border: 2px solid rgba(255, 255, 255, 0.78);
+                border-radius: 50%;
+
+                background: rgba(28, 25, 20, 0.82);
+                color: white;
+
+                font-size: 12px;
+                font-weight: bold;
+                letter-spacing: 0.06em;
+
+                box-shadow:
+                    0 3px 8px rgba(0, 0, 0, 0.3);
+            }
+
+            .inventory-profile-caption {
+                padding: 9px 10px 11px;
+
+                color: #302115;
+                text-align: left;
+            }
+
+            .inventory-profile-caption strong {
+                display: block;
+
+                margin-top: 2px;
+
+                color: #302115;
+                font-size: 14px;
+                line-height: 1.2;
+            }
+
+            .inventory-profile-type {
+                color: #765633;
+
+                font-size: 9px;
+                font-weight: bold;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+            }
 
             .inventory-note {
                 position: absolute;
@@ -246,6 +339,45 @@
 
                 cursor: pointer;
             }
+            /* =========================================================
+               OPENED PROFILE DOSSIER
+               ========================================================= */
+
+            .inventory-profile-preview-title {
+                margin:
+                    0
+                    46px
+                    18px
+                    0;
+
+                color: #342315;
+                font-family: Georgia, "Times New Roman", serif;
+                font-size: clamp(25px, 5vw, 38px);
+                line-height: 1.1;
+                text-align: center;
+            }
+
+            .inventory-folder-stamp {
+                position: absolute;
+                bottom: 28px;
+                left: 28px;
+
+                padding: 7px 10px;
+
+                border: 2px solid rgba(73, 46, 22, 0.65);
+                border-radius: 4px;
+
+                color: rgba(73, 46, 22, 0.75);
+
+                font-family: "Courier New", monospace;
+                font-size: 13px;
+                font-weight: bold;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+
+                transform: rotate(-2deg);
+            }
+
             @media (max-width: 600px) {
                 .inventory-main-close {
                     width: 30px;
@@ -264,17 +396,51 @@
                     margin-top: 30px;
                 }
 
-                .inventory-dossier.large .inventory-dossier-label {
-                    position: static;
-                    margin-top: 24px;
-                    text-align: left;
-                }
-
                 .inventory-dossier-preview-box,
                 .inventory-file-box {
                     max-height: calc(100dvh - 20px);
                     padding: 12px;
                     overflow-y: auto;
+                }
+                .inventory-profile-caption {
+                    padding: 7px 8px 9px;
+                }
+
+                .inventory-profile-caption strong {
+                    font-size: 12px;
+                }
+
+                .inventory-profile-type {
+                    font-size: 8px;
+                }
+
+                .inventory-profile-badge {
+                    right: 6px;
+                    bottom: 6px;
+
+                    width: 30px;
+                    height: 30px;
+
+                    font-size: 10px;
+                }
+
+                .inventory-profile-preview-title {
+                    margin:
+                        4px
+                        36px
+                        14px
+                        0;
+
+                    font-size: 24px;
+                }
+
+                .inventory-folder-stamp {
+                    position: static;
+
+                    width: fit-content;
+                    margin-top: 18px;
+
+                    transform: rotate(-1deg);
                 }
 
                 .inventory-close-btn {
@@ -376,10 +542,64 @@
 
         return visible.map(entry => `<li>${entry}</li>`).join("");
     }
-
+    function getProfileInitials(title) {
+        return String(title || "")
+            .trim()
+            .split(/\s+/)
+            .filter(Boolean)
+            .slice(0, 2)
+            .map(word => word.charAt(0).toUpperCase())
+            .join("");
+    }
     function createDossierMarkup(item, large = false) {
+        /*
+         * Small version shown inside the inventory grid.
+         * It contains only a neutral folder image and a caption.
+         */
+        if (!large) {
+            const thumbnail =
+                item.thumb ||
+                item.inventoryImage ||
+                "../../../../assets/images/file_placeholder.png";
+
+            return `
+            <div class="inventory-profile-tile">
+                <div class="inventory-profile-image">
+                    <img
+                        src="${thumbnail}"
+                        alt=""
+                    >
+
+                    <span class="inventory-profile-badge">
+                        ${getProfileInitials(item.title)}
+                    </span>
+                </div>
+
+                <div class="inventory-profile-caption">
+                    <span class="inventory-profile-type">
+                        Explorer profile
+                    </span>
+
+                    <strong>
+                        ${item.title}
+                    </strong>
+                </div>
+            </div>
+        `;
+        }
+
+        /*
+         * Large dossier shown after the inventory tile is opened.
+         * The name is placed above the folder instead of overlapping
+         * the Quick Facts note.
+         */
         return `
-            <div class="inventory-dossier ${large ? "large" : ""}">
+        <div class="inventory-profile-preview">
+            <h2 class="inventory-profile-preview-title">
+                ${item.title}
+            </h2>
+
+            <div class="inventory-dossier large">
                 <div class="inventory-note">
                     <h4>Quick Facts</h4>
 
@@ -389,15 +609,16 @@
                     </div>
 
                     <ul>
-                        ${createAchievementList(item, large ? null : 2)}
+                        ${createAchievementList(item)}
                     </ul>
                 </div>
 
-                <div class="inventory-dossier-label">
-                    ${item.title}
+                <div class="inventory-folder-stamp">
+                    Explorer dossier
                 </div>
             </div>
-        `;
+        </div>
+    `;
     }
 
     function openInventory() {

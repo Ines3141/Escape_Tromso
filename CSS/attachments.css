@@ -1355,3 +1355,155 @@
 		font-size: 0.9rem;
 	}
 }
+
+/* =========================================================
+   SHARED PHONE BUTTON IMPROVEMENTS
+   Keep this at the END of the CSS file
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+	/*
+     * Prevent global button rules from stretching or
+     * squeezing buttons unexpectedly.
+     */
+	.overlay-close,
+	.signal-letter-close,
+	.attachment-close,
+	.signal-lamp-button,
+	.signal-inventory-button,
+	.signal-save-button,
+	.contact-request__actions button,
+	.henry-result-back,
+	.continue-btn {
+		box-sizing: border-box;
+		font-family: inherit;
+		-webkit-tap-highlight-color: transparent;
+		touch-action: manipulation;
+	}
+
+	/* -----------------------------------------
+       ROUND CLOSE BUTTONS
+       ----------------------------------------- */
+
+	.overlay-close,
+	.signal-letter-close,
+	.attachment-close {
+		width: 32px !important;
+		height: 32px !important;
+		min-width: 32px !important;
+		min-height: 32px !important;
+		display: grid;
+		place-items: center;
+		padding: 0 !important;
+		margin: 0;
+		border-radius: 50% !important;
+		font-family: Arial, sans-serif;
+		font-size: 20px !important;
+		font-weight: 400;
+		line-height: 1;
+		box-shadow: 0 3px 9px rgba(0, 0, 0, 0.38);
+	}
+
+	.overlay-close,
+	.signal-letter-close {
+		top: max(8px, env(safe-area-inset-top));
+		right: max(8px, env(safe-area-inset-right));
+	}
+
+	.attachment-close {
+		top: 8px;
+		right: 8px;
+	}
+
+		/*
+     * Larger invisible tap area while the visible
+     * circle remains small.
+     */
+		.overlay-close::after,
+		.signal-letter-close::after,
+		.attachment-close::after {
+			content: "";
+			position: absolute;
+			inset: -6px;
+		}
+
+	/* -----------------------------------------
+       MORSE / SIGNAL CONTROLS
+       ----------------------------------------- */
+
+	.signal-lamp-button {
+		min-width: 0;
+		width: min(100%, 180px);
+		padding: 9px 14px;
+		border-radius: 7px;
+		font-size: 12px;
+		line-height: 1.2;
+	}
+
+	.signal-answer-actions {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 8px;
+		margin-top: 10px;
+	}
+
+	.signal-inventory-button,
+	.signal-save-button {
+		width: 100%;
+		min-height: 40px;
+		padding: 9px 12px;
+		border-radius: 7px;
+		font-size: 13px;
+		line-height: 1.2;
+		flex: none;
+	}
+
+	/* -----------------------------------------
+       CONTACT REQUEST BUTTONS
+       ----------------------------------------- */
+
+	.contact-request__actions {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 8px;
+	}
+
+		.contact-request__actions button {
+			width: 100%;
+			min-height: 40px;
+			padding: 9px 13px;
+			border-radius: 7px;
+			font-size: 13px;
+			line-height: 1.2;
+		}
+
+	/* -----------------------------------------
+       HACKER VIDEO CONTINUE BUTTON
+       ----------------------------------------- */
+
+	.video-wrap .continue-btn {
+		min-width: 0;
+		width: min(78vw, 190px);
+		bottom: calc( 66px + env(safe-area-inset-bottom) );
+		padding: 9px 15px;
+		border-width: 1px;
+		border-radius: 7px;
+		font-size: 12px;
+		line-height: 1.2;
+		letter-spacing: 0.06em;
+	}
+
+	/* -----------------------------------------
+       HENRY RESULT BACK BUTTON
+       ----------------------------------------- */
+
+	.henry-result-back {
+		align-self: flex-start;
+		min-height: 36px;
+		padding: 7px 11px;
+		border-radius: 7px;
+		font-size: 12px;
+		line-height: 1.2;
+	}
+}

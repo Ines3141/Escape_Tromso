@@ -39,50 +39,50 @@
 }
 
 
-/*  Decorative inner newspaper border. */
-.rudi-newspaper-paper::before {
-    content: "";
-    position: absolute;
-    inset: 12px;
-    border: 2px solid rgba(63, 42, 22, 0.75);
-    pointer-events: none;
-}
+    /*  Decorative inner newspaper border. */
+    .rudi-newspaper-paper::before {
+        content: "";
+        position: absolute;
+        inset: 12px;
+        border: 2px solid rgba(63, 42, 22, 0.75);
+        pointer-events: none;
+    }
 
 
-/*
+    /*
  * Light horizontal texture over the paper.
  */
 
-.rudi-newspaper-paper::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: repeating-linear-gradient(0deg, rgba(40, 25, 12, 0.035) 0, rgba(40, 25, 12, 0.035) 1px, transparent 1px, transparent 4px);
-    opacity: 0.5;
-    pointer-events: none;
-}
+    .rudi-newspaper-paper::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: repeating-linear-gradient(0deg, rgba(40, 25, 12, 0.035) 0, rgba(40, 25, 12, 0.035) 1px, transparent 1px, transparent 4px);
+        opacity: 0.5;
+        pointer-events: none;
+    }
 
 
-/* =========================================================
+    /* =========================================================
    FORCE NEWSPAPER TEXT TO BE DARK
    ========================================================= */
 
-/*
+    /*
  * These selectors prevent global.css from turning newspaper
  * headings and paragraphs white.
  */
 
-.rudi-newspaper-paper,
-.rudi-newspaper-paper h1,
-.rudi-newspaper-paper h2,
-.rudi-newspaper-paper h3,
-.rudi-newspaper-paper p,
-.rudi-newspaper-paper div,
-.rudi-newspaper-paper span,
-.rudi-newspaper-paper figure,
-.rudi-newspaper-paper figcaption {
-    color: #1f160d !important;
-}
+    .rudi-newspaper-paper,
+    .rudi-newspaper-paper h1,
+    .rudi-newspaper-paper h2,
+    .rudi-newspaper-paper h3,
+    .rudi-newspaper-paper p,
+    .rudi-newspaper-paper div,
+    .rudi-newspaper-paper span,
+    .rudi-newspaper-paper figure,
+    .rudi-newspaper-paper figcaption {
+        color: #1f160d !important;
+    }
 
 
 /* =========================================================
@@ -110,19 +110,19 @@
     transition: transform 0.18s ease, background 0.18s ease;
 }
 
-.rudi-newspaper-close:hover {
-    transform: scale(1.08);
-    background: #4a2e18;
-}
+    .rudi-newspaper-close:hover {
+        transform: scale(1.08);
+        background: #4a2e18;
+    }
 
-.rudi-newspaper-close:active {
-    transform: scale(0.94);
-}
+    .rudi-newspaper-close:active {
+        transform: scale(0.94);
+    }
 
-.rudi-newspaper-close:focus-visible {
-    outline: 3px solid #24190f;
-    outline-offset: 3px;
-}
+    .rudi-newspaper-close:focus-visible {
+        outline: 3px solid #24190f;
+        outline-offset: 3px;
+    }
 
 
 /* =========================================================
@@ -188,32 +188,32 @@
     border: 2px solid #3d2b18;
 }
 
-.rudi-newspaper-figure img {
-    display: block;
-    width: 100%;
-    max-height: 380px;
-    object-fit: cover;
-    border: 1px solid #2d2115;
-    filter: sepia(55%) contrast(1.05) grayscale(20%);
-}
+    .rudi-newspaper-figure img {
+        display: block;
+        width: 100%;
+        max-height: 380px;
+        object-fit: cover;
+        border: 1px solid #2d2115;
+        filter: sepia(55%) contrast(1.05) grayscale(20%);
+    }
 
 
-/*
+    /*
  * This is the text shown directly underneath the image.
  * It uses item.newspaperImageDate in JavaScript.
  */
 
-.rudi-newspaper-figure figcaption {
-    display: block;
-    margin-top: 10px;
-    padding: 4px 6px;
-    color: #1f160d !important;
-    font-size: 14px;
-    font-style: italic;
-    font-weight: 600;
-    line-height: 1.4;
-    text-align: center;
-}
+    .rudi-newspaper-figure figcaption {
+        display: block;
+        margin-top: 10px;
+        padding: 4px 6px;
+        color: #1f160d !important;
+        font-size: 14px;
+        font-style: italic;
+        font-weight: 600;
+        line-height: 1.4;
+        text-align: center;
+    }
 
 
 /* =========================================================
@@ -236,18 +236,18 @@
     z-index: 2;
 }
 
-.rudi-newspaper-body h2 {
-    margin: 0 0 12px;
-    padding: 8px 0;
-    color: #1f160d !important;
-    border-top: 2px solid #2d2115;
-    border-bottom: 2px solid #2d2115;
-    font-size: 28px;
-    font-weight: 800;
-    line-height: 1.05;
-    text-align: center;
-    text-transform: uppercase;
-}
+    .rudi-newspaper-body h2 {
+        margin: 0 0 12px;
+        padding: 8px 0;
+        color: #1f160d !important;
+        border-top: 2px solid #2d2115;
+        border-bottom: 2px solid #2d2115;
+        font-size: 28px;
+        font-weight: 800;
+        line-height: 1.05;
+        text-align: center;
+        text-transform: uppercase;
+    }
 
 
 /* =========================================================
@@ -263,25 +263,25 @@
     text-align: justify;
 }
 
-.rudi-newspaper-text p {
-    margin-top: 0;
-    margin-bottom: 14px;
-    color: #1f160d !important;
-}
+    .rudi-newspaper-text p {
+        margin-top: 0;
+        margin-bottom: 14px;
+        color: #1f160d !important;
+    }
 
 
-/*
+        /*
  * Large first letter in the first paragraph.
  */
 
-.rudi-newspaper-text p:first-child::first-letter {
-    float: left;
-    padding-right: 8px;
-    color: #1f160d;
-    font-size: 54px;
-    font-weight: bold;
-    line-height: 0.9;
-}
+        .rudi-newspaper-text p:first-child::first-letter {
+            float: left;
+            padding-right: 8px;
+            color: #1f160d;
+            font-size: 54px;
+            font-weight: bold;
+            line-height: 0.9;
+        }
 
 
 /* =========================================================
@@ -293,19 +293,19 @@
     scrollbar-width: thin;
 }
 
-.rudi-newspaper-paper::-webkit-scrollbar {
-    width: 10px;
-}
+    .rudi-newspaper-paper::-webkit-scrollbar {
+        width: 10px;
+    }
 
-.rudi-newspaper-paper::-webkit-scrollbar-track {
-    background: #e2cf9e;
-}
+    .rudi-newspaper-paper::-webkit-scrollbar-track {
+        background: #e2cf9e;
+    }
 
-.rudi-newspaper-paper::-webkit-scrollbar-thumb {
-    background: #6f5735;
-    border: 2px solid #e2cf9e;
-    border-radius: 999px;
-}
+    .rudi-newspaper-paper::-webkit-scrollbar-thumb {
+        background: #6f5735;
+        border: 2px solid #e2cf9e;
+        border-radius: 999px;
+    }
 
 
 /* =========================================================
@@ -392,17 +392,17 @@
 }
 
 
-/*
+    /*
  * Decorative inner border.
  */
 
-.amundsen-map-file::before {
-    content: "";
-    position: absolute;
-    inset: 12px;
-    border: 2px solid rgba(65, 45, 24, 0.65);
-    pointer-events: none;
-}
+    .amundsen-map-file::before {
+        content: "";
+        position: absolute;
+        inset: 12px;
+        border: 2px solid rgba(65, 45, 24, 0.65);
+        pointer-events: none;
+    }
 
 
 /* =========================================================
@@ -457,19 +457,19 @@
     transition: transform 0.18s ease, background 0.18s ease;
 }
 
-.amundsen-map-close:hover {
-    transform: scale(1.08);
-    background: #5b3822;
-}
+    .amundsen-map-close:hover {
+        transform: scale(1.08);
+        background: #5b3822;
+    }
 
-.amundsen-map-close:active {
-    transform: scale(0.94);
-}
+    .amundsen-map-close:active {
+        transform: scale(0.94);
+    }
 
-.amundsen-map-close:focus-visible {
-    outline: 3px solid white;
-    outline-offset: 3px;
-}
+    .amundsen-map-close:focus-visible {
+        outline: 3px solid white;
+        outline-offset: 3px;
+    }
 
 
 /* =========================================================
@@ -505,27 +505,27 @@
     transition: opacity 0.45s ease, transform 0.45s ease;
 }
 
-.amundsen-map.active {
-    z-index: 2;
-    opacity: 1;
-    pointer-events: auto;
-    transform: scale(1);
-}
+    .amundsen-map.active {
+        z-index: 2;
+        opacity: 1;
+        pointer-events: auto;
+        transform: scale(1);
+    }
 
-.amundsen-map.zooming {
-    z-index: 3;
-    opacity: 0;
-    transform: scale(1.8);
-    pointer-events: none;
-}
+    .amundsen-map.zooming {
+        z-index: 3;
+        opacity: 0;
+        transform: scale(1.8);
+        pointer-events: none;
+    }
 
-.amundsen-map img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: sepia(0.6) hue-rotate(15deg) saturate(1.2) brightness(0.95) contrast(1.05);
-}
+    .amundsen-map img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: sepia(0.6) hue-rotate(15deg) saturate(1.2) brightness(0.95) contrast(1.05);
+    }
 
 
 /* =========================================================
@@ -552,19 +552,19 @@
     transition: transform 0.16s ease, filter 0.16s ease;
 }
 
-.amundsen-map-pin:hover {
-    transform: translate(-50%, -100%) scale(1.15);
-    filter: drop-shadow(0 8px 5px rgba(0, 0, 0, 0.75));
-}
+    .amundsen-map-pin:hover {
+        transform: translate(-50%, -100%) scale(1.15);
+        filter: drop-shadow(0 8px 5px rgba(0, 0, 0, 0.75));
+    }
 
-.amundsen-map-pin:active {
-    transform: translate(-50%, -100%) scale(0.95);
-}
+    .amundsen-map-pin:active {
+        transform: translate(-50%, -100%) scale(0.95);
+    }
 
-.amundsen-map-pin:focus-visible {
-    outline: 3px solid white;
-    outline-offset: 2px;
-}
+    .amundsen-map-pin:focus-visible {
+        outline: 3px solid white;
+        outline-offset: 2px;
+    }
 
 
 /* =========================================================
@@ -592,21 +592,21 @@
     line-height: 1.5;
 }
 
-.amundsen-map-note h2 {
-    margin: 0 0 8px;
-    color: #281d12 !important;
-    font-size: 22px;
-    line-height: 1;
-    text-align: left;
-}
+    .amundsen-map-note h2 {
+        margin: 0 0 8px;
+        color: #281d12 !important;
+        font-size: 22px;
+        line-height: 1;
+        text-align: left;
+    }
 
-.amundsen-map-note p {
-    margin: 5px 0;
-    color: #281d12 !important;
-    font-size: 16px;
-    line-height: 1.25;
-    text-align: left;
-}
+    .amundsen-map-note p {
+        margin: 5px 0;
+        color: #281d12 !important;
+        font-size: 16px;
+        line-height: 1.25;
+        text-align: left;
+    }
 
 
 /* =========================================================
@@ -630,14 +630,14 @@
     transition: transform 0.16s ease, background 0.16s ease;
 }
 
-.amundsen-map-back:hover {
-    transform: translateY(-2px);
-    background: rgba(55, 70, 78, 0.96);
-}
+    .amundsen-map-back:hover {
+        transform: translateY(-2px);
+        background: rgba(55, 70, 78, 0.96);
+    }
 
-.amundsen-map-back:active {
-    transform: translateY(1px);
-}
+    .amundsen-map-back:active {
+        transform: translateY(1px);
+    }
 
 
 /* =========================================================
@@ -687,27 +687,25 @@
     transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
 
-.amundsen-fact-button:hover {
-    transform: translateY(-3px) rotate(7deg) scale(1.08);
-    box-shadow: 0 6px 0 #8b571d, 0 10px 15px rgba(0, 0, 0, 0.38);
-}
+    .amundsen-fact-button:hover {
+        transform: translateY(-3px) rotate(7deg) scale(1.08);
+        box-shadow: 0 6px 0 #8b571d, 0 10px 15px rgba(0, 0, 0, 0.38);
+    }
 
-.amundsen-fact-button:active {
-    transform: translateY(3px) scale(0.96);
-    box-shadow: 0 1px 0 #8b571d, 0 3px 6px rgba(0, 0, 0, 0.3);
-}
+    .amundsen-fact-button:active {
+        transform: translateY(3px) scale(0.96);
+        box-shadow: 0 1px 0 #8b571d, 0 3px 6px rgba(0, 0, 0, 0.3);
+    }
 
-.amundsen-fact-button.is-open {
-    animation: none;
-    transform: rotate(8deg);
-    background: #fff4c7;
-}
+    .amundsen-fact-button.is-open {
+        animation: none;
+        transform: rotate(8deg);
+        background: #fff4c7;
+    }
 
 @keyframes amundsen-fact-bounce {
 
-    0%,
-    75%,
-    100% {
+    0%, 75%, 100% {
         transform: translateY(0) rotate(0);
     }
 
@@ -762,31 +760,31 @@
     transform: rotate(1deg);
 }
 
-.amundsen-fact-content::before {
-    content: "";
-    position: absolute;
-    top: -9px;
-    right: 14px;
-    width: 16px;
-    height: 16px;
-    background: #fff1bd;
-    border-top: 1px solid rgba(60, 42, 20, 0.78);
-    border-left: 1px solid rgba(60, 42, 20, 0.78);
-    transform: rotate(45deg);
-}
+    .amundsen-fact-content::before {
+        content: "";
+        position: absolute;
+        top: -9px;
+        right: 14px;
+        width: 16px;
+        height: 16px;
+        background: #fff1bd;
+        border-top: 1px solid rgba(60, 42, 20, 0.78);
+        border-left: 1px solid rgba(60, 42, 20, 0.78);
+        transform: rotate(45deg);
+    }
 
-.amundsen-fact-content strong {
-    display: block;
-    margin-bottom: 5px;
-    font-size: 18px;
-}
+    .amundsen-fact-content strong {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 18px;
+    }
 
-.amundsen-fact-content p {
-    margin: 0;
-    color: #281d12 !important;
-    font-size: 16px;
-    line-height: 1.25;
-}
+    .amundsen-fact-content p {
+        margin: 0;
+        color: #281d12 !important;
+        font-size: 16px;
+        line-height: 1.25;
+    }
 
 /* =========================================================
    MOBILE
@@ -824,13 +822,13 @@
         transform: none;
     }
 
-    .amundsen-map-note h2 {
-        font-size: 19px;
-    }
+        .amundsen-map-note h2 {
+            font-size: 19px;
+        }
 
-    .amundsen-map-note p {
-        font-size: 14px;
-    }
+        .amundsen-map-note p {
+            font-size: 14px;
+        }
 
     .amundsen-map-back {
         right: 10px;
@@ -926,42 +924,42 @@
     backface-visibility: hidden;
 }
 
-.nansen-diary-page::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background: linear-gradient(90deg, rgba(60, 35, 15, 0.17), transparent 14%, transparent 85%, rgba(60, 35, 15, 0.08));
-}
+    .nansen-diary-page::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background: linear-gradient(90deg, rgba(60, 35, 15, 0.17), transparent 14%, transparent 85%, rgba(60, 35, 15, 0.08));
+    }
 
-.nansen-diary-page.flipped {
-    transform: rotateY(-180deg);
-    opacity: 0.12;
-    pointer-events: none;
-}
+    .nansen-diary-page.flipped {
+        transform: rotateY(-180deg);
+        opacity: 0.12;
+        pointer-events: none;
+    }
 
-.nansen-diary-page h2 {
-    position: relative;
-    z-index: 2;
-    margin: 0 0 8px;
-    color: black;
-    font-family: "Caveat", "Segoe Print", cursive;
-    font-size: 31px;
-    font-weight: 600;
-    line-height: 1;
-}
+    .nansen-diary-page h2 {
+        position: relative;
+        z-index: 2;
+        margin: 0 0 8px;
+        color: black;
+        font-family: "Caveat", "Segoe Print", cursive;
+        font-size: 31px;
+        font-weight: 600;
+        line-height: 1;
+    }
 
-.nansen-diary-page p {
-    position: relative;
-    z-index: 2;
-    margin: 0;
-    color: #2b2118;
-    font-family: "Caveat", "Segoe Print", cursive;
-    font-size: 21px;
-    font-weight: 500;
-    line-height: 1.08;
-    letter-spacing: 0;
-}
+    .nansen-diary-page p {
+        position: relative;
+        z-index: 2;
+        margin: 0;
+        color: #2b2118;
+        font-family: "Caveat", "Segoe Print", cursive;
+        font-size: 21px;
+        font-weight: 500;
+        line-height: 1.08;
+        letter-spacing: 0;
+    }
 
 .nansen-diary-photo {
     position: relative;
@@ -975,35 +973,35 @@
     transform: rotate(-0.5deg);
 }
 
-.nansen-diary-photo img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    border-radius: inherit;
-    object-fit: cover;
-    object-position: center;
-    filter: sepia(0.22) contrast(0.94);
-}
+    .nansen-diary-photo img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border-radius: inherit;
+        object-fit: cover;
+        object-position: center;
+        filter: sepia(0.22) contrast(0.94);
+    }
 
-.nansen-diary-photo::after {
-    content: attr(data-watermark);
-    position: absolute;
-    top: 10px;
-    left: 13px;
-    z-index: 3;
-    display: grid;
-    place-items: center;
-    width: 54px;
-    height: 54px;
-    padding: 0;
-    border: 3px solid rgba(120, 70, 30, 0.13);
-    color: rgba(120, 70, 30, 0.42);
-    font-family: Georgia, serif;
-    font-size: 34px;
-    line-height: 1;
-    transform: rotate(-5deg);
-    pointer-events: none;
-}
+    .nansen-diary-photo::after {
+        content: attr(data-watermark);
+        position: absolute;
+        top: 10px;
+        left: 13px;
+        z-index: 3;
+        display: grid;
+        place-items: center;
+        width: 54px;
+        height: 54px;
+        padding: 0;
+        border: 3px solid rgba(120, 70, 30, 0.13);
+        color: rgba(120, 70, 30, 0.42);
+        font-family: Georgia, serif;
+        font-size: 34px;
+        line-height: 1;
+        transform: rotate(-5deg);
+        pointer-events: none;
+    }
 
 /* Page-turning buttons */
 
@@ -1012,35 +1010,23 @@
     position: absolute;
     bottom: 12px;
     z-index: 1200;
-
     width: 44px;
     height: 44px;
     box-sizing: border-box;
-
     display: grid;
     place-items: center;
-
     padding: 0;
     margin: 0;
-
     border: none;
     border-radius: 50%;
-
     background: rgba(255, 245, 220, 0.9);
     color: #1f160d;
-
     font-family: Arial, sans-serif;
     font-size: 30px;
     line-height: 1;
-
     cursor: pointer;
-
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
-
-    transition:
-        opacity 0.2s ease,
-        transform 0.2s ease,
-        background 0.2s ease;
+    transition: opacity 0.2s ease, transform 0.2s ease, background 0.2s ease;
 }
 
 .nansen-diary-previous {
@@ -1051,22 +1037,22 @@
     right: 12px;
 }
 
-.nansen-diary-next:hover:not(:disabled),
-.nansen-diary-previous:hover:not(:disabled) {
-    transform: scale(1.06);
-    background: #fff4d7;
-}
+    .nansen-diary-next:hover:not(:disabled),
+    .nansen-diary-previous:hover:not(:disabled) {
+        transform: scale(1.06);
+        background: #fff4d7;
+    }
 
-.nansen-diary-next:active:not(:disabled),
-.nansen-diary-previous:active:not(:disabled) {
-    transform: scale(0.94);
-}
+    .nansen-diary-next:active:not(:disabled),
+    .nansen-diary-previous:active:not(:disabled) {
+        transform: scale(0.94);
+    }
 
-.nansen-diary-next:disabled,
-.nansen-diary-previous:disabled {
-    opacity: 0.15;
-    cursor: default;
-}
+    .nansen-diary-next:disabled,
+    .nansen-diary-previous:disabled {
+        opacity: 0.15;
+        cursor: default;
+    }
 
 /* Mobile diary */
 
@@ -1085,10 +1071,8 @@
         top: 0;
         right: auto;
         z-index: 3000;
-
         display: grid;
         place-items: center;
-
         margin: 0 0 10px auto;
         flex-shrink: 0;
     }
@@ -1111,27 +1095,27 @@
         margin-bottom: 12px;
     }
 
-    .nansen-diary-photo::after {
-        top: 9px;
-        left: 11px;
-        width: 48px;
-        height: 48px;
-        font-size: 30px;
-    }
+        .nansen-diary-photo::after {
+            top: 9px;
+            left: 11px;
+            width: 48px;
+            height: 48px;
+            font-size: 30px;
+        }
 
     .nansen-diary-page {
         padding: 16px 18px 18px;
     }
 
-    .nansen-diary-page h2 {
-        margin-bottom: 7px;
-        font-size: 29px;
-    }
+        .nansen-diary-page h2 {
+            margin-bottom: 7px;
+            font-size: 29px;
+        }
 
-    .nansen-diary-page p {
-        font-size: 19px;
-        line-height: 1.06;
-    }
+        .nansen-diary-page p {
+            font-size: 19px;
+            line-height: 1.06;
+        }
 
     .nansen-diary-previous {
         left: 8px;
@@ -1180,10 +1164,10 @@
     background: radial-gradient(circle at center, rgba(43, 58, 63, 0.7), rgba(5, 12, 16, 0.96));
 }
 
-.wanny-case-overlay[hidden],
-.wanny-case-overlay [hidden] {
-    display: none !important;
-}
+    .wanny-case-overlay[hidden],
+    .wanny-case-overlay [hidden] {
+        display: none !important;
+    }
 
 .wanny-case-shell {
     position: relative;
@@ -1224,9 +1208,9 @@
     cursor: pointer;
 }
 
-.wanny-case-close:hover {
-    background: #fff2ce;
-}
+    .wanny-case-close:hover {
+        background: #fff2ce;
+    }
 
 /* Header */
 
@@ -1293,11 +1277,11 @@
     box-shadow: 2px 3px 0 rgba(58, 37, 19, 0.3);
 }
 
-.wanny-case-letter-slot.discovered {
-    background: #fff0a2;
-    color: #27533a;
-    animation: wanny-letter-pop 0.45s ease;
-}
+    .wanny-case-letter-slot.discovered {
+        background: #fff0a2;
+        color: #27533a;
+        animation: wanny-letter-pop 0.45s ease;
+    }
 
 @keyframes wanny-letter-pop {
     50% {
@@ -1456,10 +1440,10 @@
     cursor: pointer;
 }
 
-.wanny-case-detail-back:hover,
-.wanny-case-object-back:hover {
-    background: rgba(89, 58, 33, 0.22);
-}
+    .wanny-case-detail-back:hover,
+    .wanny-case-object-back:hover {
+        background: rgba(89, 58, 33, 0.22);
+    }
 
 /* Story */
 
@@ -1489,16 +1473,16 @@
     color: #2a1e14;
 }
 
-.wanny-case-detail-body p {
-    margin: 0 0 9px;
-    color: #2a1e14;
-    font-size: 15px;
-    line-height: 1.45;
-}
+    .wanny-case-detail-body p {
+        margin: 0 0 9px;
+        color: #2a1e14;
+        font-size: 15px;
+        line-height: 1.45;
+    }
 
-.wanny-case-detail-body p:last-child {
-    margin-bottom: 0;
-}
+        .wanny-case-detail-body p:last-child {
+            margin-bottom: 0;
+        }
 
 /* Magnifying glass inside information box */
 
@@ -1522,10 +1506,10 @@
     box-shadow: 2px 3px 0 rgba(62, 39, 19, 0.28);
 }
 
-.wanny-case-magnifier:hover {
-    transform: scale(1.06);
-    background: #fff0bd;
-}
+    .wanny-case-magnifier:hover {
+        transform: scale(1.06);
+        background: #fff0bd;
+    }
 
 /* Object view */
 
@@ -1566,33 +1550,33 @@
     border-bottom: 3px double #554c31;
 }
 
-.wanny-licence-heading div {
-    display: flex;
-    flex-direction: column;
-}
+    .wanny-licence-heading div {
+        display: flex;
+        flex-direction: column;
+    }
 
-.wanny-licence-heading small {
-    color: #2b271a;
-    font-family: Arial, sans-serif;
-    font-size: 9px;
-    letter-spacing: 0.13em;
-}
+    .wanny-licence-heading small {
+        color: #2b271a;
+        font-family: Arial, sans-serif;
+        font-size: 9px;
+        letter-spacing: 0.13em;
+    }
 
-.wanny-licence-heading strong {
-    color: #2b271a;
-    font-family: Georgia, serif;
-    font-size: 20px;
-    letter-spacing: 0.06em;
-}
+    .wanny-licence-heading strong {
+        color: #2b271a;
+        font-family: Georgia, serif;
+        font-size: 20px;
+        letter-spacing: 0.06em;
+    }
 
-.wanny-licence-heading span {
-    padding: 3px 6px;
-    border: 1px solid #5b5238;
-    color: #2b271a;
-    font-family: Arial, sans-serif;
-    font-size: 10px;
-    font-weight: bold;
-}
+    .wanny-licence-heading span {
+        padding: 3px 6px;
+        border: 1px solid #5b5238;
+        color: #2b271a;
+        font-family: Arial, sans-serif;
+        font-size: 10px;
+        font-weight: bold;
+    }
 
 .wanny-licence-main {
     display: grid;
@@ -1609,40 +1593,40 @@
     background: #a6a18d;
 }
 
-.wanny-licence-photo img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    min-height: 140px;
-    object-fit: cover;
-    filter: grayscale(1) sepia(0.22) contrast(1.06);
-}
+    .wanny-licence-photo img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        min-height: 140px;
+        object-fit: cover;
+        filter: grayscale(1) sepia(0.22) contrast(1.06);
+    }
 
 .wanny-licence-information {
     margin: 0;
 }
 
-.wanny-licence-information div {
-    margin-bottom: 7px;
-}
+    .wanny-licence-information div {
+        margin-bottom: 7px;
+    }
 
-.wanny-licence-information dt {
-    color: #3b3524;
-    font-family: Arial, sans-serif;
-    font-size: 9px;
-    font-weight: bold;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-}
+    .wanny-licence-information dt {
+        color: #3b3524;
+        font-family: Arial, sans-serif;
+        font-size: 9px;
+        font-weight: bold;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+    }
 
-.wanny-licence-information dd {
-    margin: 1px 0 0;
-    padding-bottom: 3px;
-    border-bottom: 1px solid #62593c;
-    color: #262217;
-    font-family: Georgia, serif;
-    font-size: 15px;
-}
+    .wanny-licence-information dd {
+        margin: 1px 0 0;
+        padding-bottom: 3px;
+        border-bottom: 1px solid #62593c;
+        color: #262217;
+        font-family: Georgia, serif;
+        font-size: 15px;
+    }
 
 .wanny-licence-signature {
     width: fit-content;
@@ -1671,23 +1655,23 @@
     margin: 0;
 }
 
-.wanny-historical-photo img {
-    display: block;
-    width: 100%;
-    max-height: 58vh;
-    object-fit: contain;
-    border: 1px solid #493c30;
-    filter: grayscale(0.8) sepia(0.24) contrast(1.05);
-}
+    .wanny-historical-photo img {
+        display: block;
+        width: 100%;
+        max-height: 58vh;
+        object-fit: contain;
+        border: 1px solid #493c30;
+        filter: grayscale(0.8) sepia(0.24) contrast(1.05);
+    }
 
-.wanny-historical-photo figcaption {
-    padding: 7px 5px 1px;
-    color: #33281d;
-    font-family: Georgia, serif;
-    font-size: 12px;
-    font-style: italic;
-    text-align: center;
-}
+    .wanny-historical-photo figcaption {
+        padding: 7px 5px 1px;
+        color: #33281d;
+        font-family: Georgia, serif;
+        font-size: 12px;
+        font-style: italic;
+        text-align: center;
+    }
 
 /*
  * O is hidden inside an archive reference,
@@ -1728,14 +1712,14 @@
     line-height: 1.35;
 }
 
-.wanny-book-page:first-child {
-    border-right: 2px solid rgba(76, 47, 20, 0.32);
-}
+    .wanny-book-page:first-child {
+        border-right: 2px solid rgba(76, 47, 20, 0.32);
+    }
 
-.wanny-book-page p {
-    margin: 0 0 10px;
-    color: #312519;
-}
+    .wanny-book-page p {
+        margin: 0 0 10px;
+        color: #312519;
+    }
 
 .wanny-book-date {
     padding-bottom: 5px;
@@ -1779,12 +1763,12 @@
     text-align: center;
 }
 
-.wanny-case-question h2 {
-    margin: 0 0 17px;
-    color: #2a1e14;
-    font-family: "Caveat", "Segoe Print", cursive;
-    font-size: 31px;
-}
+    .wanny-case-question h2 {
+        margin: 0 0 17px;
+        color: #2a1e14;
+        font-family: "Caveat", "Segoe Print", cursive;
+        font-size: 31px;
+    }
 
 .wanny-case-answer-options {
     display: flex;
@@ -1807,17 +1791,17 @@
     cursor: pointer;
 }
 
-.wanny-case-answer-button:hover:not(:disabled) {
-    transform: translateY(-3px);
-}
+    .wanny-case-answer-button:hover:not(:disabled) {
+        transform: translateY(-3px);
+    }
 
-.wanny-case-answer-button.wrong {
-    background: #dda99e;
-}
+    .wanny-case-answer-button.wrong {
+        background: #dda99e;
+    }
 
-.wanny-case-answer-button.correct {
-    background: #bad7aa;
-}
+    .wanny-case-answer-button.correct {
+        background: #bad7aa;
+    }
 
 .wanny-case-answer-feedback {
     min-height: 22px;
@@ -1826,13 +1810,13 @@
     font-weight: bold;
 }
 
-.wanny-case-answer-feedback.correct {
-    color: #275936;
-}
+    .wanny-case-answer-feedback.correct {
+        color: #275936;
+    }
 
-.wanny-case-answer-feedback.wrong {
-    color: #792d25;
-}
+    .wanny-case-answer-feedback.wrong {
+        color: #792d25;
+    }
 
 .wanny-case-question-continue,
 .wanny-case-question-look-again,
@@ -1864,19 +1848,19 @@
     margin: 8px 0 13px;
 }
 
-.wanny-case-final-word span {
-    width: 48px;
-    height: 55px;
-    display: grid;
-    place-items: center;
-    border: 3px solid #4a321e;
-    border-radius: 6px;
-    background: #ffefa6;
-    color: #2c2117;
-    font-family: Georgia, serif;
-    font-size: 34px;
-    font-weight: bold;
-}
+    .wanny-case-final-word span {
+        width: 48px;
+        height: 55px;
+        display: grid;
+        place-items: center;
+        border: 3px solid #4a321e;
+        border-radius: 6px;
+        background: #ffefa6;
+        color: #2c2117;
+        font-family: Georgia, serif;
+        font-size: 34px;
+        font-weight: bold;
+    }
 
 .wanny-case-complete h2 {
     margin: 0 0 10px;
@@ -2005,9 +1989,9 @@
         padding: 11px 48px 11px 11px;
     }
 
-    .wanny-case-detail-body p {
-        font-size: 14px;
-    }
+        .wanny-case-detail-body p {
+            font-size: 14px;
+        }
 
     .wanny-case-magnifier {
         right: 24px;
@@ -2032,9 +2016,9 @@
         min-height: 112px;
     }
 
-    .wanny-licence-photo img {
-        min-height: 112px;
-    }
+        .wanny-licence-photo img {
+            min-height: 112px;
+        }
 
     .wanny-licence-information dd {
         font-size: 12px;
@@ -2053,10 +2037,10 @@
         padding: 17px;
     }
 
-    .wanny-book-page:first-child {
-        border-right: 0;
-        border-bottom: 2px solid rgba(76, 47, 20, 0.32);
-    }
+        .wanny-book-page:first-child {
+            border-right: 0;
+            border-bottom: 2px solid rgba(76, 47, 20, 0.32);
+        }
 
     .wanny-case-question h2 {
         font-size: 27px;
@@ -2066,5 +2050,188 @@
         width: 57px;
         height: 61px;
         font-size: 28px;
+    }
+}
+
+/* =========================================================
+   FINAL MOBILE BUTTON FIXES
+   Keep this block at the very END of this file.
+
+   Why this is needed:
+   global button rules can give buttons width: 100% or allow
+   flex/grid layouts to stretch them. A width and height alone
+   are sometimes not enough. The rules below lock circular
+   controls to a square size using min/max dimensions,
+   aspect-ratio and flex sizing.
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    /* -----------------------------------------------------
+       Shared circular close buttons used by inventory files
+       ----------------------------------------------------- */
+    .rudi-newspaper-close,
+    .amundsen-map-close,
+    .nansen-diary-close,
+    .wanny-case-close,
+    .inventory-close-btn,
+    #closeInventory,
+    .inventory-main-close {
+        appearance: none !important;
+        width: 32px !important;
+        height: 32px !important;
+        min-width: 32px !important;
+        min-height: 32px !important;
+        max-width: 32px !important;
+        max-height: 32px !important;
+        aspect-ratio: 1 / 1 !important;
+        flex: 0 0 32px !important;
+        align-self: auto;
+        display: grid !important;
+        place-items: center !important;
+        padding: 0 !important;
+        margin-left: auto;
+        border-radius: 50% !important;
+        font-family: Arial, sans-serif !important;
+        font-size: 20px !important;
+        font-weight: 400 !important;
+        line-height: 1 !important;
+        text-align: center !important;
+        box-sizing: border-box !important;
+        overflow: hidden;
+        white-space: nowrap;
+        -webkit-appearance: none;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    /* Keep file close buttons in the top-right corner. */
+    .rudi-newspaper-close,
+    .amundsen-map-close,
+    .wanny-case-close {
+        position: absolute !important;
+        top: 8px !important;
+        right: 8px !important;
+        margin: 0 !important;
+    }
+
+    /*
+     * The Nansen close button was sticky in the old phone rule.
+     * Absolute positioning prevents it from creating a wide row.
+     */
+    .nansen-diary-close {
+        position: absolute !important;
+        top: 8px !important;
+        right: 8px !important;
+        margin: 0 !important;
+    }
+
+    /*
+     * Generic inventory item close buttons are created by
+     * inventory.js. Sticky positioning keeps them visible while
+     * scrolling, but their size is now locked so they cannot stretch.
+     */
+    .inventory-close-btn {
+        position: sticky !important;
+        top: 4px !important;
+        right: auto !important;
+        z-index: 30 !important;
+        margin: 0 0 -32px auto !important;
+    }
+
+    /* Main inventory window close button. */
+    #closeInventory,
+    .inventory-main-close {
+        margin: 0 !important;
+    }
+
+    /* -----------------------------------------------------
+       Wanny magnifying-glass button
+       ----------------------------------------------------- */
+    .wanny-case-magnifier {
+        appearance: none !important;
+        width: 36px !important;
+        height: 36px !important;
+        min-width: 36px !important;
+        min-height: 36px !important;
+        max-width: 36px !important;
+        max-height: 36px !important;
+        aspect-ratio: 1 / 1 !important;
+        flex: 0 0 36px !important;
+        display: grid !important;
+        place-items: center !important;
+        right: 10px !important;
+        bottom: 10px !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        border-radius: 50% !important;
+        font-size: 19px !important;
+        line-height: 1 !important;
+        text-align: center !important;
+        box-sizing: border-box !important;
+        overflow: hidden;
+        -webkit-appearance: none;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    /*
+     * Reserve room for the magnifier so it does not cover text.
+     */
+    .wanny-case-detail-body {
+        padding-right: 54px !important;
+        padding-bottom: 48px !important;
+    }
+
+    /* Lock the small back arrows too. */
+    .wanny-case-detail-back,
+    .wanny-case-object-back {
+        width: 32px !important;
+        height: 32px !important;
+        min-width: 32px !important;
+        min-height: 32px !important;
+        max-width: 32px !important;
+        max-height: 32px !important;
+        aspect-ratio: 1 / 1 !important;
+        flex: 0 0 32px !important;
+        display: grid !important;
+        place-items: center !important;
+        padding: 0 !important;
+        border-radius: 50% !important;
+        font-size: 19px !important;
+        line-height: 1 !important;
+        box-sizing: border-box !important;
+    }
+}
+
+@media (max-width: 380px) {
+    .rudi-newspaper-close,
+    .amundsen-map-close,
+    .nansen-diary-close,
+    .wanny-case-close,
+    .inventory-close-btn,
+    #closeInventory,
+    .inventory-main-close {
+        width: 30px !important;
+        height: 30px !important;
+        min-width: 30px !important;
+        min-height: 30px !important;
+        max-width: 30px !important;
+        max-height: 30px !important;
+        flex-basis: 30px !important;
+        font-size: 18px !important;
+    }
+
+    .inventory-close-btn {
+        margin-bottom: -30px !important;
+    }
+
+    .wanny-case-magnifier {
+        width: 34px !important;
+        height: 34px !important;
+        min-width: 34px !important;
+        min-height: 34px !important;
+        max-width: 34px !important;
+        max-height: 34px !important;
+        flex-basis: 34px !important;
+        font-size: 18px !important;
     }
 }

@@ -103,7 +103,7 @@ const STORIES = {
             },
             {
                 type: "file",
-                name: "next_location.jpg",
+                name: "starting_location.jpg",
                 image: "../../../../assets/images/station_1_test.jpg"
             },
             {

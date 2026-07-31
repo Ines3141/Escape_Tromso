@@ -42,7 +42,7 @@ THINGS TO DO LATER:
             <source src="../../../../assets/audio/Wanny/Wanny_2.mp3" type="audio/mp3">
         </audio>
         <audio id="voice3" preload="auto">
-            <source src="../../../../assets/audio/Wanny/Wanny_3_B.mp3" type="audio/mp3">
+            <source src="../../../../assets/audio/Wanny/Wanny_3_B.m4a" type="audio/mp3">
         </audio>
         <audio id="voice4" preload="auto">
             <source src="../../../../assets/audio/Wanny/Wanny_3_C.mp3" type="audio/mp3">
@@ -309,17 +309,17 @@ THINGS TO DO LATER:
             const subtitleLines = new Map([
                 [audio1, [
                     "Hello?",
-                    "This is Wanny.",
-                    "I can barely hear you through the static.",
+                    "This is Wanny Woldstad.",
+                    "I can barely hear you through this static.",
                     "Can you hear me?"
                 ]],
 
                 [audio2, [
                     "Straight to business, I like that!",
                     "During my years on Svalbard, I learned how important good communication can be.",
-                    "Take these notes.",
+                    "Take my notes.",
                     "You will find them in your inventory.",
-                    "They may help you find the right frequency to contact them."
+                    "I think, they might help you to find the right frequency to contact the crew."
                 ]],
 
                 [audio3B, [
@@ -328,13 +328,13 @@ THINGS TO DO LATER:
                 ]],
 
                 [audio3C, [
-                    "Yes, I have.",
-                    "I overwintered there five times.",
+                    "Yes!",
+                    "I overwintered there five times, actually.",
                     "Have you been to Svalbard?"
                 ]],
 
                 [audio4D, [
-                    "Then you know how beautiful it is — and how harsh it can be."
+                    "Then you know how beautiful it is — But I guess, how harsh it can be."
                 ]],
 
                 [audio4E, [
@@ -350,8 +350,8 @@ THINGS TO DO LATER:
                     "I hunted, trapped, repaired things, kept the hut going, and yes, I shot my first polar bear there.",
                     "That was something I never forgot.",
                     "Before I went on these adventures, I drove a taxi in Tromsø.",
-                    "Oh man, I met so many people who were crazy about going north.",
-                    "Speaking of that, I was also the first female taxi driver in the north.",
+                    "Oh man, I met so many people who were crazy about going to the north.",
+                    "Speaking of that, I was actually also the first female taxi driver in the north.",
                     "*laugh*"
                 ]],
 
@@ -359,7 +359,7 @@ THINGS TO DO LATER:
                     "Selvfølgelig — of course.",
                     "Go on.",
                     "Your crew is waiting.",
-                    "Good luck!"
+                    "Good luck, my friends!"
                 ]],
 
                 [audio5G, [
@@ -371,7 +371,7 @@ THINGS TO DO LATER:
                     "*laugh*",
                     "I wrote a book about my experiences, if you ever want to read more.",
                     "But now you need to continue your rescue mission.",
-                    "Good luck!"
+                    "Good luck, my friends!"
                 ]]
             ]);
 
@@ -394,7 +394,10 @@ THINGS TO DO LATER:
 
                 return Math.max(wordCount, 3);
             }
-
+            const subtitleDelays = new Map([
+                [audio1, 4.7]
+            ]);
+            
             function buildSubtitleCues(audio) {
                 const lines = subtitleLines.get(audio) || [];
                 const duration = audio.duration;
@@ -407,6 +410,9 @@ THINGS TO DO LATER:
                     return [];
                 }
 
+                const subtitleDelay =
+                    subtitleDelays.get(audio) || 0;
+
                 const weights = lines.map(subtitleWeight);
 
                 const totalWeight = weights.reduce(
@@ -414,14 +420,18 @@ THINGS TO DO LATER:
                     0
                 );
 
-                let start = 0;
+                const availableDuration =
+                    Math.max(duration - subtitleDelay, 0);
+
+                let start = subtitleDelay;
 
                 return lines.map((text, index) => {
                     const isLastLine =
                         index === lines.length - 1;
 
                     const lineDuration =
-                        duration * (weights[index] / totalWeight);
+                        availableDuration *
+                        (weights[index] / totalWeight);
 
                     const end = isLastLine
                         ? duration + 0.05

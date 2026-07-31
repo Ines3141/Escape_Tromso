@@ -190,7 +190,7 @@
         }
         this.showTyping(step);
     }
-    
+
     renderHistory() {
         for (let i = 0; i < this.currentStep; i++) {
             const step = this.story.steps[i];
@@ -289,7 +289,7 @@
         }
     }
     openImageFullscreen(src, alt = "Image preview", onClose = null) {
-        window.ATTACHMENTS.openImage({src, name: alt, alt}, onClose);
+        window.ATTACHMENTS.openImage({ src, name: alt, alt }, onClose);
     }
 
     addText(step) {
@@ -390,11 +390,23 @@
         button.className = "file";
         button.innerHTML = `📄 ${step.name}`;
 
+        /*
+         * Find the position belonging to this attachment.
+         * It may only advance while the chat is still on this step.
+         */
+        const stepIndex = this.story.steps.indexOf(step);
+
         button.onclick = () => {
-            this.openAttachment(step, shouldAdvance);
+            const canAdvance =
+                shouldAdvance &&
+                this.currentStep === stepIndex;
+
+            this.openAttachment(step, canAdvance);
         };
 
-        this.shadowRoot.querySelector("#messages").appendChild(button);
+        this.shadowRoot
+            .querySelector("#messages")
+            .appendChild(button);
     }
     openAttachment(step, shouldAdvance = true) {
         if (step.action && window.ATTACHMENTS && window.ATTACHMENTS[step.action]) {
@@ -417,7 +429,7 @@
             return;
         }
 
-        
+
 
         if (step.image) {
             this.openImageFullscreen(

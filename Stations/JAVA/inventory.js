@@ -222,20 +222,40 @@
             }
 
             @media (max-width: 650px) {
-                .inventory-dossier.large .inventory-note {
-                    position: static;
-                    width: 100%;
-                    min-height: auto;
-                    transform: none;
-                    margin-top: 30px;
-                }
-
-                .inventory-dossier.large .inventory-dossier-label {
-                    position: static;
-                    margin-top: 24px;
-                    text-align: left;
-                }
+            .inventory-dossier.large .inventory-note {
+                position: static;
+                width: 100%;
+                min-height: auto;
+                transform: none;
+                margin-top: 30px;
             }
+
+            .inventory-dossier.large .inventory-dossier-label {
+                position: static;
+                margin-top: 24px;
+                text-align: left;
+            }
+
+            .inventory-dossier-preview-box,
+            .inventory-file-box {
+                max-height: calc(100dvh - 20px);
+                padding: 12px;
+                overflow-y: auto;
+            }
+
+            .inventory-close-btn {
+                position: sticky;
+                top: 0;
+                right: auto;
+                z-index: 20;
+
+                display: grid;
+                place-items: center;
+
+                margin: 0 0 12px auto;
+                flex: 0 0 40px;
+            }
+        }
         `;
 
         document.head.appendChild(style);
@@ -265,11 +285,12 @@
             ...item,
             id: item.id,
             title: item.title || "Untitled Item",
-            type: item.type || "image"};
+            type: item.type || "image"
+        };
 
         const existingIndex = items.findIndex(existing => {
-                return existing.id === item.id;
-            });
+            return existing.id === item.id;
+        });
 
         if (existingIndex !== -1) {
             /* Replace the old saved version. */

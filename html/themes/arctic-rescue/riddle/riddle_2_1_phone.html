@@ -55,16 +55,6 @@
             background: #e94a4a;
         }
 
-        .country-code {
-            display: inline-block;
-            font-size: 36px;
-            font-weight: 900;
-            padding: 12px 22px;
-            border-radius: 16px;
-            background: #0b2232;
-            border: 2px solid #35586b;
-        }
-
         .instruction {
             max-width: 620px;
             margin: 18px auto;
@@ -164,11 +154,13 @@
         .phone-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.82);
+            z-index: 9999;
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 9999;
+            padding: 20px;
+            background: radial-gradient( circle at center, rgba(18, 59, 99, 0.25), rgba(0, 0, 0, 0.9) );
+            backdrop-filter: blur(5px);
         }
 
             .phone-overlay.hidden {
@@ -176,61 +168,220 @@
             }
 
         .phone-box {
-            width: 340px;
-            background: #061927;
-            color: white;
-            border-radius: 22px;
-            padding: 26px;
-            text-align: center;
             position: relative;
+            width: min(420px, 100%);
+            box-sizing: border-box;
+            padding: 34px 30px 30px;
+            color: white;
+            text-align: center;
+            background: linear-gradient( 145deg, #0b2a3d, #061927 65% );
             border: 2px solid #35586b;
+            border-radius: 28px;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.08);
         }
 
         #closePhone {
             position: absolute;
-            top: 10px;
-            right: 12px;
-            background: transparent;
-            border: none;
-            color: white;
+            top: 16px;
+            right: 16px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            color: #d7ecff;
             font-size: 26px;
+            line-height: 1;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid #35586b;
+            border-radius: 50%;
             cursor: pointer;
         }
 
-        .phone-display {
+            #closePhone:hover,
+            #closePhone:focus-visible {
+                color: white;
+                background: rgba(255, 255, 255, 0.13);
+                border-color: #69b6df;
+            }
+        .phone-icon {
+            width: 72px;
+            height: 72px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 4px auto 18px;
+            color: white;
+            font-size: 34px;
+            background: linear-gradient( 145deg, #28b85b, #168740 );
+            border-radius: 50%;
+            box-shadow: 0 10px 25px rgba(31, 157, 76, 0.3);
+        }
+        .phone-label {
+            margin: 0 0 7px;
+            color: #7fb7d5;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+        .phone-box h2 {
+            margin: 0;
+            font-size: clamp(26px, 6vw, 34px);
+            line-height: 1.15;
+        }
+
+        .phone-subtitle {
+            margin: 10px 0 25px;
+            color: #b8d1df;
+            font-size: 15px;
+        }
+
+        .phone-number-entry {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 26px;
+        }
+
+        .phone-country-code {
+            color: white;
+            font-size: 32px;
+            font-weight: 900;
+        }
+
+        .phone-digit-group {
+            display: grid;
+            grid-template-columns: repeat(6, 46px);
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .phone-digit {
+            width: 46px;
+            height: 58px;
+            box-sizing: border-box;
+            padding: 0;
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            text-align: center;
+            background: #0b2232;
+            border: 2px solid #35586b;
+            border-radius: 12px;
+            outline: none;
+            transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
+        }
+
+            .phone-digit:focus {
+                border-color: #63c8ff;
+                background: #103249;
+                transform: translateY(-2px);
+                box-shadow: 0 0 0 3px rgba(99, 200, 255, 0.15);
+            }
+
+            .phone-digit.filled {
+                border-color: #48d14f;
+                background: rgba(72, 209, 79, 0.14);
+            }
+
+            .phone-digit.wrong {
+                border-color: #e94a4a;
+                background: rgba(233, 74, 74, 0.14);
+            }
+
+        #callBtn {
+            width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 10px;
-            margin: 22px 0;
-            font-size: 30px;
-            font-weight: bold;
-        }
-
-        #phoneInput {
-            width: 120px;
-            font-size: 30px;
-            text-align: center;
-            border-radius: 10px;
-            border: 2px solid #35586b;
-            background: #0b2232;
-            color: white;
-        }
-
-        #callBtn {
-            padding: 14px 28px;
-            border: none;
-            border-radius: 14px;
-            background: #1f9d4c;
+            padding: 16px 24px;
             color: white;
             font-size: 20px;
-            font-weight: bold;
+            font-weight: 900;
+            letter-spacing: 0.04em;
+            background: linear-gradient( 135deg, #28b85b, #1b994b );
+            border: none;
+            border-radius: 16px;
+            box-shadow: 0 10px 22px rgba(31, 157, 76, 0.22);
             cursor: pointer;
         }
 
-        #phoneMessage {
-            margin-top: 16px;
+            #callBtn:hover {
+                transform: translateY(-1px);
+                filter: brightness(1.08);
+            }
+
+            #callBtn:active {
+                transform: translateY(1px);
+            }
+
+        #clearPhoneBtn {
+            margin-top: 12px;
+            padding: 9px 18px;
+            color: #b8d1df;
+            font-size: 14px;
             font-weight: bold;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+            #clearPhoneBtn:hover {
+                color: white;
+                text-decoration: underline;
+            }
+
+        #phoneMessage {
+            min-height: 24px;
+            margin: 18px 0 0;
+            color: #d7ecff;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+            #phoneMessage.success {
+                color: #72ff8a;
+            }
+
+            #phoneMessage.error {
+                color: #ff8585;
+            }
+
+        @media (max-width: 480px) {
+            .phone-box {
+                padding: 30px 18px 24px;
+            }
+
+            .phone-digit-group {
+                grid-template-columns: repeat(6, minmax(36px, 43px));
+                gap: 5px;
+            }
+
+            .phone-digit {
+                width: 100%;
+                height: 54px;
+                font-size: 24px;
+            }
+        }     
+
+        .grid-actions {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .secondary-btn {
+            padding: 14px 22px;
+            border-radius: 14px;
+            border: 2px solid #35586b;
+            background: #0b2232;
+            color: white;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -243,25 +394,99 @@
                 <p><span class="dot green"></span> Greenland Expedition</p>
                 <p><span class="dot red"></span> Nobel Peace Prize</p>
             </div>
-            <p class="country-code">+47 Norway</p>
             <p class="instruction">
-                Match the numbers to the coloured boxes. The small numbers show the order.
+                Match the years for this events to the coloured boxes. You will find 
+                the right years in your enviroment. The small numbers show the order.
                 Fill the grid so every row, column and diagonal has the same sum.
                 The yellow fields form Nansen’s phone number.
             </p>
             <div id="magicGrid" class="magic-grid"></div>
+            <button id="clearGridBtn" class="secondary-btn">
+                Clear Grid
+            </button>
             <button id="callNansenBtn">☎ Call Nansen</button>
         </div>
         <div id="phoneOverlay" class="phone-overlay hidden">
-            <div class="phone-box">
-                <button id="closePhone">×</button>
-                <h2>Call Fridtjof Nansen</h2>
-                <div class="phone-display">
-                    <span>+47</span>
-                    <input id="phoneInput" maxlength="6" placeholder="------">
+            <div class="phone-box" role="dialog" aria-modal="true" aria-labelledby="phoneTitle">
+
+                <button id="closePhone"
+                        type="button"
+                        aria-label="Close phone">
+                    ×
+                </button>
+
+                <div class="phone-icon" aria-hidden="true">
+                    ☎
                 </div>
-                <button id="callBtn">CALL</button>
-                <p id="phoneMessage"></p>
+
+                <p class="phone-label">Expedition contact</p>
+
+                <h2 id="phoneTitle">
+                    Fridtjof Nansen
+                </h2>
+
+                <p class="phone-subtitle">
+                    Enter the six-digit number
+                </p>
+
+                <div class="phone-number-entry">
+                    <span class="phone-country-code">+47</span>
+
+                    <div class="phone-digit-group">
+                        <input class="phone-digit"
+                               type="text"
+                               maxlength="1"
+                               inputmode="numeric"
+                               aria-label="Phone digit 1">
+
+                        <input class="phone-digit"
+                               type="text"
+                               maxlength="1"
+                               inputmode="numeric"
+                               aria-label="Phone digit 2">
+
+                        <input class="phone-digit"
+                               type="text"
+                               maxlength="1"
+                               inputmode="numeric"
+                               aria-label="Phone digit 3">
+
+                        <input class="phone-digit"
+                               type="text"
+                               maxlength="1"
+                               inputmode="numeric"
+                               aria-label="Phone digit 4">
+
+                        <input class="phone-digit"
+                               type="text"
+                               maxlength="1"
+                               inputmode="numeric"
+                               aria-label="Phone digit 5">
+
+                        <input class="phone-digit"
+                               type="text"
+                               maxlength="1"
+                               inputmode="numeric"
+                               aria-label="Phone digit 6">
+                    </div>
+                </div>
+
+                <!-- Hidden field keeps compatibility with existing JavaScript -->
+                <input id="phoneInput"
+                       type="hidden">
+
+                <button id="callBtn" type="button">
+                    <span aria-hidden="true">☎</span>
+                    Call Nansen
+                </button>
+
+                <button id="clearPhoneBtn" type="button">
+                    Clear number
+                </button>
+
+                <p id="phoneMessage"
+                   role="status"
+                   aria-live="polite"></p>
             </div>
         </div>
         <!-- DEVELOPMENT ONLY -->

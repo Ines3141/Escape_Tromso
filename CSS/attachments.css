@@ -469,6 +469,124 @@
 	outline-offset: 4px;
 }
 
+.signal-answer-section {
+	margin-top: 22px;
+	padding: 16px;
+	border: 1px solid rgba(20, 60, 90, 0.25);
+	border-radius: 12px;
+	background: rgba(255, 255, 255, 0.55);
+}
+
+	.signal-answer-section label {
+		display: block;
+		margin-bottom: 8px;
+		font-weight: 700;
+	}
+
+.signal-answer-input {
+	width: 100%;
+	padding: 11px 12px;
+	border: 2px solid #9aafbd;
+	border-radius: 8px;
+	font: inherit;
+	text-transform: uppercase;
+}
+
+	.signal-answer-input:focus {
+		border-color: #12658a;
+		outline: 3px solid rgba(18, 101, 138, 0.18);
+	}
+
+	.signal-answer-input.incorrect {
+		border-color: #b42318;
+	}
+
+.signal-answer-status {
+	min-height: 22px;
+	margin: 8px 0;
+	color: #b42318;
+	font-weight: 700;
+}
+
+.signal-answer-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+.signal-inventory-button,
+.signal-save-button {
+	flex: 1 1 160px;
+	padding: 11px 14px;
+	border: 0;
+	border-radius: 8px;
+	cursor: pointer;
+	font-weight: 700;
+}
+
+.signal-inventory-button {
+	background: #d9e8ef;
+	color: #123b50;
+}
+
+.signal-save-button {
+	background: #12658a;
+	color: white;
+}
+
+.signal-coordinate-note {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	gap: 7px;
+	font-size: 1.25rem;
+	font-weight: 700;
+}
+
+.signal-character-input {
+	width: 42px;
+	height: 46px;
+	padding: 4px;
+	border: 2px solid #8299a8;
+	border-radius: 7px;
+	background: white;
+	color: #152f3d;
+	font: inherit;
+	font-size: 1.2rem;
+	font-weight: 700;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+	.signal-character-input:focus {
+		border-color: #12658a;
+		outline: 3px solid rgba(18, 101, 138, 0.2);
+	}
+
+	.signal-character-input.incorrect {
+		border-color: #b42318;
+		background: #fff1f0;
+	}
+
+.signal-coordinate-separator {
+	margin: 0 7px;
+}
+
+.signal-answer-status {
+	min-height: 24px;
+	margin: 10px 0;
+	color: #b42318;
+	font-weight: 700;
+}
+
+.signal-answer-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	margin-top: 12px;
+}
+
 /* ==================== MOBILE ==================== */
 @media (max-width: 520px) {
 	.signal-letter-overlay {

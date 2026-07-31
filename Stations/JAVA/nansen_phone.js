@@ -55,6 +55,28 @@ Explaination:
 */
 const correctPhone = phoneCells.map(([row, col]) => String(correctGrid[row][col])).join("");
 const grid = document.getElementById("magicGrid");
+
+const phoneOverlay =
+    document.getElementById("phoneOverlay");
+
+const closePhoneButton =
+    document.getElementById("closePhone");
+
+const callButton =
+    document.getElementById("callBtn");
+
+const phoneInput =
+    document.getElementById("phoneInput");
+
+const phoneMessage =
+    document.getElementById("phoneMessage");
+
+const clearPhoneButton =
+    document.getElementById("clearPhoneBtn");
+
+const phoneDigits = Array.from(
+    document.querySelectorAll(".phone-digit")
+);
 /* Creates the grid automatically */
 for (let row = 0; row < 4; row++) {
     for (let col = 0; col < 4; col++) {
@@ -157,6 +179,154 @@ function getGridValues() {
     }
     return values;
 }
+function updatePhoneInput() {
+    phoneInput.value = phoneDigits
+        .map(input => input.value)
+        .join("");
+}
+
+function clearPhoneNumber() {
+    phoneDigits.forEach(input => {
+        input.value = "";
+
+        input.classList.remove(
+            "filled",
+            "wrong"
+        );
+    });
+
+    phoneInput.value = "";
+
+    phoneMessage.textContent = "";
+    phoneMessage.className = "";
+
+    phoneDigits[0]?.focus();
+}
+
+function openPhoneOverlay() {
+    phoneOverlay.classList.remove("hidden");
+
+    phoneMessage.textContent = "";
+    phoneMessage.className = "";
+
+    window.setTimeout(() => {
+        const firstEmptyInput =
+            phoneDigits.find(input => !input.value);
+
+        firstEmptyInput?.focus();
+    }, 50);
+}
+
+function closePhoneOverlay() {
+    phoneOverlay.classList.add("hidden");
+
+    phoneMessage.textContent = "";
+    phoneMessage.className = "";
+}
+
+phoneDigits.forEach((input, index) => {
+    input.addEventListener("input", () => {
+        /*
+         * Allow only one numeric digit.
+         */
+        input.value = input.value
+            .replace(/\D/g, "")
+            .slice(0, 1);
+
+        input.classList.toggle(
+            "filled",
+            input.value !== ""
+        );
+
+        input.classList.remove("wrong");
+
+        phoneMessage.textContent = "";
+        phoneMessage.className = "";
+
+        updatePhoneInput();
+
+        /*
+         * Move to the next field automatically.
+         */
+        if (
+            input.value &&
+            index < phoneDigits.length - 1
+        ) {
+            phoneDigits[index + 1].focus();
+        }
+    });
+
+    input.addEventListener("keydown", event => {
+        /*
+         * Move to the previous field when deleting
+         * from an empty field.
+         */
+        if (
+            event.key === "Backspace" &&
+            input.value === "" &&
+            index > 0
+        ) {
+            phoneDigits[index - 1].focus();
+        }
+
+        if (
+            event.key === "ArrowLeft" &&
+            index > 0
+        ) {
+            phoneDigits[index - 1].focus();
+        }
+
+        if (
+            event.key === "ArrowRight" &&
+            index < phoneDigits.length - 1
+        ) {
+            phoneDigits[index + 1].focus();
+        }
+
+        if (event.key === "Enter") {
+            callButton.click();
+        }
+    });
+
+    input.addEventListener("paste", event => {
+        const pastedNumber =
+            event.clipboardData
+                .getData("text")
+                .replace(/\D/g, "")
+                .slice(0, 6);
+
+        if (!pastedNumber) {
+            return;
+        }
+
+        event.preventDefault();
+
+        phoneDigits.forEach(
+            (digitInput, digitIndex) => {
+                digitInput.value =
+                    pastedNumber[digitIndex] || "";
+
+                digitInput.classList.toggle(
+                    "filled",
+                    digitInput.value !== ""
+                );
+
+                digitInput.classList.remove("wrong");
+            }
+        );
+
+        updatePhoneInput();
+
+        const nextEmptyInput =
+            phoneDigits.find(input => !input.value);
+
+        if (nextEmptyInput) {
+            nextEmptyInput.focus();
+        } else {
+            phoneDigits.at(-1)?.focus();
+        }
+    });
+});
 function checkGrid() {
     const values = getGridValues();
     if (values.flat().some(value => value === null)) return;
@@ -174,39 +344,85 @@ function checkGrid() {
     }
     localStorage.setItem("nansenGridSolved", gridCorrect ? "true" : "false");
 }
-document.getElementById("callNansenBtn").onclick = () => {
-    /* Check if the grid is correct solved, not activated yet, if not
-    one has to solve it all the time. Later fix isGridCorrect */
-    if (!isGridCorrect()) {
-        alert("The grid is not solved yet.");
+document
+    .getElementById("callNansenBtn")
+    .addEventListener("click", () => {
+        if (!isGridCorrect()) {
+            /*
+             * Replace this alert later with an
+             * on-page message if desired.
+             */
+            alert("The grid is not solved yet.");
+            return;
+        }
+
+        openPhoneOverlay();
+    });
+
+closePhoneButton.addEventListener(
+    "click",
+    closePhoneOverlay
+);
+
+clearPhoneButton.addEventListener(
+    "click",
+    clearPhoneNumber
+);
+
+callButton.addEventListener("click", () => {
+    updatePhoneInput();
+
+    const value = phoneInput.value.trim();
+
+    phoneDigits.forEach(input => {
+        input.classList.remove("wrong");
+    });
+
+    if (value.length !== 6) {
+        phoneMessage.textContent =
+            "Please enter all six digits.";
+
+        phoneMessage.className = "error";
+
+        const firstEmptyInput =
+            phoneDigits.find(input => !input.value);
+
+        firstEmptyInput?.focus();
         return;
     }
-    document.getElementById("phoneOverlay")
-        .classList.remove("hidden");
-};
-document.getElementById("closePhone").onclick = () => {
-    document.getElementById("phoneOverlay").classList.add("hidden");
-};
-document.getElementById("callBtn").onclick = () => {
-    /* Checks if the phone numer is correct and goes to the next page if yes. */
-    const value = document.getElementById("phoneInput").value.trim();
-    const message = document.getElementById("phoneMessage");
-    if (value === correctPhone) {
-        message.textContent = "Calling Nansen...";
-        message.style.color = "lightgreen";
-        setTimeout(() => {
-            window.location.href = nextPage;
-        }, 1000);
-    } else {
-        message.textContent = "Wrong number.";
-        message.style.color = "#ff6b6b";
-        setTimeout(() => { /* Close layover */
-            document.getElementById("phoneOverlay").classList.add("hidden");
-            message.textContent = "";
-            document.getElementById("phoneInput").value = "";
-        }, 1200);
+
+    if (value !== correctPhone) {
+        phoneMessage.textContent =
+            "That number does not connect. Check the yellow fields again.";
+
+        phoneMessage.className = "error";
+
+        phoneDigits.forEach(input => {
+            input.classList.add("wrong");
+        });
+
+        return;
     }
-};
+
+    phoneMessage.textContent =
+        "Calling Fridtjof Nansen…";
+
+    phoneMessage.className = "success";
+
+    callButton.disabled = true;
+
+    window.setTimeout(() => {
+        window.location.href = nextPage;
+    }, 1000);
+});
+
+/* Clear button */
+document.getElementById("clearGridBtn").addEventListener("click", () => {
+    document.querySelectorAll(".magic-cell").forEach(cell => {
+        cell.value = "";
+        cell.classList.remove("correct", "wrong");
+    });
+});
 function isGridCorrect() {
     const values = getGridValues();
     /* USE LATER THIS:
@@ -219,3 +435,18 @@ function isGridCorrect() {
     }*/
     return true;
 }
+
+phoneOverlay.addEventListener("click", event => {
+    if (event.target === phoneOverlay) {
+        closePhoneOverlay();
+    }
+});
+
+document.addEventListener("keydown", event => {
+    if (
+        event.key === "Escape" &&
+        !phoneOverlay.classList.contains("hidden")
+    ) {
+        closePhoneOverlay();
+    }
+}); 

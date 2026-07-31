@@ -262,97 +262,158 @@ Object.assign(window.ATTACHMENTS, {
        ==================== */
 
     station1SignalLetter(step, done) {
-        const teamName =
-            localStorage.getItem("teamName") || "Team";
+        const teamName = localStorage.getItem("teamName") || "Team";
 
         const overlay = document.createElement("div");
         overlay.className = "signal-letter-overlay";
-
         overlay.setAttribute("role", "dialog");
         overlay.setAttribute("aria-modal", "true");
-        overlay.setAttribute(
-            "aria-label",
-            "Strange Signal Received"
-        );
+        overlay.setAttribute("aria-label", "Strange Signal Received");
 
         overlay.innerHTML = `
-        <button
-            type="button"
-            class="signal-letter-close"
-            aria-label="Close letter"
-        >
-            &times;
-        </button>
+            <button type="button"
+                class="signal-letter-close"
+                aria-label="Close letter">
+                &times;
+            </button>
+            <article class="signal-letter-paper">
+                <header class="signal-letter-header">
+                    <span class="signal-letter-category">
+                        Incoming field report
+                    </span>
 
-        <article class="signal-letter-paper">
-            <header class="signal-letter-header">
-                <span class="signal-letter-category">
-                    Incoming field report
-                </span>
+                    <h2>Strange Signal Received</h2>
 
-                <h2>Strange Signal Received</h2>
+                    <p class="signal-letter-sender">
+                        From: Dispatch Control
+                    </p>
+                </header>
 
-                <p class="signal-letter-sender">
-                    From: Dispatch Control
-                </p>
-            </header>
+                <div class="signal-letter-content">
+                    <p>Hello Team ${teamName},</p>
 
-            <div class="signal-letter-content">
-                <p>Hello Team ${teamName},</p>
+                    <p>
+                        We got this really strange signal from a
+                        blinking lamp.
+                    </p>
 
-                <p>
-                    We got this really strange signal from a
-                    blinking lamp.
-                </p>
+                    <p>
+                        Along with it came this kind of note:
+                    </p>
 
-                <p>
-                    Along with it came this kind of note:
-                </p>
+                    <div class="signal-note signal-coordinate-note">
+                        <input
+                            class="signal-character-input"
+                            data-answer-index="0"
+                            type="text"
+                            maxlength="1"
+                            inputmode="numeric"
+                            aria-label="First coordinate digit"
+                        >
 
-                <div class="signal-note">
-                    _ _ m _ and _ _ 9 m _
+                        <input
+                            class="signal-character-input"
+                            data-answer-index="1"
+                            type="text"
+                            maxlength="1"
+                            inputmode="numeric"
+                            aria-label="Second coordinate digit"
+                        >
+
+                        <span>m S</span>
+
+                        <span class="signal-coordinate-separator">and</span>
+
+                        <span>1</span>
+
+                        <input
+                            class="signal-character-input"
+                            data-answer-index="2"
+                            type="text"
+                            maxlength="1"
+                            inputmode="numeric"
+                            aria-label="Third coordinate digit"
+                        >
+
+                        <span>9 m </span>
+
+                        <input
+                            class="signal-character-input"
+                            data-answer-index="3"
+                            type="text"
+                            maxlength="1"
+                            autocapitalize="characters"
+                            aria-label="Coordinate direction"
+                        >
+                    </div>
+
+                    <p class="signal-answer-status"
+                        role="status"
+                        aria-live="polite"></p>
+
+                    <div class="signal-answer-actions">
+                        <button type="button"
+                            class="signal-inventory-button">
+                            Open inventory
+                        </button>
+
+                        <button type="button"
+                            class="signal-save-button">
+                            Save answer and close
+                        </button>
+                    </div>
+
+                    <section class="signal-lamp-panel">
+                        <p class="signal-panel-title">
+                            Recovered blinking signal
+                        </p>
+
+                        <div
+                            class="signal-lamp"
+                            aria-hidden="true"
+                        ></div>
+
+                        <audio
+                            class="signal-morse-audio"
+                            preload="auto"
+                        
+                        >
+                            <source
+                                src="../../../../assets/audio/morse.wav"
+                                type="audio/wav"
+                            >
+                        </audio>
+
+                        <button
+                            type="button"
+                            class="signal-lamp-button"
+                            aria-pressed="false"
+                        >
+                            Start signal
+                        </button>
+
+                        <p
+                            class="signal-lamp-status"
+                            aria-live="polite"
+                        >
+                            Signal stopped
+                        </p>
+                    </section>
+
+                    <p>
+                        Maybe you can do more with this information!
+                    </p>
+
+                    <p>
+                        Decode the blinking signal. You can use the inventory for help.
+                    </p>
+
+                    <p class="signal-letter-signature">
+                        - Dispatch Control
+                    </p>
                 </div>
-
-                <section class="signal-lamp-panel">
-                    <p class="signal-panel-title">
-                        Recovered blinking signal
-                    </p>
-
-                    <div
-                        class="signal-lamp"
-                        aria-hidden="true"
-                    ></div>
-
-                    <button
-                        type="button"
-                        class="signal-lamp-button"
-                        aria-pressed="false"
-                    >
-                        Start signal
-                    </button>
-
-                    <p
-                        class="signal-lamp-status"
-                        aria-live="polite"
-                    >
-                        Signal stopped
-                    </p>
-                </section>
-
-                <p>
-                    Maybe you can do more with this information!
-                </p>
-
-                <p>
-                    Remember to look for help in the inventory.
-                </p>
-
-                <p class="signal-letter-signature">
-                    - Dispatch Control
-                </p>
-            </div>
-        </article>
-    `;
+            </article>
+        `;
 
         document.body.appendChild(overlay);
 
@@ -376,33 +437,87 @@ Object.assign(window.ATTACHMENTS, {
         const lampStatus = overlay.querySelector(
             ".signal-lamp-status"
         );
+        const morseAudio = overlay.querySelector(
+            ".signal-morse-audio"
+        );
+        const answerInputs = Array.from(overlay.querySelectorAll(".signal-character-input"));
+
+        const answerStatus = overlay.querySelector(
+            ".signal-answer-status"
+        );
+
+        const saveButton = overlay.querySelector(
+            ".signal-save-button"
+        );
+
+        const inventoryButton = overlay.querySelector(
+            ".signal-inventory-button"
+        );
 
         /*
          * Morse-style pattern from the recovered signal.
          */
         const pattern = [
+            // 6
             "dash", "dot", "dot", "dot", "dot",
-            "pause",
+            "characterPause",
 
+            // 4
             "dot", "dot", "dot", "dot", "dash",
-            "pause",
+            "characterPause",
 
-            "dot", "dot", "dot",
-            "pause",
-
+            // 1
             "dot", "dash", "dash", "dash", "dash",
-            "pause",
+            "characterPause",
 
+            // 2
             "dot", "dot", "dash", "dash", "dash",
-            "pause",
+            "characterPause",
 
+            // W
             "dot", "dash", "dash"
         ];
 
+        const DOT_DURATION = 303;
+        const DASH_DURATION = 903;
+
+        // Darkness between individual flashes.
+        const SYMBOL_GAP = 302;
+
+        // Darkness between complete digits or letters.
+        const CHARACTER_GAP = 2867;
+
+        // Pause before the entire signal repeats.
+        const REPEAT_GAP = 3500;
+        const expectedAnswer = step.correctAnswer || "64S12W";
         let signalRunning = false;
         let closed = false;
         let timers = [];
+        let audioRepeatTimer = null;
+        const REPEAT_PAUSE = 3500;
 
+        function startMorseAudio() {
+            clearTimeout(audioRepeatTimer);
+
+            morseAudio.pause();
+            morseAudio.currentTime = 0;
+
+            morseAudio.play().catch(error => {
+                console.warn("Morse audio could not start:", error);
+            });
+        }
+
+        morseAudio.addEventListener("ended", () => {
+            if (!signalRunning) {
+                return;
+            }
+
+            audioRepeatTimer = setTimeout(() => {
+                if (signalRunning) {
+                    startMorseAudio();
+                }
+            }, REPEAT_PAUSE);
+        });
         function clearSignalTimers() {
             timers.forEach(timer => {
                 window.clearTimeout(timer);
@@ -422,13 +537,15 @@ Object.assign(window.ATTACHMENTS, {
             let delay = 0;
 
             pattern.forEach(symbol => {
-                if (symbol === "pause") {
-                    delay += 1000;
+                if (symbol === "characterPause") {
+                    delay += CHARACTER_GAP;
                     return;
                 }
 
                 const lightDuration =
-                    symbol === "dot" ? 250 : 750;
+                    symbol === "dot"
+                        ? DOT_DURATION
+                        : DASH_DURATION;
 
                 timers.push(
                     window.setTimeout(() => {
@@ -444,19 +561,89 @@ Object.assign(window.ATTACHMENTS, {
                     }, delay + lightDuration)
                 );
 
-                delay += lightDuration + 300;
+                delay += lightDuration + SYMBOL_GAP;
             });
 
-            /*
-             * Repeat the complete signal.
-             */
             timers.push(
                 window.setTimeout(() => {
                     playSignalPattern();
-                }, delay + 1800)
+                }, delay + REPEAT_GAP)
             );
         }
+        function normalizeSignalAnswer(value) {
+            return String(value || "")
+                .toUpperCase()
+                .replaceAll(" ", "")
+                .replaceAll("-", "")
+                .replaceAll("_", "")
+                .replaceAll(",", "")
+                .replaceAll(".", "");
+        }
+        function validateAndSaveAnswer() {
+            const values = answerInputs.map(input =>
+                input.value.trim().toUpperCase()
+            );
 
+            const allFieldsCompleted =
+                values.every(value => value.length === 1);
+
+            if (!allFieldsCompleted) {
+                answerStatus.textContent =
+                    "Please complete all four missing characters.";
+
+                const emptyInput = answerInputs.find(
+                    input => !input.value.trim()
+                );
+
+                emptyInput?.focus();
+                return false;
+            }
+
+            /*
+             * The visible coordinate is:
+             * [6][4]° S and 1[2]°[W]
+             */
+            const enteredAnswer =
+                `${values[0]}${values[1]}S1${values[2]}${values[3]}`;
+
+            const correctAnswer =
+                normalizeSignalAnswer(
+                    step.correctAnswer || "64S12W"
+                );
+
+            if (
+                normalizeSignalAnswer(enteredAnswer) !==
+                correctAnswer
+            ) {
+                answerStatus.textContent =
+                    "That is not correct yet. Listen to the signal again.";
+
+                answerInputs.forEach(input => {
+                    input.classList.add("incorrect");
+                });
+
+                answerInputs[0].focus();
+                return false;
+            }
+
+            localStorage.setItem(
+                "station1SignalAnswer",
+                enteredAnswer
+            );
+
+            localStorage.setItem(
+                "station1SignalSolved",
+                "true"
+            );
+
+            answerInputs.forEach(input => {
+                input.classList.remove("incorrect");
+            });
+
+            answerStatus.textContent = "Coordinates saved.";
+
+            return true;
+        }
         function toggleSignal() {
             signalRunning = !signalRunning;
 
@@ -475,17 +662,36 @@ Object.assign(window.ATTACHMENTS, {
                 : "Start signal";
 
             lampStatus.textContent = signalRunning
-                ? "Receiving repeating light pattern..."
+                ? "Receiving repeating light and audio pattern..."
                 : "Signal stopped";
 
             if (signalRunning) {
+                /*
+                 * Start the light and audio together.
+                 */
                 playSignalPattern();
+                startMorseAudio();
             } else {
+                /*
+                 * Stop the light.
+                 */
                 clearSignalTimers();
+
+                /*
+                 * Cancel the scheduled audio repetition.
+                 */
+                clearTimeout(audioRepeatTimer);
+                audioRepeatTimer = null;
+
+                /*
+                 * Stop and rewind the audio.
+                 */
+                morseAudio.pause();
+                morseAudio.currentTime = 0;
             }
         }
 
-        function closeLetter() {
+        function finishAndCloseLetter() {
             if (closed) {
                 return;
             }
@@ -493,6 +699,21 @@ Object.assign(window.ATTACHMENTS, {
             closed = true;
             signalRunning = false;
 
+            /*
+             * Cancel any scheduled audio restart.
+             */
+            clearTimeout(audioRepeatTimer);
+            audioRepeatTimer = null;
+
+            /*
+             * Stop and rewind the audio.
+             */
+            morseAudio.pause();
+            morseAudio.currentTime = 0;
+
+            /*
+             * Stop the blinking signal.
+             */
             clearSignalTimers();
 
             document.removeEventListener(
@@ -513,12 +734,76 @@ Object.assign(window.ATTACHMENTS, {
                 }
             }, 250);
         }
+        function requestCloseLetter() {
+            if (validateAndSaveAnswer()) {
+                finishAndCloseLetter();
+            }
+        }
 
         function handleKeydown(event) {
             if (event.key === "Escape") {
-                closeLetter();
+                requestCloseLetter();
             }
         }
+        /* ==========
+          Audio error loading 
+          =========== */
+        morseAudio.addEventListener("error", () => {
+            console.error(
+                "The Morse audio file could not be loaded:",
+                morseAudio.currentSrc
+            );
+
+            lampStatus.textContent =
+                "The audio could not be loaded. The light signal is still available.";
+        });
+
+
+        /* ============== 
+           Inventory Button
+           ============== */
+        inventoryButton.addEventListener("click", () => {
+            /*
+             * First try a global inventory-opening function.
+             */
+            if (typeof window.openInventory === "function") {
+                window.openInventory();
+                return;
+            }
+
+            /*
+             * Otherwise, click the existing inventory button
+             * elsewhere on the page.
+             *
+             * Change these selectors to match your actual button.
+             */
+            const existingInventoryButton =
+                document.querySelector(
+                    "#inventoryButton, " +
+                    ".inventory-button, " +
+                    "[data-open-inventory]"
+                );
+
+            if (existingInventoryButton) {
+                existingInventoryButton.click();
+                return;
+            }
+
+            /*
+             * Optional fallback: open a separate inventory page.
+             */
+            if (step.inventoryHref) {
+                window.open(
+                    step.inventoryHref,
+                    "_blank",
+                    "noopener,noreferrer"
+                );
+                return;
+            }
+
+            answerStatus.textContent =
+                "The inventory could not be opened.";
+        });
 
         lampButton.addEventListener(
             "click",
@@ -527,15 +812,51 @@ Object.assign(window.ATTACHMENTS, {
 
         closeButton.addEventListener(
             "click",
-            closeLetter
+            requestCloseLetter
         );
+
+        saveButton.addEventListener(
+            "click",
+            requestCloseLetter
+        );
+        answerInputs.forEach((input, index) => {
+            input.addEventListener("input", () => {
+                input.value = input.value
+                    .slice(0, 1)
+                    .toUpperCase();
+
+                input.classList.remove("incorrect");
+                answerStatus.textContent = "";
+
+                if (
+                    input.value &&
+                    index < answerInputs.length - 1
+                ) {
+                    answerInputs[index + 1].focus();
+                }
+            });
+
+            input.addEventListener("keydown", event => {
+                if (
+                    event.key === "Backspace" &&
+                    !input.value &&
+                    index > 0
+                ) {
+                    answerInputs[index - 1].focus();
+                }
+
+                if (event.key === "Enter") {
+                    requestCloseLetter();
+                }
+            });
+        });
 
         /*
          * Clicking the black background also closes it.
          */
         overlay.addEventListener("click", event => {
             if (event.target === overlay) {
-                closeLetter();
+                requestCloseLetter();
             }
         });
 
@@ -549,6 +870,17 @@ Object.assign(window.ATTACHMENTS, {
         });
 
         closeButton.focus();
+        const savedAnswer =
+            normalizeSignalAnswer(
+                localStorage.getItem("station1SignalAnswer")
+            );
+
+        if (savedAnswer.length >= 6) {
+            answerInputs[0].value = savedAnswer[0];
+            answerInputs[1].value = savedAnswer[1];
+            answerInputs[2].value = savedAnswer[4];
+            answerInputs[3].value = savedAnswer[5];
+        }
     },
 
     imagePreview(step, done) {

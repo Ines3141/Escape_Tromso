@@ -130,7 +130,7 @@ const STORIES = {
                 sender: "Dispatch",
                 time: "10:31",
                 text: "check_location.html",
-                href: "../riddle/riddle_1_2_destination.html2_fish.html"
+                href: "../riddle/riddle_1_2_destination.html"
             }
         ]
     },

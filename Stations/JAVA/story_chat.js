@@ -16,18 +16,6 @@
     render() {
         this.shadowRoot.innerHTML = `
             <style>
-            .chat {
-                display: block;
-                width: 320px;
-                height: 560px;
-                overflow-y: auto;
-                background: #061927;
-                border-radius: 14px;
-                padding: 16px;
-                font-family: Arial, sans-serif;
-                color: white;
-            }
-
             .header {
                 text-align: center;
                 margin-bottom: 20px;
@@ -136,10 +124,29 @@
             :host {
                 display: flex;
                 justify-content: center;
-                box-sizing: border-box;
                 width: 100%;
                 max-width: 100%;
+                min-width: 0;
                 margin: 20px auto 0;
+                box-sizing: border-box;
+            }
+
+            * {
+                box-sizing: border-box;
+            }
+
+            .chat {
+                display: block;
+                width: 100%;
+                max-width: 320px;
+                height: 560px;
+                overflow-y: auto;
+                overflow-x: hidden;
+                background: #061927;
+                border-radius: 14px;
+                padding: 16px;
+                font-family: Arial, sans-serif;
+                color: white;
             }
             .chat-link {
                 color: #4aa8ff;

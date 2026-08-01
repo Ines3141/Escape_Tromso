@@ -124,6 +124,13 @@ const STORIES = {
                 placeholder: "Write OKAY",
                 correctAnswer: "okay",
                 wrongAnswer: "Are you there? Write OKAY when you have reached the next location."
+            },
+            {
+                type: "link",
+                sender: "Dispatch",
+                time: "10:31",
+                text: "check_location.html",
+                href: "../riddle/riddle_1_2_destination.html2_fish.html"
             }
         ]
     },

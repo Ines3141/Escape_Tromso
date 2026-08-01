@@ -214,6 +214,7 @@ const STORIES = {
             },
             {
                 type: "file",
+                name: "undefined.png",
                 sender: "Dispatch",
                 time: "10:41",
                 image: "../../../../assets/images/Wanny_Painting_Blurred.png"

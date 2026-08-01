@@ -72,9 +72,12 @@ THINGS TO DO LATER:
             <button id="btnG" class="answer-button" style="display:none;"></button>
         </div>
         <!-- for actual game do </button>style="display:none;">, but now it is just blocking -->
-        <!--<button class="riddle-button" id="riddle_btn" onclick="window.location.href = nextPage">
-            Solve Riddle
-        </button> -->
+        <button class="riddle-button"
+                id="riddle_btn"
+                style="display: none;"
+                >
+            Continue
+        </button>
         <script>
             const person = document.querySelector(".person-container");
             const audioButton = document.getElementById("audioBtn");
@@ -113,6 +116,10 @@ THINGS TO DO LATER:
                 F: document.getElementById("btnF"),
                 G: document.getElementById("btnG")
             };
+
+            riddleButton.addEventListener("click", () => {
+                window.location.href = nextPage;
+            });
 
             // =====================================================
             // ANSWER TEXT

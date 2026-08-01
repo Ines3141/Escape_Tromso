@@ -441,6 +441,13 @@ const STORIES = {
                 sender: "Henry Rudi",
                 time: "10:26",
                 text: "Take care."
+            },
+            {
+                type: "link",
+                sender: "Henry Rudi",
+                time: "10:31",
+                text: "Next_Station.html",
+                href: "riddle_6_3_location.html"
             }
 
         ]
@@ -472,7 +479,7 @@ const STORIES = {
                 sender: "Dispatch",
                 time: "10:31",
                 text: "Upload_Important_files.com",
-                href: "../final_page.html"
+                href: "final_page.html"
             }
         ]
     }

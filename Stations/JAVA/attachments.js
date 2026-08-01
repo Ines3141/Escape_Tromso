@@ -324,11 +324,19 @@ Object.assign(window.ATTACHMENTS, {
 
                         <span class="signal-coordinate-separator">and</span>
 
-                        <span>1</span>
-
+                        
                         <input
                             class="signal-character-input"
                             data-answer-index="2"
+                            type="text"
+                            maxlength="1"
+                            inputmode="numeric"
+                            aria-label="Third coordinate digit"
+                        >
+
+                        <input
+                            class="signal-character-input"
+                            data-answer-index="3"
                             type="text"
                             maxlength="1"
                             inputmode="numeric"
@@ -339,7 +347,7 @@ Object.assign(window.ATTACHMENTS, {
 
                         <input
                             class="signal-character-input"
-                            data-answer-index="3"
+                            data-answer-index="4"
                             type="text"
                             maxlength="1"
                             autocapitalize="characters"
@@ -601,14 +609,14 @@ Object.assign(window.ATTACHMENTS, {
 
             /*
              * The visible coordinate is:
-             * [6][4]° S and 1[2]°[W]
+             * [6][4]m S and [1][2]9m [W]
              */
             const enteredAnswer =
-                `${values[0]}${values[1]}S1${values[2]}${values[3]}`;
+                `${values[0]}${values[1]}S${values[2]}${values[3]}9${values[4]}`;
 
             const correctAnswer =
                 normalizeSignalAnswer(
-                    step.correctAnswer || "64S12W"
+                    step.correctAnswer || "64S129W"
                 );
 
             if (

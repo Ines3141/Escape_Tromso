@@ -554,6 +554,27 @@
 
         const container = document.createElement("div");
         container.className = "input-box";
+        const skipButton = document.createElement("button");
+        skipButton.textContent = "Skip";
+
+        skipButton.onclick = () => {
+            localStorage.setItem(
+                this.storyName + "_upload_" + this.currentStep,
+                JSON.stringify({
+                    skipped: true
+                })
+            );
+
+            container.remove();
+
+            const div = document.createElement("div");
+            div.className = "message from-user";
+            div.textContent = "Photo skipped.";
+
+            messages.appendChild(div);
+
+            this.advance();
+        };
 
         const input = document.createElement("input");
         input.type = "file";
@@ -604,6 +625,7 @@
         };
 
         container.appendChild(input);
+        container.appendChild(skipButton);
 
         messages.appendChild(question);
         messages.appendChild(container);

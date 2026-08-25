@@ -16,35 +16,156 @@
     render() {
         this.shadowRoot.innerHTML = `
             <style>
+            .chat-link {
+                color: #4aa8ff;
+                text-decoration: underline;
+                cursor: pointer;
+            }
+
+            .chat-link:hover {
+                color: #7bc3ff;
+            }
+            :host {
+                display: block;
+
+                width: 100%;
+                max-width: 440px;
+                min-width: 0;
+
+                margin: 16px auto 0;
+
+                padding-left: 12px;
+                padding-right: 12px;
+
+                box-sizing: border-box;
+            }
+
+            *,
+            *::before,
+            *::after {
+                box-sizing: border-box;
+            }
+
+
+            /* ======================
+               COMPLETE CHAT WINDOW
+               ====================== */
+
+            .chat {
+                width: 100%;
+                max-width: none;
+
+                /*
+                 * Fallback for older browsers.
+                 */
+                height: min(620px, calc(100vh - 120px));
+
+                /*
+                 * Better mobile-browser viewport handling.
+                 */
+                height: min(620px, calc(100dvh - 120px));
+
+                min-height: 400px;
+
+                overflow-y: auto;
+                overflow-x: hidden;
+
+                -webkit-overflow-scrolling: touch;
+                overscroll-behavior: contain;
+
+                background: #061927;
+
+                border-radius: 16px;
+
+                padding: clamp(
+                    12px,
+                    4vw,
+                    18px
+                );
+
+                font-family:
+                    Arial,
+                    Helvetica,
+                    sans-serif;
+
+                color: white;
+            }
+
+
+            /* ======================
+               HEADER
+               ====================== */
+
             .header {
                 text-align: center;
-                margin-bottom: 20px;
+                margin-bottom: 18px;
             }
 
             .header strong {
                 display: block;
-                font-size: 14px;
+
+                font-size: clamp(
+                    15px,
+                    4vw,
+                    18px
+                );
+
+                line-height: 1.3;
             }
 
             .header span {
                 color: #6cff6c;
-                font-size: 12px;
+
+                font-size: clamp(
+                    11px,
+                    3vw,
+                    13px
+                );
             }
+
+
+            /* ======================
+               MESSAGE AREA
+               ====================== */
 
             #messages {
                 display: flex;
                 flex-direction: column;
+
+                width: 100%;
+
                 gap: 8px;
             }
 
+
+            /* ======================
+               CHAT BUBBLES
+               ====================== */
+
             .message {
+                width: fit-content;
+
                 max-width: 85%;
+                min-width: 0;
+
                 background: #20445a;
-                border-radius: 9px;
-                padding: 8px 10px;
-                font-size: 12px;
-                line-height: 1.35;
+
+                border-radius: 12px;
+
+                padding: 9px 11px;
+
+                font-size: clamp(
+                    14px,
+                    3.7vw,
+                    16px
+                );
+
+                line-height: 1.4;
+
                 color: white;
+
+                overflow-wrap: anywhere;
+                word-break: normal;
             }
 
             .from-phone {
@@ -55,19 +176,33 @@
                 align-self: flex-end;
             }
 
+
+            /* ======================
+               TIME
+               ====================== */
+
             .time {
                 display: block;
+
                 text-align: center;
+
                 font-size: 10px;
+
                 opacity: 0.7;
-                margin-bottom: 2px;
+
+                margin-bottom: 3px;
             }
+
+
+            /* ======================
+               TYPING
+               ====================== */
 
             .typing {
                 align-self: flex-start;
                 background: #20445a;
-                border-radius: 9px;
-                padding: 8px 12px;
+                border-radius: 12px;
+                padding: 10px 13px;
                 display: flex;
                 gap: 4px;
             }
@@ -89,73 +224,203 @@
             }
 
             @keyframes blink {
-                0%, 80%, 100% { opacity: 0.3; transform: translateY(0); }
-                40% { opacity: 1; transform: translateY(-3px); }
+                0%,
+                80%,
+                100% {
+                    opacity: 0.3;
+                    transform: translateY(0);
+                }
+
+                40% {
+                    opacity: 1;
+                    transform: translateY(-3px);
+                }
             }
 
+
+            /* ======================
+               FILE ATTACHMENTS
+               ====================== */
+
             button.file {
+                width: fit-content;
                 max-width: 85%;
                 align-self: flex-start;
                 background: #20445a;
                 color: white;
                 border: none;
-                border-radius: 9px;
-                padding: 10px;
+                border-radius: 12px;
+                padding: 11px 13px;
                 text-align: left;
                 cursor: pointer;
+                font-size: 14px;
                 font-weight: bold;
+                overflow-wrap: anywhere;
             }
+
+
+            /* ======================
+               NORMAL TEXT INPUT
+               ====================== */
 
             .input-box {
-                align-self: flex-end;
+                align-self: stretch;
+                width: 100%;
                 display: flex;
-                gap: 5px;
+                gap: 8px;
+                align-items: stretch;
+                min-width: 0;
             }
 
-            .input-box input {
-                width: 130px;
+            .input-box input:not([type="file"]) {
+                flex: 1 1 auto;
+                width: auto;
+                min-width: 0;
+                min-height: 44px;
+                border-radius: 10px;
+                border: 1px solid rgba(
+                    255,
+                    255,
+                    255,
+                    0.25
+                );
+                padding: 9px 11px;
+
+                /*
+                 * 16px prevents Safari from zooming
+                 * the page when the input gets focus.
+                 */
+                font-size: 16px;
+            }
+
+            .input-box button {
+                min-height: 44px;
+                border: none;
+                border-radius: 10px;
+                padding: 9px 14px;
+                cursor: pointer;
+                font-size: 14px;
+            }
+
+            /* ======================
+               PHOTO UPLOAD
+               ====================== */
+
+            .upload-box {
+                flex-direction: column;
+            }
+
+            .hidden-photo-input {
+                position: absolute;
+                width: 1px;
+                height: 1px;
+                opacity: 0;
+                pointer-events: none;
+                overflow: hidden;
+            }
+
+            .upload-actions {
+                display: grid;
+                grid-template-columns:
+                    minmax(0, 1fr)
+                    minmax(0, 1fr);
+                gap: 8px;
+                width: 100%;
+            }
+
+            .photo-button {
+                width: 100%;
+                min-height: 48px;
+                border: none;
+                border-radius: 10px;
+                padding: 10px 12px;
+                font-size: 15px;
+                font-weight: bold;
+                cursor: pointer;
+            }
+
+            .photo-button-skip {
+                grid-column: 1 / -1;
+            }
+
+            .photo-button:disabled {
+                opacity: 0.55;
+                cursor: default;
+            }
+
+            .upload-status {
+                min-height: 18px;
+
+                font-size: 12px;
+
+                line-height: 1.4;
+
+                opacity: 0.85;
+            }
+
+
+            /* ======================
+               IMAGES
+               ====================== */
+
+            .photo-message {
+                padding: 6px;
             }
 
             .chat-image {
-                max-width: 100%;
-                border-radius: 8px;
-                cursor: pointer;
-            }
-            :host {
-                display: flex;
-                justify-content: center;
-                width: 100%;
-                max-width: 100%;
-                min-width: 0;
-                margin: 20px auto 0;
-                box-sizing: border-box;
-            }
-
-            * {
-                box-sizing: border-box;
-            }
-
-            .chat {
                 display: block;
+
                 width: 100%;
-                max-width: 320px;
-                height: 560px;
-                overflow-y: auto;
-                overflow-x: hidden;
-                background: #061927;
-                border-radius: 14px;
-                padding: 16px;
-                font-family: Arial, sans-serif;
-                color: white;
-            }
-            .chat-link {
-                color: #4aa8ff;
-                text-decoration: underline;
+                max-width: 100%;
+                height: auto;
+
+                border-radius: 9px;
+
                 cursor: pointer;
             }
 
-            .chat-link:hover {
-                color: #7bc3ff;
+
+            /* ======================
+               VERY SMALL PHONES
+               ====================== */
+
+            @media (max-width: 360px) {
+
+                :host {
+                    padding-left: 8px;
+                    padding-right: 8px;
+                }
+
+                .chat {
+                    padding: 11px;
+                    border-radius: 12px;
+                }
+
+                .message,
+                button.file {
+                    max-width: 92%;
+                }
+
+                .upload-actions {
+                    grid-template-columns: 1fr;
+                }
+
+                .photo-button-skip {
+                    grid-column: auto;
+                }
+            }
+
+
+            /* ======================
+               REDUCED MOTION
+               ====================== */
+
+            @media (prefers-reduced-motion: reduce) {
+
+                .typing span {
+                    animation: none;
+                    opacity: 0.7;
+                }
             }
         </style>
             <div class="chat">
@@ -165,6 +430,7 @@
                 </div>
                 <div id="messages"></div>
             </div>`;
+
         const chatBox = this.shadowRoot.querySelector(".chat");
 
         chatBox.addEventListener("scroll", () => {
@@ -512,120 +778,477 @@
     }
 
     addSavedUpload(step, stepIndex) {
-        const messages = this.shadowRoot.querySelector("#messages");
+    const messages =
+        this.shadowRoot.querySelector("#messages");
 
-        const question = document.createElement("div");
-        question.className = "message from-phone";
-        question.innerHTML = `
+    const question = document.createElement("div");
+
+    question.className = "message from-phone";
+
+    question.innerHTML = `
         <span class="time">${step.time || ""}</span>
-        ${step.question || "Please upload a file."}
+        ${step.question || "Please take a photo."}
     `;
 
-        messages.appendChild(question);
+    messages.appendChild(question);
 
-        const savedUpload = localStorage.getItem(this.storyName + "_upload_" + stepIndex);
+    const savedUpload = localStorage.getItem(
+        this.storyName + "_upload_" + stepIndex
+    );
 
-        if (!savedUpload) return;
+    if (!savedUpload) {
+        return;
+    }
 
-        const uploadData = JSON.parse(savedUpload);
+    let uploadData;
 
-        const div = document.createElement("div");
-        div.className = "message from-user";
-        div.innerHTML = `
+    try {
+        uploadData = JSON.parse(savedUpload);
+    } catch (error) {
+        console.error(
+            "Saved upload could not be read:",
+            error
+        );
+        return;
+    }
+
+    /*
+     * Previously skipped.
+     */
+    if (uploadData.skipped) {
+        const skippedMessage =
+            document.createElement("div");
+
+        skippedMessage.className =
+            "message from-user";
+
+        skippedMessage.textContent =
+            "Photo skipped.";
+
+        messages.appendChild(skippedMessage);
+
+        return;
+    }
+
+    /*
+     * No actual image stored.
+     */
+    if (!uploadData.src) {
+        return;
+    }
+
+    const div = document.createElement("div");
+
+    div.className =
+        "message from-user photo-message";
+
+    div.innerHTML = `
         <span class="time">uploaded</span>
-        <img class="chat-image" src="${uploadData.src}" alt="${uploadData.name}">
+
+        <img
+            class="chat-image"
+            src="${uploadData.src}"
+            alt="${uploadData.name || "Uploaded photo"}"
+        >
     `;
 
-        div.querySelector("img").onclick = () => {
-            this.openImageFullscreen(uploadData.src);
-        };
+    div
+        .querySelector("img")
+        .addEventListener(
+            "click",
+            () => {
+                this.openImageFullscreen(
+                    uploadData.src,
+                    uploadData.name ||
+                        "Uploaded photo"
+                );
+            }
+        );
 
-        messages.appendChild(div);
+    messages.appendChild(div);
+    }
+
+    /* A photo is reduced to a maximum of 1280 px before you put it into storage. */
+    compressPhoto(file) {
+        const MAX_FILE_SIZE = 20 * 1024 * 1024; // 20 MB
+        const MAX_SIDE = 1280;
+        const JPEG_QUALITY = 0.72;
+
+        return new Promise((resolve, reject) => {
+            if (!file) {
+                reject(new Error("No photo selected."));
+                return;
+            }
+
+            if (!file.type.startsWith("image/")) {
+                reject(new Error("Please select an image."));
+                return;
+            }
+
+            if (file.size > MAX_FILE_SIZE) {
+                reject(
+                    new Error(
+                        "This photo is too large. Please take another photo."
+                    )
+                );
+                return;
+            }
+
+            const objectUrl = URL.createObjectURL(file);
+            const image = new Image();
+
+            image.onload = () => {
+                URL.revokeObjectURL(objectUrl);
+
+                const originalWidth = image.naturalWidth;
+                const originalHeight = image.naturalHeight;
+
+                const scale = Math.min(
+                    1,
+                    MAX_SIDE / originalWidth,
+                    MAX_SIDE / originalHeight
+                );
+
+                const width = Math.round(originalWidth * scale);
+                const height = Math.round(originalHeight * scale);
+
+                const canvas = document.createElement("canvas");
+                canvas.width = width;
+                canvas.height = height;
+
+                const context = canvas.getContext("2d");
+
+                if (!context) {
+                    reject(
+                        new Error("The photo could not be processed.")
+                    );
+                    return;
+                }
+
+                // White background in case the source has transparency.
+                context.fillStyle = "#ffffff";
+                context.fillRect(0, 0, width, height);
+
+                context.drawImage(
+                    image,
+                    0,
+                    0,
+                    width,
+                    height
+                );
+
+                canvas.toBlob(
+                    blob => {
+                        if (!blob) {
+                            reject(
+                                new Error(
+                                    "The photo could not be compressed."
+                                )
+                            );
+                            return;
+                        }
+
+                        const reader = new FileReader();
+
+                        reader.onload = () => {
+                            resolve(reader.result);
+                        };
+
+                        reader.onerror = () => {
+                            reject(
+                                new Error(
+                                    "The photo could not be read."
+                                )
+                            );
+                        };
+
+                        reader.readAsDataURL(blob);
+                    },
+                    "image/jpeg",
+                    JPEG_QUALITY
+                );
+            };
+
+            image.onerror = () => {
+                URL.revokeObjectURL(objectUrl);
+
+                reject(
+                    new Error(
+                        "This photo format could not be opened. Please take a new photo."
+                    )
+                );
+            };
+
+            image.src = objectUrl;
+        });
     }
     addUpload(step) {
-        const messages = this.shadowRoot.querySelector("#messages");
+        const messages =
+            this.shadowRoot.querySelector("#messages");
 
         const question = document.createElement("div");
         question.className = "message from-phone";
+
         question.innerHTML = `
         <span class="time">${step.time || ""}</span>
-        ${step.question || "Please upload a file."}
+        ${step.question || "Please take a photo."}
     `;
 
         const container = document.createElement("div");
-        container.className = "input-box";
+        container.className = "input-box upload-box";
+
+        /*
+         * Camera input
+         */
+        const cameraInput = document.createElement("input");
+
+        cameraInput.type = "file";
+        cameraInput.accept = "image/*";
+
+        // Ask mobile phones to use the rear camera.
+        cameraInput.setAttribute(
+            "capture",
+            "environment"
+        );
+
+        cameraInput.className = "hidden-photo-input";
+
+        /*
+         * Normal photo-library input.
+         * This is the fallback for phones/browsers that
+         * do not support capture properly.
+         */
+        const galleryInput = document.createElement("input");
+
+        galleryInput.type = "file";
+        galleryInput.accept = "image/*";
+        galleryInput.className = "hidden-photo-input";
+
+        /*
+         * Visible buttons
+         */
+        const takePhotoButton =
+            document.createElement("button");
+
+        takePhotoButton.type = "button";
+        takePhotoButton.className = "photo-button";
+        takePhotoButton.textContent = "📷 Take photo";
+
+        const choosePhotoButton =
+            document.createElement("button");
+
+        choosePhotoButton.type = "button";
+        choosePhotoButton.className =
+            "photo-button photo-button-secondary";
+
+        choosePhotoButton.textContent = "Choose photo";
+
         const skipButton = document.createElement("button");
+
+        skipButton.type = "button";
+        skipButton.className =
+            "photo-button photo-button-skip";
+
         skipButton.textContent = "Skip";
 
-        skipButton.onclick = () => {
-            localStorage.setItem(
-                this.storyName + "_upload_" + this.currentStep,
-                JSON.stringify({
-                    skipped: true
-                })
-            );
+        /*
+         * Status/error message
+         */
+        const status = document.createElement("div");
 
-            container.remove();
+        status.className = "upload-status";
+        status.setAttribute("role", "status");
+        status.setAttribute("aria-live", "polite");
 
-            const div = document.createElement("div");
-            div.className = "message from-user";
-            div.textContent = "Photo skipped.";
+        /*
+         * Open camera.
+         */
+        takePhotoButton.addEventListener(
+            "click",
+            () => {
+                cameraInput.click();
+            }
+        );
 
-            messages.appendChild(div);
+        /*
+         * Open normal photo chooser.
+         */
+        choosePhotoButton.addEventListener(
+            "click",
+            () => {
+                galleryInput.click();
+            }
+        );
 
-            this.advance();
-        };
+        /*
+         * Process photo from either input.
+         */
+        const processPhoto = async file => {
+            if (!file) {
+                return;
+            }
 
-        const input = document.createElement("input");
-        input.type = "file";
-        input.accept = "image/*";
+            takePhotoButton.disabled = true;
+            choosePhotoButton.disabled = true;
+            skipButton.disabled = true;
 
-        input.onchange = () => {
-            if (!input.files.length) return;
+            status.textContent = "Preparing photo...";
 
-            const file = input.files[0];
-            const reader = new FileReader();
+            try {
+                /*
+                 * Resize + convert to a reasonably small JPEG.
+                 */
+                const imageData =
+                    await this.compressPhoto(file);
 
-            reader.onload = () => {
-                const imageData = reader.result;
+                /*
+                 * Save it.
+                 *
+                 * localStorage can fail when it is full,
+                 * so this MUST be inside try/catch.
+                 */
+                try {
+                    localStorage.setItem(
+                        this.storyName +
+                        "_upload_" +
+                        this.currentStep,
+                        JSON.stringify({
+                            src: imageData,
+                            name: "team-photo.jpg"
+                        })
+                    );
 
-                localStorage.setItem(
-                    this.storyName + "_upload_" + this.currentStep,
-                    JSON.stringify({
-                        src: imageData,
-                        name: file.name
-                    })
+                    localStorage.setItem(
+                        "teamPhoto",
+                        imageData
+                    );
+                } catch (storageError) {
+                    console.error(
+                        "Could not save photo:",
+                        storageError
+                    );
+
+                    throw new Error(
+                        "There is not enough storage space for the photo."
+                    );
+                }
+
+                /*
+                 * Remove upload controls.
+                 */
+                container.remove();
+
+                /*
+                 * Display photo as user message.
+                 */
+                const div = document.createElement("div");
+
+                div.className =
+                    "message from-user photo-message";
+
+                div.innerHTML = `
+                <span class="time">uploaded</span>
+
+                <img
+                    class="chat-image"
+                    src="${imageData}"
+                    alt="Uploaded team photo"
+                >
+            `;
+
+                div
+                    .querySelector("img")
+                    .addEventListener(
+                        "click",
+                        () => {
+                            this.openImageFullscreen(
+                                imageData,
+                                "Uploaded team photo"
+                            );
+                        }
+                    );
+
+                messages.appendChild(div);
+
+                this.advance();
+
+            } catch (error) {
+                console.error(
+                    "Photo upload failed:",
+                    error
                 );
 
-                localStorage.setItem("teamPhoto", imageData);
+                status.textContent =
+                    error.message ||
+                    "The photo could not be uploaded.";
+
+                /*
+                 * Allow user to try again.
+                 */
+                takePhotoButton.disabled = false;
+                choosePhotoButton.disabled = false;
+                skipButton.disabled = false;
+
+                cameraInput.value = "";
+                galleryInput.value = "";
+            }
+        };
+
+        cameraInput.addEventListener(
+            "change",
+            () => {
+                processPhoto(cameraInput.files[0]);
+            }
+        );
+
+        galleryInput.addEventListener(
+            "change",
+            () => {
+                processPhoto(galleryInput.files[0]);
+            }
+        );
+
+        /*
+         * Skip photo.
+         */
+        skipButton.addEventListener(
+            "click",
+            () => {
+                localStorage.setItem(
+                    this.storyName +
+                    "_upload_" +
+                    this.currentStep,
+                    JSON.stringify({
+                        skipped: true
+                    })
+                );
 
                 container.remove();
 
                 const div = document.createElement("div");
                 div.className = "message from-user";
-
-                div.innerHTML = `
-                    <span class="time">uploaded</span>
-                    <img
-                        class="chat-image"
-                        src="${imageData}"
-                        alt="${file.name}"
-                    >
-                `;
-
-                div.querySelector("img").onclick = () => {
-                    this.openImageFullscreen(imageData);
-                };
+                div.textContent = "Photo skipped.";
 
                 messages.appendChild(div);
+
                 this.advance();
-            };
+            }
+        );
 
-            reader.readAsDataURL(file);
-        };
+        /*
+         * Button area
+         */
+        const actions = document.createElement("div");
+        actions.className = "upload-actions";
 
-        container.appendChild(input);
-        container.appendChild(skipButton);
+        actions.appendChild(takePhotoButton);
+        actions.appendChild(choosePhotoButton);
+        actions.appendChild(skipButton);
+
+        container.appendChild(cameraInput);
+        container.appendChild(galleryInput);
+        container.appendChild(actions);
+        container.appendChild(status);
 
         messages.appendChild(question);
         messages.appendChild(container);

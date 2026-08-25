@@ -3,8 +3,44 @@
   "WorkspaceRootPath": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\stations\\station_4_1.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:html\\themes\\arctic-rescue\\stations\\station_4_1.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\Stations\\JAVA\\attachments.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Stations\\JAVA\\attachments.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\stations\\station_2_2.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:html\\themes\\arctic-rescue\\stations\\station_2_2.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\stations\\station_3_2.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:html\\themes\\arctic-rescue\\stations\\station_3_2.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\stations\\station_2_0.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:html\\themes\\arctic-rescue\\stations\\station_2_0.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\stations\\station_3_0.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:html\\themes\\arctic-rescue\\stations\\station_3_0.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\riddle\\riddle_3_3_maze.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:html\\themes\\arctic-rescue\\riddle\\riddle_3_3_maze.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\Stations\\JAVA\\story_chat.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Stations\\JAVA\\story_chat.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\Stations\\JAVA\\explorer_profiles.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Stations\\JAVA\\explorer_profiles.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\Stations\\JAVA\\incoming_dispatch.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Stations\\JAVA\\incoming_dispatch.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\Stations\\JAVA\\story_data.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Stations\\JAVA\\story_data.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\stations\\station_7_0.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -15,6 +51,22 @@
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:html\\themes\\arctic-rescue\\stations\\station_7.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\stations\\final_page.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:html\\themes\\arctic-rescue\\stations\\final_page.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\riddle\\riddle_7_1_church.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:html\\themes\\arctic-rescue\\riddle\\riddle_7_1_church.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\stations\\congrats.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:html\\themes\\arctic-rescue\\stations\\congrats.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\riddle\\riddle_6_2_chat.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:html\\themes\\arctic-rescue\\riddle\\riddle_6_2_chat.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\stations\\station_6_1.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:html\\themes\\arctic-rescue\\stations\\station_6_1.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
@@ -23,36 +75,16 @@
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:html\\themes\\arctic-rescue\\stations\\station_5_1.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\stations\\station_3_2.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:html\\themes\\arctic-rescue\\stations\\station_3_2.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\stations\\station_3_0.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:html\\themes\\arctic-rescue\\stations\\station_3_0.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\stations\\station_2_2.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:html\\themes\\arctic-rescue\\stations\\station_2_2.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\stations\\station_2_0.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:html\\themes\\arctic-rescue\\stations\\station_2_0.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\stations\\station_1_1.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:html\\themes\\arctic-rescue\\stations\\station_1_1.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\riddle\\riddle_7_1_church.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:html\\themes\\arctic-rescue\\riddle\\riddle_7_1_church.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\stations\\station_4_1.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:html\\themes\\arctic-rescue\\stations\\station_4_1.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\riddle\\riddle_6_3_location.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:html\\themes\\arctic-rescue\\riddle\\riddle_6_3_location.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\riddle\\riddle_6_2_chat.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:html\\themes\\arctic-rescue\\riddle\\riddle_6_2_chat.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\riddle\\riddle_5_4_location.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -67,24 +99,12 @@
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:html\\themes\\arctic-rescue\\riddle\\riddle_4_2_fish.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\riddle\\riddle_3_3_maze.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:html\\themes\\arctic-rescue\\riddle\\riddle_3_3_maze.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\riddle\\riddle_3_1_frequency.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:html\\themes\\arctic-rescue\\riddle\\riddle_3_1_frequency.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\riddle\\riddle_2_4_location.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:html\\themes\\arctic-rescue\\riddle\\riddle_2_4_location.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\Stations\\JAVA\\explorer_profiles.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Stations\\JAVA\\explorer_profiles.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\Stations\\JAVA\\attachments.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Stations\\JAVA\\attachments.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\Stations\\JAVA\\inventory.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
@@ -97,14 +117,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\CSS\\inventory.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CSS\\inventory.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\Stations\\JAVA\\story_data.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Stations\\JAVA\\story_data.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\Stations\\JAVA\\story_chat.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Stations\\JAVA\\story_chat.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\congrats.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -142,280 +154,98 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "station_7_0.html",
-              "DocumentMoniker": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\stations\\station_7_0.html",
-              "RelativeDocumentMoniker": "html\\themes\\arctic-rescue\\stations\\station_7_0.html",
-              "ToolTip": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\stations\\station_7_0.html",
-              "RelativeToolTip": "html\\themes\\arctic-rescue\\stations\\station_7_0.html",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAAACcAAABJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2026-07-31T23:17:07.013Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "station_6_1.html",
-              "DocumentMoniker": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\stations\\station_6_1.html",
-              "RelativeDocumentMoniker": "html\\themes\\arctic-rescue\\stations\\station_6_1.html",
-              "ToolTip": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\stations\\station_6_1.html",
-              "RelativeToolTip": "html\\themes\\arctic-rescue\\stations\\station_6_1.html",
-              "ViewState": "AgIAADAAAAAAAAAAAAAAADcAAAAUAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2026-07-31T23:16:36.194Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 2,
               "Title": "station_3_2.html",
               "DocumentMoniker": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\stations\\station_3_2.html",
               "RelativeDocumentMoniker": "html\\themes\\arctic-rescue\\stations\\station_3_2.html",
               "ToolTip": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\stations\\station_3_2.html",
               "RelativeToolTip": "html\\themes\\arctic-rescue\\stations\\station_3_2.html",
-              "ViewState": "AgIAAD8AAAAAAAAAAAAAAEwAAAAVAAAAAAAAAA==",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAACwAAABXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
               "WhenOpened": "2026-07-31T23:15:25.121Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "station_4_1.html",
-              "DocumentMoniker": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\stations\\station_4_1.html",
-              "RelativeDocumentMoniker": "html\\themes\\arctic-rescue\\stations\\station_4_1.html",
-              "ToolTip": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\stations\\station_4_1.html",
-              "RelativeToolTip": "html\\themes\\arctic-rescue\\stations\\station_4_1.html",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAB8AAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2026-07-31T16:07:52.2Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "station_7.html",
-              "DocumentMoniker": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\stations\\station_7.html",
-              "RelativeDocumentMoniker": "html\\themes\\arctic-rescue\\stations\\station_7.html",
-              "ToolTip": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\stations\\station_7.html",
-              "RelativeToolTip": "html\\themes\\arctic-rescue\\stations\\station_7.html",
-              "ViewState": "AgIAAFkBAAAAAAAAAIAwwGkBAAAVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2026-07-31T18:09:47.524Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "station_3_0.html",
-              "DocumentMoniker": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\stations\\station_3_0.html",
-              "RelativeDocumentMoniker": "html\\themes\\arctic-rescue\\stations\\station_3_0.html",
-              "ToolTip": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\stations\\station_3_0.html",
-              "RelativeToolTip": "html\\themes\\arctic-rescue\\stations\\station_3_0.html",
-              "ViewState": "AgIAABgAAAAAAAAAAAAAACgAAABKAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2026-07-31T23:14:58.514Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "station_5_1.html",
-              "DocumentMoniker": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\stations\\station_5_1.html",
-              "RelativeDocumentMoniker": "html\\themes\\arctic-rescue\\stations\\station_5_1.html",
-              "ToolTip": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\stations\\station_5_1.html",
-              "RelativeToolTip": "html\\themes\\arctic-rescue\\stations\\station_5_1.html",
-              "ViewState": "AgIAAN8AAAAAAAAAAAAAAPQAAABVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2026-07-31T16:47:01.149Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "station_2_2.html",
-              "DocumentMoniker": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\stations\\station_2_2.html",
-              "RelativeDocumentMoniker": "html\\themes\\arctic-rescue\\stations\\station_2_2.html",
-              "ToolTip": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\stations\\station_2_2.html",
-              "RelativeToolTip": "html\\themes\\arctic-rescue\\stations\\station_2_2.html",
-              "ViewState": "AgIAAMwAAAAAAAAAAAAAANkAAABZAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2026-07-31T23:14:38.927Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 3,
               "Title": "station_2_0.html",
               "DocumentMoniker": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\stations\\station_2_0.html",
               "RelativeDocumentMoniker": "html\\themes\\arctic-rescue\\stations\\station_2_0.html",
               "ToolTip": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\stations\\station_2_0.html",
               "RelativeToolTip": "html\\themes\\arctic-rescue\\stations\\station_2_0.html",
-              "ViewState": "AgIAACQAAAAAAAAAAAAAADQAAAAVAAAAAAAAAA==",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAADEAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
               "WhenOpened": "2026-07-31T23:14:05.297Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "riddle_6_3_location.html",
-              "DocumentMoniker": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\riddle\\riddle_6_3_location.html",
-              "RelativeDocumentMoniker": "html\\themes\\arctic-rescue\\riddle\\riddle_6_3_location.html",
-              "ToolTip": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\riddle\\riddle_6_3_location.html",
-              "RelativeToolTip": "html\\themes\\arctic-rescue\\riddle\\riddle_6_3_location.html",
-              "ViewState": "AgIAACQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "station_2_2.html",
+              "DocumentMoniker": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\stations\\station_2_2.html",
+              "RelativeDocumentMoniker": "html\\themes\\arctic-rescue\\stations\\station_2_2.html",
+              "ToolTip": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\stations\\station_2_2.html",
+              "RelativeToolTip": "html\\themes\\arctic-rescue\\stations\\station_2_2.html",
+              "ViewState": "AgIAACQAAAAAWVpaWloiwBQAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2026-07-31T23:12:55.636Z",
+              "WhenOpened": "2026-07-31T23:14:38.927Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "riddle_7_1_church.html",
-              "DocumentMoniker": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\riddle\\riddle_7_1_church.html",
-              "RelativeDocumentMoniker": "html\\themes\\arctic-rescue\\riddle\\riddle_7_1_church.html",
-              "ToolTip": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\riddle\\riddle_7_1_church.html",
-              "RelativeToolTip": "html\\themes\\arctic-rescue\\riddle\\riddle_7_1_church.html",
-              "ViewState": "AgIAADcCAAAAAAAAAIAwwEoCAAAVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2026-07-31T18:21:57.284Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "station_1_1.html",
-              "DocumentMoniker": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\stations\\station_1_1.html",
-              "RelativeDocumentMoniker": "html\\themes\\arctic-rescue\\stations\\station_1_1.html",
-              "ToolTip": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\stations\\station_1_1.html",
-              "RelativeToolTip": "html\\themes\\arctic-rescue\\stations\\station_1_1.html",
-              "ViewState": "AgIAACQAAAAAAAAAAAAAADkAAABKAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2026-07-31T22:20:14.799Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "riddle_6_2_chat.html",
-              "DocumentMoniker": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\riddle\\riddle_6_2_chat.html",
-              "RelativeDocumentMoniker": "html\\themes\\arctic-rescue\\riddle\\riddle_6_2_chat.html",
-              "ToolTip": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\riddle\\riddle_6_2_chat.html",
-              "RelativeToolTip": "html\\themes\\arctic-rescue\\riddle\\riddle_6_2_chat.html",
-              "ViewState": "AgIAABUAAAAAAAAAAAAAACUAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2026-07-31T23:12:41.324Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "riddle_5_4_location.html",
-              "DocumentMoniker": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\riddle\\riddle_5_4_location.html",
-              "RelativeDocumentMoniker": "html\\themes\\arctic-rescue\\riddle\\riddle_5_4_location.html",
-              "ToolTip": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\riddle\\riddle_5_4_location.html",
-              "RelativeToolTip": "html\\themes\\arctic-rescue\\riddle\\riddle_5_4_location.html",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2026-07-31T23:12:40.461Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "riddle_4_3_location.html",
-              "DocumentMoniker": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\riddle\\riddle_4_3_location.html",
-              "RelativeDocumentMoniker": "html\\themes\\arctic-rescue\\riddle\\riddle_4_3_location.html",
-              "ToolTip": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\riddle\\riddle_4_3_location.html",
-              "RelativeToolTip": "html\\themes\\arctic-rescue\\riddle\\riddle_4_3_location.html",
-              "ViewState": "AgIAACQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2026-07-31T23:11:58.313Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "riddle_3_3_maze.html",
-              "DocumentMoniker": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\riddle\\riddle_3_3_maze.html",
-              "RelativeDocumentMoniker": "html\\themes\\arctic-rescue\\riddle\\riddle_3_3_maze.html",
-              "ToolTip": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\riddle\\riddle_3_3_maze.html",
-              "RelativeToolTip": "html\\themes\\arctic-rescue\\riddle\\riddle_3_3_maze.html",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAABsAAABVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2026-07-31T23:11:28.265Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "riddle_2_4_location.html",
-              "DocumentMoniker": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\riddle\\riddle_2_4_location.html",
-              "RelativeDocumentMoniker": "html\\themes\\arctic-rescue\\riddle\\riddle_2_4_location.html",
-              "ToolTip": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\riddle\\riddle_2_4_location.html",
-              "RelativeToolTip": "html\\themes\\arctic-rescue\\riddle\\riddle_2_4_location.html",
-              "ViewState": "AgIAAC0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2026-07-31T23:11:02.633Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 0,
               "Title": "attachments.js",
               "DocumentMoniker": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\Stations\\JAVA\\attachments.js",
               "RelativeDocumentMoniker": "Stations\\JAVA\\attachments.js",
               "ToolTip": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\Stations\\JAVA\\attachments.js",
               "RelativeToolTip": "Stations\\JAVA\\attachments.js",
-              "ViewState": "AgIAAEQCAAAAAAAAAAAwwAkAAAA3AAAAAAAAAA==",
+              "ViewState": "AgIAAMoBAACgw8PB+z0twNEBAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
               "WhenOpened": "2026-07-31T22:54:03.161Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "riddle_4_2_fish.html",
-              "DocumentMoniker": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\riddle\\riddle_4_2_fish.html",
-              "RelativeDocumentMoniker": "html\\themes\\arctic-rescue\\riddle\\riddle_4_2_fish.html",
-              "ToolTip": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\riddle\\riddle_4_2_fish.html",
-              "RelativeToolTip": "html\\themes\\arctic-rescue\\riddle\\riddle_4_2_fish.html",
-              "ViewState": "AgIAAAMCAAAAAAAAAIAwwGoBAAAJAAAAAAAAAA==",
+              "DocumentIndex": 4,
+              "Title": "station_3_0.html",
+              "DocumentMoniker": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\stations\\station_3_0.html",
+              "RelativeDocumentMoniker": "html\\themes\\arctic-rescue\\stations\\station_3_0.html",
+              "ToolTip": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\stations\\station_3_0.html",
+              "RelativeToolTip": "html\\themes\\arctic-rescue\\stations\\station_3_0.html",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAACgAAABKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2026-07-31T16:10:21.321Z",
+              "WhenOpened": "2026-07-31T23:14:58.514Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "inventory.js",
-              "DocumentMoniker": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\Stations\\JAVA\\inventory.js",
-              "RelativeDocumentMoniker": "Stations\\JAVA\\inventory.js",
-              "ToolTip": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\Stations\\JAVA\\inventory.js",
-              "RelativeToolTip": "Stations\\JAVA\\inventory.js",
-              "ViewState": "AgIAAGYBAAAAAAAAAAAAwGwBAAAQAAAAAAAAAA==",
+              "DocumentIndex": 5,
+              "Title": "riddle_3_3_maze.html",
+              "DocumentMoniker": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\riddle\\riddle_3_3_maze.html",
+              "RelativeDocumentMoniker": "html\\themes\\arctic-rescue\\riddle\\riddle_3_3_maze.html",
+              "ToolTip": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\riddle\\riddle_3_3_maze.html",
+              "RelativeToolTip": "html\\themes\\arctic-rescue\\riddle\\riddle_3_3_maze.html",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAABsAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2026-07-31T23:11:28.265Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "story_chat.js",
+              "DocumentMoniker": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\Stations\\JAVA\\story_chat.js",
+              "RelativeDocumentMoniker": "Stations\\JAVA\\story_chat.js",
+              "ToolTip": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\Stations\\JAVA\\story_chat.js",
+              "RelativeToolTip": "Stations\\JAVA\\story_chat.js",
+              "ViewState": "AgIAAGcCAAAAAAAAAAAiwHICAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2026-07-31T17:51:33.858Z",
+              "WhenOpened": "2026-07-31T16:06:56.379Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "riddle_3_1_frequency.html",
-              "DocumentMoniker": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\riddle\\riddle_3_1_frequency.html",
-              "RelativeDocumentMoniker": "html\\themes\\arctic-rescue\\riddle\\riddle_3_1_frequency.html",
-              "ToolTip": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\riddle\\riddle_3_1_frequency.html",
-              "RelativeToolTip": "html\\themes\\arctic-rescue\\riddle\\riddle_3_1_frequency.html",
-              "ViewState": "AgIAAJ0AAAAAAAAAAAAwwLAAAAAfAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2026-07-31T16:52:32.112Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 7,
               "Title": "explorer_profiles.js",
               "DocumentMoniker": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\Stations\\JAVA\\explorer_profiles.js",
               "RelativeDocumentMoniker": "Stations\\JAVA\\explorer_profiles.js",
@@ -428,7 +258,247 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "incoming_dispatch.js",
+              "DocumentMoniker": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\Stations\\JAVA\\incoming_dispatch.js",
+              "RelativeDocumentMoniker": "Stations\\JAVA\\incoming_dispatch.js",
+              "ToolTip": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\Stations\\JAVA\\incoming_dispatch.js",
+              "RelativeToolTip": "Stations\\JAVA\\incoming_dispatch.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2026-08-01T22:00:20.937Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "station_7_0.html",
+              "DocumentMoniker": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\stations\\station_7_0.html",
+              "RelativeDocumentMoniker": "html\\themes\\arctic-rescue\\stations\\station_7_0.html",
+              "ToolTip": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\stations\\station_7_0.html",
+              "RelativeToolTip": "html\\themes\\arctic-rescue\\stations\\station_7_0.html",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABcAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2026-07-31T23:17:07.013Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "station_7.html",
+              "DocumentMoniker": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\stations\\station_7.html",
+              "RelativeDocumentMoniker": "html\\themes\\arctic-rescue\\stations\\station_7.html",
+              "ToolTip": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\stations\\station_7.html",
+              "RelativeToolTip": "html\\themes\\arctic-rescue\\stations\\station_7.html",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2026-07-31T18:09:47.524Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "final_page.html",
+              "DocumentMoniker": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\stations\\final_page.html",
+              "RelativeDocumentMoniker": "html\\themes\\arctic-rescue\\stations\\final_page.html",
+              "ToolTip": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\stations\\final_page.html",
+              "RelativeToolTip": "html\\themes\\arctic-rescue\\stations\\final_page.html",
+              "ViewState": "AgIAAGkAAAAAAAAAAAAAAHcAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2026-08-01T21:27:51.573Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "story_data.js",
+              "DocumentMoniker": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\Stations\\JAVA\\story_data.js",
+              "RelativeDocumentMoniker": "Stations\\JAVA\\story_data.js",
+              "ToolTip": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\Stations\\JAVA\\story_data.js",
+              "RelativeToolTip": "Stations\\JAVA\\story_data.js",
+              "ViewState": "AgIAANMBAAAAAAAAAAAqwOEBAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2026-07-31T16:06:57.28Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "congrats.html",
+              "DocumentMoniker": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\stations\\congrats.html",
+              "RelativeDocumentMoniker": "html\\themes\\arctic-rescue\\stations\\congrats.html",
+              "ToolTip": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\stations\\congrats.html",
+              "RelativeToolTip": "html\\themes\\arctic-rescue\\stations\\congrats.html",
+              "ViewState": "AgIAABECAAAAAAAAAAAAAB8CAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2026-08-01T21:26:39.952Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "station_6_1.html",
+              "DocumentMoniker": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\stations\\station_6_1.html",
+              "RelativeDocumentMoniker": "html\\themes\\arctic-rescue\\stations\\station_6_1.html",
+              "ToolTip": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\stations\\station_6_1.html",
+              "RelativeToolTip": "html\\themes\\arctic-rescue\\stations\\station_6_1.html",
+              "ViewState": "AgIAABUAAAAAAAAAAAAAABcAAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2026-07-31T23:16:36.194Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "riddle_7_1_church.html",
+              "DocumentMoniker": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\riddle\\riddle_7_1_church.html",
+              "RelativeDocumentMoniker": "html\\themes\\arctic-rescue\\riddle\\riddle_7_1_church.html",
+              "ToolTip": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\riddle\\riddle_7_1_church.html",
+              "RelativeToolTip": "html\\themes\\arctic-rescue\\riddle\\riddle_7_1_church.html",
+              "ViewState": "AgIAAAgAAAAAAAAAAIAwwBAAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2026-07-31T18:21:57.284Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "station_5_1.html",
+              "DocumentMoniker": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\stations\\station_5_1.html",
+              "RelativeDocumentMoniker": "html\\themes\\arctic-rescue\\stations\\station_5_1.html",
+              "ToolTip": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\stations\\station_5_1.html",
+              "RelativeToolTip": "html\\themes\\arctic-rescue\\stations\\station_5_1.html",
+              "ViewState": "AgIAAJ0AAAAAAAAAAAAAAPQAAABVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2026-07-31T16:47:01.149Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "riddle_6_2_chat.html",
+              "DocumentMoniker": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\riddle\\riddle_6_2_chat.html",
+              "RelativeDocumentMoniker": "html\\themes\\arctic-rescue\\riddle\\riddle_6_2_chat.html",
+              "ToolTip": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\riddle\\riddle_6_2_chat.html",
+              "RelativeToolTip": "html\\themes\\arctic-rescue\\riddle\\riddle_6_2_chat.html",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAABcAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2026-07-31T23:12:41.324Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "station_1_1.html",
+              "DocumentMoniker": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\stations\\station_1_1.html",
+              "RelativeDocumentMoniker": "html\\themes\\arctic-rescue\\stations\\station_1_1.html",
+              "ToolTip": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\stations\\station_1_1.html",
+              "RelativeToolTip": "html\\themes\\arctic-rescue\\stations\\station_1_1.html",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAAB4AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2026-07-31T22:20:14.799Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "station_4_1.html",
+              "DocumentMoniker": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\stations\\station_4_1.html",
+              "RelativeDocumentMoniker": "html\\themes\\arctic-rescue\\stations\\station_4_1.html",
+              "ToolTip": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\stations\\station_4_1.html",
+              "RelativeToolTip": "html\\themes\\arctic-rescue\\stations\\station_4_1.html",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2026-07-31T16:07:52.2Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "riddle_6_3_location.html",
+              "DocumentMoniker": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\riddle\\riddle_6_3_location.html",
+              "RelativeDocumentMoniker": "html\\themes\\arctic-rescue\\riddle\\riddle_6_3_location.html",
+              "ToolTip": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\riddle\\riddle_6_3_location.html",
+              "RelativeToolTip": "html\\themes\\arctic-rescue\\riddle\\riddle_6_3_location.html",
+              "ViewState": "AgIAACQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2026-07-31T23:12:55.636Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "riddle_5_4_location.html",
+              "DocumentMoniker": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\riddle\\riddle_5_4_location.html",
+              "RelativeDocumentMoniker": "html\\themes\\arctic-rescue\\riddle\\riddle_5_4_location.html",
+              "ToolTip": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\riddle\\riddle_5_4_location.html",
+              "RelativeToolTip": "html\\themes\\arctic-rescue\\riddle\\riddle_5_4_location.html",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2026-07-31T23:12:40.461Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 22,
+              "Title": "riddle_4_3_location.html",
+              "DocumentMoniker": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\riddle\\riddle_4_3_location.html",
+              "RelativeDocumentMoniker": "html\\themes\\arctic-rescue\\riddle\\riddle_4_3_location.html",
+              "ToolTip": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\riddle\\riddle_4_3_location.html",
+              "RelativeToolTip": "html\\themes\\arctic-rescue\\riddle\\riddle_4_3_location.html",
+              "ViewState": "AgIAACQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2026-07-31T23:11:58.313Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "riddle_2_4_location.html",
+              "DocumentMoniker": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\riddle\\riddle_2_4_location.html",
+              "RelativeDocumentMoniker": "html\\themes\\arctic-rescue\\riddle\\riddle_2_4_location.html",
+              "ToolTip": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\riddle\\riddle_2_4_location.html",
+              "RelativeToolTip": "html\\themes\\arctic-rescue\\riddle\\riddle_2_4_location.html",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2026-07-31T23:11:02.633Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "riddle_4_2_fish.html",
+              "DocumentMoniker": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\riddle\\riddle_4_2_fish.html",
+              "RelativeDocumentMoniker": "html\\themes\\arctic-rescue\\riddle\\riddle_4_2_fish.html",
+              "ToolTip": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\riddle\\riddle_4_2_fish.html",
+              "RelativeToolTip": "html\\themes\\arctic-rescue\\riddle\\riddle_4_2_fish.html",
+              "ViewState": "AgIAAAMCAAAAAAAAAIAwwGoBAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2026-07-31T16:10:21.321Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "inventory.js",
+              "DocumentMoniker": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\Stations\\JAVA\\inventory.js",
+              "RelativeDocumentMoniker": "Stations\\JAVA\\inventory.js",
+              "ToolTip": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\Stations\\JAVA\\inventory.js",
+              "RelativeToolTip": "Stations\\JAVA\\inventory.js",
+              "ViewState": "AgIAAGYBAAAAAAAAAAAAwGwBAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2026-07-31T17:51:33.858Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "riddle_3_1_frequency.html",
+              "DocumentMoniker": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\riddle\\riddle_3_1_frequency.html",
+              "RelativeDocumentMoniker": "html\\themes\\arctic-rescue\\riddle\\riddle_3_1_frequency.html",
+              "ToolTip": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\riddle\\riddle_3_1_frequency.html",
+              "RelativeToolTip": "html\\themes\\arctic-rescue\\riddle\\riddle_3_1_frequency.html",
+              "ViewState": "AgIAAJ0AAAAAAAAAAAAwwLAAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2026-07-31T16:52:32.112Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
               "Title": "attachments.css",
               "DocumentMoniker": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\CSS\\attachments.css",
               "RelativeDocumentMoniker": "CSS\\attachments.css",
@@ -436,12 +506,11 @@
               "RelativeToolTip": "CSS\\attachments.css",
               "ViewState": "AgIAAPIDAAAAAAAAAIAwwMgDAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2026-07-31T22:24:07.316Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-31T22:24:07.316Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 28,
               "Title": "inventory.css",
               "DocumentMoniker": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\CSS\\inventory.css",
               "RelativeDocumentMoniker": "CSS\\inventory.css",
@@ -449,38 +518,11 @@
               "RelativeToolTip": "CSS\\inventory.css",
               "ViewState": "AgIAAJsIAAAAAAAAAIAwwK4IAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2026-07-31T16:54:59.065Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-31T16:54:59.065Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
-              "Title": "story_chat.js",
-              "DocumentMoniker": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\Stations\\JAVA\\story_chat.js",
-              "RelativeDocumentMoniker": "Stations\\JAVA\\story_chat.js",
-              "ToolTip": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\Stations\\JAVA\\story_chat.js",
-              "RelativeToolTip": "Stations\\JAVA\\story_chat.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2026-07-31T16:06:56.379Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 24,
-              "Title": "story_data.js",
-              "DocumentMoniker": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\Stations\\JAVA\\story_data.js",
-              "RelativeDocumentMoniker": "Stations\\JAVA\\story_data.js",
-              "ToolTip": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\Stations\\JAVA\\story_data.js",
-              "RelativeToolTip": "Stations\\JAVA\\story_data.js",
-              "ViewState": "AgIAAPwAAAAAAAAAAAAiwAsBAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2026-07-31T16:06:57.28Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 29,
               "Title": "congrats.html",
               "DocumentMoniker": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\html\\themes\\arctic-rescue\\congrats.html",
               "RelativeDocumentMoniker": "html\\themes\\arctic-rescue\\congrats.html",
@@ -488,12 +530,11 @@
               "RelativeToolTip": "html\\themes\\arctic-rescue\\congrats.html",
               "ViewState": "AgIAAIcBAAAAAAAAAAAAAB8CAAA4AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2026-07-31T18:23:12.681Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-31T18:23:12.681Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 30,
               "Title": "nansen.css",
               "DocumentMoniker": "C:\\Users\\InesS\\source\\repos\\Escape_Tromso\\CSS\\nansen.css",
               "RelativeDocumentMoniker": "CSS\\nansen.css",
@@ -501,8 +542,7 @@
               "RelativeToolTip": "CSS\\nansen.css",
               "ViewState": "AgIAADwDAAAAAAAAAAAAAFcDAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2026-07-31T16:47:14.418Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-31T16:47:14.418Z"
             }
           ]
         }

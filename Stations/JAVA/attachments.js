@@ -281,7 +281,6 @@ Object.assign(window.ATTACHMENTS, {
                     <span class="signal-letter-category">
                         Incoming field report
                     </span>
-
                     <h2>Strange Signal Received</h2>
 
                     <p class="signal-letter-sender">
@@ -302,6 +301,7 @@ Object.assign(window.ATTACHMENTS, {
                     </p>
 
                     <div class="signal-note signal-coordinate-note">
+                        <!-- ------------- MORSE CODE DEFINITION --------------- -->
                         <input
                             class="signal-character-input"
                             data-answer-index="0"
@@ -310,7 +310,10 @@ Object.assign(window.ATTACHMENTS, {
                             inputmode="numeric"
                             aria-label="First coordinate digit"
                         >
+                        <span>5m S</span>
 
+                        <span class="signal-coordinate-separator">and</span>
+                        
                         <input
                             class="signal-character-input"
                             data-answer-index="1"
@@ -319,35 +322,11 @@ Object.assign(window.ATTACHMENTS, {
                             inputmode="numeric"
                             aria-label="Second coordinate digit"
                         >
+                        <span>25m </span>
 
-                        <span>m S</span>
-
-                        <span class="signal-coordinate-separator">and</span>
-
-                        
                         <input
                             class="signal-character-input"
                             data-answer-index="2"
-                            type="text"
-                            maxlength="1"
-                            inputmode="numeric"
-                            aria-label="Third coordinate digit"
-                        >
-
-                        <input
-                            class="signal-character-input"
-                            data-answer-index="3"
-                            type="text"
-                            maxlength="1"
-                            inputmode="numeric"
-                            aria-label="Third coordinate digit"
-                        >
-
-                        <span>9 m </span>
-
-                        <input
-                            class="signal-character-input"
-                            data-answer-index="4"
                             type="text"
                             maxlength="1"
                             autocapitalize="characters"
@@ -424,62 +403,35 @@ Object.assign(window.ATTACHMENTS, {
         `;
 
         document.body.appendChild(overlay);
-
-        const oldBodyOverflow =
-            document.body.style.overflow;
-
+        const oldBodyOverflow = document.body.style.overflow;
         document.body.style.overflow = "hidden";
+        const closeButton = overlay.querySelector(".signal-letter-close");
 
-        const closeButton = overlay.querySelector(
-            ".signal-letter-close"
-        );
+        const lamp = overlay.querySelector(".signal-lamp");
 
-        const lamp = overlay.querySelector(
-            ".signal-lamp"
-        );
+        const lampButton = overlay.querySelector(".signal-lamp-button");
 
-        const lampButton = overlay.querySelector(
-            ".signal-lamp-button"
-        );
-
-        const lampStatus = overlay.querySelector(
-            ".signal-lamp-status"
-        );
-        const morseAudio = overlay.querySelector(
-            ".signal-morse-audio"
-        );
+        const lampStatus = overlay.querySelector(".signal-lamp-status");
+        const morseAudio = overlay.querySelector(".signal-morse-audio");
         const answerInputs = Array.from(overlay.querySelectorAll(".signal-character-input"));
 
-        const answerStatus = overlay.querySelector(
-            ".signal-answer-status"
-        );
+        const answerStatus = overlay.querySelector(".signal-answer-status");
 
-        const saveButton = overlay.querySelector(
-            ".signal-save-button"
-        );
+        const saveButton = overlay.querySelector(".signal-save-button");
 
-        const inventoryButton = overlay.querySelector(
-            ".signal-inventory-button"
-        );
+        const inventoryButton = overlay.querySelector(".signal-inventory-button");
 
         /*
-         * Morse-style pattern from the recovered signal.
+         * MorseMorse-style pattern from the recovered signal.
          */
-        const pattern = [
-            // 6
-            "dash", "dot", "dot", "dot", "dot",
-            "characterPause",
 
-            // 4
-            "dot", "dot", "dot", "dot", "dash",
+        const pattern = [
+            // 8
+            "dash", "dash", "dash", "dot", "dot",
             "characterPause",
 
             // 1
             "dot", "dash", "dash", "dash", "dash",
-            "characterPause",
-
-            // 2
-            "dot", "dot", "dash", "dash", "dash",
             "characterPause",
 
             // W
@@ -493,39 +445,20 @@ Object.assign(window.ATTACHMENTS, {
         const SYMBOL_GAP = 302;
 
         // Darkness between complete digits or letters.
+        const expectedAnswer = step.correctAnswer || "85mS125mW";
         const CHARACTER_GAP = 2867;
-
-        // Pause before the entire signal repeats.
-        const REPEAT_GAP = 3500;
-        const expectedAnswer = step.correctAnswer || "64S12W";
         let signalRunning = false;
         let closed = false;
         let timers = [];
-        let audioRepeatTimer = null;
-        const REPEAT_PAUSE = 3500;
+
 
         function startMorseAudio() {
-            clearTimeout(audioRepeatTimer);
-
             morseAudio.pause();
             morseAudio.currentTime = 0;
-
             morseAudio.play().catch(error => {
                 console.warn("Morse audio could not start:", error);
             });
         }
-
-        morseAudio.addEventListener("ended", () => {
-            if (!signalRunning) {
-                return;
-            }
-
-            audioRepeatTimer = setTimeout(() => {
-                if (signalRunning) {
-                    startMorseAudio();
-                }
-            }, REPEAT_PAUSE);
-        });
         function clearSignalTimers() {
             timers.forEach(timer => {
                 window.clearTimeout(timer);
@@ -549,7 +482,6 @@ Object.assign(window.ATTACHMENTS, {
                     delay += CHARACTER_GAP;
                     return;
                 }
-
                 const lightDuration =
                     symbol === "dot"
                         ? DOT_DURATION
@@ -572,10 +504,20 @@ Object.assign(window.ATTACHMENTS, {
                 delay += lightDuration + SYMBOL_GAP;
             });
 
+            // Signal has finished ONE time.
             timers.push(
                 window.setTimeout(() => {
-                    playSignalPattern();
-                }, delay + REPEAT_GAP)
+                    signalRunning = false;
+                    lamp.classList.remove("on");
+                    lampButton.classList.remove("active");
+                    lampButton.setAttribute(
+                        "aria-pressed",
+                        "false"
+                    );
+
+                    lampButton.textContent = "AGAIN";
+                    lampStatus.textContent = "Signal finished. Press AGAIN to replay.";
+                }, delay)
             );
         }
         function normalizeSignalAnswer(value) {
@@ -597,7 +539,7 @@ Object.assign(window.ATTACHMENTS, {
 
             if (!allFieldsCompleted) {
                 answerStatus.textContent =
-                    "Please complete all four missing characters.";
+                    "Please complete all three missing characters.";
 
                 const emptyInput = answerInputs.find(
                     input => !input.value.trim()
@@ -609,20 +551,13 @@ Object.assign(window.ATTACHMENTS, {
 
             /*
              * The visible coordinate is:
-             * [6][4]m S and [1][2]9m [W]
+             * [8]5m S and [1]25m [W]
              */
-            const enteredAnswer =
-                `${values[0]}${values[1]}S${values[2]}${values[3]}9${values[4]}`;
+            const enteredAnswer = `${values[0]}5mS${values[1]}25m${values[2]}`;
 
-            const correctAnswer =
-                normalizeSignalAnswer(
-                    step.correctAnswer || "64S129W"
-                );
+            const correctAnswer = normalizeSignalAnswer(step.correctAnswer || "85mS125mW");
 
-            if (
-                normalizeSignalAnswer(enteredAnswer) !==
-                correctAnswer
-            ) {
+            if (normalizeSignalAnswer(enteredAnswer) !== correctAnswer) {
                 answerStatus.textContent =
                     "That is not correct yet. Listen to the signal again.";
 
@@ -653,50 +588,28 @@ Object.assign(window.ATTACHMENTS, {
             return true;
         }
         function toggleSignal() {
-            signalRunning = !signalRunning;
+            // Don't allow another click while it is currently playing.
+            if (signalRunning) {
+                return;
+            }
 
-            lampButton.classList.toggle(
-                "active",
-                signalRunning
-            );
+            signalRunning = true;
+
+            lampButton.classList.add("active");
 
             lampButton.setAttribute(
                 "aria-pressed",
-                String(signalRunning)
+                "true"
             );
 
-            lampButton.textContent = signalRunning
-                ? "Stop signal"
-                : "Start signal";
+            lampButton.textContent = "Playing...";
 
-            lampStatus.textContent = signalRunning
-                ? "Receiving repeating light and audio pattern..."
-                : "Signal stopped";
+            lampStatus.textContent =
+                "Receiving light and audio pattern...";
 
-            if (signalRunning) {
-                /*
-                 * Start the light and audio together.
-                 */
-                playSignalPattern();
-                startMorseAudio();
-            } else {
-                /*
-                 * Stop the light.
-                 */
-                clearSignalTimers();
-
-                /*
-                 * Cancel the scheduled audio repetition.
-                 */
-                clearTimeout(audioRepeatTimer);
-                audioRepeatTimer = null;
-
-                /*
-                 * Stop and rewind the audio.
-                 */
-                morseAudio.pause();
-                morseAudio.currentTime = 0;
-            }
+            // Start blinking and sound together.
+            playSignalPattern();
+            startMorseAudio();
         }
 
         function finishAndCloseLetter() {
@@ -707,12 +620,7 @@ Object.assign(window.ATTACHMENTS, {
             closed = true;
             signalRunning = false;
 
-            /*
-             * Cancel any scheduled audio restart.
-             */
-            clearTimeout(audioRepeatTimer);
-            audioRepeatTimer = null;
-
+            
             /*
              * Stop and rewind the audio.
              */
@@ -729,8 +637,7 @@ Object.assign(window.ATTACHMENTS, {
                 handleKeydown
             );
 
-            document.body.style.overflow =
-                oldBodyOverflow;
+            document.body.style.overflow = oldBodyOverflow;
 
             overlay.classList.add("closing");
 
@@ -752,21 +659,7 @@ Object.assign(window.ATTACHMENTS, {
             if (event.key === "Escape") {
                 requestCloseLetter();
             }
-        }
-        /* ==========
-          Audio error loading 
-          =========== */
-        morseAudio.addEventListener("error", () => {
-            console.error(
-                "The Morse audio file could not be loaded:",
-                morseAudio.currentSrc
-            );
-
-            lampStatus.textContent =
-                "The audio could not be loaded. The light signal is still available.";
-        });
-
-
+        }      
         /* ============== 
            Inventory Button
            ============== */
@@ -886,8 +779,7 @@ Object.assign(window.ATTACHMENTS, {
         if (savedAnswer.length >= 6) {
             answerInputs[0].value = savedAnswer[0];
             answerInputs[1].value = savedAnswer[1];
-            answerInputs[2].value = savedAnswer[4];
-            answerInputs[3].value = savedAnswer[5];
+            answerInputs[2].value = savedAnswer[2];
         }
     },
 
@@ -1491,31 +1383,3 @@ function playHenryRudiResultVideo(
         video.controls = true;
     });
 }
-
-
-/* dispatchSosAudio(step, done) {
-    const modal = document.createElement("div");
-    modal.className = "attachment-modal";
-    modal.innerHTML = `
-        <div class="attachment-content audio-content">
-            <h2>Dispatch Audio</h2>
-
-            <audio controls class="dispatch-audio">
-                <source src="${step.audio}" type="audio/mp3">
-                Your browser does not support the audio element.
-            </audio>
-
-            <button class="close-attachment">Close</button>
-        </div>
-    `;
-
-    document.body.appendChild(modal);
-
-    modal.querySelector(".close-attachment").onclick = () => {
-        modal.remove();
-
-        if (done) {
-            done();
-        }
-    };
-}, */

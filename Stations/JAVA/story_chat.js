@@ -433,18 +433,8 @@
 
         const chatBox = this.shadowRoot.querySelector(".chat");
 
-        chatBox.addEventListener("scroll", () => {
-            localStorage.setItem(this.storyName + "_scroll", chatBox.scrollTop);
-        });
-
-        this.renderHistory();
-
-        setTimeout(() => {
-            const savedScroll = Number(localStorage.getItem(this.storyName + "_scroll")) || 0;
-            chatBox.scrollTop = savedScroll;
-        }, 1000);
-
-        this.next();
+        
+        
     }
 
     next() {

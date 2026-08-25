@@ -433,7 +433,38 @@
 
         const chatBox = this.shadowRoot.querySelector(".chat");
 
-        
+        this.renderHistory();
+
+        /* Automatically keep the chat scrolled to the newest message. */
+        const messages = this.shadowRoot.querySelector("#messages");
+
+        const scrollToBottom = () => {
+            requestAnimationFrame(() => {
+                chatBox.scrollTop = chatBox.scrollHeight;
+            });
+        };
+
+        /* Watch for new messages being added. */
+        const observer = new MutationObserver(() => {scrollToBottom();});
+
+        observer.observe(messages, {
+            childList: true,
+            subtree: true
+        });
+
+        /* Also react when images change the height of the chat after loading. */
+        if ("ResizeObserver" in window) {
+            const resizeObserver =
+                new ResizeObserver(() => {
+                    scrollToBottom();
+                });
+
+            resizeObserver.observe(messages);
+        }
+
+        /* Start at the bottom when the page loads.*/
+        scrollToBottom();
+        this.next();
         
     }
 

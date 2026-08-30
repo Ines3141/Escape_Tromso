@@ -505,18 +505,32 @@ Object.assign(window.ATTACHMENTS, {
             });
 
             // Signal has finished ONE time.
+            // Signal has finished ONE time.
             timers.push(
                 window.setTimeout(() => {
+
                     signalRunning = false;
+
                     lamp.classList.remove("on");
+
+                    /*
+                     * Make sure audio has also stopped.
+                     */
+                    morseAudio.pause();
+                    morseAudio.currentTime = 0;
+
                     lampButton.classList.remove("active");
+
                     lampButton.setAttribute(
                         "aria-pressed",
                         "false"
                     );
 
-                    lampButton.textContent = "AGAIN";
-                    lampStatus.textContent = "Signal finished. Press AGAIN to replay.";
+                    lampButton.textContent = "PLAY AGAIN";
+
+                    lampStatus.textContent =
+                        "Signal finished. Press PLAY AGAIN to replay.";
+
                 }, delay)
             );
         }
@@ -588,11 +602,48 @@ Object.assign(window.ATTACHMENTS, {
             return true;
         }
         function toggleSignal() {
-            // Don't allow another click while it is currently playing.
+
+            /*
+             * SIGNAL IS CURRENTLY PLAYING
+             * -> STOP IT
+             */
             if (signalRunning) {
+                signalRunning = false;
+
+                /*
+                 * Stop blinking.
+                 */
+                clearSignalTimers();
+
+                /*
+                 * Stop audio and rewind.
+                 */
+                morseAudio.pause();
+                morseAudio.currentTime = 0;
+
+                /*
+                 * Change button.
+                 */
+                lampButton.classList.remove("active");
+
+                lampButton.setAttribute(
+                    "aria-pressed",
+                    "false"
+                );
+
+                lampButton.textContent = "PLAY AGAIN";
+
+                lampStatus.textContent =
+                    "Signal stopped.";
+
                 return;
             }
 
+
+            /*
+             * SIGNAL IS NOT PLAYING
+             * -> START IT
+             */
             signalRunning = true;
 
             lampButton.classList.add("active");
@@ -602,12 +653,14 @@ Object.assign(window.ATTACHMENTS, {
                 "true"
             );
 
-            lampButton.textContent = "Playing...";
+            lampButton.textContent = "STOP";
 
             lampStatus.textContent =
                 "Receiving light and audio pattern...";
 
-            // Start blinking and sound together.
+            /*
+             * Start blinking and audio together.
+             */
             playSignalPattern();
             startMorseAudio();
         }
@@ -776,10 +829,10 @@ Object.assign(window.ATTACHMENTS, {
                 localStorage.getItem("station1SignalAnswer")
             );
 
-        if (savedAnswer.length >= 6) {
-            answerInputs[0].value = savedAnswer[0];
-            answerInputs[1].value = savedAnswer[1];
-            answerInputs[2].value = savedAnswer[2];
+        if (savedAnswer.length >= 9) {
+            answerInputs[0].value = savedAnswer[0]; // 8
+            answerInputs[1].value = savedAnswer[4]; // 1
+            answerInputs[2].value = savedAnswer[8]; // W
         }
     },
 

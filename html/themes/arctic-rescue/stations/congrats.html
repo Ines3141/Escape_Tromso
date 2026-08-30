@@ -34,6 +34,7 @@
             padding: 28px;
             box-shadow: 0 0 40px rgba(100, 200, 255, 0.25);
             overflow: hidden;
+            margin-bottom: 80px;
         }
 
         .arctic-scene {
@@ -326,13 +327,102 @@
             color: #0b4a66;
             font-weight: bold;
         }
+        /* ==============================
+   LONG VERSION INFORMATION POPUP
+   ============================== */
+
+        .long-version-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 50000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.75);
+        }
+
+            .long-version-overlay.hidden {
+                display: none;
+            }
+
+        .long-version-popup {
+            width: 100%;
+            max-width: 440px;
+            padding: 24px;
+            background: #071b28;
+            color: white;
+            border-radius: 18px;
+            border: 1px solid rgba( 255, 255, 255, 0.2 );
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+            .long-version-popup h2 {
+                margin-bottom: 16px;
+            }
+
+            .long-version-popup p {
+                margin-bottom: 12px;
+            }
+
+        .timer-notice {
+            margin: 20px 0;
+            padding: 16px;
+            background: rgba( 255, 255, 255, 0.08 );
+            border-radius: 12px;
+        }
+
+            .timer-notice > strong {
+                display: block;
+                margin-bottom: 12px;
+                font-size: 18px;
+                color: #f7d046;
+            }
+
+        .long-version-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+            .long-version-actions button {
+                flex: 1;
+                width: auto;
+                margin: 0;
+            }
+
+        @media (max-width: 500px) {
+            .long-version-actions {
+                flex-direction: column;
+            }
+        }
+        #continueLongVersion {
+            background: #00b894;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 14px 18px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+
+            #continueLongVersion:hover {
+                background: #00a884;
+                transform: scale(1.02);
+            }
+
+            #continueLongVersion:active {
+                transform: scale(0.98);
+            }
     </style>
 </head>
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 <!--This for downloading the image but there are still some problems.-->
 
 <body>
-
     <div class="victory-box">
         <div class="arctic-scene">
             <div class="moon"></div>
@@ -374,6 +464,11 @@
                 The five lost explorers are safe.
                 Thank you for joining the Rescue Hunt of the Lost Polar Expedition.
             </p>
+
+            <p id="teamNameDisplay"
+               class="final-note">
+            </p>
+
             <div id="memoryCard" class="team-photo-frame">
                 <img id="teamPhotoDisplay" alt="Team Photo">
 
@@ -386,13 +481,56 @@
                     </p>
                 </div>
             </div>
-            <button class="feedback-button" onclick="window.open('YOUR-FEEDBACK-LINK-HERE')">
+            <button class="feedback-button" onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSdZM9C9YFnDy_sURTQXCbNp7OQbk5QXPW8p3BAIY4xTA0gkiQ/viewform?usp=publish-editor')">
                 Leave Feedback
             </button>
 
-            <button class="back-button" onclick="window.location.href='../../../index.html'">
-                Return to Start
+            <button class="back-button"
+                    id="longVersionButton">
+                Continue to longer version
             </button>
+            <div class="long-version-overlay hidden"
+                 id="longVersionOverlay">
+                <div class="long-version-popup">
+
+                    <h2>Continue to the longer version?</h2>
+
+                    <p>
+                        You have completed the current version of the game.
+                    </p>
+
+                    <div class="timer-notice">
+                        <strong>⏱ Please stop your timer now.</strong>
+
+                        <p>
+                            The longer version contains additional riddles.
+                        </p>
+
+                        <p>
+                            When you begin the extra riddles,
+                            <strong>start your timer again</strong>
+                            and measure the additional time separately.
+                        </p>
+                    </div>
+
+                    <div class="long-version-actions">
+
+                        <button type="button"
+                                id="cancelLongVersion"
+                                class="back-button">
+                            Stay here
+                        </button>
+
+                        <button type="button"
+                                id="continueLongVersion"
+                                class="submit-button">
+                            Continue to longer version
+                        </button>
+
+                    </div>
+
+                </div>
+            </div>
             <button class="feedback-button" onclick="downloadMemoryCard()">
                 Download Memory Card
             </button>
@@ -402,25 +540,53 @@
     <script>
         function openLetter() {
             const letter = document.getElementById("letter");
+
             letter.classList.add("open");
 
             const teamName = localStorage.getItem("teamName");
+
             const teamPhoto = localStorage.getItem("teamPhoto");
-            document.getElementById("memoryTeam").textContent =
-                `Team ${teamName}`;
 
-            document.getElementById("teamPhotoDisplay").src =
-                teamPhoto;
+            const teamPhotoDisplay = document.getElementById("teamPhotoDisplay");
 
-            document.getElementById("teamNameDisplay").textContent =
+            /*
+             * Change this path to your
+             * actual placeholder image.
+             */
+            const defaultTeamPhoto =
+                "../../../../assets/images/Nansen.jpg";
+
+
+            document.getElementById(
+                "memoryTeam"
+            ).textContent =
+                teamName
+                    ? `Team ${teamName}`
+                    : "Rescue Team";
+
+
+            document.getElementById(
+                "teamNameDisplay"
+            ).textContent =
                 teamName
                     ? `Mission completed by Team ${teamName}.`
                     : "Mission completed.";
 
-            if (teamPhoto) {
-                document.getElementById("teamPhotoDisplay").src = teamPhoto;
-            }
+
+            /*
+             * Uploaded picture if available,
+             * otherwise placeholder.
+             */
+            teamPhotoDisplay.onerror = () => {
+                teamPhotoDisplay.onerror = null;
+                teamPhotoDisplay.src =
+                    defaultTeamPhoto;
+            };
+
+            teamPhotoDisplay.src =
+                teamPhoto || defaultTeamPhoto;
         }
+
         async function downloadMemoryCard() {
             const originalCard = document.getElementById("memoryCard");
             const originalImage =
@@ -541,7 +707,59 @@
             }
         }
     </script>
-    <game-navigation previous="../riddle/riddle_7_1_church.html" next="../riddle/riddle_2.html">
+    <script>
+        const longVersionButton =
+            document.getElementById(
+                "longVersionButton"
+            );
+
+        const longVersionOverlay =
+            document.getElementById(
+                "longVersionOverlay"
+            );
+
+        const cancelLongVersion =
+            document.getElementById(
+                "cancelLongVersion"
+            );
+
+        const continueLongVersion =
+            document.getElementById(
+                "continueLongVersion"
+            );
+
+
+        /* Open information popup */
+        longVersionButton.addEventListener(
+            "click",
+            () => {
+                longVersionOverlay.classList.remove(
+                    "hidden"
+                );
+            }
+        );
+
+
+        /* Stay on current page */
+        cancelLongVersion.addEventListener(
+            "click",
+            () => {
+                longVersionOverlay.classList.add(
+                    "hidden"
+                );
+            }
+        );
+
+
+        /* Continue to longer game */
+        continueLongVersion.addEventListener(
+            "click",
+            () => {
+                window.location.href = "station_7.html";
+            }
+        );
+    </script>
+    <game-navigation previous="final_page.html" next="../riddle/riddle_2.html">
     </game-navigation>
 </body>
 

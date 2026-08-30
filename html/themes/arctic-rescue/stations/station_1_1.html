@@ -28,20 +28,12 @@
         const previousPage = currentNavigation.previous;
         const nextPage = currentNavigation.next;
     </script>
-    <style>
-        story-chat {
-            display: block;
-            width: 100%;
-            max-width: 100%;
-            margin: 0 auto;
-        }
-    </style>
 </head>
 
-<body>
-    <div class="box">
+<body class="chat-page">
+    <div class="chat-container">
         <story-chat story="dispatch_intro"></story-chat>
-        
+
         <!--
         <button onclick="
             localStorage.removeItem('dispatch_intro_step');

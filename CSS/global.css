@@ -208,18 +208,16 @@ img {
     }
 }
 
-/* PHONE */
 @media (max-width: 600px) {
     body {
         display: block;
         padding: 15px;
-        padding-bottom: 800px;
+        padding-bottom: 88px;
     }
 
-
     .box {
-        padding-bottom: 180px;
-        margin-bottom: 140px;
+        padding: 20px;
+        margin-bottom: 0;
     }
 
     .box,
@@ -242,8 +240,6 @@ img {
         margin: 8px 0;
     }
 
-    /* The not is there because these buttons are smaller. */
-
     input {
         width: 100%;
     }
@@ -256,16 +252,10 @@ img {
         top: 18px;
         right: 18px;
     }
-
-    input {
-        width: 100%;
-    }
 }
-
 @media (max-width: 380px) and (max-height: 760px) {
     .box {
-        padding-bottom: 260px;
-        margin-bottom: 180px;
+        margin-bottom: 0;
     }
 
     incoming-dispatch {
@@ -445,3 +435,77 @@ img {
     }
 }
 
+/* =================================
+   CHAT PAGE
+   ================================= */
+
+body.chat-page {
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    margin: 0 !important;
+    padding: 10px 5px 75px !important;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: flex-start !important;
+    align-items: stretch !important;
+    overflow: hidden;
+}
+
+
+    /* Container around story-chat */
+    body.chat-page .chat-container {
+        flex: 1 1 auto;
+        width: 100%;
+        max-width: 500px;
+        min-height: 0;
+        margin: 0 auto;
+        padding: 0;
+    }
+
+
+    /* StoryChat fills available area */
+    body.chat-page story-chat {
+        display: block;
+        width: 100%;
+        height: 100%;
+        min-height: 0;
+        margin: 0;
+        padding: 0;
+    }
+
+
+/* =====================================
+   NORMAL BOX PAGES
+   ===================================== */
+
+body.box-page {
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+    margin: 0 !important;
+    /*
+     * Normal page spacing.
+     * Bottom leaves room for navigation.
+     */
+    padding: 16px 12px 88px !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    overflow-x: hidden;
+}
+
+    body.box-page .box {
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto !important;
+        /*
+     * Normal inner box padding.
+     */
+        padding: 24px !important;
+        /*
+     * Remove the huge artificial
+     * space from global.css.
+     */
+        margin-bottom: 0 !important;
+    }

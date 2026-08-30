@@ -24,19 +24,19 @@
         const nextPage = "riddle_6_3_location.html";
     </script>
 </head>
-<body>
-    <div class="box">
+<body class="chat-page">
+    <div class="chat-container">
         <story-chat story="henry_rudi"></story-chat>
-            <button onclick=" localStorage.removeItem('henry_rudi_step');
+        <button onclick=" localStorage.removeItem('henry_rudi_step');
                 localStorage.removeItem('henry_rudi_scroll');
                 localStorage.removeItem('henryRudiPeople');
                 localStorage.removeItem('henryRudiLocation');
                 location.reload();">
-                Reset chat
+            Reset chat
         </button>
         <!-- <button onclick="window.location.href = nextPage">DEV Continue </button> -->
     </div>
-    <game-navigation></game-navigation>
+    <game-navigation hint-id="riddle_6_2_chat"></game-navigation>
     <script>
         setupGameNavigation();
     </script>

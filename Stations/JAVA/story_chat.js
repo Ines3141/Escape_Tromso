@@ -30,12 +30,12 @@
 
                 width: 100%;
                 max-width: 440px;
+                height: 100%;
                 min-width: 0;
 
-                margin: 16px auto 0;
+                margin: 0 auto;
 
-                padding-left: 12px;
-                padding-right: 12px;
+                padding: 0;
 
                 box-sizing: border-box;
             }
@@ -55,33 +55,20 @@
                 width: 100%;
                 max-width: none;
 
-                /*
-                 * Fallback for older browsers.
-                 */
-                height: min(620px, calc(100vh - 120px));
-
-                /*
-                 * Better mobile-browser viewport handling.
-                 */
-                height: min(620px, calc(100dvh - 120px));
-
-                min-height: 400px;
+                height: 100%;
+                min-height: 0;
 
                 overflow-y: auto;
                 overflow-x: hidden;
 
                 -webkit-overflow-scrolling: touch;
-                overscroll-behavior: contain;
+                touch-action: pan-y;
 
                 background: #061927;
 
-                border-radius: 16px;
+                border-radius: 14px;
 
-                padding: clamp(
-                    12px,
-                    4vw,
-                    18px
-                );
+                padding: 10px;
 
                 font-family:
                     Arial,
@@ -98,7 +85,8 @@
 
             .header {
                 text-align: center;
-                margin-bottom: 18px;
+                margin-bottom: 14px;
+                padding: 2px 50px 8px;
             }
 
             .header strong {
@@ -115,12 +103,7 @@
 
             .header span {
                 color: #6cff6c;
-
-                font-size: clamp(
-                    11px,
-                    3vw,
-                    13px
-                );
+                font-size: 11px;
             }
 
 
@@ -131,10 +114,8 @@
             #messages {
                 display: flex;
                 flex-direction: column;
-
                 width: 100%;
-
-                gap: 8px;
+                gap: 6px;
             }
 
 
@@ -145,14 +126,14 @@
             .message {
                 width: fit-content;
 
-                max-width: 85%;
+                max-width: 88%;
                 min-width: 0;
 
                 background: #20445a;
 
-                border-radius: 12px;
+                border-radius: 14px;
 
-                padding: 9px 11px;
+                padding: 8px 10px;
 
                 font-size: clamp(
                     14px,
@@ -160,12 +141,11 @@
                     16px
                 );
 
-                line-height: 1.4;
+                line-height: 1.35;
 
                 color: white;
 
                 overflow-wrap: anywhere;
-                word-break: normal;
             }
 
             .from-phone {

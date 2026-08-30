@@ -31,23 +31,15 @@
         const previousPage = currentNavigation.previous;
         const nextPage = currentNavigation.next;
     </script>
-    <style>
-        story-chat {
-            display: block;
-            width: 100%;
-            max-width: 100%;
-            margin: 0 auto;
-        }
-    </style>
 </head>
 
-<body>
-    <div class="box">
+<body class="chat-page">
+    <div class="chat-container">
         <story-chat story="nansen_dispatch"></story-chat>
         <!--
         <button class="riddle-button" id="riddle_btn" onclick="window.location.href=nextPage">
             Solve Riddle
-        </button> 
+        </button>
         <button onclick="clearInventory();"> Reset Inventory </button>
         <button type="button" onclick="resetCurrentChat()">
             Dev: Reset Chat

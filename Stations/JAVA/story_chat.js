@@ -138,7 +138,7 @@
                above the bottom navigation on phones */
             @media (max-width: 600px) {
                 #messages {
-                    padding-bottom: 100px;
+                    padding-bottom: 120px;
                 }
             }
 

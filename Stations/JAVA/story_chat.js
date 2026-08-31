@@ -115,7 +115,15 @@
                 display: flex;
                 flex-direction: column;
                 width: 100%;
-                gap: 6px;
+                gap: 8px;
+            }
+
+            /* Extra space so the last message can scroll
+               above the bottom navigation on phones */
+            @media (max-width: 600px) {
+                #messages {
+                    padding-bottom: 100px;
+                }
             }
 
 

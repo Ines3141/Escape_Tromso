@@ -7,16 +7,14 @@ const STORIES = {
             {
                 type: "text",
                 sender: "Dispatch",
-                time: "10:15",
-                text: "Hello, we received this SOS-signal from one of our research vessels:!"
+                text: "Hi there. We have just received an SOS transmission from one of our research vessels operating in the Arctic:"
             },
             {
                 type: "file",
                 sender: "Dispatch",
-                time: "10:14",
                 name: "SOS_Echo1.mp3",
                 action: "sosSignal"
-            },            
+            },
             /*{
                 type: "file",
                 sender: "Unknown",
@@ -29,32 +27,22 @@ const STORIES = {
             {
                 type: "text",
                 sender: "Dispatch",
-                time: "10:15",
                 text: "We don't have the knowledge and resources to run a rescue operation."
             },
             {
                 type: "text",
                 sender: "Dispatch",
-                time: "10:15",
-                text: "Can you help us?"
+                text: "We need your help."
             },
             {
                 type: "text",
                 sender: "Dispatch",
-                time: "10:15",
-                text: "The crew is running out of time."
+                text: "The crew is running out of time. They urgently need information to survive."
             },
             {
                 type: "text",
                 sender: "Dispatch",
-                time: "10:15",
-                text: "They need essential survival information."
-            },
-            {
-                type: "text",
-                sender: "Dispatch",
-                time: "10:15",
-                text: "Before we begin, we need to know who we are speaking with."
+                text: "Before we send you in, we need to know who we're working with."
             },
             {
                 type: "input",
@@ -65,15 +53,13 @@ const STORIES = {
             {
                 type: "text",
                 sender: "Dispatch",
-                time: "10:20",
-                text: "Thanks, Team {teamName}. You can start your mission once you're at the Gateway to the Arctic."
+                text: "Understood, Team {teamName}. You can start your mission once you're are at the Gateway to the Arctic."
             },
             {
                 type: "text",
                 sender: "Dispatch",
-                time: "10:20",
-                text: "Here's a photo to help you locate the place."
-            },        
+                text: "Use this photo to find the starting point."
+            },
             {
                 type: "file",
                 name: "starting_point.jpg",
@@ -86,20 +72,17 @@ const STORIES = {
             {
                 type: "text",
                 sender: "Dispatch",
-                time: "10:22",
                 text: "Location confirmed."
             },
             {
                 type: "text",
                 sender: "Dispatch",
-                time: "10:22",
                 text: "Tromsø has a rich history of Arctic exploration. We're sure some former explorers can help you out."
             },
             {
                 type: "text",
                 sender: "Dispatch",
-                time: "10:24",
-                text: "These files should help you get in touch with one of Norway's best. Good luck, {teamName}!"
+                text: "These files should help you get in touch with one of Norway's best. Good luck, Team {teamName}!"
             },
             {
                 type: "file",
@@ -114,8 +97,7 @@ const STORIES = {
             {
                 type: "text",
                 sender: "Dispatch",
-                time: "10:26",
-                text: "Write us OKAY, when you reached the next location."
+                text: "Send us: OKAY, when you've reached the next location."
             },
             {
                 type: "input",
@@ -128,7 +110,6 @@ const STORIES = {
             {
                 type: "link",
                 sender: "Dispatch",
-                time: "10:31",
                 text: "check_location.html",
                 href: "../riddle/riddle_1_2_destination.html"
             }
@@ -141,18 +122,15 @@ const STORIES = {
             {
                 type: "text",
                 sender: "Dispatch",
-                time: "10:30",
                 text: "Yes. Nansen! Of course!"
             },
             {
                 type: "text",
                 sender: "Dispatch",
-                time: "10:30",
                 text: "He will help."
             },
             {
                 type: "input",
-                time: "10:32",
                 question: "Do you have his phone number?",
                 placeholder: "Write your answer...",
                 variable: "nansen_phone_answer"
@@ -160,25 +138,21 @@ const STORIES = {
             {
                 type: "text",
                 sender: "Dispatch",
-                time: "10:30",
                 text: "No?"
             },
             {
                 type: "text",
                 sender: "Dispatch",
-                time: "10:31",
                 text: "We found some old notes."
             },
             {
                 type: "text",
                 sender: "Dispatch",
-                time: "10:32",
                 text: "See if you can figure it out."
             },
             {
                 type: "link",
                 sender: "Dispatch",
-                time: "10:31",
                 text: "Files",
                 href: "../riddle/riddle_2_1_phone.html"
             }
@@ -191,56 +165,47 @@ const STORIES = {
             {
                 type: "text",
                 sender: "Dispatch",
-                time: "10:40",
-                text: "Wanny Wolstadt should be able to help you as well."
+                text: "There's another person who may be able to help you: Wanny Wolstad."
             },
             {
                 type: "text",
                 sender: "Dispatch",
-                time: "10:40",
-                text: "She was the first female hunter on Svalbard!"
+                text: "She was reportedly the first female hunter on Svalbard, and knows the value of good communication in the Arctic."
             },
             {
                 type: "text",
                 sender: "Dispatch",
-                time: "10:41",
-                text: "But, we've lost contact with her."
+                text: "Svalbard Radio moved to Longyearbyen in 1930, just before Wanny began her first winter on Svalbard in 1932."
             },
             {
                 type: "text",
                 sender: "Dispatch",
-                time: "10:41",
-                text: "This is the last image we received."
+                text: "Before we lost contact, she proudly shared this image with us. We believe it depicts an artwork of Wanny somewhere in Tromsø."
             },
             {
                 type: "file",
                 name: "undefined.png",
                 sender: "Dispatch",
-                time: "10:41",
                 image: "../../../../assets/images/Wanny_Painting_Blurred.png"
             },
             {
                 type: "text",
                 sender: "Dispatch",
-                time: "10:43",
-                text: "But it is too blurry, we can't identify this."
+                text: "Wanny was known to communicate through clues, so it may contain information to pick up on one of her old radio signals. Unfortunately, this image is too unclear for us to be of any use."
             },
             {
                 type: "text",
                 sender: "Dispatch",
-                time: "10:42",
-                text: "You need to see it properly to establish a connection with her."
+                text: "You'll need to find the mural and examine it properly. We believe it contains information to get in touch with her."
             },
             {
                 type: "text",
                 sender: "Dispatch",
-                time: "10:42",
-                text: "Click on the following link to go to the radio."
+                text: "Use this link to stablish a radio connection."
             },
             {
                 type: "link",
                 sender: "Dispatch",
-                time: "10:31",
                 text: "Wanny_Radio_Connection.hpf",
                 href: "../riddle/riddle_3_1_frequency.html"
             }
@@ -254,19 +219,16 @@ const STORIES = {
             {
                 type: "text",
                 sender: "Dispatch",
-                time: "10:30",
                 text: "We are receiving your signal..."
             },
             {
                 type: "text",
                 sender: "Dispatch",
-                time: "10:30",
                 text: "Stand by...."
             },
             {
                 type: "text",
                 sender: "Dispatch",
-                time: "10:31",
                 text: "Uploading coordinates..."
             },
             {
@@ -276,7 +238,6 @@ const STORIES = {
             {
                 type: "link",
                 sender: "Dispatch",
-                time: "10:31",
                 text: "Riddle_Hacker.png",
                 href: "../riddle/riddle_4_2_fish.html"
             }
@@ -371,7 +332,7 @@ const STORIES = {
                 sender: "Henry Rudi",
                 time: "10:17",
                 text: "We're looking for the departure date, right?."
-            },                
+            },
             {
                 type: "text",
                 sender: "Henry Rudi",
@@ -392,7 +353,7 @@ const STORIES = {
             {
                 type: "input",
                 variable: "henryRudiPeople",
-                question: "Which number  do you see?", /* CHANGE IT LATER BACK TO WHAT DO YOU SEE */ 
+                question: "Which number  do you see?", /* CHANGE IT LATER BACK TO WHAT DO YOU SEE */
                 placeholder: "Type your answer...",
                 acceptedAnswers: ["2", "two", "two.", "2.", "two people", "2 people"],
                 wrongAnswer: "Look carefully at the movement in the window."

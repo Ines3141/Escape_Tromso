@@ -14,6 +14,7 @@ THINGS TO CHANGE AT THE END:
 -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -38,8 +39,8 @@ THINGS TO CHANGE AT THE END:
             padding: 35px;
             background: rgba(8, 25, 42, 0.96);
             border-radius: 22px;
-            box-shadow: 0 20px 60px rgba(0,0,0,.45);
-            border: 1px solid rgba(255,255,255,.08);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, .45);
+            border: 1px solid rgba(255, 255, 255, .08);
         }
 
         .logo {
@@ -63,8 +64,26 @@ THINGS TO CHANGE AT THE END:
         #introText {
             min-height: 170px;
             line-height: 1.8;
-            font-size: 19px;
+            font-size: 15px;
             white-space: pre-line;
+            letter-spacing: 0.02em;
+            color: #ffffff;
+            text-shadow: 0 0 16px rgba(143, 216, 255, 0.18);
+            position: relative;
+        }
+
+        #introText::after {
+            content: "|";
+            position: relative;
+            margin-left: 4px;
+            color: #f4d35e;
+            animation: blink 0.9s step-end infinite;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
         }
 
         .section {
@@ -74,15 +93,15 @@ THINGS TO CHANGE AT THE END:
             transition: .6s;
         }
 
-            .section.show {
-                opacity: 1;
-                transform: none;
-            }
+        .section.show {
+            opacity: 1;
+            transform: none;
+        }
 
-            .section h2 {
-                color: #f4d35e;
-                margin-bottom: 15px;
-            }
+        .section h2 {
+            color: #f4d35e;
+            margin-bottom: 15px;
+        }
 
         .checklist {
             display: flex;
@@ -94,7 +113,7 @@ THINGS TO CHANGE AT THE END:
             display: flex;
             align-items: center;
             gap: 15px;
-            background: rgba(255,255,255,.04);
+            background: rgba(255, 255, 255, .04);
             padding: 14px;
             border-radius: 12px;
         }
@@ -105,40 +124,40 @@ THINGS TO CHANGE AT THE END:
 
         .cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 20px;
             margin-top: 25px;
         }
 
         .card {
-            background: rgba(255,255,255,.05);
+            background: rgba(255, 255, 255, .05);
             border-radius: 16px;
             padding: 22px;
         }
 
-            .card h3 {
-                color: #8fd8ff;
-                margin-top: 0;
-            }
+        .card h3 {
+            color: #8fd8ff;
+            margin-top: 0;
+        }
 
-            .card ul {
-                padding-left: 18px;
-                line-height: 1.7;
-            }
+        .card ul {
+            padding-left: 18px;
+            line-height: 1.7;
+        }
 
         .mission-card {
             margin-top: 40px;
-            background: rgba(255,255,255,.06);
+            background: rgba(255, 255, 255, .06);
             border-radius: 18px;
             padding: 30px;
             text-align: center;
-            border: 2px solid rgba(255,255,255,.08);
+            border: 2px solid rgba(255, 255, 255, .08);
         }
 
-            .mission-card h2 {
-                color: #f4d35e;
-                margin-bottom: 15px;
-            }
+        .mission-card h2 {
+            color: #f4d35e;
+            margin-bottom: 15px;
+        }
 
         .destination {
             font-size: 28px;
@@ -149,7 +168,20 @@ THINGS TO CHANGE AT THE END:
         .coords {
             font-size: 22px;
             color: #7fd3ff;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
+        }
+
+        .map-link {
+            display: inline-block;
+            margin: 8px 0 18px;
+            color: #8fd8ff;
+            font-weight: 600;
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+
+        .map-link:hover {
+            color: #f4d35e;
         }
 
         .start-btn {
@@ -159,7 +191,7 @@ THINGS TO CHANGE AT THE END:
             border: none;
             border-radius: 50px;
             cursor: pointer;
-            background: linear-gradient(135deg,#18b47f,#0d9167);
+            background: linear-gradient(135deg, #18b47f, #0d9167);
             color: white;
             font-size: 22px;
             font-weight: bold;
@@ -167,22 +199,22 @@ THINGS TO CHANGE AT THE END:
             animation: pulse 2s infinite;
         }
 
-            .start-btn:hover {
-                transform: translateY(-2px);
-            }
+        .start-btn:hover {
+            transform: translateY(-2px);
+        }
 
         @keyframes pulse {
 
             0% {
-                box-shadow: 0 0 0 rgba(24,180,127,.4);
+                box-shadow: 0 0 0 rgba(24, 180, 127, .4);
             }
 
             50% {
-                box-shadow: 0 0 30px rgba(24,180,127,.6);
+                box-shadow: 0 0 30px rgba(24, 180, 127, .6);
             }
 
             100% {
-                box-shadow: 0 0 0 rgba(24,180,127,.4);
+                box-shadow: 0 0 0 rgba(24, 180, 127, .4);
             }
         }
 
@@ -194,6 +226,7 @@ THINGS TO CHANGE AT THE END:
         }
     </style>
 </head>
+
 <body>
     <div class="briefing-box">
         <div class="logo">🧭</div>
@@ -231,22 +264,24 @@ THINGS TO CHANGE AT THE END:
             <div class="cards">
                 <div class="card">
                     <h3>⚙ Settings</h3>
+                    <p>
+                        During your mission, you can adjust the following settings in the Settings Menu:
+                    </p>
                     <ul>
                         <li>Adjust volume</li>
-                        <li>Accessibility options</li>
-                        <li>Replay audio clues</li>
                     </ul>
                 </div>
                 <div class="card">
                     <h3>☰ Mission Menu</h3>
-                    <ul>
-                        <li>📥 Inbox</li>
-                        <li>🎒 Inventory</li>
-                        <li>👤 Polar Explorer Profiles</li>
-                    </ul>
                     <p>
-                        These tools are available throughout the mission.
+                        The Mission Menu is always available and has the following options:
                     </p>
+                    <ul>
+                        <li>🎒 Inventory: Items that you collect during your mission, will be stored in your inventory.
+                        </li>
+                        <li>💡 Hints: If you get stuck, use the Hint Menu to get help. Each riddle has two hints to
+                            guide you in the right direction. If you're still stuck, you can reveal the solution.</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -256,15 +291,19 @@ THINGS TO CHANGE AT THE END:
                 📍 Gateway to the Arctic
             </div>
             <div class="coords">
-                69.6493° N<br>
-                18.9560° E
+                69.6527° N<br>
+                18.9702° E
             </div>
+            <a class="map-link"
+                href="https://www.google.com/maps/search/?api=1&query=69.6527162287978%2C18.970195590753264"
+                target="_blank" rel="noopener noreferrer">
+                Open location in Google Maps
+            </a>
             <p>
                 Travel to the Gateway to the Arctic.
                 Once you arrive, press the button below to begin your mission.
             </p>
-            <button class="start-btn"
-                    onclick="window.location.href = nextPage">
+            <button class="start-btn" onclick="window.location.href = nextPage">
                 ▶ BEGIN EXPEDITION
             </button>
         </div>
@@ -278,37 +317,56 @@ THINGS TO CHANGE AT THE END:
         </script>
     </div>
     <script>
+        // Text shown in the mission intro.
         const text =
             `Welcome to the Arctic Explorer Rescue Mission.
-                    Your mission is to help a crew trapped in the Arctic
-                    by recovering crucial information hidden throughout Tromsø.
-                    During your journey you will meet the stories of legendary
-                    polar explorers, each providing an important clue.
-                    Visit every location, solve the riddles, and piece together
-                    the information needed to rescue the expedition.
-                    Every clue matters.
-                    The crew is counting on you.`;
+
+                    Your mission is to help a crew trapped in the Arctic by recovering crucial information hidden throughout Tromsø. Along your journey, you will uncover the stories of legendary polar explorers, each holding on to an important clue. Visit every location, solve the riddles, and piece together the information you needed to rescue the trapped crew.
+
+                    The crew is counting on you!`;
+
         const target = document.getElementById("introText");
         let i = 0;
+        const typingDelay = 20;
+        const sentencePause = 400;
+        const revealDelay = 450;
+
+        // Writes one character at a time to the intro text box, with a short pause only after sentence endings.
         function typeWriter() {
             if (i < text.length) {
-                target.innerHTML += text.charAt(i);
+                const currentChar = text.charAt(i);
+                target.innerHTML += currentChar;
+
+                if (currentChar === ".") {
+                    const nextChar = text.charAt(i + 1);
+                    const isSentenceEnd = nextChar === "" || nextChar === "\n" || nextChar === " ";
+
+                    if (isSentenceEnd) {
+                        i++;
+                        setTimeout(typeWriter, sentencePause);
+                        return;
+                    }
+                }
+
                 i++;
-                setTimeout(typeWriter, 1);
-            }
-            else {
+                setTimeout(typeWriter, typingDelay);
+            } else {
                 revealSections();
             }
         }
+
+        // Reveals the sections after the typing finishes, using a smoother staggered timing.
         function revealSections() {
             const sections = document.querySelectorAll(".section");
             sections.forEach((section, index) => {
                 setTimeout(() => {
                     section.classList.add("show");
-                }, index * 350);
+                }, index * revealDelay);
             });
         }
+
         typeWriter();
     </script>
 </body>
+
 </html>

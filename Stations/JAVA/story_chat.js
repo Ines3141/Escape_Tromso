@@ -3,6 +3,22 @@
         super();
         this.attachShadow({ mode: "open" });
     }
+
+    formatTime(date = new Date()) {
+        return new Date(date).toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit"
+        });
+    }
+
+    getMessageTime(step) {
+        if (step && step.time) {
+            return step.time;
+        }
+
+        return this.formatTime();
+    }
+
     connectedCallback() {
         const storyName = this.getAttribute("story");
         this.story = STORIES[storyName];
@@ -125,20 +141,24 @@
 
             .message {
                 width: fit-content;
-
+                min-width: 100px;
                 max-width: 88%;
-                min-width: 0;
+                display: flex;
+                flex-direction: column;
+                gap: 2px;
+                position: relative;
 
                 background: #20445a;
-
+                border: 1px solid rgba(255, 255, 255, 0.08);
                 border-radius: 14px;
+                box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18);
 
-                padding: 8px 10px;
+                padding: 7px 8px 6px 8px;
 
                 font-size: clamp(
-                    14px,
+                    13px,
                     3.7vw,
-                    16px
+                    13px
                 );
 
                 line-height: 1.35;
@@ -148,12 +168,26 @@
                 overflow-wrap: anywhere;
             }
 
+            .message-text {
+                display: block;
+                width: 100%;
+                padding-right: 10px;
+                word-break: break-word;
+                margin: 0;
+            }
+
             .from-phone {
                 align-self: flex-start;
+                margin-right: auto;
+                background: #20445a;
+                border-color: rgba(143, 216, 255, 0.18);
             }
 
             .from-user {
                 align-self: flex-end;
+                margin-left: auto;
+                background: #145d67;
+                border-color: rgba(125, 233, 206, 0.2);
             }
 
 
@@ -163,14 +197,12 @@
 
             .time {
                 display: block;
-
-                text-align: center;
-
-                font-size: 10px;
-
-                opacity: 0.7;
-
-                margin-bottom: 3px;
+                margin-left: auto;
+                margin-top: auto;
+                font-size: 9px;
+                opacity: 0.8;
+                text-align: right;
+                color: rgba(255, 255, 255, 0.9);
             }
 
 
@@ -425,7 +457,7 @@
         };
 
         /* Watch for new messages being added. */
-        const observer = new MutationObserver(() => {scrollToBottom();});
+        const observer = new MutationObserver(() => { scrollToBottom(); });
 
         observer.observe(messages, {
             childList: true,
@@ -445,7 +477,7 @@
         /* Start at the bottom when the page loads.*/
         scrollToBottom();
         this.next();
-        
+
     }
 
     next() {
@@ -548,8 +580,10 @@
         );
 
         div.innerHTML = `
-            <span class="time">${step.time || ""}</span>
-            <img class="chat-image" src="${step.src}" alt="${step.name || "image"}">
+            <div class="message-text">
+                <img class="chat-image" src="${step.src}" alt="${step.name || "image"}">
+            </div>
+            <span class="time">${this.getMessageTime(step)}</span>
         `;
 
         div.querySelector("img").onclick = () => {
@@ -579,8 +613,8 @@
         );
 
         div.innerHTML = `
-        <span class="time">${step.time || ""}</span>
-        ${text}
+        <div class="message-text">${text}</div>
+        <span class="time">${this.getMessageTime(step)}</span>
     `;
 
         this.shadowRoot.querySelector("#messages").appendChild(div);
@@ -592,8 +626,8 @@
         const question = document.createElement("div");
         question.className = "message from-phone";
         question.innerHTML = `
-        <span class="time">${step.time || ""}</span>
-        ${step.question || ""}
+        <div class="message-text">${step.question || ""}</div>
+        <span class="time">${this.getMessageTime(step)}</span>
     `;
 
         const input = document.createElement("input");
@@ -631,7 +665,10 @@
 
             const userMessage = document.createElement("div");
             userMessage.className = "message from-user";
-            userMessage.textContent = value;
+            userMessage.innerHTML = `
+                <div class="message-text">${value}</div>
+                <span class="time">${this.formatTime()}</span>
+            `;
 
             this.shadowRoot.querySelector("#messages").appendChild(userMessage);
 
@@ -760,8 +797,8 @@
         const question = document.createElement("div");
         question.className = "message from-phone";
         question.innerHTML = `
-        <span class="time">${step.time || ""}</span>
-        ${step.question || ""}
+        <div class="message-text">${step.question || ""}</div>
+        <span class="time">${this.getMessageTime(step)}</span>
     `;
 
         messages.appendChild(question);
@@ -772,101 +809,105 @@
             if (savedValue) {
                 const userMessage = document.createElement("div");
                 userMessage.className = "message from-user";
-                userMessage.textContent = savedValue;
+                userMessage.innerHTML = `
+                    <div class="message-text">${savedValue}</div>
+                    <span class="time">${this.formatTime()}</span>
+                `;
                 messages.appendChild(userMessage);
             }
         }
     }
 
     addSavedUpload(step, stepIndex) {
-    const messages =
-        this.shadowRoot.querySelector("#messages");
+        const messages =
+            this.shadowRoot.querySelector("#messages");
 
-    const question = document.createElement("div");
+        const question = document.createElement("div");
 
-    question.className = "message from-phone";
+        question.className = "message from-phone";
 
-    question.innerHTML = `
-        <span class="time">${step.time || ""}</span>
-        ${step.question || "Please take a photo."}
+        question.innerHTML = `
+        <div class="message-text">${step.question || "Please take a photo."}</div>
+        <span class="time">${this.getMessageTime(step)}</span>
     `;
 
-    messages.appendChild(question);
+        messages.appendChild(question);
 
-    const savedUpload = localStorage.getItem(
-        this.storyName + "_upload_" + stepIndex
-    );
-
-    if (!savedUpload) {
-        return;
-    }
-
-    let uploadData;
-
-    try {
-        uploadData = JSON.parse(savedUpload);
-    } catch (error) {
-        console.error(
-            "Saved upload could not be read:",
-            error
+        const savedUpload = localStorage.getItem(
+            this.storyName + "_upload_" + stepIndex
         );
-        return;
-    }
 
-    /*
-     * Previously skipped.
-     */
-    if (uploadData.skipped) {
-        const skippedMessage =
-            document.createElement("div");
+        if (!savedUpload) {
+            return;
+        }
 
-        skippedMessage.className =
-            "message from-user";
+        let uploadData;
 
-        skippedMessage.textContent =
-            "Photo skipped.";
+        try {
+            uploadData = JSON.parse(savedUpload);
+        } catch (error) {
+            console.error(
+                "Saved upload could not be read:",
+                error
+            );
+            return;
+        }
 
-        messages.appendChild(skippedMessage);
+        /*
+         * Previously skipped.
+         */
+        if (uploadData.skipped) {
+            const skippedMessage =
+                document.createElement("div");
 
-        return;
-    }
+            skippedMessage.className =
+                "message from-user";
 
-    /*
-     * No actual image stored.
-     */
-    if (!uploadData.src) {
-        return;
-    }
+            skippedMessage.textContent =
+                "Photo skipped.";
 
-    const div = document.createElement("div");
+            messages.appendChild(skippedMessage);
 
-    div.className =
-        "message from-user photo-message";
+            return;
+        }
 
-    div.innerHTML = `
-        <span class="time">uploaded</span>
+        /*
+         * No actual image stored.
+         */
+        if (!uploadData.src) {
+            return;
+        }
 
-        <img
-            class="chat-image"
-            src="${uploadData.src}"
-            alt="${uploadData.name || "Uploaded photo"}"
-        >
+        const div = document.createElement("div");
+
+        div.className =
+            "message from-user photo-message";
+
+        div.innerHTML = `
+        <div class="message-text">
+            <img
+                class="chat-image"
+                src="${uploadData.src}"
+                alt="${uploadData.name || "Uploaded photo"}"
+            >
+        </div>
+        <span class="time">${this.formatTime()}</span>
     `;
 
-    div
-        .querySelector("img")
-        .addEventListener(
-            "click",
-            () => {
-                this.openImageFullscreen(
-                    uploadData.src,
-                    uploadData.name ||
+        div
+            .querySelector("img")
+            .addEventListener(
+                "click",
+                () => {
+                    this.openImageFullscreen(
+                        uploadData.src,
+                        uploadData.name ||
                         "Uploaded photo"
-                );
-            }
-        );
+                    );
+                }
+            );
 
-    messages.appendChild(div);
+        messages.appendChild(div);
     }
 
     /* A photo is reduced to a maximum of 1280 px before you put it into storage. */

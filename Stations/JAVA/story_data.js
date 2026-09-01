@@ -27,17 +27,17 @@ const STORIES = {
             {
                 type: "text",
                 sender: "Dispatch",
-                text: "We don't have the knowledge and resources to run a rescue operation."
+                text: "We've tried to trace the signal, but we're not equipped to set up a rescue operation."
             },
             {
                 type: "text",
                 sender: "Dispatch",
-                text: "We need your help."
+                text: "We need your help!"
             },
             {
                 type: "text",
                 sender: "Dispatch",
-                text: "The crew is running out of time. They urgently need information to survive."
+                text: "The crew is running out of time and they rely urgently on information to survive."
             },
             {
                 type: "text",
@@ -77,12 +77,42 @@ const STORIES = {
             {
                 type: "text",
                 sender: "Dispatch",
-                text: "Tromsø has a rich history of Arctic exploration. We're sure some former explorers can help you out."
+                text: "We've managed to establish a weak connection with the crew: we can hear them, but we can't send them the information they need."
             },
             {
                 type: "text",
                 sender: "Dispatch",
-                text: "These files should help you get in touch with one of Norway's best. Good luck, Team {teamName}!"
+                text: "There are three things we need to find:"
+            },
+            {
+                type: "text",
+                sender: "Dispatch",
+                text: "1. They need a safe route out of their current location."
+            },
+            {
+                type: "text",
+                sender: "Dispatch",
+                text: "2. We need a safe radio frequency so we can establish a reliable connection with them."
+            },
+            {
+                type: "text",
+                sender: "Dispatch",
+                text: "3. They need to know where they can find food and emergency supplies."
+            },
+            {
+                type: "text",
+                sender: "Dispatch",
+                text: "Tromsø is an excellent place to begin, so we're glad you're there. Many great historic expeditions started in Tromsø"
+            },
+            {
+                type: "text",
+                sender: "Dispatch",
+                text: "We believe the explorers behind these expeditions may hold the answers we need. Unfortunately, it won't be easy to find them."
+            },
+            {
+                type: "text",
+                sender: "Dispatch",
+                text: "But we've found these files. They should lead you to your first location. Good luck, Team {teamName}!"
             },
             {
                 type: "file",
@@ -170,38 +200,33 @@ const STORIES = {
             {
                 type: "text",
                 sender: "Dispatch",
-                text: "She was reportedly the first female hunter on Svalbard, and knows the value of good communication in the Arctic."
+                text: "She was the first female hunter on Svalbard and was known for thinking well ahead. She even developed a mechanical alarm system to warn her of approaching polar bears."
             },
             {
                 type: "text",
                 sender: "Dispatch",
-                text: "Svalbard Radio moved to Longyearbyen in 1930, just before Wanny began her first winter on Svalbard in 1932."
-            },
-            {
-                type: "text",
-                sender: "Dispatch",
-                text: "Before we lost contact, she proudly shared this image with us. We believe it depicts an artwork of Wanny somewhere in Tromsø."
+                text: "Before we lost contact, she shared this photo with us. We believe it depicts an artwork of Wanny somewhere in Tromsø."
             },
             {
                 type: "file",
                 name: "undefined.png",
                 sender: "Dispatch",
-                image: "../../../../assets/images/Wanny_Painting_Blurred.png"
+                image: "../../../../assets/images/Wanny_Painting_Old.png"
             },
             {
                 type: "text",
                 sender: "Dispatch",
-                text: "Wanny was known to communicate through clues, so it may contain information to pick up on one of her old radio signals. Unfortunately, this image is too unclear for us to be of any use."
+                text: "We believe this mural may contain a clue to one of her old radio signals. If we can decode it, we might be able to establish contact."
             },
             {
                 type: "text",
                 sender: "Dispatch",
-                text: "You'll need to find the mural and examine it properly. We believe it contains information to get in touch with her."
+                text: "Unfortunately, the image we received is too vague for us to make out the details. You need to take a closer look."
             },
             {
                 type: "text",
                 sender: "Dispatch",
-                text: "Use this link to stablish a radio connection."
+                text: "Once you're there, use this link to see if you can pick up one of her old radio signals."
             },
             {
                 type: "link",

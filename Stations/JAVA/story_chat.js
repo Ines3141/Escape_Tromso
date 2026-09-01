@@ -43,16 +43,12 @@
             }
             :host {
                 display: block;
-
                 width: 100%;
                 max-width: 440px;
                 height: 100%;
                 min-width: 0;
-
                 margin: 0 auto;
-
                 padding: 0;
-
                 box-sizing: border-box;
             }
 
@@ -67,151 +63,243 @@
                COMPLETE CHAT WINDOW
                ====================== */
 
+        .chat {
+            width: 100%;
+            max-width: none;
+            height: 100%;
+            min-height: 0;
+            overflow-y: auto;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+            touch-action: pan-y;
+            background: #061927;
+            border-radius: 14px;
+
+            /*
+            * Slightly tighter than before.
+            */
+            padding: 8px;
+            font-family:
+                Inter,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Roboto,
+                Helvetica,
+                Arial,
+                sans-serif;
+            color: #f5f7f8;
+        }
+
+
+        /* =========================================================
+        HEADER
+        ========================================================= */
+
+        .header {
+            text-align: center;
+            margin-bottom: 12px;
+            padding: 3px 48px 7px;
+        }
+
+        .header strong {
+            display: block;
+            font-family:
+                Inter,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Roboto,
+                sans-serif;
+            font-size: clamp(15px, 4vw, 18px);
+            font-weight: 650;
+            line-height: 1.25;
+        }
+
+        .header span {
+            display: block;
+            margin-top: 2px;
+            color: #63e66c;
+            font-size: 11px;
+            line-height: 1.2;
+        }
+
+
+        /* =========================================================
+        MESSAGE AREA
+        ========================================================= */
+
+        #messages {
+            display: flex;
+            flex-direction: column;
+            padding-left: 5px;
+            width: 100%;
+            gap: 6px;
+        }
+
+
+        /* =========================================================
+        MESSAGE BUBBLES
+        ========================================================= */
+
+        .message {
+            position: relative;
+            width: fit-content;
+            max-width: 80%;
+            padding: 7px 9px;
+            padding-right: 37px;
+            padding-bottom: 7px;
+            border-radius: 13px;
+            border-top-left-radius: 5px;
+            background: #20465d;
+            border: 1px solid rgba(128, 190, 218, 0.16);
+            color: #f4f7f8;
+            font-size: 14px;
+            line-height: 1.3;
+            overflow-wrap: anywhere;
+            box-shadow:
+                0 1px 2px rgba(0, 0, 0, 0.18);
+        }
+
+        /* Incoming */
+
+        .from-phone {
+            align-self: flex-start;
+            margin-right: auto;
+            background: #20465d;
+            border: 1px solid rgba(128, 190, 218, 0.16);
+            border-top-left-radius: 5px;
+        }
+
+        /* User */
+
+        .from-user {
+            align-self: flex-end;
+            margin-left: auto;
+            background: #145f68;
+            border: 1px solid rgba(115, 218, 201, 0.15);
+            border-top-left-radius: 13px;
+            border-top-right-radius: 5px;
+        }
+
+        /* =========================================================
+        MESSAGE TEXT
+        ========================================================= */
+
+        .message-text {
+            display: inline;
+            margin: 0;
+            padding: 0;
+            word-break: break-word;
+        }
+
+        .time {
+            position: absolute;
+            right: 7px;
+            bottom: 5px;
+            margin: 0;
+            color: rgba(235, 244, 247, 0.68);
+            font-size: 9px;
+            font-weight: 400;
+            line-height: 1;
+            white-space: nowrap;
+        }
+
+
+        /* =========================================================
+        FILE ATTACHMENTS
+        ========================================================= */
+
+        button.file {
+            width: fit-content;
+            max-width: 86%;
+            align-self: flex-start;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            background: #20465d;
+            color: #f4f7f8;
+            border: 1px solid rgba(128, 190, 218, 0.14);
+            border-radius: 12px;
+            padding: 8px 10px;
+            text-align: left;
+            cursor: pointer;
+            font-family:
+                Inter,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Roboto,
+                sans-serif;
+
+            font-size: 12px;
+            overflow-wrap: anywhere;
+
+            box-shadow:
+                0 1px 2px rgba(0, 0, 0, 0.15);
+        }
+
+
+        /* =========================================================
+        TYPING INDICATOR
+        ========================================================= */
+
+        .typing {
+            align-self: flex-start;
+
+            background: #20465d;
+
+            border-radius: 12px;
+            border-top-left-radius: 5px;
+
+            padding: 8px 11px;
+
+            display: flex;
+            gap: 4px;
+
+            box-shadow:
+                0 1px 2px rgba(0, 0, 0, 0.15);
+        }
+
+        .typing span {
+            width: 5px;
+            height: 5px;
+
+            background: rgba(255, 255, 255, 0.8);
+
+            border-radius: 50%;
+
+            animation: blink 1.2s infinite;
+        }
+
+
+        /* =========================================================
+        SMALL PHONES
+        ========================================================= */
+
+        @media (max-width: 360px) {
+
             .chat {
-                width: 100%;
-                max-width: none;
-
-                height: 100%;
-                min-height: 0;
-
-                overflow-y: auto;
-                overflow-x: hidden;
-
-                -webkit-overflow-scrolling: touch;
-                touch-action: pan-y;
-
-                background: #061927;
-
-                border-radius: 14px;
-
-                padding: 10px;
-
-                font-family:
-                    Arial,
-                    Helvetica,
-                    sans-serif;
-
-                color: white;
+                padding: 7px;
+                border-radius: 12px;
             }
 
-
-            /* ======================
-               HEADER
-               ====================== */
-
-            .header {
-                text-align: center;
-                margin-bottom: 14px;
-                padding: 2px 50px 8px;
+            .message,
+            button.file {
+                max-width: 91%;
             }
 
-            .header strong {
-                display: block;
+            .message {
+                padding: 6px 8px;
 
-                font-size: clamp(
-                    15px,
-                    4vw,
-                    18px
-                );
-
+                font-size: 13.5px;
                 line-height: 1.3;
             }
 
-            .header span {
-                color: #6cff6c;
-                font-size: 11px;
-            }
-
-
-            /* ======================
-               MESSAGE AREA
-               ====================== */
-
             #messages {
-                display: flex;
-                flex-direction: column;
-                width: 100%;
-                gap: 8px;
+                gap: 4px;
             }
-
-            /* Extra space so the last message can scroll
-               above the bottom navigation on phones */
-            @media (max-width: 600px) {
-                #messages {
-                    padding-bottom: 220px;
-                }
-            }
-
-
-            /* ======================
-               CHAT BUBBLES
-               ====================== */
-
-            .message {
-                width: fit-content;
-                min-width: 100px;
-                max-width: 88%;
-                display: flex;
-                flex-direction: column;
-                gap: 2px;
-                position: relative;
-
-                background: #20445a;
-                border: 1px solid rgba(255, 255, 255, 0.08);
-                border-radius: 14px;
-                box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18);
-
-                padding: 7px 8px 6px 8px;
-
-                font-size: clamp(
-                    13px,
-                    3.7vw,
-                    13px
-                );
-
-                line-height: 1.35;
-
-                color: white;
-
-                overflow-wrap: anywhere;
-            }
-
-            .message-text {
-                display: block;
-                width: 100%;
-                padding-right: 10px;
-                word-break: break-word;
-                margin: 0;
-            }
-
-            .from-phone {
-                align-self: flex-start;
-                margin-right: auto;
-                background: #20445a;
-                border-color: rgba(143, 216, 255, 0.18);
-            }
-
-            .from-user {
-                align-self: flex-end;
-                margin-left: auto;
-                background: #145d67;
-                border-color: rgba(125, 233, 206, 0.2);
-            }
-
-
-            /* ======================
-               TIME
-               ====================== */
-
-            .time {
-                display: block;
-                margin-left: auto;
-                margin-top: auto;
-                font-size: 9px;
-                opacity: 0.8;
-                text-align: right;
-                color: rgba(255, 255, 255, 0.9);
-            }
+        }
 
 
             /* ======================
@@ -305,11 +393,6 @@
                     0.25
                 );
                 padding: 9px 11px;
-
-                /*
-                 * 16px prevents Safari from zooming
-                 * the page when the input gets focus.
-                 */
                 font-size: 16px;
             }
 
@@ -540,14 +623,26 @@
         const typing = document.createElement("div");
         typing.className = "typing";
         typing.innerHTML = `
-            <span></span> 
-            <span></span>
-            <span></span>`;
+        <span></span>
+        <span></span>
+        <span></span>`;
+
         messages.appendChild(typing);
+
+        const messageText = step.text || step.question || "";
+        const baseDelay = 500;
+        const delayPerCharacter = 40;
+        const maximumDelay = 2500;
+
+        const typingDuration = Math.min(
+            baseDelay + messageText.length * delayPerCharacter,
+            maximumDelay
+        );
+
         setTimeout(() => {
             typing.remove();
             this.showStep(step);
-        }, 1000);
+        }, typingDuration);
     }
 
     showStep(step) {

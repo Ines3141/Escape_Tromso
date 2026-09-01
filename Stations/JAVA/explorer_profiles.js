@@ -69,13 +69,13 @@ CONNECTIONS:
         }
         closeButton?.addEventListener("click", closeOverlay);
         overlay.addEventListener("click", event => {
-                if (event.target === overlay) {
-                    closeOverlay();
-                }
+            if (event.target === overlay) {
+                closeOverlay();
             }
+        }
         );
     }
-    
+
     /* =========================================================
        HENRY RUDI FILE
        ========================================================= */
@@ -192,7 +192,7 @@ CONNECTIONS:
         const maudMapImage = item.maudMapImage || PROFILE_IMAGES.placeholder;
         const northPoleMapImage = item.northPoleMapImage || PROFILE_IMAGES.placeholder;
 
-        
+
         overlay.innerHTML = `
             <section class="amundsen-map-file">
                 <button
@@ -233,7 +233,7 @@ CONNECTIONS:
                         type="button"
                         data-target-map="framMap"
                         aria-label="View the Fram expedition"
-                        style="left: 48%; top: 32%;"
+                        style="left: 50%; top: 95%;"
                     >
                         &#128205;
                     </button>
@@ -243,7 +243,7 @@ CONNECTIONS:
                         type="button"
                         data-target-map="maudMap"
                         aria-label="View the Maud expedition"
-                        style="left: 66%; top: 56%;"
+                        style="left: 85%; top: 20%;"
                     >
                         &#128205;
                     </button>
@@ -252,7 +252,7 @@ CONNECTIONS:
                         type="button"
                         data-target-map="northPoleMap"
                         aria-label="View the North Pole expedition"
-                        style="left: 52%; top: 15%;">
+                        style="left: 50%; top: 5%;">
                         &#128205;
                     </button>
                 </div>
@@ -280,8 +280,8 @@ CONNECTIONS:
                         </p>
 
                         <p>
-                            Amundsen joined Lincoln Ellsworth and Umberto Nobile
-                            aboard the airship Norge for a flight across the Arctic.
+                            Together with Lincoln Ellsworth and Umberto Nobile, Amundsen was 
+                            the first to cross the the Arctic Ocean and pass over the North Pole.
                         </p>
                     </div>
                     <button
@@ -472,7 +472,7 @@ CONNECTIONS:
                     );
                 });
             });
-        
+
         addImageFallbacks(overlay);
 
         const worldMap = overlay.querySelector('[data-map-id="worldMap"]');
@@ -509,9 +509,9 @@ CONNECTIONS:
 
         addOverlayClosing(overlay, overlay.querySelector(".amundsen-map-close"));
     }
-     
 
-    window.INVENTORY_FILES.amundsenFile = function (item) {openAmundsenExpeditionMap(item);};
+
+    window.INVENTORY_FILES.amundsenFile = function (item) { openAmundsenExpeditionMap(item); };
     window.addAmundsenProfileToInventory =
         function () {
             addInventoryItem({
@@ -521,7 +521,7 @@ CONNECTIONS:
                 thumb: PROFILE_IMAGES.placeholder,
                 fileAction: "amundsenFile",
                 birthDate: "16 July 1872",
-                achievements: 
+                achievements:
                     [
                         "First through the Northwest Passage",
                         "First to reach the South Pole",
@@ -540,7 +540,7 @@ CONNECTIONS:
             });
         };
 
-    
+
 
     /* =========================================================
    FRIDTJOF NANSEN DIARY
@@ -794,7 +794,7 @@ CONNECTIONS:
                 ".nansen-diary-previous"
             );
 
-        
+
 
 
         let currentPage =
@@ -884,7 +884,7 @@ CONNECTIONS:
         );
 
 
-        
+
 
 
         /*
@@ -950,13 +950,13 @@ CONNECTIONS:
 
 
     /* New action name. */
-    window.INVENTORY_FILES.nansenDiary = function (item){openNansenDiary(item);};
+    window.INVENTORY_FILES.nansenDiary = function (item) { openNansenDiary(item); };
 
     /*
      * Compatibility with an old saved Nansen item
      * that still uses fileAction: "nansenFile".
      */
-    window.INVENTORY_FILES.nansenFile =  window.INVENTORY_FILES.nansenDiary;
+    window.INVENTORY_FILES.nansenFile = window.INVENTORY_FILES.nansenDiary;
     window.addNansenProfileToInventory =
         function () {
             addExplorerItem({
@@ -973,13 +973,13 @@ CONNECTIONS:
                     "Received the Nobel Peace Prize"
                 ],
                 fileTitle: "Fridtjof Nansen - Expedition Diary",
-                fileImage:  PROFILE_IMAGES.nansen
+                fileImage: PROFILE_IMAGES.nansen
             });
         };
 
-   /* =========================================================
-        WANNY WOLDSTAD - ARCTIC TRAPPER CASE
-   ========================================================= */
+    /* =========================================================
+         WANNY WOLDSTAD - ARCTIC TRAPPER CASE
+    ========================================================= */
 
     function openWannyTrapperCase(item) {
         const overlay = document.createElement("div");
@@ -1863,7 +1863,7 @@ CONNECTIONS:
     /*
      * Inventory action for Wanny.
      */
-    window.INVENTORY_FILES.wannyCase = function (item) {openWannyTrapperCase(item);   };
+    window.INVENTORY_FILES.wannyCase = function (item) { openWannyTrapperCase(item); };
 
 
     /*

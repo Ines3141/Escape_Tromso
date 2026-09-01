@@ -130,6 +130,19 @@ function loadStyleOnce(href, flagName) {
 }
 
 loadInventoryScripts();
+
+/*-----------------------------
+   Location for each webpage
+------------------------------- */
+const GAME_LOCATIONS = {
+    "station1-gate": "https://www.google.com/maps/search/?api=1&query=Tromsø+Harbour",
+    "station2-bench": "https://www.google.com/maps/search/?api=1&query=Stortorget+Tromsø",
+    "station3-traffik": "https://www.google.com/maps/search/?api=1&query=Stortorget+Tromsø",
+    "station4-stortorget": "https://www.google.com/maps/search/?api=1&query=Stortorget+Tromsø",
+    "station5-amundsen": "https://www.google.com/maps/search/?api=1&query=The+Polar+Museum+Tromsø",
+    "station6-olhallen": "https://www.google.com/maps/search/?api=1&query=Tromsø",
+    "station7-cathedral": "https://www.google.com/maps/search/?api=1&query=Stortorget+Tromsø"
+};
 class GameNavigation extends HTMLElement {
     constructor() {
         super();
@@ -672,7 +685,28 @@ class GameNavigation extends HTMLElement {
         });
 
         locationBtn.addEventListener("click", () => {
-            window.open("https://www.google.com/maps/search/Tromsø+Harbour");
+
+            const locationId = this.getAttribute("location-id");
+            const locationUrl = GAME_LOCATIONS[locationId];
+
+            if (!locationId) {
+                console.warn(
+                    "No location-id set on <game-navigation>."
+                );
+                return;
+            }
+
+            if (!locationUrl) {
+                console.warn(
+                    `No location defined for "${locationId}".`
+                );
+                return;
+            }
+
+            window.open(
+                locationUrl,
+                "_blank"
+            );
         });
 
         /* Opens the inventory.js file */

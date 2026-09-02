@@ -3,7 +3,7 @@ window.GAME_HINTS = {
         hint1:
             "The flashing lamp is using a well-known code made from short and long signals.",
         hint2:
-            "Think of Morse code. Decode each group of flashes separately.",
+            "It's Morse code, you'll find a translation sheet in the inventory. Decode each group (3 in total) of flashes separately.",
         solution:
             "The signal translates to 8, 1 and W."
     },
@@ -11,7 +11,7 @@ window.GAME_HINTS = {
         hint1:
             "You have to find the dates on the bench for the Greenland expedition and the Nobel Peace prize.",
         hint2: "In each row, diagonal, column one has to have the numbers 1,2,8,9.",
-        solution:"Phone number: 998192" 
+        solution: "Phone number: 998192"
     },
     "riddle_2_3_ice": {
         hint1: "Use the inventory for Nansen to find the correct route.",
@@ -20,8 +20,8 @@ window.GAME_HINTS = {
     },
     "riddle_3_1_frequency": {
         hint1: "Try to find the correct wave function by rotating the buttons.",
-        hint2: "How many Breads, Wanny Woldstad and animals do you see?",
-        solution:"6 Breads, 5 Wanny's and 2 Animals.",
+        hint2: "How many Breads, Wanny Woldstads and animals do you see?",
+        solution: "6 Breads, 5 Wanny's and 2 Animals.",
     },
     "riddle_3_3_maze": {
         hint1: "Which animal do you have to follow? Check the inventory.",
@@ -30,7 +30,7 @@ window.GAME_HINTS = {
     },
     "riddle_4_2_fish": {
         hint1: "Count the fish on the statue.",
-        hint2: "Where do you find the fish?",
+        hint2: "Where do you find the fish? Opposing sides of the statue should add up to 10.",
         solution: "6 Fish, 8 Fish, 4 and 2.",
     },
     "riddle_5_2_compass": {
@@ -50,7 +50,7 @@ window.GAME_HINTS = {
     },
     "riddle_7_1_church": {
         hint1: "Fill the colours of the church.",
-        hint2: "Can you create green, light yellow and gray with a mixture of colours.",
-        solution: "Green(Roof): Yellow and blue, Light yellow (Church): Yellow and white, Gray (Door): White and Black, White Clock" 
+        hint2: "Can you create green, light yellow and gray with a mixture of colours?",
+        solution: "Green(Roof): Yellow and blue, Light yellow (Church): Yellow and white, Gray (Door): White and Black, White Clock"
     }
 };

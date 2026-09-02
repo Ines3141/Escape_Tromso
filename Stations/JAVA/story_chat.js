@@ -472,13 +472,10 @@
 
             .chat-image {
                 display: block;
-
                 width: 100%;
                 max-width: 100%;
                 height: auto;
-
                 border-radius: 9px;
-
                 cursor: pointer;
             }
 
@@ -619,21 +616,18 @@
 
     showTyping(step) {
         const messages = this.shadowRoot.querySelector("#messages");
-
         const typing = document.createElement("div");
         typing.className = "typing";
         typing.innerHTML = `
         <span></span>
         <span></span>
         <span></span>`;
-
         messages.appendChild(typing);
 
         const messageText = step.text || step.question || "";
         const baseDelay = 500;
-        const delayPerCharacter = 40;
+        const delayPerCharacter = 45;
         const maximumDelay = 2500;
-
         const typingDuration = Math.min(
             baseDelay + messageText.length * delayPerCharacter,
             maximumDelay

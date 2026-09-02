@@ -7,7 +7,7 @@ const STORIES = {
             {
                 type: "text",
                 sender: "Dispatch",
-                text: "Hi there. We have just received an SOS transmission from one of our research vessels operating in the Arctic:"
+                text: "Hi there. We have just received a SOS transmission from one of our research vessels operating in the Arctic:"
             },
             {
                 type: "file",
@@ -226,7 +226,7 @@ const STORIES = {
             {
                 type: "text",
                 sender: "Dispatch",
-                text: "Once you're there, use this link to see if you can pick up one of her old radio signals."
+                text: "Once you're there, use this radio-tool to see if you can pick up one of her old radio signals."
             },
             {
                 type: "link",

@@ -444,7 +444,7 @@ body.chat-page {
     height: 100vh;
     height: 100dvh;
     margin: 0 !important;
-    padding: 10px 5px 100px !important;
+    padding: 10px 5px 150px !important;
     display: flex !important;
     flex-direction: column;
     justify-content: flex-start !important;

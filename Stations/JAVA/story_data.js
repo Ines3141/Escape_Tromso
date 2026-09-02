@@ -116,7 +116,7 @@ const STORIES = {
             },
             {
                 type: "file",
-                name: "starting_location.jpg",
+                name: "map_to_next_station.jpg",
                 image: "../../../../assets/images/station_1_test.jpg"
             },
             {

@@ -244,10 +244,7 @@ THINGS TO DO:
         <!--
         <button onclick="window.location.href = nextPage"> DEV Continue </button> -->
     </div>
-
-    <game-navigation></game-navigation>
-
-    <script>       
+    <script>
         // =====================================================
         // ELEMENTS
         // =====================================================
@@ -854,7 +851,7 @@ THINGS TO DO:
                 return [];
             }
             const weights = lines.map(subtitleWeight);
-            const totalWeight = weights.reduce((sum, weight) => sum + weight,0);
+            const totalWeight = weights.reduce((sum, weight) => sum + weight, 0);
             let start = 0;
 
             return lines.map((text, index) => {
@@ -926,6 +923,7 @@ THINGS TO DO:
             );
         });
     </script>
+    <game-navigation location-id="station5-amundsen"></game-navigation>
     <script>
         setupGameNavigation();
         loadInventoryScripts().then(() => {

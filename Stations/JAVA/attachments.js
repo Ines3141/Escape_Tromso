@@ -953,7 +953,7 @@ Object.assign(window.ATTACHMENTS, {
             dismissButton.disabled = true;
 
             status.textContent =
-                "Sending secure contact request�";
+                "Sending secure contact request";
 
             window.setTimeout(() => {
                 localStorage.setItem(

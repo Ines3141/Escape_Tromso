@@ -114,7 +114,7 @@
             display: none !important;
         }
     </style>
-    <script src="../../../Stations/JAVA/navigation.js"></script>
+    <script src="../../../../Stations/JAVA/navigation.js"></script>
     <script>
         const previousPage = "station_7_0.html";
         const nextPage = "congrats.html";
@@ -168,7 +168,7 @@
 
         <div class="choice-menu hidden">
             <button onclick="choose('coords','wrong', this)">69.64N, 18.95E</button>
-            <button onclick="choose('coords','correct', this)">78.13N, 15.38E</button>
+            <button onclick="choose('coords','correct', this)">71.22N 11.15W</button>
             <button onclick="choose('coords','wrong', this)">90.00N, 0.00E</button>
         </div>
 
@@ -187,12 +187,12 @@
             📡 Send Rescue Transmission
         </button>
 
-        <button class="back-button" onclick="window.location.href = previousPage">
+        <!--<button class="back-button" onclick="window.location.href = previousPage">
             Back
-        </button>
+        </button>-->
 
         <p id="feedback"></p>
-        <button onclick="window.location.href = nextPage">DEV Continue</button>
+        <!-- <button onclick="window.location.href = nextPage">DEV Continue</button> -->
     </div>
 
     <script>
@@ -277,7 +277,7 @@
             }
         }
     </script>
-    <game-navigation></game-navigation>
+    <game-navigation location-id="station6-olhallen"></game-navigation>
 
     <script>
         setupGameNavigation();

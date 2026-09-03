@@ -132,9 +132,12 @@
         #messages {
             display: flex;
             flex-direction: column;
-            padding-left: 5px;
             width: 100%;
-            gap: 6px;
+            gap: 8px;
+
+            /* Space for fixed navigation bar + phone safe area */
+            padding-bottom: calc(120px + env(safe-area-inset-bottom));
+            box-sizing: border-box;
         }
 
 

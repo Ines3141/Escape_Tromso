@@ -444,11 +444,10 @@ body.chat-page {
     height: 100vh;
     height: 100dvh;
     margin: 0 !important;
-    padding: 10px 5px 200px !important;
+    padding: 8px 8px calc(90px + env(safe-area-inset-bottom)) 8px !important;
+    box-sizing: border-box;
     display: flex !important;
     flex-direction: column;
-    justify-content: flex-start !important;
-    align-items: stretch !important;
     overflow: hidden;
 }
 

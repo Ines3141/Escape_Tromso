@@ -23,16 +23,83 @@ THINGS TO DO LATER:
         const previousPage = "../riddle/riddle_3_1_frequency.html";
         const nextPage = "../riddle/riddle_3_3_maze.html";
     </script>
+    <style>
+        .radio-label {
+            font-family: "Courier New", monospace;
+            font-size: 16px;
+            letter-spacing: 2px;
+            color: #8f967f;
+            margin-top: 32px;
+            margin-bottom: 7px;
+        }
+        .radio-end-button {
+            margin: 28px auto 10px;
+            padding: 13px 20px;
+            background: linear-gradient( 180deg, #373932 0%, #20221f 100% );
+            color: #ddd0a0;
+            border: 1px solid #706d58;
+            border-radius: 5px;
+            font-family: "Courier New", monospace;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), 0 3px 8px rgba(0,0,0,0.35);
+            cursor: pointer;
+        }
+        .subtitle {
+            flex: 1;
+            min-height: 48px;
+            display: flex;
+            align-items: center;
+            padding: 9px 13px;
+            background: #101713;
+            border: 1px solid #4d554b;
+            border-radius: 5px;
+            color: #ddd4aa;
+            font-family: "Courier New", monospace;
+            font-size: 16px;
+            line-height: 1.35;
+            box-shadow: inset 0 0 12px rgba(0,0,0,0.65);
+            overflow-wrap: anywhere;
+        }
+        .radio-audio-btn {
+            width: 52px;
+            height: 48px;
+            flex-shrink: 0;
+            background: linear-gradient( 180deg, #393b35, #21231f );
+            color: #d9cc9b;
+            border: 1px solid #666653;
+            border-radius: 5px;
+            font-size: 18px;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), 0 3px 7px rgba(0,0,0,0.35);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            line-height: 1;
+        }
+        .person-name {
+            font-size: 20px;
+            font-weight: 600;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+    </style>
 </head>
 <body>
     <div class="box">
-        <h1>Station 3</h1>
-        <p> Wanny Woldstad </p>
+        <p class="person-name">Wanny Woldstad</p>
         <div class="person-container">
             <img src="../../../../assets/images/Wanny.jpg" alt="Station 3" class="imag-person">
         </div>
+        <div class="radio-label">
+            RECEIVING TRANSMISSION
+        </div>
         <div class="audio-row">
-            <button class="audio-btn" id="audioBtn"> &#128266;</button>
+            <button class="radio-audio-btn" id="audioBtn">
+                ▶
+            </button>
             <div id="subtitle" class="subtitle"></div>
         </div>
         <audio id="voice1" preload="auto">
@@ -42,7 +109,7 @@ THINGS TO DO LATER:
             <source src="../../../../assets/audio/Wanny/Wanny_2.mp3" type="audio/mp3">
         </audio>
         <audio id="voice3" preload="auto">
-            <source src="../../../../assets/audio/Wanny/Wanny_3_B.m4a" type="audio/mp4">
+            <source src="../../../../assets/audio/Wanny/Wanny_3_B.mp3" type="audio/mp3">
         </audio>
         <audio id="voice4" preload="auto">
             <source src="../../../../assets/audio/Wanny/Wanny_3_C.mp3" type="audio/mp3">
@@ -62,6 +129,10 @@ THINGS TO DO LATER:
         <audio id="voice9" preload="auto">
             <source src="../../../../assets/audio/Wanny/Wanny_5_G.mp3" type="audio/mp3">
         </audio>
+        <audio id="staticNoise" loop preload="auto">
+            <source src="../../../../assets/audio/Noise_Wanny.mp3"
+                    type="audio/mp3">
+        </audio>
         <div id="choices" style="display:none;">
             <button id="btnA" class="answer-button"></button>
             <button id="btnB" class="answer-button"></button>
@@ -71,10 +142,12 @@ THINGS TO DO LATER:
             <button id="btnF" class="answer-button" style="display:none;"></button>
             <button id="btnG" class="answer-button" style="display:none;"></button>
         </div>
+
         <!-- for actual game do </button>style="display:none;">, but now it is just blocking -->
-        <button class="riddle-button"
-                id="riddle_btn">
-            Continue
+        <button class="radio-end-button"
+                id="riddle_btn"
+                style="display:none;">
+            END TRANSMISSION ›
         </button>
         <script>
             const person = document.querySelector(".person-container");
@@ -92,6 +165,9 @@ THINGS TO DO LATER:
             const audio4 = document.getElementById("voice7");
             const audio5F = document.getElementById("voice8");
             const audio5G = document.getElementById("voice9");
+            const staticNoise = document.getElementById("staticNoise");
+
+            staticNoise.volume = 0.01;
 
             const allAudios = [
                 audio1,
@@ -191,6 +267,8 @@ THINGS TO DO LATER:
             function finishConversation() {
                 hideChoices();
                 subtitle.textContent = "";
+
+                // Conversation has ended, so Continue can be shown.
                 riddleButton.style.display = "block";
             }
 
@@ -202,6 +280,20 @@ THINGS TO DO LATER:
                 // First click begins the conversation.
                 if (!conversationStarted) {
                     conversationStarted = true;
+                    // Start permanent radio static.
+                    try {
+                        staticNoise.currentTime = 0;
+                        await staticNoise.play();
+                    } catch (error) {
+                        console.warn("Static noise could not start:", error);
+                    }
+
+                    // Show Continue automatically after 30 seconds,
+                    // even if the conversation is still going.
+                    setTimeout(() => {
+                        riddleButton.style.display = "block";
+                    }, 30000);
+
                     await playAudio(audio1);
                     return;
                 }
@@ -399,9 +491,9 @@ THINGS TO DO LATER:
                 return Math.max(wordCount, 3);
             }
             const subtitleDelays = new Map([
-                [audio1, 4.7]
+                [audio1, 0.7]
             ]);
-            
+
             function buildSubtitleCues(audio) {
                 const lines = subtitleLines.get(audio) || [];
                 const duration = audio.duration;
@@ -489,7 +581,7 @@ THINGS TO DO LATER:
             });
         </script>
     </div>
-    <game-navigation></game-navigation>
+    <game-navigation location-id="station3-traffik"></game-navigation>
     <script>
         setupGameNavigation();
         loadInventoryScripts().then(() => {

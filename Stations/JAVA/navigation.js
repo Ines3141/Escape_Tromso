@@ -135,13 +135,13 @@ loadInventoryScripts();
    Location for each webpage
 ------------------------------- */
 const GAME_LOCATIONS = {
-    "station1-gate": "https://www.google.com/maps/search/?api=1&query=Tromsø+Harbour",
-    "station2-bench": "https://www.google.com/maps/search/?api=1&query=Stortorget+Tromsø",
-    "station3-traffik": "https://www.google.com/maps/search/?api=1&query=Stortorget+Tromsø",
-    "station4-stortorget": "https://www.google.com/maps/search/?api=1&query=Stortorget+Tromsø",
-    "station5-amundsen": "https://www.google.com/maps/search/?api=1&query=The+Polar+Museum+Tromsø",
-    "station6-olhallen": "https://www.google.com/maps/search/?api=1&query=Tromsø",
-    "station7-cathedral": "https://www.google.com/maps/search/?api=1&query=Stortorget+Tromsø"
+    "station1-gate": "https://www.google.com/maps/search/?api=1&query=Gateway+to+the+Arctic",
+    "station2-bench": "https://www.google.com/maps/search/?api=1&query=69.652251,18.967166",
+    "station3-traffik": "https://www.google.com/maps/search/?api=1&query=69.653221,18.962187",
+    "station4-stortorget": "https://www.google.com/maps/search/?api=1&query=Stortorget+Troms%C3%B8",
+    "station5-amundsen": "https://www.google.com/maps/search/?api=1&query=Amundsen+plass+Troms%C3%B8",
+    "station6-olhallen": "https://www.google.com/maps/search/?api=1&query=%C3%B8lhallen+Troms%C3%B8",
+    "station7-cathedral": "https://www.google.com/maps/search/?api=1&query=Troms%C3%B8+Domkirke"
 };
 class GameNavigation extends HTMLElement {
     constructor() {
@@ -485,7 +485,7 @@ class GameNavigation extends HTMLElement {
 
                     <div class="menu" id="hamburgerMenu">
                         <button id="inventoryBtn">Inventory</button>
-                        <button id="hintBtn">💡 Hints</button>
+                        <button id="hintBtn"> Hints</button>
                     </div>
                 </div>
                 <div

@@ -200,7 +200,7 @@ const STORIES = {
             {
                 type: "text",
                 sender: "Dispatch",
-                text: "She was the first female hunter on Svalbard and was known for thinking well ahead. She even developed a mechanical alarm system to warn her of approaching polar bears."
+                text: "As Svalbard's first female hunter in 1932, she mastered the skills needed to survive the Arctic. She even invented a mechanical alarm system to warn her of approaching polar bears. Later in life, she appeared on radio programmes across Northern Norway, sharing stories from her years in the Arctic."
             },
             {
                 type: "text",
@@ -216,7 +216,7 @@ const STORIES = {
             {
                 type: "text",
                 sender: "Dispatch",
-                text: "We believe this mural may contain a clue to one of her old radio signals. If we can decode it, we might be able to establish contact."
+                text: "We believe it may contain a clue to one of Wanny's old radio broadcasts. If we can decode it, it may provide important information."
             },
             {
                 type: "text",

@@ -216,7 +216,7 @@ const STORIES = {
             {
                 type: "text",
                 sender: "Dispatch",
-                text: "We believe it may contain a clue to one of Wanny's old radio broadcasts. If we can decode it, it may provide important information."
+                text: "We believe it may contain a clue to get in touch with her."
             },
             {
                 type: "text",
@@ -226,7 +226,7 @@ const STORIES = {
             {
                 type: "text",
                 sender: "Dispatch",
-                text: "Once you're there, use this radio-tool to see if you can pick up one of her old radio signals."
+                text: "Once you're there, use this radio-tool to see if you can pick up her radio signal."
             },
             {
                 type: "link",
